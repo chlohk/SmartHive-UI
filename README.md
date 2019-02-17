@@ -25,9 +25,9 @@ Prototüüp: https://antomatas.github.io/smarthive-proto/
 |Nädal|Kolmapäev|Pühapäev|
 |-------------|---------|--------|
 |2            |Esimene kohtumine|Üldine projektiplaan koos|
-|3            |Näita prototüüpi ja plaani|Angular-Spring integratsioon tehtud. Prototüüp lõpetatud|
-|4            |Põhilised template'id valmis|Spring-DB integratsioon tehtud. 1 funktsionaalsus, mis kasutab tervet stacki. Ühendatud template'id üheks töötavad MVP'ks|
-|5            |Demo. Loo detailsemad taskid nädalateks 5-10.| ...otsustada nädalal 5...|
+|3            |Näita prototüüpi ja plaani|Angular-Spring integratsioon tehtud.|
+|4            ||Spring-DB integratsioon tehtud. 1 funktsionaalsus, mis kasutab tervet stacki.|
+|5            |Demo. Loo detailsemad taskid nädalateks 5-10. | Prototüüp lõpetatud. ...otsustada nädalal 5...|
 |6            |...otsustada nädalal 5...|...otsustada nädalal 5...|
 |7            |...otsustada nädalal 5...|...otsustada nädalal 5...|
 |8            |...otsustada nädalal 5...|Põhifunktsionaalsus valmis. Alusta testimisega -> otsusta, mis bugid ära parandada|
