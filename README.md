@@ -1,3 +1,12 @@
+## Eelseisvad vastutused
+| Osaleja| Lõpptähtaeg   | Vastutus |
+| --------|---------|-------|
+| Anto  | Pühapäev 17.02.2019, 10:30   | Tulla lagedale lahendusega, kus Spring ja Angular koos töötavad (näide allpool)|
+| Jaanika | Pühapäev 17.02.2019, 10:30 | Tulla lagedale lahendusega, kus Spring ja Angular koos töötavad (näide allpool)|
+| Christer | Pühapäev 17.02.2019, 10:30 | Tulla lagedale lahendusega, kus Spring ja Angular koos töötavad (näide allpool)|
+
+
+
 # SmarthiveUi
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
