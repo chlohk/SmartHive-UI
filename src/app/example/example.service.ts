@@ -9,6 +9,6 @@ export class TaskService {
   }
 
   getData(): Observable<any> {
-    return this.httpClient.get('localhost:8080/api/tasks');
+    return this.httpClient.get('/api/tasks');
   }
 }
