@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Colony} from "../colony.model";
+import {ColoniesService} from "../colonies.service";
 
 @Component({
   selector: 'app-edit-colony',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditColonyComponent implements OnInit {
 
-  constructor() { }
+  currentColony: Colony;
+
+  constructor(private coloniesService: ColoniesService) { }
 
   ngOnInit() {
+    this.currentColony = this.coloniesService.getCurrentlySelectedColony();
   }
 
 }
