@@ -8,7 +8,10 @@
       <p>id: {{ currentColony.id }}</p>
     </div>
     <div class="col-sm-4">
-      <button type="button" class="btn btn-light btn-outline-secondary"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/2000px-Trash_font_awesome.svg.png"></button>
+      <button
+        type="button"
+        class="btn btn-light btn-outline-secondary"
+        (click)="deleteColony()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/2000px-Trash_font_awesome.svg.png"></button>
     </div>
   </div>
 </div>
@@ -19,7 +22,8 @@
 </label>
 <input
   type="text"
-  [value]="currentColony.name">
+  [value]="currentColony.name"
+  #newColonyName>
 <br>
 <br>
 <br>
@@ -28,7 +32,10 @@
     <button type="button" class="btn btn-light btn-outline-secondary">❌</button>
   </div>
   <div class="col-sm-4">
-    <button type="button" class="btn btn-light btn-outline-secondary">✔</button>
+    <button
+      type="button"
+      class="btn btn-light btn-outline-secondary"
+      (click)="editColony(newColonyName.value)">✔</button>
   </div>
 </div>
 <br>

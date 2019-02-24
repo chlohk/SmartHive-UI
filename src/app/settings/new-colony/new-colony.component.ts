@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {SettingsDataService} from "../shared/settings-data.service";
+import {ColoniesService} from "../shared/colonies.service";
 
 @Component({
   selector: 'app-new-colony',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NewColonyComponent implements OnInit {
 
-  constructor() { }
+  constructor(private coloniesService: ColoniesService) { }
 
   ngOnInit() {
   }
 
+
+  addNewColony(newColonyName: string) {
+    this.coloniesService.addNewColony(newColonyName);
+  }
 }

@@ -1,8 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {ColoniesService} from "../colony-details/colonies.service";
-import {Colony} from "../colony-details/colony.model";
+import {ColoniesService} from "../shared/colonies.service";
+import {Colony} from "../shared/colony.model";
 import {NgForm} from "@angular/forms";
+import {SettingsDataService} from "../shared/settings-data.service";
 
 @Component({
   selector: 'app-settings-header',
@@ -16,10 +17,16 @@ export class SettingsHeaderComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private router: Router,
-              private coloniesService: ColoniesService) { }
+              private coloniesService: ColoniesService,
+              private settingsDataService: SettingsDataService) { }
 
   ngOnInit() {
-    this.colonies = this.coloniesService.getColonies();
+    // this.colonies = this.coloniesService.getColonies();
+    this.coloniesService.updateColoniesData();
+    this.coloniesService.coloniesChanged.subscribe(
+      (colonies) => this.colonies = colonies
+    )
+
   }
 
   onNewColonyButtonClick() {
@@ -47,4 +54,7 @@ export class SettingsHeaderComponent implements OnInit {
     this.router.navigate(['settings/colony', this.coloniesService.currentlySelectedColony]);
   }
 
+  onUpdateColoniesInformation() {
+    this.coloniesService.updateColoniesData();
+  }
 }

@@ -2,20 +2,18 @@
 <div class="col-sm-7">
 </div>
 <div class="col-sm-5 myBackGround">
-  <br>
-  <br>
-  <br>
+  <br><br><br>
   <p>uue koloonia nimi</p>
-  <input>
-  <br>
-  <br>
-  <br>
+  <input
+    type="text"
+    #newColonyName>
+  <br><br><br>
   <div class="container-fluid">
     <div class="col-sm-4">
       <button type="button" class="btn btn-light btn-outline-secondary">❌</button>
     </div>
     <div class="col-sm-4">
-      <button type="button" class="btn btn-light btn-outline-secondary">✔</button>
+      <button type="button" class="btn btn-light btn-outline-secondary" (click)="addNewColony(newColonyName.value)">✔</button>
     </div>
   </div>
   <br>

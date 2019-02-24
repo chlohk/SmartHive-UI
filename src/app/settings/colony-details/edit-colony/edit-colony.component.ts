@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Colony} from "../colony.model";
-import {ColoniesService} from "../colonies.service";
+import {Colony} from "../../shared/colony.model";
+import {ColoniesService} from "../../shared/colonies.service";
 
 @Component({
   selector: 'app-edit-colony',
@@ -15,6 +15,15 @@ export class EditColonyComponent implements OnInit {
 
   ngOnInit() {
     this.currentColony = this.coloniesService.getCurrentlySelectedColony();
+  }
+
+  editColony(newColonyName) {
+    this.coloniesService.editColony(this.currentColony, newColonyName);
+  }
+
+  deleteColony() {
+    this.coloniesService.deleteColony(this.currentColony);
+    console.log('1 was called');
   }
 
 }

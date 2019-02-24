@@ -12,8 +12,9 @@ import { NewColonyComponent } from './settings/new-colony/new-colony.component';
 import { EditHiveComponent } from './settings/colony-details/edit-hive/edit-hive.component';
 import { NewHiveComponent } from './settings/colony-details/new-hive/new-hive.component';
 import { EditColonyComponent } from './settings/colony-details/edit-colony/edit-colony.component';
-import {ColoniesService} from "./settings/colony-details/colonies.service";
+import {ColoniesService} from "./settings/shared/colonies.service";
 import { ColonyDetailsComponent } from './settings/colony-details/colony-details.component';
+import {SettingsDataService} from "./settings/shared/settings-data.service";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,7 @@ import { ColonyDetailsComponent } from './settings/colony-details/colony-details
     FormsModule,
     HttpClientModule
   ],
-  providers: [ColoniesService],
+  providers: [ColoniesService, SettingsDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
