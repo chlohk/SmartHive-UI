@@ -7,24 +7,25 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {ExampleComponent} from "./example/example.component";
 import { SettingsComponent } from './settings/settings.component';
-import { ColoniesComponent } from './settings/colonies/colonies.component';
-import { NewColonyComponent } from './settings/colonies/new-colony/new-colony.component';
-import { HivesComponent } from './settings/hives/hives.component';
-import { EditHiveComponent } from './settings/hives/edit-hive/edit-hive.component';
-import { NewHiveComponent } from './settings/hives/new-hive/new-hive.component';
-import { EditColonyComponent } from './settings/colonies/edit-colony/edit-colony.component';
+import { SettingsHeaderComponent } from './settings/settings-header/settings-header.component';
+import { NewColonyComponent } from './settings/new-colony/new-colony.component';
+import { EditHiveComponent } from './settings/colony-details/edit-hive/edit-hive.component';
+import { NewHiveComponent } from './settings/colony-details/new-hive/new-hive.component';
+import { EditColonyComponent } from './settings/colony-details/edit-colony/edit-colony.component';
+import {ColoniesService} from "./settings/colony-details/colonies.service";
+import { ColonyDetailsComponent } from './settings/colony-details/colony-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ExampleComponent,
     SettingsComponent,
-    ColoniesComponent,
+    SettingsHeaderComponent,
     NewColonyComponent,
-    HivesComponent,
     EditHiveComponent,
     NewHiveComponent,
-    EditColonyComponent
+    EditColonyComponent,
+    ColonyDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +33,7 @@ import { EditColonyComponent } from './settings/colonies/edit-colony/edit-colony
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ColoniesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
