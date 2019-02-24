@@ -9,11 +9,11 @@ export class SettingsDataService {
   constructor(private httpClient: HttpClient) {}
 
   onAddNewColony(newColonyName: string) {
-    return this.httpClient.post<Colony[]>('api/colony', {'name': newColonyName});
-      // .map(
-      //   colonies => {return colonies},
-      //   (error) => console.log(error)
-      // );
+    return this.httpClient.post<Colony[]>('api/colony', {'name': newColonyName})
+      .map(
+        colonies => {return colonies},
+        (error) => console.log(error)
+      );
   }
 
   onEditColony(colonyToEdit: Colony, newColonyName: string) {
