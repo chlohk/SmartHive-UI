@@ -13,4 +13,14 @@ export class ColonyDetailsComponent implements OnInit {
   ngOnInit() {
   }
 
+  /*onNewHiveButtonClick() {
+    this.colonySelectionForm.form.patchValue({
+      colony: ''
+    });
+    if(this.router.url === '/settings/colony/new') {
+      this.router.navigate(['settings']);
+    } else {
+      this.router.navigate(['settings/colony/new']);
+    }
+  }*/
 }

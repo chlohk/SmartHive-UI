@@ -1,22 +1,25 @@
 <div class="row">
-<div class="col-sm-7">
-</div>
-<div class="col-sm-5 myBackGround">
-  <br><br><br>
-  <p>uue koloonia nimi</p>
-  <input
-    type="text"
-    #newColonyName>
-  <br><br><br>
-  <div class="container-fluid">
-    <div class="col-sm-4">
-      <button type="button" class="btn btn-light btn-outline-secondary">❌</button>
-    </div>
-    <div class="col-sm-4">
-      <button type="button" class="btn btn-light btn-outline-secondary" (click)="addNewColony(newColonyName.value)">✔</button>
+  <div class="col-5"></div>
+  <div class="col-7">
+    <div class="card bg-light mb-3" style="max-width: 23rem; height: 20rem">
+      <div class="card-header">Koloonia loomine</div>
+      <div class="card-body">
+        <h5 class="card-title">uue koloonia nimi</h5>
+        <br>
+        <input
+          type="text"
+          #newColonyName>
+        <br><br><br>
+        <div class="card-footer">
+          <button type="button" class="btn btn-light btn-outline-danger" style="margin: 20px">❌</button>
+
+          <button type="button" class="btn btn-light btn-outline-success" (click)="addNewColony(newColonyName.value)" style="margin: 20px">
+            ✔
+          </button>
+        </div>
+      </div>
     </div>
   </div>
-  <br>
-  <br>
 </div>
-</div>
+
+
