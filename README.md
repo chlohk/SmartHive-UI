@@ -1,3 +1,6 @@
+## Projektiplaan
+Projektiplaan leitav [Smarhive-UI repo wikist](https://github.com/chlohk/SmartHive-UI/wiki/Projektiplaan).
+
 ## Projekti paigaldamine
 1. Installi [MySQL](https://www.mysql.com/) andmebaas, loo uus andmebaas 'smarthive'
 2. Klooni [Smarthive-API repo](https://github.com/chlohk/SmartHive-API)
