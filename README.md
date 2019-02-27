@@ -1,9 +1,9 @@
 ## Eelseisvad vastutused
 | Osaleja| Lõpptähtaeg   | Vastutus |
 | --------|---------|-------|
-| Anto  | Pühapäev 24.02.2019, 10:30   | Teha selgeks endale Angulari observables, service'd, dependency injection -> luua päringud, et saaks tööle kolooniate haldus|
-| Jaanika | Pühapäev 24.02.2019, 10:30 | Vaadata tutoriali 3. peatükk, teha "settingu" vaade vajalikeks komponentideks -> valmistada html template kolooniate kohta (kui aega jääb, siis ka tarude kohta)|
-| Christer | Pühapäev 24.02.2019, 10:30 | Teha valmis back-end kolooniate halduse kohta (koloonia loomine, kustutamine, nime muutmine) |
+| Anto  | Pühapäev 03.03.2019, 10:30   | Luua prototüüp minimaalselt järgmise iteratsiooni skoobi jaoks |
+| Jaanika | Pühapäev 03.03.2019, 10:30 | Teha läbi paari-kolmetunnine tutorial bootstrapi CSS'i kasutamise kohta ja parandada olemasolevaid template'e (klasside struktuur peab olema loogiline, elementide kaugust üksteisest hallatakse css'i klassidege mitte <br> tagidega. |
+| Christer | Pühapäev 03.03.2019, 10:30 | Teha valmis back-end tarude haldamise kohta (taru loomine, muutmine ja kustutamine). Back peab kontrollima koloonia nime unikaalsust (tõstetundetu), kolooniat ei saa kustutada kui sellega on seotud tarusid, taru numbri unikaalsuse kontroll koloonia piires |
 
 ## Osalejad
 |Nimi|Matrikkel|Telefoni nr.|E-mail                 |
@@ -14,7 +14,7 @@
 
 ## Kohtumised
 Kolmapäeviti harjutustunnis 14:00-16:30 ja pärast tundi 16:30-18:00 raamatukogus.
-Pühapäeviti võimalusel 10:30-18:00 (kindlasti 16:00-18:00) Nortali kontoris.
+Pühapäeviti võimalusel 11:00-18:00 (kindlasti 16:00-18:00) Nortali kontoris.
 
 ## Materjalid
 Google drive: https://drive.google.com/drive/folders/1NVt4jPOiayZcuvSYO1ZgluZWduJeHui-?usp=sharing
@@ -27,7 +27,7 @@ Prototüüp: https://antomatas.github.io/smarthive-proto/
 |2            |Esimene kohtumine|Üldine projektiplaan koos|
 |3            |Näita prototüüpi ja plaani|Angular-Spring integratsioon tehtud.|
 |4            ||Spring-DB integratsioon tehtud. 1 funktsionaalsus, mis kasutab tervet stacki.|
-|5            |Demo. Loo detailsemad taskid nädalateks 5-10. | Prototüüp lõpetatud. ...otsustada nädalal 5...|
+|5            |Demo. Loo detailsemad taskid nädalateks 5-10. | Prototüüp lõpetatud. Loo detailsemad taskid nädalateks 5-10.|
 |6            |...otsustada nädalal 5...|...otsustada nädalal 5...|
 |7            |...otsustada nädalal 5...|...otsustada nädalal 5...|
 |8            |...otsustada nädalal 5...|Põhifunktsionaalsus valmis. Alusta testimisega -> otsusta, mis bugid ära parandada|
