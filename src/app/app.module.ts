@@ -15,6 +15,7 @@ import { EditColonyComponent } from './settings/colony-details/edit-colony/edit-
 import {ColoniesService} from "./settings/shared/colonies.service";
 import { ColonyDetailsComponent } from './settings/colony-details/colony-details.component';
 import {SettingsDataService} from "./settings/shared/settings-data.service";
+import { MotherMainComponent } from './settings/mother-main/mother-main.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {SettingsDataService} from "./settings/shared/settings-data.service";
     EditHiveComponent,
     NewHiveComponent,
     EditColonyComponent,
-    ColonyDetailsComponent
+    ColonyDetailsComponent,
+    MotherMainComponent
   ],
   imports: [
     BrowserModule,
