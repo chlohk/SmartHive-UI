@@ -15,8 +15,10 @@ import { EditColonyComponent } from './settings/colony-details/edit-colony/edit-
 import {ColoniesService} from "./settings/shared/colonies.service";
 import { ColonyDetailsComponent } from './settings/colony-details/colony-details.component';
 import {SettingsDataService} from "./settings/shared/settings-data.service";
-import { MotherMainComponent } from './settings/mother-main/mother-main.component';
-import { MotherSituationComponent } from './settings/mother-situation/mother-situation.component';
+import { MotherMainComponent } from './work/mother-main/mother-main.component';
+import { MotherSituationComponent } from './work/mother-situation/mother-situation.component';
+import { WorkComponent } from './work/work.component';
+import { WorkHeaderComponent } from './work/work-header/work-header.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { MotherSituationComponent } from './settings/mother-situation/mother-sit
     EditColonyComponent,
     ColonyDetailsComponent,
     MotherMainComponent,
-    MotherSituationComponent
+    MotherSituationComponent,
+    WorkComponent,
+    WorkHeaderComponent
   ],
   imports: [
     BrowserModule,

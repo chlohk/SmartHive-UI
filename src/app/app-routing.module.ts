@@ -6,7 +6,8 @@ import {ColonyDetailsComponent} from "./settings/colony-details/colony-details.c
 import {EditColonyComponent} from "./settings/colony-details/edit-colony/edit-colony.component";
 import {NewHiveComponent} from "./settings/colony-details/new-hive/new-hive.component";
 import {EditHiveComponent} from "./settings/colony-details/edit-hive/edit-hive.component";
-import {MotherSituationComponent} from "./settings/mother-situation/mother-situation.component";
+import {MotherSituationComponent} from "./work/mother-situation/mother-situation.component";
+import {WorkComponent} from "./work/work.component";
 
 const routes: Routes = [
   { path: 'settings', component: SettingsComponent, children: [
@@ -17,6 +18,7 @@ const routes: Routes = [
           { path: 'hive/edit/:hiveId', component: EditHiveComponent },
           ]}
     ]},
+  {path: 'work', component: WorkComponent},
   {path: '**', redirectTo: 'settings'}
   ];
 
