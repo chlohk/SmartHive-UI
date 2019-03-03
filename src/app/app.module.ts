@@ -16,6 +16,7 @@ import {ColoniesService} from "./settings/shared/colonies.service";
 import { ColonyDetailsComponent } from './settings/colony-details/colony-details.component';
 import {SettingsDataService} from "./settings/shared/settings-data.service";
 import { MotherMainComponent } from './settings/mother-main/mother-main.component';
+import { MotherSituationComponent } from './settings/mother-situation/mother-situation.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MotherMainComponent } from './settings/mother-main/mother-main.componen
     NewHiveComponent,
     EditColonyComponent,
     ColonyDetailsComponent,
-    MotherMainComponent
+    MotherMainComponent,
+    MotherSituationComponent
   ],
   imports: [
     BrowserModule,
