@@ -19,6 +19,7 @@ import { MotherMainComponent } from './work/mother-main/mother-main.component';
 import { MotherSituationComponent } from './work/mother-situation/mother-situation.component';
 import { WorkComponent } from './work/work.component';
 import { WorkHeaderComponent } from './work/work-header/work-header.component';
+import { FreakMomComponent } from './work/freak-mom/freak-mom.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { WorkHeaderComponent } from './work/work-header/work-header.component';
     MotherMainComponent,
     MotherSituationComponent,
     WorkComponent,
-    WorkHeaderComponent
+    WorkHeaderComponent,
+    FreakMomComponent
   ],
   imports: [
     BrowserModule,

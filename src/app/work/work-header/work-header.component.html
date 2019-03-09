@@ -1,3 +1,44 @@
-<p>
-  work-header works!
-</p>
+<body>
+<nav class="navbar navbar-default" style="margin: 0 !important;">
+  <div class="container-fluid">
+    <div class="col-sm-1">
+      <button
+        type="button"
+        class="btn btn-light btn-outline-secondary">
+        <img src="assets/img/settingsView.png">
+      </button>
+    </div>
+    <div class="col-sm-6">
+      <form #f="ngForm">
+        <select
+          name="colony"
+          class="custom-select"
+          size="1"
+          [ngModel]="defaultColony"
+          (change)="onChange($event)">
+          <option value="" disabled selected hidden>Vali koloonia...</option>
+          <option
+            *ngFor="let colony of colonies"
+            [value]="colony.id"> {{ colony.name }}</option>
+        </select>
+      </form>
+    </div>
+    <div class="col-sm-5">
+      <form #f="ngForm">
+        <select
+          name="colony"
+          class="custom-select"
+          size="1"
+          [ngModel]="defaultColony"
+          (change)="onChange($event)">
+          <option value="" disabled selected hidden>Vali koloonia...</option>
+          <option
+            *ngFor="let colony of colonies"
+            [value]="colony.id"> {{ colony.name }}</option>
+        </select>
+      </form>
+    </div>
+  </div>
+</nav>
+</body>
+

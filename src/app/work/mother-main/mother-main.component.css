@@ -1,4 +1,7 @@
 img {
-  width: 25%;
-  height: auto;
+  height: 30px;
+}
+
+button {
+  height: 40px;
 }
