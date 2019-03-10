@@ -14,8 +14,7 @@ import { EditColonyComponent } from './settings/colony-details/edit-colony/edit-
 import {ColoniesService} from "./settings/shared/colonies.service";
 import { ColonyDetailsComponent } from './settings/colony-details/colony-details.component';
 import {SettingsDataService} from "./settings/shared/settings-data.service";
-import { MotherMainComponent } from './work/mother-main/mother-main.component';
-import { MotherSituationComponent } from './work/mother-situation/mother-situation.component';
+import { MotherSituationComponent } from './work/reference/mother-situation/mother-situation.component';
 import { WorkComponent } from './work/work.component';
 import { WorkHeaderComponent } from './work/work-header/work-header.component';
 import { SpinnerComponent } from './util/spinner/spinner.component';
@@ -23,8 +22,16 @@ import {SpinnerService} from "./util/spinner/spinner.service";
 import {SettingsNavigationService} from "./settings/shared/settings-navigation.service";
 import { JwModalComponent } from './util/jw-modal/jw-modal.component';
 import {JwModalService} from "./util/jw-modal/jw-modal.service";
-import { FreakMomComponent } from './work/freak-mom/freak-mom.component';
-import { MotherFrameComponent } from './work/mother-frame/mother-frame.component';
+import { FreakMomComponent } from './work/reference/freak-mom/freak-mom.component';
+import { MotherFrameComponent } from './work/reference/mother-frame/mother-frame.component';
+import { MotherComponent } from './work/mother/mother.component';
+import { SeenComponent } from './work/mother/seen/seen.component';
+import { InCageComponent } from './work/mother/in-cage/in-cage.component';
+import { HatchedComponent } from './work/mother/hatched/hatched.component';
+import { UnknownComponent } from './work/mother/unknown/unknown.component';
+import { MissingComponent } from './work/mother/missing/missing.component';
+import { FreakComponent } from './work/mother/freak/freak.component';
+import { UnCagedComponent } from './work/mother/un-caged/un-caged.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,14 +42,21 @@ import { MotherFrameComponent } from './work/mother-frame/mother-frame.component
     NewHiveComponent,
     EditColonyComponent,
     ColonyDetailsComponent,
-    MotherMainComponent,
     MotherSituationComponent,
     WorkComponent,
     WorkHeaderComponent,
     SpinnerComponent,
     JwModalComponent,
     FreakMomComponent,
-    MotherFrameComponent
+    MotherFrameComponent,
+    MotherComponent,
+    SeenComponent,
+    InCageComponent,
+    HatchedComponent,
+    UnknownComponent,
+    MissingComponent,
+    FreakComponent,
+    UnCagedComponent
   ],
   imports: [
     BrowserModule,

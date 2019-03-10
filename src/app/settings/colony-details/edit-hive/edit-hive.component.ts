@@ -28,7 +28,6 @@ export class EditHiveComponent implements OnInit, OnChanges {
               private modalService: JwModalService) { }
 
   ngOnInit() {
-
   }
 
   ngOnChanges(): void {
@@ -71,7 +70,7 @@ export class EditHiveComponent implements OnInit, OnChanges {
     this.coloniesService.updateHiveData(id, number, colonyIdHiveBelongsTo, description)
   }
 
-  openVerifyDeleteHiveModal(id: number) {
+  openVerifyDeleteHiveModal() {
 
     this.warningMustIncludeVerifyText = false;
     this.modalService.open('delete-hive');
