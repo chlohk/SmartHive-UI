@@ -1,5 +1,9 @@
 img {
-  height: 30px;
+  height: 100px;
+}
+
+img.pencil {
+  height: 57px;
 }
 
 button {
