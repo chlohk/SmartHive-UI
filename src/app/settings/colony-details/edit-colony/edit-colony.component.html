@@ -12,10 +12,12 @@
           class="btn btn-light btn-outline-secondary"
           (click)="deleteColony()"
           [ngStyle]="warningHasAssociatedHives ? {'border-color': 'red'} : ''">
-            <img
-              height="30"
-              width="30"
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/2000px-Trash_font_awesome.svg.png"></button>
+          <img
+            src="assets/img/trash.png"
+            height="30px"
+            width="30px"
+          >
+        </button>
       </div>
     </div>
     <div class="row" *ngIf="warningHasAssociatedHives">

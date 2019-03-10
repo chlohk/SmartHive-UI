@@ -28,14 +28,18 @@ export class EditHiveComponent implements OnInit, OnChanges {
               private modalService: JwModalService) { }
 
   ngOnInit() {
-    this.colonies = this.coloniesService.getAllColonies();
+
   }
 
   ngOnChanges(): void {
+    this.colonies = this.coloniesService.getAllColonies();
     this.colonyIdToWhichHiveWillBelong = this.currentlySelectedColonyId;
     this.newHiveDescription = this.currentlySelectedHive.description;
     this.newHiveNumber = this.currentlySelectedHive.number;
-    this.newHiveId = this.currentlySelectedHive.id
+    this.newHiveId = this.currentlySelectedHive.id;
+    this.colonyToWhichItBelongsNow = this.colonies.find(
+      colony => colony.id === +this.currentlySelectedColonyId
+    );
   }
 
   cancelAddingNewHive() {
@@ -68,9 +72,7 @@ export class EditHiveComponent implements OnInit, OnChanges {
   }
 
   openVerifyDeleteHiveModal(id: number) {
-    this.colonyToWhichItBelongsNow = this.colonies.find(
-      colony => colony.id === +this.currentlySelectedColonyId
-    );
+
     this.warningMustIncludeVerifyText = false;
     this.modalService.open('delete-hive');
 

@@ -1,8 +1,4 @@
-body {
+.gray-background {
   background-color: gray;
 }
 
-img {
-  width: 50%;
-  height: auto;
-}

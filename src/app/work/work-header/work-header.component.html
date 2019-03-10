@@ -1,12 +1,17 @@
-<body>
-<nav class="navbar navbar-default" style="margin: 0 !important;">
+<nav class="navbar navbar-default" style="margin: 0 !important; background-color: gray">
   <div class="container-fluid">
     <div class="col-sm-1">
-      <button
-        type="button"
-        class="btn btn-light btn-outline-secondary">
-        <img src="assets/img/settingsView.png">
-      </button>
+      <a routerLink="/settings">
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary">
+          <img
+            src="assets/img/settingsView.png"
+            height="30px"
+            width="30px"
+            >
+        </button>
+      </a>
     </div>
     <div class="col-sm-6">
       <form #f="ngForm">
@@ -40,5 +45,3 @@
     </div>
   </div>
 </nav>
-</body>
-

@@ -1,12 +1,17 @@
 <nav class="navbar navbar-default grayBackground" style="margin: 0 !important;">
   <div class="container-fluid">
     <div class="col-sm-1">
-      <button
-        type="button"
-        class="btn btn-light btn-outline-secondary"
-        (click)="onRandomButtonClick()">
-        Work
-      </button>
+      <a routerLink="/work">
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary">
+          <img
+            src="assets/img/mesitaru.png"
+            height="30px"
+            width="30px"
+          >
+        </button>
+      </a>
     </div>
     <div class="col-sm-6">
       <select

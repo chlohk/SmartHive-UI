@@ -39,10 +39,6 @@ export class SettingsComponent implements OnInit{
      }, 0);
   }
 
-  onRandomButtonClick() {
-
-  }
-
   onNewColonyButtonClick() {
     this.settingsNavigationService.colonyDetailsComponent.next('');
     this.currentlySelectedColonyId = '';
