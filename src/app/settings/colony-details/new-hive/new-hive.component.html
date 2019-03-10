@@ -1,31 +1,51 @@
-<p>
-  new-hive works!
-</p><div class="row">
-  <div class="col-sm-7">
-  </div>
-  <div class="col-sm-5 myBackGround">
-    <br>
-    <p>number</p>
-    <input>
-    <br>
-    <p>uue taru kirjeldus</p>
-    <input>
-    <br>
-    <p>koloonia</p>
-    <input>
-    <br>
-    <br>
-    <br>
-    <div class="container-fluid">
-      <div class="col-sm-4">
 
-      </div>
-      <div class="col-sm-4">
-        <button type="button" class="btn btn-light btn-outline-secondary">✔</button>
+<div class="row">
+  <div class="col-5"></div>
+  <div class="col-7">
+    <div class="card bg-light mb-3" style="max-width: 23rem">
+      <div class="card-header"><strong>Taru loomine</strong></div>
+      <div class="card-body">
+        <div class="row">
+          <label>Uue taru kirjeldus</label>
+        </div>
+        <div class="row">
+          <input
+            type="text"
+            [(ngModel)]="newHiveDescription">
+        </div>
+        <div class="row">
+          <label>Uue taru number</label>
+        </div>
+        <div class="row" *ngIf="warningHiveNumberExists">
+          <span style="color: red"><strong>Koloonias korduv number</strong></span>
+        </div>
+        <div class="row">
+          <input
+            type="number"
+            oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+            maxlength="3"
+            [ngStyle]="warningHiveNumberExists ? {'border-color': 'red'} : ''"
+            [(ngModel)]="newHiveNumber">
+        </div>
+        <div class="card-footer row topMargin">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-danger"
+            (click)="cancelAddingNewHive()">❌</button>
+
+          <button
+            type="button"
+            class="btn btn-light btn-outline-success leftMargin"
+            [disabled]="newHiveNumber === null
+                        || newHiveNumber <= 0
+                        || colonyIdToWhichHiveWillBelong === ''
+                        || newHiveDescription === ''"
+            (click)="addNewHive(newHiveNumber, currentlySelectedColonyId, newHiveDescription)">
+            ✔
+          </button>
+        </div>
       </div>
     </div>
-    <br>
-    <br>
   </div>
 </div>
 

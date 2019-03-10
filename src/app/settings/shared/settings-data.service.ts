@@ -9,45 +9,35 @@ export class SettingsDataService {
   constructor(private httpClient: HttpClient) {}
 
   onAddNewColony(newColonyName: string) {
-    return this.httpClient.post<Colony[]>('api/colony', {'name': newColonyName})
-      .map(
-        colonies => {return colonies},
-        (error) => console.log(error)
-      );
+    return this.httpClient.post<Colony[]>('api/colony', {'name': newColonyName}).toPromise();
   }
 
   onEditColony(colonyToEdit: Colony, newColonyName: string) {
     const URL = 'api/colony/' + colonyToEdit.id;
-    return this.httpClient.put<Colony[]>(URL, {'name': newColonyName})
-      .map(
-        colonies => {
-          console.log('4ok was called');
-          return colonies},
-        (error) => {
-          console.log(error)}
-      );
+    return this.httpClient.put<Colony[]>(URL, {'name': newColonyName}).toPromise();
   }
 
   onDeleteColony(colonyToDelete: Colony) {
-    console.log('3 was called');
     const URL = 'api/colony/' + colonyToDelete.id;
-    return this.httpClient.delete<Colony[]>(URL)
-      .map(
-        colonies => {
-          console.log('4ok was called');
-          return colonies},
-        (error) => {
-          console.log('4err was called');
-          console.log(error)}
-      );
+    return this.httpClient.delete<Colony[]>(URL).toPromise();
   }
 
-  getAllColonies() {
-    return this.httpClient.get<Colony[]>('api/colony')
-      .map( (colonies) => {
-          return colonies;
-        },
-        (error) => console.log(error)
-      );
+  onGetColoniesData() {
+    return this.httpClient.get<Colony[]>('api/colony').toPromise();
+  }
+
+  onAddNewHive(number: number, colonyIdHiveBelongsTo: string, description?: string) {
+    const url =  'api/hive/' + colonyIdHiveBelongsTo;
+    return this.httpClient.post(url, {'description': description, 'number': number}).toPromise();
+  }
+
+  onUpdateHiveData(id: number, number: number, colonyIdHiveBelongsTo: string, description?: string) {
+    const url =  'api/hive/' + id + '/colony/' + colonyIdHiveBelongsTo;
+    return this.httpClient.put(url, {'id': id, 'description': description, 'number': number}).toPromise();
+  }
+
+  onDeleteHive(hiveIdToDelete: number) {
+    const URL = 'api/hive/' + hiveIdToDelete;
+    return this.httpClient.delete<Colony[]>(URL).toPromise();
   }
 }

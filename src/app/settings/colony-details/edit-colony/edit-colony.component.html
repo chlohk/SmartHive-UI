@@ -1,44 +1,57 @@
-<body>
-<form>
-<br>
-<div class="container">
-  <div class="row">
+<div class="myBackGround">
+  <br>
+  <div class="container">
+    <div class="row">
 
-    <div class="col-sm-8">
-      <p>id: {{ currentColony.id }}</p>
+      <div class="col-sm-8">
+        <p>id: {{ currentlySelectedColony.id }}</p>
+      </div>
+      <div class="col-sm-4">
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary"
+          (click)="deleteColony()"
+          [ngStyle]="warningHasAssociatedHives ? {'border-color': 'red'} : ''">
+            <img
+              height="30"
+              width="30"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/2000px-Trash_font_awesome.svg.png"></button>
+      </div>
+    </div>
+    <div class="row" *ngIf="warningHasAssociatedHives">
+      <span style="color: red"><strong>
+        Ei saa kustutada kolooniat, millega on seotud tarusid. Enne koloonia kustutamist liiguta
+        nad teise koloonia alla või kustuta tarud sootuks.<br>
+        <u>NB! Taru kustutamisega kaotad kõik sellega seotud andmed</u>
+      </strong></span>
+    </div>
+  </div>
+  <br>
+  <br>
+  <label>
+    koloonia nimi
+  </label>
+  <input
+    type="text"
+    [value]="currentlySelectedColony.name"
+    #newColonyName>
+  <br>
+  <br>
+  <br>
+  <div class="container-fluid">
+    <div class="col-sm-4">
+      <button
+        type="button"
+        class="btn btn-light btn-outline-secondary"
+        (click)="cancelEditingColony()">❌</button>
     </div>
     <div class="col-sm-4">
       <button
         type="button"
         class="btn btn-light btn-outline-secondary"
-        (click)="deleteColony()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/Trash_font_awesome.svg/2000px-Trash_font_awesome.svg.png"></button>
+        (click)="editColony(newColonyName.value)">✔</button>
     </div>
   </div>
+  <br>
+  <br>
 </div>
-<br>
-<br>
-<label>
-  koloonia nimi
-</label>
-<input
-  type="text"
-  [value]="currentColony.name"
-  #newColonyName>
-<br>
-<br>
-<br>
-<div class="container-fluid">
-  <div class="col-sm-4">
-    <button type="button" class="btn btn-light btn-outline-secondary">❌</button>
-  </div>
-  <div class="col-sm-4">
-    <button
-      type="button"
-      class="btn btn-light btn-outline-secondary"
-      (click)="editColony(newColonyName.value)">✔</button>
-  </div>
-</div>
-<br>
-<br>
-</form>
-</body>

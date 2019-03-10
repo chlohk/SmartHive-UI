@@ -7,7 +7,6 @@ import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import {ExampleComponent} from "./example/example.component";
 import { SettingsComponent } from './settings/settings.component';
-import { SettingsHeaderComponent } from './settings/settings-header/settings-header.component';
 import { NewColonyComponent } from './settings/new-colony/new-colony.component';
 import { EditHiveComponent } from './settings/colony-details/edit-hive/edit-hive.component';
 import { NewHiveComponent } from './settings/colony-details/new-hive/new-hive.component';
@@ -19,13 +18,16 @@ import { MotherMainComponent } from './work/mother-main/mother-main.component';
 import { MotherSituationComponent } from './work/mother-situation/mother-situation.component';
 import { WorkComponent } from './work/work.component';
 import { WorkHeaderComponent } from './work/work-header/work-header.component';
-
+import { SpinnerComponent } from './util/spinner/spinner.component';
+import {SpinnerService} from "./util/spinner/spinner.service";
+import {SettingsNavigationService} from "./settings/shared/settings-navigation.service";
+import { JwModalComponent } from './util/jw-modal/jw-modal.component';
+import {JwModalService} from "./util/jw-modal/jw-modal.service";
 @NgModule({
   declarations: [
     AppComponent,
     ExampleComponent,
     SettingsComponent,
-    SettingsHeaderComponent,
     NewColonyComponent,
     EditHiveComponent,
     NewHiveComponent,
@@ -34,7 +36,9 @@ import { WorkHeaderComponent } from './work/work-header/work-header.component';
     MotherMainComponent,
     MotherSituationComponent,
     WorkComponent,
-    WorkHeaderComponent
+    WorkHeaderComponent,
+    SpinnerComponent,
+    JwModalComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,12 @@ import { WorkHeaderComponent } from './work/work-header/work-header.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [ColoniesService, SettingsDataService],
+  providers: [
+    ColoniesService,
+    SettingsDataService,
+    SpinnerService,
+    SettingsNavigationService,
+    JwModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,21 +4,48 @@
       <div class="row">
         <div class="col-sm-7"></div>
         <div class="col-sm-2">
-          <button type="button" class="btn btn-light btn-outline-secondary">✚ taru</button>
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary"
+            (click)="onNewHiveButtonClick()">✚ taru</button>
         </div>
       </div>
       <br>
-      <div class="row" style="background-color: lightgray">
-        <div class="col-sm-8">
-          <p>#1 Roheline</p>
-        </div>
-        <div class="col-sm-2">
-          <button type="button" class="btn btn-light btn-outline-secondary">✎</button>
+      <div id=""
+           style="overflow-y:auto;
+            overflow-x:hidden;
+            border-color: dimgray;
+            border-style: solid;
+            height:350px;">
+        <div class="row"
+             style="background-color: lightgray; border-style: solid; border-color: white;"
+              *ngFor="let hive of currentlySelectedColony.hives">
+          <div class="col-sm-2 text-center">
+            <h5>{{hive.number}}</h5>
+          </div>
+          <div class="col-sm-6">
+            <strong>{{hive.description}}</strong>
+          </div>
+          <div class="col-sm-2">
+            <button
+              type="button"
+              class="btn btn-light btn-outline-secondary"
+              (click)="onEditHiveButtonClick(hive)">✎</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-sm-5">
-    <router-outlet></router-outlet>
+  <div class="col-sm-5" [ngSwitch]="loadedComponent">
+    <app-edit-colony
+      *ngSwitchCase="'editColony'"
+      [currentlySelectedColonyId]="currentlySelectedColonyId"></app-edit-colony>
+    <app-edit-hive
+      *ngSwitchCase="'editHive'"
+      [currentlySelectedColonyId]="currentlySelectedColonyId"
+      [currentlySelectedHive]="currentlySelectedHive"></app-edit-hive>
+    <app-new-hive
+      *ngSwitchCase="'newHive'"
+      [currentlySelectedColonyId]="currentlySelectedColonyId"></app-new-hive>
   </div>
 </div>

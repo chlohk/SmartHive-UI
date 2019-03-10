@@ -1,12 +1,44 @@
-<div class="container-fluid">
-  <div class="row">
-    <app-settings-header></app-settings-header>
+<nav class="navbar navbar-default grayBackground" style="margin: 0 !important;">
+  <div class="container-fluid">
+    <div class="col-sm-1">
+      <button
+        type="button"
+        class="btn btn-light btn-outline-secondary"
+        (click)="onRandomButtonClick()">
+        Work
+      </button>
+    </div>
+    <div class="col-sm-6">
+      <select
+        name="colony"
+        class="custom-select"
+        (change)="onChange()"
+        [(ngModel)]="currentlySelectedColonyId"
+        #selectField>
+        <option value="" disabled selected hidden>Vali koloonia...</option>
+        <option
+          *ngFor="let colony of colonies"
+          [value]="colony.id"> {{ colony.name }}</option>
+      </select>
+    </div>
+    <div class="col-sm-1.5">
+      <button
+        type="button"
+        class="btn btn-light btn-outline-secondary"
+        (click)="onEditColonyButtonClick()"
+        [disabled]="selectField.value === ''">✎</button>
+    </div>
+    <div class="col-sm-3.5">
+      <button type="button" class="btn btn-light btn-outline-secondary" (click)="onNewColonyButtonClick()">✚ koloonia</button>
+    </div>
   </div>
+</nav>
+<div class="container-fluid">
   <br>
+  <div [ngSwitch]="loadedComponent">
+    <app-new-colony *ngSwitchCase="'newColony'"></app-new-colony>
+    <app-colony-details *ngSwitchCase="'colonyDetails'" [currentlySelectedColonyId]="currentlySelectedColonyId"></app-colony-details>
+  </div>
 </div>
 
-<div class="container">
-  <!--<router-outlet></router-outlet>-->
-  <app-mother-main></app-mother-main>
-</div>
 

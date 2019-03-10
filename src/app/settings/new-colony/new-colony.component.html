@@ -2,18 +2,27 @@
   <div class="col-5"></div>
   <div class="col-7">
     <div class="card bg-light mb-3" style="max-width: 23rem; height: 20rem">
-      <div class="card-header">Koloonia loomine</div>
+      <div class="card-header"><strong>Koloonia loomine</strong></div>
       <div class="card-body">
-        <h5 class="card-title">uue koloonia nimi</h5>
+        <h5 class="card-title">Uue koloonia nimi</h5>
         <br>
         <input
           type="text"
-          #newColonyName>
+          [(ngModel)]="newColonyName">
         <br><br><br>
         <div class="card-footer">
-          <button type="button" class="btn btn-light btn-outline-danger" style="margin: 20px">❌</button>
+          <button
+            type="button"
+            class="btn btn-light btn-outline-danger"
+            (click)="cancelAddingNewColony()"
+            style="margin: 20px">❌</button>
 
-          <button type="button" class="btn btn-light btn-outline-success" (click)="addNewColony(newColonyName.value)" style="margin: 20px">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-success"
+            [disabled]="newColonyName === ''"
+            (click)="addNewColony()"
+            style="margin: 20px">
             ✔
           </button>
         </div>
