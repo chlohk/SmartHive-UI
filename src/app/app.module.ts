@@ -23,6 +23,8 @@ import {SpinnerService} from "./util/spinner/spinner.service";
 import {SettingsNavigationService} from "./settings/shared/settings-navigation.service";
 import { JwModalComponent } from './util/jw-modal/jw-modal.component';
 import {JwModalService} from "./util/jw-modal/jw-modal.service";
+import { FreakMomComponent } from './work/freak-mom/freak-mom.component';
+import { MotherFrameComponent } from './work/mother-frame/mother-frame.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,9 @@ import {JwModalService} from "./util/jw-modal/jw-modal.service";
     WorkComponent,
     WorkHeaderComponent,
     SpinnerComponent,
-    JwModalComponent
+    JwModalComponent,
+    FreakMomComponent,
+    MotherFrameComponent
   ],
   imports: [
     BrowserModule,
