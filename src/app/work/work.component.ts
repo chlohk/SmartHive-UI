@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {SpinnerService} from "../util/spinner/spinner.service";
 import set = Reflect.set;
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-work',
@@ -16,5 +17,7 @@ export class WorkComponent implements OnInit {
       this.spinnerService.setSpinnerStatus.next(false);}, 0)
 
   }
+
+
 
 }
