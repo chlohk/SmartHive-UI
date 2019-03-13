@@ -18,7 +18,8 @@ export class JwModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
   private element: any;
 
-  constructor(private modalService: JwModalService, private el: ElementRef) {
+  constructor(private modalService: JwModalService,
+              private el: ElementRef) {
     this.element = el.nativeElement;
   }
 

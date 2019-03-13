@@ -1,20 +1,50 @@
 <div [ngSwitch]="loadedMotherStatus" >
   <app-freak *ngSwitchCase="motherStatusEnum.FREAK"></app-freak>
-  <app-hatched *ngSwitchCase="motherStatusEnum.HATCHED"></app-hatched>
+  <app-hatched
+    *ngSwitchCase="motherStatusEnum.HATCHED"
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)">
+  </app-hatched>
   <app-in-cage *ngSwitchCase="motherStatusEnum.IN_CAGE"></app-in-cage>
   <app-missing *ngSwitchCase="motherStatusEnum.MISSING"></app-missing>
   <app-seen
     *ngSwitchCase="motherStatusEnum.SEEN"
-    (onChangeMotherStatus)="openMotherStatusChangePanel()"
-  ></app-seen>
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)">
+  </app-seen>
   <app-un-caged *ngSwitchCase="motherStatusEnum.UN_CAGED"></app-un-caged>
   <app-unknown *ngSwitchCase="motherStatusEnum.UNKNOWN"></app-unknown>
 </div>
 
 <jw-modal id="mother-status">
   <h4>Ema hetkeolukord</h4>
-  <button class="btn btn-secondary">Puurist lahti</button>
-  <button class="btn btn-secondary">Puuris</button>
-  <button class="btn btn-secondary">Nähtud</button>
+  <button
+    class="btn btn-secondary"
+    (click)="changeMotherStatus(motherStatusEnum.MISSING)">Puudu: -
+  </button>
+  <button
+    class="btn btn-secondary"
+    (click)="changeMotherStatus(motherStatusEnum.IN_CAGE)">Puuriga tarus: -
+  </button>
+  <button
+    class="btn btn-secondary"
+    (click)="changeMotherStatus(motherStatusEnum.UN_CAGED)">Puurist välja lastud: -
+  </button>
+  <button
+    class="btn btn-secondary"
+    (click)="changeMotherStatus(motherStatusEnum.SEEN)">Nähtud: OK
+  </button>
+  <br>
+  <button
+    class="btn btn-secondary"
+    (click)="changeMotherStatus(motherStatusEnum.UNKNOWN)">Teadmata: WORKING
+  </button>
+  <br>
+  <button
+    class="btn btn-secondary"
+    (click)="changeMotherStatus(motherStatusEnum.FREAK)">Väärema: -
+  </button>
+  <button
+    class="btn btn-secondary"
+    (click)="changeMotherStatus(motherStatusEnum.HATCHED)">Koorunud: OK
+  </button>
 </jw-modal>
 

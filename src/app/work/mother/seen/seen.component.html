@@ -13,7 +13,7 @@
               src="assets/img/muuda.png"
               alt="ii"
               style="height: 65px"
-              (click)="onChangeMotherStatusButtonClick()">
+              (click)="onChangeMotherStatusButtonClick(null)">
           </button>
         </div>
 
@@ -35,7 +35,8 @@
       <button
         type="button"
         class="btn btn-light btn-outline-danger"
-        style="height: 115px;width: 80px; margin: 0px; margin-left: 20px">
+        style="height: 115px;width: 80px; margin: 0px; margin-left: 20px"
+        (click)="onChangeMotherStatusButtonClick(motherStatusEnum.UNKNOWN)">
         <img
           src="assets/img/teadmataVertical.jpg"
           alt="ii"

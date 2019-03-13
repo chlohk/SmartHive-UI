@@ -17,8 +17,17 @@ export class MotherComponent implements OnInit {
   ngOnInit() {
   }
 
-  openMotherStatusChangePanel() {
-    this.modalService.open('mother-status');
+  onChangeMotherStatusButtonClick(newMotherStatus?: MotherStatusEnum) {
+    if(newMotherStatus) {
+      this.changeMotherStatus(newMotherStatus);
+    } else {
+      this.modalService.open('mother-status');
+    }
+  }
+
+  changeMotherStatus(newMotherStatus: MotherStatusEnum) {
+    this.loadedMotherStatus = newMotherStatus;
+    this.modalService.close('mother-status')
   }
 
 

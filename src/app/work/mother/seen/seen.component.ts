@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {JwModalService} from "../../../util/jw-modal/jw-modal.service";
+import {MotherStatusEnum} from "../mother-status.enum";
 
 @Component({
   selector: 'app-seen',
@@ -7,17 +8,17 @@ import {JwModalService} from "../../../util/jw-modal/jw-modal.service";
   styleUrls: ['./seen.component.css']
 })
 export class SeenComponent implements OnInit {
-  @Output() onChangeMotherStatus = new EventEmitter<null>();
-
+  @Output() onChangeMotherStatus = new EventEmitter<MotherStatusEnum>();
+  motherStatusEnum = MotherStatusEnum;
 
   constructor(private modalService: JwModalService) { }
 
   ngOnInit() {
   }
 
-  onChangeMotherStatusButtonClick() {
-    this.modalService.close('mother-seen-edit')
-    this.onChangeMotherStatus.emit();
+  onChangeMotherStatusButtonClick(newMotherStatus?: MotherStatusEnum) {
+    this.modalService.close('mother-seen-edit');
+    this.onChangeMotherStatus.emit(newMotherStatus);
   }
 
   onOpenWhenSeenMotherEditButton() {
