@@ -89,34 +89,51 @@
     <div class="card-header">
       <div class="row">
         <h4>Millal seda ema viimati nägid?</h4>
-        <button class="btn btn-danger" style="width: 40px; height: 40px; margin-left: 700px">
-          <img src="assets/img/sulge.jpeg" alt="" style="height: 30px;width: 30px; margin: 2px">
+        <button
+          class="btn btn-danger"
+          style="width: 40px; height: 40px; margin-left: 700px"
+          (click)="onCloseSeenMotherEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            style="height: 30px;width: 30px; margin: 2px">
         </button>
       </div>
     </div>
+    <br>
     <div class="row">
       <div class="col-1"></div>
       <div class="col-4">
         <img src="assets/img/emaOkRohe.png" alt="" style="width: 160px">
         <br>
         <div class="radio">
-          <label><input type="radio" name="seen"><h5> Täna</h5></label>
-        </div>
-        <div class="radio">
           <label>
-            <input type="radio" name="seen"><input type="number"><h5> päeva tagasi</h5>
+            <h3>
+              <input
+                type="radio"
+                name="seen"
+                style="width: 25px; height: 25px">
+              Täna
+            </h3>
           </label>
         </div>
         <div class="radio">
-          <label><input type="radio" name="seen"> <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"><h5> (7 päeva tagasi)</h5></label>
+          <label>
+            <h3>
+              <input type="radio" name="seen"  style="width: 25px; height: 25px">&nbsp;<input type="number" size="3"> päeva tagasi</h3>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <h3>
+              <input type="radio" name="seen"  style="width: 25px; height: 25px">&nbsp; <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"> (7 päeva tagasi)</h3></label>
         </div>
       </div>
       <div class="col-7">
         <div class="row">
-          <h5>Ei ole seda ema üldse näinud?</h5>
+          <h3>Ei ole seda ema üldse näinud?</h3>
         </div>
         <div class="row">
-          <h5>Vali teine ema staatus: </h5>
+          <h3>Vali teine ema staatus:&nbsp;</h3>
           <button
             type="button"
             class="btn btn-light btn-outline-primary"
