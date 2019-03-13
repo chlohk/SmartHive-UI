@@ -83,31 +83,60 @@
   </div>
 </div>
 
-<jw-modal id="mother-seen-edit">
-  <h4>Millal seda ema viimati nägid?</h4>
-  <div class="radio">
-    <label><input type="radio" name="seen">Täna</label>
+<jw-modal id="mother-seen-edit"  style="max-width: 50rem; height: 45rem">
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row">
+        <h4>Millal seda ema viimati nägid?</h4>
+        <button class="btn btn-danger" style="width: 40px; height: 40px; margin-left: 700px">
+          <img src="assets/img/sulge.jpeg" alt="" style="height: 30px;width: 30px; margin: 2px">
+        </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-4">
+        <img src="assets/img/emaOkRohe.png" alt="" style="width: 160px">
+        <br>
+        <div class="radio">
+          <label><input type="radio" name="seen"><h5> Täna</h5></label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" name="seen"><input type="number"><h5> päeva tagasi</h5>
+          </label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="seen"> <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"><h5> (7 päeva tagasi)</h5></label>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="row">
+          <h5>Ei ole seda ema üldse näinud?</h5>
+        </div>
+        <div class="row">
+          <h5>Vali teine ema staatus: </h5>
+          <button
+            type="button"
+            class="btn btn-light btn-outline-primary"
+            style="width: 200px; height: 80px; margin: 0px">
+            <img
+              src="assets/img/muuda.png"
+              alt="ii"
+              style="height: 65px"
+              (click)="onChangeMotherStatusButtonClick()">
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
+      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
+    </div>
+
+
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="seen"><input type="number">päeva tagasi
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="seen">(7 päeva tagasi)</label>
-  </div>
-  <button class="btn btn-warning">Loobun</button>
-  <button class="btn btn-success">Salvestan</button>
-  <button
-    type="button"
-    class="btn btn-light btn-outline-primary"
-    style="width: 200px; height: 80px; margin: 0px">
-    <img
-      src="assets/img/muuda.png"
-      alt="ii"
-      style="height: 65px"
-      (click)="onChangeMotherStatusButtonClick()">
-  </button>
+
 </jw-modal>
 
 
@@ -178,8 +207,8 @@
   <div class="radio">
     <label><input type="radio" name="when_marked">(märts 2017)</label>
   </div>
-  <button class="btn btn-warning">Loobun</button>
-  <button class="btn btn-success">Salvestan</button>
+  <button class="btn btn-light">Loobun</button>
+  <button class="btn btn-light">Salvestan</button>
 </jw-modal>
 
 
@@ -211,8 +240,8 @@
   <div class="radio">
     <label><input type="radio" name="seen">Märts 2017</label>
   </div>
-  <button class="btn btn-warning">Loobun</button>
-  <button class="btn btn-success">Salvestan</button>
+  <button class="btn btn-light">Loobun</button>
+  <button class="btn btn-light">Salvestan</button>
   <button
     type="button"
     class="btn btn-light btn-outline-primary"
