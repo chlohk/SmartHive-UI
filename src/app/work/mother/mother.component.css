@@ -6,8 +6,7 @@ img.pencil {
   height: 57px;
 }
 
-button {
-  height: 100px;
-  width: 100px;
-  margin: 20px
+img.statusPanel {
+  height: 80px;
 }
+

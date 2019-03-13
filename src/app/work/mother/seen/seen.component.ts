@@ -21,7 +21,7 @@ export class SeenComponent implements OnInit {
     this.onChangeMotherStatus.emit(newMotherStatus);
   }
 
-  onOpenWhenSeenMotherEditButton() {
+  onOpenSeenMotherEditButton() {
     this.modalService.open('mother-seen-edit')
   }
 

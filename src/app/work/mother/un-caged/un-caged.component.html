@@ -1,3 +1,273 @@
-<p>
-  un-caged works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-7.5">
+      <div
+        class="card bg-light mb-3"
+        style="max-width: 16rem; height: 42.5rem; margin-left:auto;margin-right:auto;text-align:center">
+        <div class="card-header">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-primary"
+            style="width: 200px; height: 80px; margin: 0px">
+            <img
+              src="assets/img/muuda.png"
+              alt="ii"
+              style="height: 65px"
+              (click)="onChangeMotherStatusButtonClick(null)">
+          </button>
+        </div>
+
+        <div class="card-body" style="background-color: white">
+          <img
+            src="assets/img/puuristV2lja.png" alt="ii">
+          <p class="card-text">täna</p>
+          <img
+            src="assets/img/munebOK.png" alt="ii">
+          <p class="card-text">täna</p>
+          <img
+            src="assets/img/m2rgistatudYes.png" alt="ii">
+          <p class="card-text">mai 2018</p>
+          <img src="assets/img/synnip2evOk.png" alt="ii"><p>mai 2018</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4.5">
+      <button
+        type="button"
+        class="btn btn-light btn-outline-danger"
+        style="height: 115px;width: 80px; margin: 0px; margin-left: 20px"
+        (click)="onChangeMotherStatusButtonClick(motherStatusEnum.SEEN)">
+        <img
+          src="assets/img/n2htudVertical.png"
+          alt="ii"
+          style="height: 100px">
+      </button>
+      <br>
+      <button
+        type="button"
+        class="btn btn-light btn-outline-success"
+        (click)="onMotherUnCagedEditButton()">
+        <img src="assets/img/muudaNupp.png"
+             alt="ii"
+             class="pencil">
+      </button>
+      <br>
+      <button
+        type="button"
+        class="btn btn-light btn-outline-danger"
+        (click)="onOpenWhenSeenMotherLayingEggsEditButton()">
+        <img
+          src="assets/img/muudaNupp.png"
+          alt="ii" class="pencil">
+      </button>
+      <br>
+      <button
+        type="button"
+        class="btn btn-light btn-outline-danger"
+        (click)="onOpenWhenMotherMarkedEditButton()">
+        <img
+          src="assets/img/muudaNupp.png"
+          alt="ii"
+          class="pencil">
+      </button>
+      <br>
+      <button
+        type="button"
+        class="btn btn-light btn-outline-primary"
+        (click)="onOpenWhenMotherBirthdayEditButton()">
+        <img
+          src="assets/img/muudaNupp.png"
+          alt="ii"
+          class="pencil">
+      </button>
+    </div>
+  </div>
+</div>
+
+<jw-modal id="mother-un-caged-edit"  style="max-width: 50rem; height: 45rem">
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row">
+        <h4>Millal ema puurist välja perre lasti?</h4>
+        <button
+          class="btn btn-danger"
+          style="width: 40px; height: 40px; margin-left: 700px"
+          (click)="onCloseMotherUnCagedEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            style="height: 30px;width: 30px; margin: 2px">
+        </button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-4">
+        <img src="assets/img/puuristV2lja.png">
+        <br>
+        <div class="radio">
+          <label>
+            <h3>
+              <input
+                type="radio"
+                name="un_caged"
+                style="width: 25px; height: 25px">
+              Täna
+            </h3>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <h3>
+              <input type="radio" name="un_caged"  style="width: 25px; height: 25px">&nbsp;<input type="number" size="3"> päeva tagasi</h3>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <h3>
+              <input type="radio" name="un_caged"  style="width: 25px; height: 25px">&nbsp; <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"> (7 päeva tagasi)</h3></label>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="row">
+          <h3>Ema staatus ei ole "puurist välja lastud"?</h3>
+        </div>
+        <div class="row">
+          <h3>Vali teine ema staatus:&nbsp;</h3>
+          <button
+            type="button"
+            class="btn btn-light btn-outline-primary"
+            style="width: 200px; height: 80px; margin: 0px">
+            <img
+              src="assets/img/muuda.png"
+              alt="ii"
+              style="height: 65px"
+              (click)="onChangeMotherStatusButtonClick()">
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
+      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
+    </div>
+
+
+  </div>
+
+</jw-modal>
+
+
+<jw-modal id="mother-laying-eggs-edit">
+  <h4>Millal nägid viimati, et see ema munes?</h4>
+  <strong>Muneb</strong>
+  <div class="radio">
+    <label><input type="radio" name="seen">Täna</label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="seen"><input type="number">päeva tagasi
+    </label>
+  </div>
+  <div class="radio">
+    <label><input type="radio" name="seen">(7 päeva tagasi)</label>
+  </div>
+  <strong>Muneb</strong>
+  <div class="radio">
+    <label><input type="radio" name="seen">Ei ole näinud, et muneks</label>
+  </div>
+  <button class="btn btn-warning">Loobun</button>
+  <button class="btn btn-success">Salvestan</button>
+</jw-modal>
+
+
+<jw-modal id="mother-marked-edit">
+  <h4>Kui korralikult on ema märgistatud ja millal?</h4>
+  <strong>Märgistuse kvaliteet</strong>
+  <div class="radio">
+    <label><input type="radio" name="quality">Korralik märgistus</label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="quality">
+      Märgistusega on probleeme
+      Märksõna:
+      <input type="number">
+    </label>
+  </div>
+  <div class="radio">
+    <label><input type="radio" name="quality">Ei ole märgistatud</label>
+  </div>
+  <strong>Millal märgistatud?</strong>
+  <div class="radio">
+    <label><input type="radio" name="when_marked">Täna</label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="when_marked">
+      <select
+        name="month_marked"
+        class="custom-select"
+        size="1">
+        <option value="">Jaanuar</option>
+        <option value="">Veebruar</option>
+        <option value="">Märts</option>
+      </select>
+      <select
+        name="year_marked"
+        class="custom-select"
+        size="1">
+        <option value="">2017</option>
+        <option value="">2018</option>
+      </select>
+    </label>
+  </div>
+  <div class="radio">
+    <label><input type="radio" name="when_marked">(märts 2017)</label>
+  </div>
+  <button class="btn btn-light">Loobun</button>
+  <button class="btn btn-light">Salvestan</button>
+</jw-modal>
+
+
+<jw-modal id="mother-birthday-edit">
+  <h4>Millal on see ema koorunud?</h4>
+  <div class="radio">
+    <label><input type="radio" name="seen">Täna</label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="when_marked">
+      <select
+        name="month_marked"
+        class="custom-select"
+        size="1">
+        <option value="">Jaanuar</option>
+        <option value="">Veebruar</option>
+        <option value="">Märts</option>
+      </select>
+      <select
+        name="year_marked"
+        class="custom-select"
+        size="1">
+        <option value="">2017</option>
+        <option value="">2018</option>
+      </select>
+    </label>
+  </div>
+  <div class="radio">
+    <label><input type="radio" name="seen">Märts 2017</label>
+  </div>
+  <button class="btn btn-light">Loobun</button>
+  <button class="btn btn-light">Salvestan</button>
+  <button
+    type="button"
+    class="btn btn-light btn-outline-primary"
+    style="width: 200px; height: 80px; margin: 0px">
+    <img
+      src="assets/img/muuda.png"
+      alt="ii"
+      style="height: 65px"
+      (click)="onChangeMotherStatusButtonClick()">
+  </button>
+</jw-modal>

@@ -22,12 +22,11 @@
             src="assets/img/teadmata.jpg" alt="ii">
           <p class="card-text">täna</p>
           <img
-            src="assets/img/munebOK.png" alt="ii">
+            src="assets/img/kontrollraamPuudu.png" alt="ii">
           <p class="card-text">täna</p>
           <img
-            src="assets/img/m2rgistatudYes.png" alt="ii">
-          <p class="card-text">mai 2018</p>
-          <img src="assets/img/synnip2evOk.png" alt="ii"><p>mai 2018</p>
+            src="assets/img/kuppValitudNot.png" alt="ii">
+          <p class="card-text">8 päeva tagasi</p>
         </div>
       </div>
     </div>
@@ -36,7 +35,7 @@
         type="button"
         class="btn btn-light btn-outline-danger"
         style="height: 115px;width: 80px; margin: 0px; margin-left: 20px"
-        (click)="onChangeMotherStatusButtonClick(motherStatusEnum.UNKNOWN)">
+        (click)="onChangeMotherStatusButtonClick(motherStatusEnum.MISSING)">
         <img
           src="assets/img/kadunudVertical.jpg"
           alt="ii"
@@ -46,7 +45,7 @@
       <button
         type="button"
         class="btn btn-light btn-outline-success"
-        (click)="onOpenWhenSeenMotherEditButton()">
+        (click)="onOpenMotherUnknownEditButton()">
         <img src="assets/img/muudaNupp.png"
              alt="ii"
              class="pencil">
@@ -55,7 +54,7 @@
       <button
         type="button"
         class="btn btn-light btn-outline-danger"
-        (click)="onOpenWhenSeenMotherLayingEggsEditButton()">
+        (click)="onOpenControlframeEggsEditButton()">
         <img
           src="assets/img/muudaNupp.png"
           alt="ii" class="pencil">
@@ -64,17 +63,7 @@
       <button
         type="button"
         class="btn btn-light btn-outline-danger"
-        (click)="onOpenWhenMotherMarkedEditButton()">
-        <img
-          src="assets/img/muudaNupp.png"
-          alt="ii"
-          class="pencil">
-      </button>
-      <br>
-      <button
-        type="button"
-        class="btn btn-light btn-outline-primary"
-        (click)="onOpenWhenMotherBirthdayEditButton()">
+        (click)="onOpenCocoonEditButton()">
         <img
           src="assets/img/muudaNupp.png"
           alt="ii"
@@ -88,35 +77,52 @@
   <div class="card bg-light">
     <div class="card-header">
       <div class="row">
-        <h4>Millal seda ema viimati nägid?</h4>
-        <button class="btn btn-danger" style="width: 40px; height: 40px; margin-left: 700px">
-          <img src="assets/img/sulge.jpeg" alt="" style="height: 30px;width: 30px; margin: 2px">
+        <h4>Mis ajast on teadmata kas ema on tarus olemas?</h4>
+        <button
+          class="btn btn-danger"
+          style="width: 40px; height: 40px; margin-left: 700px"
+          (click)="onCloseMotherUnknownEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            style="height: 30px;width: 30px; margin: 2px">
         </button>
       </div>
     </div>
+    <br>
     <div class="row">
       <div class="col-1"></div>
       <div class="col-4">
         <img src="assets/img/teadmata.jpg" alt="" style="width: 160px">
         <br>
         <div class="radio">
-          <label><input type="radio" name="seen"><h5> Täna</h5></label>
-        </div>
-        <div class="radio">
           <label>
-            <input type="radio" name="seen"><input type="number"><h5> päeva tagasi</h5>
+            <h3>
+              <input
+                type="radio"
+                name="unknown"
+                style="width: 25px; height: 25px">
+              Täna
+            </h3>
           </label>
         </div>
         <div class="radio">
-          <label><input type="radio" name="seen"> <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"><h5> (7 päeva tagasi)</h5></label>
+          <label>
+            <h3>
+              <input type="radio" name="unknown"  style="width: 25px; height: 25px">&nbsp;<input type="number" size="3"> päeva tagasi</h3>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <h3>
+              <input type="radio" name="unknown"  style="width: 25px; height: 25px">&nbsp; <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"> (7 päeva tagasi)</h3></label>
         </div>
       </div>
       <div class="col-7">
         <div class="row">
-          <h5>Ei ole seda ema üldse näinud?</h5>
+          <h3>Ema staatus ei ole "teadmata"?</h3>
         </div>
         <div class="row">
-          <h5>Vali teine ema staatus: </h5>
+          <h3>Vali teine ema staatus:&nbsp;</h3>
           <button
             type="button"
             class="btn btn-light btn-outline-primary"
@@ -141,116 +147,46 @@
 </jw-modal>
 
 
-<jw-modal id="mother-laying-eggs-edit">
-  <h4>Millal nägid viimati, et see ema munes?</h4>
-  <strong>Muneb</strong>
+<jw-modal id="mother-controlframe-edit">
+  <h4>Millal panin praegu peres oleva kontrollraami sisse?</h4>
+  <strong>Kontrollraam sees</strong>
   <div class="radio">
-    <label><input type="radio" name="seen">Täna</label>
+    <label><input type="radio" name="controlframe">Täna</label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" name="seen"><input type="number">päeva tagasi
+      <input type="radio" name="controlframe"><input type="number">päeva tagasi
     </label>
   </div>
   <div class="radio">
-    <label><input type="radio" name="seen">(7 päeva tagasi)</label>
+    <label><input type="radio" name="controlframe">(7 päeva tagasi)</label>
   </div>
-  <strong>Muneb</strong>
+  <strong>Kontrollraam puudub</strong>
   <div class="radio">
-    <label><input type="radio" name="seen">Ei ole näinud, et muneks</label>
+    <label><input type="radio" name="controlframe">Ei ole kontrollraami</label>
   </div>
   <button class="btn btn-warning">Loobun</button>
   <button class="btn btn-success">Salvestan</button>
 </jw-modal>
 
-
-<jw-modal id="mother-marked-edit">
-  <h4>Kui korralikult on ema märgistatud ja millal?</h4>
-  <strong>Märgistuse kvaliteet</strong>
+<jw-modal id="mother-cocoon-edit">
+  <h4>Mis ajast on välja valitud praegune kontrollraami kupp?</h4>
+  <strong>Kupp valitud</strong>
   <div class="radio">
-    <label><input type="radio" name="quality">Korralik märgistus</label>
+    <label><input type="radio" name="cocoon">Täna</label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" name="quality">
-      Märgistusega on probleeme
-      Märksõna:
-      <input type="number">
+      <input type="radio" name="cocoon"><input type="number">päeva tagasi
     </label>
   </div>
   <div class="radio">
-    <label><input type="radio" name="quality">Ei ole märgistatud</label>
+    <label><input type="radio" name="cocoon">(7 päeva tagasi)</label>
   </div>
-  <strong>Millal märgistatud?</strong>
+  <strong>Kupp pole valitud</strong>
   <div class="radio">
-    <label><input type="radio" name="when_marked">Täna</label>
+    <label><input type="radio" name="cocoon">Ei ole kuppu valitud</label>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="when_marked">
-      <select
-        name="month_marked"
-        class="custom-select"
-        size="1">
-        <option value="">Jaanuar</option>
-        <option value="">Veebruar</option>
-        <option value="">Märts</option>
-      </select>
-      <select
-        name="year_marked"
-        class="custom-select"
-        size="1">
-        <option value="">2017</option>
-        <option value="">2018</option>
-      </select>
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="when_marked">(märts 2017)</label>
-  </div>
-  <button class="btn btn-light">Loobun</button>
-  <button class="btn btn-light">Salvestan</button>
-</jw-modal>
-
-
-<jw-modal id="mother-birthday-edit">
-  <h4>Millal on see ema koorunud?</h4>
-  <div class="radio">
-    <label><input type="radio" name="seen">Täna</label>
-  </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="when_marked">
-      <select
-        name="month_marked"
-        class="custom-select"
-        size="1">
-        <option value="">Jaanuar</option>
-        <option value="">Veebruar</option>
-        <option value="">Märts</option>
-      </select>
-      <select
-        name="year_marked"
-        class="custom-select"
-        size="1">
-        <option value="">2017</option>
-        <option value="">2018</option>
-      </select>
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="seen">Märts 2017</label>
-  </div>
-  <button class="btn btn-light">Loobun</button>
-  <button class="btn btn-light">Salvestan</button>
-  <button
-    type="button"
-    class="btn btn-light btn-outline-primary"
-    style="width: 200px; height: 80px; margin: 0px">
-    <img
-      src="assets/img/muuda.png"
-      alt="ii"
-      style="height: 65px"
-      (click)="onChangeMotherStatusButtonClick()">
-  </button>
+  <button class="btn btn-warning">Loobun</button>
+  <button class="btn btn-success">Salvestan</button>
 </jw-modal>

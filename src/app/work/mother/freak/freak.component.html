@@ -1,3 +1,184 @@
-<p>
-  freak works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-7.5">
+      <div
+        class="card bg-light mb-3"
+        style="max-width: 16rem; height: 42.5rem; margin-left:auto;margin-right:auto;text-align:center">
+        <div class="card-header">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-primary"
+            style="width: 200px; height: 80px; margin: 0px">
+            <img
+              src="assets/img/muuda.png"
+              alt="ii"
+              style="height: 65px"
+              (click)="onChangeMotherStatusButtonClick(null)">
+          </button>
+        </div>
+
+        <div class="card-body" style="background-color: white">
+          <img
+            src="assets/img/v22rema.png" alt="ii">
+          <p class="card-text">täna</p>
+          <img
+            src="assets/img/voitlusV22remaga.png"
+            alt="ii"
+            style="margin-top: 130px">
+          <p class="card-text">mai 2018</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4.5">
+      <button
+        type="button"
+        class="btn btn-light btn-outline-success"
+        (click)="onOpenFreakMotherEditButton()"
+        style="margin-top: 130px">
+        <img src="assets/img/muudaNupp.png"
+             alt="ii"
+             class="pencil">
+      </button>
+      <br>
+      <button
+        type="button"
+        class="btn btn-light btn-outline-danger"
+        (click)="onOpenFreakMotherLogEditButton()"
+        style="margin-top: 130px">
+        <img
+          src="assets/img/raamat.jpg"
+          alt="ii"
+          class="pencil">
+      </button>
+    </div>
+  </div>
+</div>
+
+<jw-modal id="mother-freak-edit"  style="max-width: 50rem; height: 45rem">
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row">
+        <h4>Mis ajast on kahtlus, et peres on väärema?</h4>
+        <button
+          class="btn btn-danger"
+          style="width: 40px; height: 40px; margin-left: 700px"
+          (click)="onCloseFreakMotherEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            style="height: 30px;width: 30px; margin: 2px">
+        </button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-4">
+        <img src="assets/img/v22rema.png">
+        <br>
+        <div class="radio">
+          <label>
+            <h3>
+              <input
+                type="radio"
+                name="freak"
+                style="width: 25px; height: 25px">
+              Täna
+            </h3>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <h3>
+              <input type="radio" name="freak"  style="width: 25px; height: 25px">&nbsp;<input type="number" size="3"> päeva tagasi</h3>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <h3>
+              <input type="radio" name="freak"  style="width: 25px; height: 25px">&nbsp; <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"> (7 päeva tagasi)</h3></label>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="row">
+          <h3>Oled kindel, et peres ei ole enam väärema?</h3>
+        </div>
+        <div class="row">
+          <h3>Vali teine ema staatus:&nbsp;</h3>
+          <button
+            type="button"
+            class="btn btn-light btn-outline-primary"
+            style="width: 200px; height: 80px; margin: 0px">
+            <img
+              src="assets/img/muuda.png"
+              alt="ii"
+              style="height: 65px"
+              (click)="onChangeMotherStatusButtonClick()">
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
+      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
+    </div>
+  </div>
+</jw-modal>
+
+
+<jw-modal id="mother-freak-log-edit">
+  <h4>Vääremast lahtisaamise logi</h4>
+  <div  style="overflow-y:auto;
+            overflow-x:hidden;
+            border-color: dimgray;
+            border-style: solid;
+            height:350px">
+    <div class="row"
+         style="background-color: #f0f0f0; border-style: solid; border-color: white;">
+      <div class="col-sm-8">
+        Tühjendasin taru 100 m eemal
+      </div>
+      <div class="col-sm-4">
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary">
+          <img
+            src="assets/img/trash.png"
+            class="pencil"
+          >
+        </button>
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary">
+          <img
+            src="assets/img/muudaNupp.png"
+            class="pencil">
+        </button>
+      </div>
+    </div>
+    <div class="row"
+         style="background-color: #e8e8e8; border-style: solid; border-color: white;">
+      <div class="col-sm-8">
+        Proovisin veel korda tühjendada
+      </div>
+      <div class="col-sm-4">
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary">
+          <img
+            src="assets/img/trash.png"
+            class="pencil"
+          >
+        </button>
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary">
+          <img
+            src="assets/img/muudaNupp.png"
+            class="pencil">
+        </button>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-success">Salvestan</button>
+</jw-modal>
+

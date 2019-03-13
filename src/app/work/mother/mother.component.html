@@ -1,50 +1,65 @@
 <div [ngSwitch]="loadedMotherStatus" >
-  <app-freak *ngSwitchCase="motherStatusEnum.FREAK"></app-freak>
+  <app-freak
+    *ngSwitchCase="motherStatusEnum.FREAK"
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-freak>
   <app-hatched
     *ngSwitchCase="motherStatusEnum.HATCHED"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)">
-  </app-hatched>
-  <app-in-cage *ngSwitchCase="motherStatusEnum.IN_CAGE"></app-in-cage>
-  <app-missing *ngSwitchCase="motherStatusEnum.MISSING"></app-missing>
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-hatched>
+  <app-in-cage
+    *ngSwitchCase="motherStatusEnum.IN_CAGE"
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-in-cage>
+  <app-missing
+    *ngSwitchCase="motherStatusEnum.MISSING"
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-missing>
   <app-seen
     *ngSwitchCase="motherStatusEnum.SEEN"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)">
-  </app-seen>
-  <app-un-caged *ngSwitchCase="motherStatusEnum.UN_CAGED"></app-un-caged>
-  <app-unknown *ngSwitchCase="motherStatusEnum.UNKNOWN"></app-unknown>
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-seen>
+  <app-un-caged
+    *ngSwitchCase="motherStatusEnum.UN_CAGED"
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-un-caged>
+  <app-unknown
+    *ngSwitchCase="motherStatusEnum.UNKNOWN"
+    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-unknown>
 </div>
 
 <jw-modal id="mother-status">
   <h4>Ema hetkeolukord</h4>
   <button
     class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.MISSING)">Puudu: -
+    (click)="changeMotherStatus(motherStatusEnum.MISSING)">
+    <img src="assets/img/kadunud.jpg" class="statusPanel">
   </button>
   <button
     class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.IN_CAGE)">Puuriga tarus: -
+    (click)="changeMotherStatus(motherStatusEnum.IN_CAGE)">
+    <img src="assets/img/puurigaTarru.png" class="statusPanel">
   </button>
   <button
     class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.UN_CAGED)">Puurist välja lastud: -
+    (click)="changeMotherStatus(motherStatusEnum.UN_CAGED)">
+    <img src="assets/img/puuristV2lja.png" class="statusPanel">
   </button>
   <button
     class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.SEEN)">Nähtud: OK
+    (click)="changeMotherStatus(motherStatusEnum.SEEN)">
+    <img src="assets/img/n2htud.png" class="statusPanel">
   </button>
   <br>
   <button
     class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.UNKNOWN)">Teadmata: WORKING
+    (click)="changeMotherStatus(motherStatusEnum.UNKNOWN)">
+    <img src="assets/img/teadmata.jpg" class="statusPanel">
   </button>
   <br>
   <button
     class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.FREAK)">Väärema: -
+    (click)="changeMotherStatus(motherStatusEnum.FREAK)">
+    <img src="assets/img/v22rema.png" class="statusPanel">
   </button>
   <button
     class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.HATCHED)">Koorunud: OK
+    (click)="changeMotherStatus(motherStatusEnum.HATCHED)">
+    <img src="assets/img/koorunudEma.jpg" class="statusPanel">
   </button>
 </jw-modal>
 

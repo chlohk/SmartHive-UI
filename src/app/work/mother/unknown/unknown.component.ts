@@ -21,20 +21,20 @@ export class UnknownComponent implements OnInit {
     this.onChangeMotherStatus.emit(newMotherStatus);
   }
 
-  onOpenWhenSeenMotherEditButton() {
-    this.modalService.open('mother-seen-edit')
+  onOpenMotherUnknownEditButton() {
+    this.modalService.open('mother-unknown-edit')
   }
 
-  onOpenWhenSeenMotherLayingEggsEditButton() {
-    this.modalService.open('mother-laying-eggs-edit')
+  onCloseMotherUnknownEditButton() {
+    this.modalService.close('mother-unknown-edit')
   }
 
-  onOpenWhenMotherMarkedEditButton() {
-    this.modalService.open('mother-marked-edit')
+  onOpenControlframeEggsEditButton() {
+    this.modalService.open('mother-controlframe-edit')
   }
 
-  onOpenWhenMotherBirthdayEditButton() {
-    this.modalService.open('mother-birthday-edit')
+  onOpenCocoonEditButton() {
+    this.modalService.open('mother-cocoon-edit')
   }
 
 }
