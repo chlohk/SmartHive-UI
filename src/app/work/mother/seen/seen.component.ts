@@ -16,12 +16,16 @@ export class SeenComponent implements OnInit {
   }
 
   onChangeMotherStatusButtonClick() {
-    this.modalService.close('mother-seen-edit')
+    this.modalService.close('mother-seen-edit');
     this.onChangeMotherStatus.emit();
   }
 
   onOpenWhenSeenMotherEditButton() {
     this.modalService.open('mother-seen-edit')
+  }
+
+  onCloseSeenMotherEditButton() {
+    this.modalService.close('mother-seen-edit')
   }
 
   onOpenWhenSeenMotherLayingEggsEditButton() {
