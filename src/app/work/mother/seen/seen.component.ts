@@ -33,12 +33,24 @@ export class SeenComponent implements OnInit {
     this.modalService.open('mother-laying-eggs-edit')
   }
 
+  onCloseWhenSeenMotherLayingEggsEditButton() {
+    this.modalService.close('mother-laying-eggs-edit')
+  }
+
   onOpenWhenMotherMarkedEditButton() {
     this.modalService.open('mother-marked-edit')
   }
 
+  onCloseWhenMotherMarkedEditButton() {
+    this.modalService.close('mother-marked-edit')
+  }
+
   onOpenWhenMotherBirthdayEditButton() {
     this.modalService.open('mother-birthday-edit')
+  }
+
+  onCloseWhenMotherBirthdayEditButton() {
+    this.modalService.close('mother-birthday-edit')
   }
 
 }
