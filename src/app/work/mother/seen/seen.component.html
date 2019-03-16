@@ -159,25 +159,41 @@
 
 
 <jw-modal id="mother-laying-eggs-edit">
-  <h4>Millal nägid viimati, et see ema munes?</h4>
-  <strong>Muneb</strong>
-  <div class="radio">
-    <label><input type="radio" name="seen">Täna</label>
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row">
+        <h4>Millal nägid viimati, et see ema munes?</h4>
+        <button
+          class="btn btn-danger"
+          style="width: 40px; height: 40px; margin-left: 700px"
+          (click)="onCloseSeenMotherEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            style="height: 30px;width: 30px; margin: 2px">
+        </button>
+      </div>
+    </div>
+    <strong>Muneb</strong>
+    <div class="radio">
+      <label><input type="radio" name="seen">Täna</label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="seen"><input type="number">päeva tagasi
+      </label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="seen">(7 päeva tagasi)</label>
+    </div>
+    <strong>Muneb</strong>
+    <div class="radio">
+      <label><input type="radio" name="seen">Ei ole näinud, et muneks</label>
+    </div>
+    <div class="row">
+      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
+      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
+    </div>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="seen"><input type="number">päeva tagasi
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="seen">(7 päeva tagasi)</label>
-  </div>
-  <strong>Muneb</strong>
-  <div class="radio">
-    <label><input type="radio" name="seen">Ei ole näinud, et muneks</label>
-  </div>
-  <button class="btn btn-warning">Loobun</button>
-  <button class="btn btn-success">Salvestan</button>
 </jw-modal>
 
 
