@@ -2,6 +2,12 @@ img {
   height: 100px;
 }
 
+img.x {
+  height: 30px;
+  width: 30px;
+  margin: 2px !important;
+}
+
 img.pencil {
   height: 57px;
 }
