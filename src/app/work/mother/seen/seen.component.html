@@ -253,7 +253,7 @@
     <div class="col">
       <div class="row">
         <div class="col-4">
-          <img src="assets/img/munebOK.png" alt="">
+          <img src="assets/img/m2rgistatudYes.png" alt="">
           <div class="radio option">
             <label>
               <h2>
@@ -267,18 +267,22 @@
           </div>
         </div>
         <div class="col-4">
-          <img src="assets/img/munebOK.png" alt="">
-          <div class="radio">
+          <img src="assets/img/m2rgistatudAttention.png" alt="">
+          <div class="radio option">
             <label>
-              <input type="radio" name="quality">
-              Märgistusega on probleeme
-              Märksõna:
-              <input type="number">
+              <h2>
+                <input
+                  type="radio"
+                  name="quality"
+                  class="bigRadio">
+                Märgistusega on probleeme. <br>
+                Märksõna: <input type="number" size="3" class="num">
+              </h2>
             </label>
           </div>
         </div>
         <div class="col-4">
-          <img src="assets/img/munebOK.png" alt="">
+          <img src="assets/img/m2rgistatudNo.png" alt="">
           <div class="radio option">
             <label>
               <h2>
@@ -292,39 +296,59 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-4">
+          <div class="radio option">
+            <label>
+              <h2>
+                <input
+                  type="radio"
+                  name="when_marked"
+                  class="bigRadio">
+                Täna
+              </h2>
+            </label>
+          </div>
+          <div class="radio option">
+            <label>
+              <input type="radio"
+                     name="when_marked"
+              class="bigRadio">
+              <select
+                name="month_marked"
+                class="custom-select"
+                size="1">
+                <option value="">Jaanuar</option>
+                <option value="">Veebruar</option>
+                <option value="">Märts</option>
+              </select>
+              <select
+                name="year_marked"
+                class="custom-select"
+                size="1">
+                <option value="">2017</option>
+                <option value="">2018</option>
+              </select>
+            </label>
+          </div>
+          <div class="radio option">
+            <label>
+              <h2>
+                <input type="radio" name="when_marked"
+                       class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva tagasi)
+              </h2>
+            </label>
+          </div>
+        </div>
+        <div class="col-8">
+          <div class="row">
+            <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px;"><h2>Loobun</h2></button>
+            <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
+          </div>
+        </div>
+        </div>
+      </div>
 
-      <strong>Millal märgistatud?</strong>
-      <div class="radio">
-        <label><input type="radio" name="when_marked">Täna</label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" name="when_marked">
-          <select
-            name="month_marked"
-            class="custom-select"
-            size="1">
-            <option value="">Jaanuar</option>
-            <option value="">Veebruar</option>
-            <option value="">Märts</option>
-          </select>
-          <select
-            name="year_marked"
-            class="custom-select"
-            size="1">
-            <option value="">2017</option>
-            <option value="">2018</option>
-          </select>
-        </label>
-      </div>
-      <div class="radio">
-        <label><input type="radio" name="when_marked">(märts 2017)</label>
-      </div>
-    </div>
-    <div class="row">
-      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
-      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
-    </div>
   </div>
 </jw-modal>
 
