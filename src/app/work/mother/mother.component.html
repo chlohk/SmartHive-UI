@@ -27,53 +27,56 @@
     <div class="card-header">
       <h1>Ema hetkeolukord</h1>
     </div>
-    <div class="row">
-      <button
-        class="btn btn-secondary"
-        (click)="changeMotherStatus(motherStatusEnum.MISSING)"
-        style="width: 230px">
-        <img src="assets/img/kadunud.jpg" class="statusPanel">
-      </button>
-      <button
-        class="btn btn-secondary"
-        (click)="changeMotherStatus(motherStatusEnum.IN_CAGE)"
-        style="width: 230px">
-        <img src="assets/img/puurigaTarru.png" class="statusPanel">
-      </button>
-      <button
-        class="btn btn-secondary"
-        (click)="changeMotherStatus(motherStatusEnum.UN_CAGED)"
-        style="width: 230px">
-        <img src="assets/img/puuristV2lja.png" class="statusPanel">
-      </button>
-    </div>
-    <div class="row">
-      <button
-        class="btn btn-secondary"
-        (click)="changeMotherStatus(motherStatusEnum.UNKNOWN)"
-        style="width: 230px">
-        <img src="assets/img/teadmata.jpg" class="statusPanel">
-      </button>
-      <button
-        class="btn btn-secondary"
-        (click)="changeMotherStatus(motherStatusEnum.SEEN)"
-        style="width: 230px">
-        <img src="assets/img/n2htud.png" class="statusPanel">
-      </button>
-    </div>
-    <div class="row">
-      <button
-        class="btn btn-secondary"
-        (click)="changeMotherStatus(motherStatusEnum.FREAK)"
-        style="width: 230px">
-        <img src="assets/img/v22rema.png" class="statusPanel">
-      </button>
-      <button
-        class="btn btn-secondary"
-        (click)="changeMotherStatus(motherStatusEnum.HATCHED)"
-        style="width: 230px">
-        <img src="assets/img/koorunudEma.jpg" class="statusPanel">
-      </button>
+    <div class="col">
+      <div class="row">
+        <button
+          class="btn btn-secondary"
+          (click)="changeMotherStatus(motherStatusEnum.MISSING)"
+          style="width: 230px">
+          <img src="assets/img/kadunud.jpg" class="statusPanel">
+        </button>
+        <button
+          class="btn btn-secondary"
+          (click)="changeMotherStatus(motherStatusEnum.IN_CAGE)"
+          style="width: 230px">
+          <img src="assets/img/puurigaTarru.png" class="statusPanel">
+        </button>
+        <button
+          class="btn btn-secondary"
+          (click)="changeMotherStatus(motherStatusEnum.UN_CAGED)"
+          style="width: 230px">
+          <img src="assets/img/puuristV2lja.png" class="statusPanel">
+        </button>
+      </div>
+      <div class="row">
+        <button
+          class="btn btn-secondary"
+          (click)="changeMotherStatus(motherStatusEnum.UNKNOWN)"
+          style="width: 230px">
+          <img src="assets/img/teadmata.jpg" class="statusPanel">
+        </button>
+        <img src="assets/img/arrow.png" alt="" style="width: 450px; margin: 40px">
+        <button
+          class="btn btn-secondary"
+          (click)="changeMotherStatus(motherStatusEnum.SEEN)"
+          style="width: 230px">
+          <img src="assets/img/n2htud.png" class="statusPanel">
+        </button>
+      </div>
+      <div class="row">
+        <button
+          class="btn btn-secondary"
+          (click)="changeMotherStatus(motherStatusEnum.FREAK)"
+          style="width: 230px">
+          <img src="assets/img/v22rema.png" class="statusPanel">
+        </button>
+        <button
+          class="btn btn-secondary"
+          (click)="changeMotherStatus(motherStatusEnum.HATCHED)"
+          style="width: 230px; margin-left: 160px">
+          <img src="assets/img/koorunudEma.jpg" class="statusPanel">
+        </button>
+      </div>
     </div>
   </div>
 </jw-modal>

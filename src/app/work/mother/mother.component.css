@@ -9,4 +9,7 @@ img.pencil {
 img.statusPanel {
   height: 80px;
 }
+button {
+  margin: 40px;
+}
 
