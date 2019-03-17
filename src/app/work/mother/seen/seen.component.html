@@ -170,7 +170,7 @@
         </h1>
         <button
           class="btn btn-danger closing"
-          (click)="onCloseSeenMotherEditButton()">
+          (click)="onCloseWhenSeenMotherLayingEggsEditButton()">
           <img
             src="assets/img/sulge.jpeg"
             class="x">
@@ -236,23 +236,63 @@
 
 <jw-modal id="mother-marked-edit">
   <div class="card bg-light">
-    <h4>Kui korralikult on ema märgistatud ja millal?</h4>
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Kui korralikult on ema märgistatud ja millal?
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onCloseWhenMotherMarkedEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
+    </div>
+    <br>
     <div class="col">
-      <strong>Märgistuse kvaliteet</strong>
-      <div class="radio">
-        <label><input type="radio" name="quality">Korralik märgistus</label>
+      <div class="row">
+        <div class="col-4">
+          <img src="assets/img/munebOK.png" alt="">
+          <div class="radio option">
+            <label>
+              <h2>
+                <input
+                  type="radio"
+                  name="quality"
+                  class="bigRadio">
+                Korralik märgistus
+              </h2>
+            </label>
+          </div>
+        </div>
+        <div class="col-4">
+          <img src="assets/img/munebOK.png" alt="">
+          <div class="radio">
+            <label>
+              <input type="radio" name="quality">
+              Märgistusega on probleeme
+              Märksõna:
+              <input type="number">
+            </label>
+          </div>
+        </div>
+        <div class="col-4">
+          <img src="assets/img/munebOK.png" alt="">
+          <div class="radio option">
+            <label>
+              <h2>
+                <input
+                  type="radio"
+                  name="quality"
+                  class="bigRadio">
+                Ei ole märgistatud
+              </h2>
+            </label>
+          </div>
+        </div>
       </div>
-      <div class="radio">
-        <label>
-          <input type="radio" name="quality">
-          Märgistusega on probleeme
-          Märksõna:
-          <input type="number">
-        </label>
-      </div>
-      <div class="radio">
-        <label><input type="radio" name="quality">Ei ole märgistatud</label>
-      </div>
+
       <strong>Millal märgistatud?</strong>
       <div class="radio">
         <label><input type="radio" name="when_marked">Täna</label>
@@ -291,7 +331,20 @@
 
 <jw-modal id="mother-birthday-edit">
   <div class="card bg-light">
-    <h4>Millal on see ema koorunud?</h4>
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Millal on see ema koorunud?
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onCloseWhenSeenMotherLayingEggsEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
+    </div>
+    <br>
     <div class="col">
       <div class="radio">
         <label>
