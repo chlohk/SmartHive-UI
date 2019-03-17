@@ -23,43 +23,58 @@
 </div>
 
 <jw-modal id="mother-status">
-  <h4>Ema hetkeolukord</h4>
-  <button
-    class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.MISSING)">
-    <img src="assets/img/kadunud.jpg" class="statusPanel">
-  </button>
-  <button
-    class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.IN_CAGE)">
-    <img src="assets/img/puurigaTarru.png" class="statusPanel">
-  </button>
-  <button
-    class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.UN_CAGED)">
-    <img src="assets/img/puuristV2lja.png" class="statusPanel">
-  </button>
-  <button
-    class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.SEEN)">
-    <img src="assets/img/n2htud.png" class="statusPanel">
-  </button>
-  <br>
-  <button
-    class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.UNKNOWN)">
-    <img src="assets/img/teadmata.jpg" class="statusPanel">
-  </button>
-  <br>
-  <button
-    class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.FREAK)">
-    <img src="assets/img/v22rema.png" class="statusPanel">
-  </button>
-  <button
-    class="btn btn-secondary"
-    (click)="changeMotherStatus(motherStatusEnum.HATCHED)">
-    <img src="assets/img/koorunudEma.jpg" class="statusPanel">
-  </button>
+  <div class="card bg-light">
+    <div class="card-header">
+      <h1>Ema hetkeolukord</h1>
+    </div>
+    <div class="row">
+      <button
+        class="btn btn-secondary"
+        (click)="changeMotherStatus(motherStatusEnum.MISSING)"
+        style="width: 230px">
+        <img src="assets/img/kadunud.jpg" class="statusPanel">
+      </button>
+      <button
+        class="btn btn-secondary"
+        (click)="changeMotherStatus(motherStatusEnum.IN_CAGE)"
+        style="width: 230px">
+        <img src="assets/img/puurigaTarru.png" class="statusPanel">
+      </button>
+      <button
+        class="btn btn-secondary"
+        (click)="changeMotherStatus(motherStatusEnum.UN_CAGED)"
+        style="width: 230px">
+        <img src="assets/img/puuristV2lja.png" class="statusPanel">
+      </button>
+    </div>
+    <div class="row">
+      <button
+        class="btn btn-secondary"
+        (click)="changeMotherStatus(motherStatusEnum.UNKNOWN)"
+        style="width: 230px">
+        <img src="assets/img/teadmata.jpg" class="statusPanel">
+      </button>
+      <button
+        class="btn btn-secondary"
+        (click)="changeMotherStatus(motherStatusEnum.SEEN)"
+        style="width: 230px">
+        <img src="assets/img/n2htud.png" class="statusPanel">
+      </button>
+    </div>
+    <div class="row">
+      <button
+        class="btn btn-secondary"
+        (click)="changeMotherStatus(motherStatusEnum.FREAK)"
+        style="width: 230px">
+        <img src="assets/img/v22rema.png" class="statusPanel">
+      </button>
+      <button
+        class="btn btn-secondary"
+        (click)="changeMotherStatus(motherStatusEnum.HATCHED)"
+        style="width: 230px">
+        <img src="assets/img/koorunudEma.jpg" class="statusPanel">
+      </button>
+    </div>
+  </div>
 </jw-modal>
 

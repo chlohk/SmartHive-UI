@@ -8,6 +8,24 @@ img.x {
   margin: 2px !important;
 }
 
+div.option {
+  margin-top: 50px;
+}
+
+div.twoButtons {
+  margin-top: 200px;
+}
+
+input.bigRadio {
+  width: 35px;
+  height: 35px
+}
+
+input.num {
+  width: 70px;
+  height: 35px
+}
+
 img.pencil {
   height: 57px;
 }

@@ -88,52 +88,59 @@
   <div class="card bg-light">
     <div class="card-header">
       <div class="row">
-        <h4>Millal seda ema viimati nägid?</h4>
-        <button
-          class="btn btn-danger"
-          style="width: 70px !important; height: 40px; margin-left: 1100px; padding: 2px 2px 2px 2px"
-          (click)="onCloseSeenMotherEditButton()">
-          <img
-            src="assets/img/sulge.jpeg"
-            class="x">
-        </button>
+        <h1>Millal seda ema viimati nägid?
+          <button
+            class="btn btn-danger"
+            style="display: inline !important;width: 40px !important; height: 40px; padding: 2px 2px 2px 2px"
+            (click)="onCloseSeenMotherEditButton()">
+            <img
+              src="assets/img/sulge.jpeg"
+              class="x">
+          </button>
+        </h1>
       </div>
     </div>
     <br>
     <div class="row">
       <div class="col-1"></div>
       <div class="col-4">
-        <img src="assets/img/n2htud.png" alt="" style="width: 160px">
+        <img src="assets/img/n2htud.png" alt="">
         <br>
-        <div class="radio">
+        <div class="radio option">
           <label>
-            <h3>
+            <h2>
               <input
                 type="radio"
                 name="seen"
-                style="width: 25px; height: 25px">
+                class="bigRadio">
               Täna
-            </h3>
+            </h2>
           </label>
         </div>
-        <div class="radio">
+        <div class="radio option">
           <label>
-            <h3>
-              <input type="radio" name="seen"  style="width: 25px; height: 25px">&nbsp;<input type="number" size="3"> päeva tagasi</h3>
+            <h2>
+              <input type="radio" name="seen"
+                     class="bigRadio">&nbsp;&nbsp;&nbsp;
+              <input type="number" size="3" class="num"> päeva tagasi
+            </h2>
           </label>
         </div>
-        <div class="radio">
+        <div class="radio option">
           <label>
-            <h3>
-              <input type="radio" name="seen"  style="width: 25px; height: 25px">&nbsp; <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"> (7 päeva tagasi)</h3></label>
+            <h2>
+              <input type="radio" name="seen"
+                     class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva tagasi)
+            </h2>
+          </label>
         </div>
       </div>
       <div class="col-7">
         <div class="row">
-          <h3>Ema staatus ei ole "nähtud"?</h3>
+          <h2>Ema staatus ei ole "nähtud"?</h2>
         </div>
-        <div class="row">
-          <h3>Vali teine ema staatus:&nbsp;</h3>
+        <div class="row option">
+          <h2>Vali teine ema staatus:&nbsp;&nbsp;&nbsp;</h2>
           <button
             type="button"
             class="btn btn-light btn-outline-primary"
@@ -145,14 +152,12 @@
               (click)="onChangeMotherStatusButtonClick()">
           </button>
         </div>
+        <div class="row twoButtons">
+          <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 100px"><h2>Loobun</h2></button>
+          <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
-      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
-    </div>
-
-
   </div>
 
 </jw-modal>
@@ -162,15 +167,16 @@
   <div class="card bg-light">
     <div class="card-header">
       <div class="row">
-        <h4>Millal nägid viimati, et see ema munes?</h4>
-        <button
-          class="btn btn-danger"
-          style="width: 70px !important; height: 40px; margin-left: 1100px; padding: 2px 2px 2px 2px"
-          (click)="onCloseWhenSeenMotherLayingEggsEditButton()">
-          <img
-            src="assets/img/sulge.jpeg"
-            class="x">
-        </button>
+        <h4>Millal nägid viimati, et see ema munes?
+          <button
+            class="btn btn-danger"
+            style="width: 70px !important; height: 40px; margin-left: 1100px; padding: 2px 2px 2px 2px"
+            (click)="onCloseWhenSeenMotherLayingEggsEditButton()">
+            <img
+              src="assets/img/sulge.jpeg"
+              class="x">
+          </button>
+        </h4>
       </div>
     </div>
     <div class="col">
