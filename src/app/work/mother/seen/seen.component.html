@@ -310,26 +310,28 @@
             </label>
           </div>
           <div class="radio option">
-            <label>
-              <input type="radio"
-                     name="when_marked"
-              class="bigRadio">
-              <select
-                name="month_marked"
-                class="custom-select"
-                size="1">
-                <option value="">Jaanuar</option>
-                <option value="">Veebruar</option>
-                <option value="">Märts</option>
-              </select>
-              <select
-                name="year_marked"
-                class="custom-select"
-                size="1">
-                <option value="">2017</option>
-                <option value="">2018</option>
-              </select>
-            </label>
+            <div class="up-bar">
+              <label>
+                <input type="radio"
+                       name="when_marked"
+                       class="bigRadio">
+                <select
+                  name="month_marked"
+                  class="custom-select"
+                  size="1">
+                  <option value="">Jaanuar</option>
+                  <option value="">Veebruar</option>
+                  <option value="">Märts</option>
+                </select>
+                <select
+                  name="year_marked"
+                  class="custom-select"
+                  size="1">
+                  <option value="">2017</option>
+                  <option value="">2018</option>
+                </select>
+              </label>
+            </div>
           </div>
           <div class="radio option">
             <label>
@@ -341,7 +343,7 @@
           </div>
         </div>
         <div class="col-8">
-          <div class="row">
+          <div class="row" style="margin-top: 200px">
             <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px;"><h2>Loobun</h2></button>
             <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
           </div>
@@ -369,66 +371,62 @@
       </div>
     </div>
     <br>
-    <div class="col">
-      <div class="radio">
-        <label>
-          <h3>
-            <input
-              type="radio"
-              name="seen"
-              style="width: 25px; height: 25px">
-            Täna
-          </h3>
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input
-            type="radio"
-            name="when_marked"
-            style="width: 25px; height: 25px">
-          <select
-            name="month_marked"
-            class="custom-select"
-            size="1">
-            <option value="">Jaanuar</option>
-            <option value="">Veebruar</option>
-            <option value="">Märts</option>
-          </select>
-          <select
-            name="year_marked"
-            class="custom-select"
-            size="1">
-            <option value="">2017</option>
-            <option value="">2018</option>
-          </select>
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <h3>
-            <input
-              type="radio"
-              name="seen"
-              style="width: 25px; height: 25px">
-            Märts 2017
-          </h3>
-        </label>
-      </div>
-    </div>
     <div class="row">
-      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
-      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
+      <div class="col-1"></div>
+      <div class="col-4">
+        <img src="assets/img/synnip2evOk.png" alt="">
+        <br>
+        <div class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="year_marked"
+                class="bigRadio">
+              Täna
+            </h2>
+          </label>
+        </div>
+        <div class="radio option">
+          <label>
+            <h2>
+              <input type="radio" name="year_marked"
+                     class="bigRadio">&nbsp;&nbsp;&nbsp;
+              <input type="number" size="3" class="num"> päeva tagasi
+            </h2>
+          </label>
+        </div>
+        <div class="radio option">
+          <label>
+            <h2>
+              <input type="radio" name="year_marked"
+                     class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva tagasi)
+            </h2>
+          </label>
+        </div>
+      </div>
+      <div class="col-7">
+        <div class="row">
+          <h2>Selles tarus ei ole veel koorunud ema?</h2>
+        </div>
+        <div class="row option">
+          <h2>Vali teine ema staatus:&nbsp;&nbsp;&nbsp;</h2>
+          <button
+            type="button"
+            class="btn btn-light btn-outline-primary"
+            style="width: 200px; height: 80px; margin: 0px">
+            <img
+              src="assets/img/muuda.png"
+              alt="ii"
+              style="height: 65px"
+              (click)="onChangeMotherStatusButtonClick()">
+          </button>
+        </div>
+        <div class="row twoButtons">
+          <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 100px"><h2>Loobun</h2></button>
+          <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
+        </div>
+      </div>
     </div>
-    <button
-      type="button"
-      class="btn btn-light btn-outline-primary"
-      style="width: 200px; height: 80px; margin: 0px">
-      <img
-        src="assets/img/muuda.png"
-        alt="ii"
-        style="height: 65px"
-        (click)="onChangeMotherStatusButtonClick()">
-    </button>
   </div>
 </jw-modal>
