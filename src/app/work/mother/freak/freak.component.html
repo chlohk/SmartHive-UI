@@ -19,7 +19,7 @@
 
         <div class="card-body" style="background-color: white">
           <img
-            src="assets/img/v22rema.png" alt="ii">
+            src="assets/img/v22rema.png" alt="ii" style="height: 95px">
           <p class="card-text">täna</p>
           <img
             src="assets/img/voitlusV22remaga.png"
@@ -57,15 +57,15 @@
 <jw-modal id="mother-freak-edit"  style="max-width: 50rem; height: 45rem">
   <div class="card bg-light">
     <div class="card-header">
-      <div class="row">
-        <h4>Mis ajast on kahtlus, et peres on väärema?</h4>
+      <div class="row up-bar">
+        <h1>Mis ajast on kahtlus, et peres on väärema?
+        </h1>
         <button
-          class="btn btn-danger"
-          style="width: 40px; height: 40px; margin-left: 700px"
-          (click)="onCloseFreakMotherEditButton()">
+          class="btn btn-danger closing"
+          (click)="onCloseSeenMotherEditButton()">
           <img
             src="assets/img/sulge.jpeg"
-            style="height: 30px;width: 30px; margin: 2px">
+            class="x">
         </button>
       </div>
     </div>
@@ -73,37 +73,43 @@
     <div class="row">
       <div class="col-1"></div>
       <div class="col-4">
-        <img src="assets/img/v22rema.png">
+        <img src="assets/img/v22rema.png" alt="">
         <br>
-        <div class="radio">
+        <div class="radio option">
           <label>
-            <h3>
+            <h2>
               <input
                 type="radio"
                 name="freak"
-                style="width: 25px; height: 25px">
+                class="bigRadio">
               Täna
-            </h3>
+            </h2>
           </label>
         </div>
-        <div class="radio">
+        <div class="radio option">
           <label>
-            <h3>
-              <input type="radio" name="freak"  style="width: 25px; height: 25px">&nbsp;<input type="number" size="3"> päeva tagasi</h3>
+            <h2>
+              <input type="radio" name="freak"
+                     class="bigRadio">&nbsp;&nbsp;&nbsp;
+              <input type="number" size="3" class="num"> päeva tagasi
+            </h2>
           </label>
         </div>
-        <div class="radio">
+        <div class="radio option">
           <label>
-            <h3>
-              <input type="radio" name="freak"  style="width: 25px; height: 25px">&nbsp; <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"> (7 päeva tagasi)</h3></label>
+            <h2>
+              <input type="radio" name="freak"
+                     class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva tagasi)
+            </h2>
+          </label>
         </div>
       </div>
       <div class="col-7">
         <div class="row">
-          <h3>Oled kindel, et peres ei ole enam väärema?</h3>
+          <h2>Oled kindel, et peres ei ole enam väärema?</h2>
         </div>
-        <div class="row">
-          <h3>Vali teine ema staatus:&nbsp;</h3>
+        <div class="row option">
+          <h2>Vali teine ema staatus:&nbsp;&nbsp;&nbsp;</h2>
           <button
             type="button"
             class="btn btn-light btn-outline-primary"
@@ -115,70 +121,84 @@
               (click)="onChangeMotherStatusButtonClick()">
           </button>
         </div>
+        <div class="row twoButtons">
+          <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 100px"><h2>Loobun</h2></button>
+          <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
-      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
     </div>
   </div>
 </jw-modal>
 
 
 <jw-modal id="mother-freak-log-edit">
-  <h4>Vääremast lahtisaamise logi</h4>
-  <div  style="overflow-y:auto;
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Vääremast latisaamise logi
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onCloseSeenMotherEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
+    </div>
+    <div  style="overflow-y:auto;
             overflow-x:hidden;
             border-color: dimgray;
             border-style: solid;
             height:350px">
-    <div class="row"
-         style="background-color: #f0f0f0; border-style: solid; border-color: white;">
-      <div class="col-sm-8">
-        Tühjendasin taru 100 m eemal
+      <div class="row"
+           style="background-color: #f0f0f0; border-style: solid; border-color: white;">
+        <div class="col-sm-8">
+          <h3>Tühjendasin taru 100 m eemal</h3>
+        </div>
+        <div class="col-sm-4">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary">
+            <img
+              src="assets/img/trash.png"
+              class="pencil"
+            >
+          </button>
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary">
+            <img
+              src="assets/img/muudaNupp.png"
+              class="pencil">
+          </button>
+        </div>
       </div>
-      <div class="col-sm-4">
-        <button
-          type="button"
-          class="btn btn-light btn-outline-secondary">
-          <img
-            src="assets/img/trash.png"
-            class="pencil"
-          >
-        </button>
-        <button
-          type="button"
-          class="btn btn-light btn-outline-secondary">
-          <img
-            src="assets/img/muudaNupp.png"
-            class="pencil">
-        </button>
+      <div class="row"
+           style="background-color: #e8e8e8; border-style: solid; border-color: white;">
+        <div class="col-sm-8">
+          <h3>Proovisin veel korda tühjendada</h3>
+        </div>
+        <div class="col-sm-4">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary">
+            <img
+              src="assets/img/trash.png"
+              class="pencil"
+            >
+          </button>
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary">
+            <img
+              src="assets/img/muudaNupp.png"
+              class="pencil">
+          </button>
+        </div>
       </div>
     </div>
-    <div class="row"
-         style="background-color: #e8e8e8; border-style: solid; border-color: white;">
-      <div class="col-sm-8">
-        Proovisin veel korda tühjendada
-      </div>
-      <div class="col-sm-4">
-        <button
-          type="button"
-          class="btn btn-light btn-outline-secondary">
-          <img
-            src="assets/img/trash.png"
-            class="pencil"
-          >
-        </button>
-        <button
-          type="button"
-          class="btn btn-light btn-outline-secondary">
-          <img
-            src="assets/img/muudaNupp.png"
-            class="pencil">
-        </button>
-      </div>
-    </div>
+    <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
   </div>
-  <button class="btn btn-success">Salvestan</button>
 </jw-modal>
 
