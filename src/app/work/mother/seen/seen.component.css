@@ -6,6 +6,10 @@ img.x {
   height: 40px;
 }
 
+h3.word {
+  margin-top: -10px;
+}
+
 button.closing {
   display: inline-block;
   width: fit-content;
@@ -17,6 +21,10 @@ button.closing {
 
 div.option {
   margin-top: 50px;
+}
+
+div.option2 {
+  margin-top: 20px;
 }
 
 div.twoButtons {
@@ -39,6 +47,11 @@ input.num {
   height: 35px
 }
 
+input.description {
+  width: 170px;
+  height: 35px
+}
+
 img.pencil {
   height: 57px;
 }
@@ -46,15 +59,18 @@ img.pencil {
 button {
   height: 100px;
   width: 100px;
-  margin: 20px
+  margin: 20px;
 }
 
 .custom-select {
   display: inline;
-  width: 130px;
+  width: 150px;
+  font-size: 28px;
+  margin-left: 18px;
 }
 .option-row {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  height: 60px;
 }
