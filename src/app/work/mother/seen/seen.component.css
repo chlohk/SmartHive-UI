@@ -48,3 +48,13 @@ button {
   width: 100px;
   margin: 20px
 }
+
+.custom-select {
+  display: inline;
+  width: 130px;
+}
+.option-row {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
