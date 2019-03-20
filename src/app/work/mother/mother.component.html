@@ -25,7 +25,17 @@
 <jw-modal id="mother-status">
   <div class="card bg-light">
     <div class="card-header">
-      <h1>Ema hetkeolukord</h1>
+      <div class="row up-bar">
+        <h1>Ema hetkeolukord
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onCloseMother()">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
     </div>
     <div class="col">
       <div class="row">

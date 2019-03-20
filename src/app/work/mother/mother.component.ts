@@ -17,6 +17,10 @@ export class MotherComponent implements OnInit {
   ngOnInit() {
   }
 
+  onCloseMother() {
+    this.modalService.close('mother-status')
+  }
+
   onChangeMotherStatusButtonClick(newMotherStatus?: MotherStatusEnum) {
     if(newMotherStatus) {
       this.changeMotherStatus(newMotherStatus);
