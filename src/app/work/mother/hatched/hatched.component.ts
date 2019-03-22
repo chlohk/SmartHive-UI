@@ -17,6 +17,10 @@ export class HatchedComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClose(id) {
+    this.modalService.close(id)
+  }
+
   onChangeMotherStatusButtonClick(newMotherStatus?: MotherStatusEnum) {
     this.modalService.close('mother-hatched-edit');
     this.onChangeMotherStatus.emit(newMotherStatus);

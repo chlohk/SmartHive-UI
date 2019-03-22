@@ -75,19 +75,19 @@
 
 <jw-modal id="mother-unknown-edit"  style="max-width: 50rem; height: 45rem">
   <div class="card bg-light">
-    <div class="card-header">
-      <div class="row">
-        <h4>Mis ajast on teadmata kas ema on tarus olemas?</h4>
-        <button
-          class="btn btn-danger"
-          style="width: 40px; height: 40px; margin-left: 700px"
-          (click)="onCloseMotherUnknownEditButton()">
-          <img
-            src="assets/img/sulge.jpeg"
-            style="height: 30px;width: 30px; margin: 2px">
-        </button>
+      <div class="card-header">
+        <div class="row up-bar">
+          <h1>Mis ajast on teadmata, kas ema on tarus olemas?
+          </h1>
+          <button
+            class="btn btn-danger closing"
+            (click)="onClose('mother-unknown-edit')">
+            <img
+              src="assets/img/sulge.jpeg"
+              class="x">
+          </button>
+        </div>
       </div>
-    </div>
     <br>
     <div class="row">
       <div class="col-1"></div>
@@ -148,45 +148,73 @@
 
 
 <jw-modal id="mother-controlframe-edit">
-  <h4>Millal panin praegu peres oleva kontrollraami sisse?</h4>
-  <strong>Kontrollraam sees</strong>
-  <div class="radio">
-    <label><input type="radio" name="controlframe">Täna</label>
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Millal panin praegu peres oleva kontrollraami sisse?
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onClose('mother-controlframe-edit')">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
+    </div>
+    <strong>Kontrollraam sees</strong>
+    <div class="radio">
+      <label><input type="radio" name="controlframe">Täna</label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="controlframe"><input type="number">päeva tagasi
+      </label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="controlframe">(7 päeva tagasi)</label>
+    </div>
+    <strong>Kontrollraam puudub</strong>
+    <div class="radio">
+      <label><input type="radio" name="controlframe">Ei ole kontrollraami</label>
+    </div>
+    <button class="btn btn-warning">Loobun</button>
+    <button class="btn btn-success">Salvestan</button>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="controlframe"><input type="number">päeva tagasi
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="controlframe">(7 päeva tagasi)</label>
-  </div>
-  <strong>Kontrollraam puudub</strong>
-  <div class="radio">
-    <label><input type="radio" name="controlframe">Ei ole kontrollraami</label>
-  </div>
-  <button class="btn btn-warning">Loobun</button>
-  <button class="btn btn-success">Salvestan</button>
 </jw-modal>
 
 <jw-modal id="mother-cocoon-edit">
-  <h4>Mis ajast on välja valitud praegune kontrollraami kupp?</h4>
-  <strong>Kupp valitud</strong>
-  <div class="radio">
-    <label><input type="radio" name="cocoon">Täna</label>
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Mis ajast on välja valitud praegune kontrollraami kupp?
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onClose('mother-cocoon-edit')">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
+    </div>
+    <strong>Kupp valitud</strong>
+    <div class="radio">
+      <label><input type="radio" name="cocoon">Täna</label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="cocoon"><input type="number">päeva tagasi
+      </label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="cocoon">(7 päeva tagasi)</label>
+    </div>
+    <strong>Kupp pole valitud</strong>
+    <div class="radio">
+      <label><input type="radio" name="cocoon">Ei ole kuppu valitud</label>
+    </div>
+    <button class="btn btn-warning">Loobun</button>
+    <button class="btn btn-success">Salvestan</button>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="cocoon"><input type="number">päeva tagasi
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="cocoon">(7 päeva tagasi)</label>
-  </div>
-  <strong>Kupp pole valitud</strong>
-  <div class="radio">
-    <label><input type="radio" name="cocoon">Ei ole kuppu valitud</label>
-  </div>
-  <button class="btn btn-warning">Loobun</button>
-  <button class="btn btn-success">Salvestan</button>
 </jw-modal>

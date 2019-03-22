@@ -25,8 +25,8 @@ export class InCageComponent implements OnInit {
     this.modalService.open('mother-in-cage-edit')
   }
 
-  onCloseMotherInCageEditButton() {
-    this.modalService.close('mother-in-cage-edit')
+  onClose(id) {
+    this.modalService.close(id)
   }
 
   onOpenWhenMotherMarkedEditButton() {

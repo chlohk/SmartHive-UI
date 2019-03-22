@@ -77,19 +77,20 @@
 </div>
 
 <jw-modal id="mother-in-cage-edit"  style="max-width: 50rem; height: 45rem">
-  <div class="card-header">
-    <div class="row up-bar">
-      <h1>Millal ema puuriga perre pandi?
-      </h1>
-      <button
-        class="btn btn-danger closing"
-        (click)="onCloseMotherInCageEditButton()">
-        <img
-          src="assets/img/sulge.jpeg"
-          class="x">
-      </button>
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Millal ema puuriga perre pandi?
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onClose('mother-in-cage-edit')">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
     </div>
-  </div>
     <br>
     <div class="row">
       <div class="col-1"></div>
@@ -142,123 +143,150 @@
       <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
       <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
     </div>
-
-
-
-
+  </div>
 </jw-modal>
 
 
 <jw-modal id="mother-laying-eggs-edit">
-  <h4>Millal nägid viimati, et see ema munes?</h4>
-  <strong>Muneb</strong>
-  <div class="radio">
-    <label><input type="radio" name="seen">Täna</label>
+  <div class="card bg-light">
+    <h4>Millal nägid viimati, et see ema munes?</h4>
+    <strong>Muneb</strong>
+    <div class="radio">
+      <label><input type="radio" name="seen">Täna</label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="seen"><input type="number">päeva tagasi
+      </label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="seen">(7 päeva tagasi)</label>
+    </div>
+    <strong>Muneb</strong>
+    <div class="radio">
+      <label><input type="radio" name="seen">Ei ole näinud, et muneks</label>
+    </div>
+    <button class="btn btn-warning">Loobun</button>
+    <button class="btn btn-success">Salvestan</button>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="seen"><input type="number">päeva tagasi
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="seen">(7 päeva tagasi)</label>
-  </div>
-  <strong>Muneb</strong>
-  <div class="radio">
-    <label><input type="radio" name="seen">Ei ole näinud, et muneks</label>
-  </div>
-  <button class="btn btn-warning">Loobun</button>
-  <button class="btn btn-success">Salvestan</button>
 </jw-modal>
 
 
 <jw-modal id="mother-marked-edit">
-  <h4>Kui korralikult on ema märgistatud ja millal?</h4>
-  <strong>Märgistuse kvaliteet</strong>
-  <div class="radio">
-    <label><input type="radio" name="quality">Korralik märgistus</label>
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Kui korralikult on ema märgistatud ja millal?
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onClose('mother-marked-edit')">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
+    </div>
+    <strong>Märgistuse kvaliteet</strong>
+    <div class="radio">
+      <label><input type="radio" name="quality">Korralik märgistus</label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="quality">
+        Märgistusega on probleeme
+        Märksõna:
+        <input type="number">
+      </label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="quality">Ei ole märgistatud</label>
+    </div>
+    <strong>Millal märgistatud?</strong>
+    <div class="radio">
+      <label><input type="radio" name="when_marked">Täna</label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="when_marked">
+        <select
+          name="month_marked"
+          class="custom-select"
+          size="1">
+          <option value="">Jaanuar</option>
+          <option value="">Veebruar</option>
+          <option value="">Märts</option>
+        </select>
+        <select
+          name="year_marked"
+          class="custom-select"
+          size="1">
+          <option value="">2017</option>
+          <option value="">2018</option>
+        </select>
+      </label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="when_marked">(märts 2017)</label>
+    </div>
+    <button class="btn btn-light">Loobun</button>
+    <button class="btn btn-light">Salvestan</button>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="quality">
-      Märgistusega on probleeme
-      Märksõna:
-      <input type="number">
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="quality">Ei ole märgistatud</label>
-  </div>
-  <strong>Millal märgistatud?</strong>
-  <div class="radio">
-    <label><input type="radio" name="when_marked">Täna</label>
-  </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="when_marked">
-      <select
-        name="month_marked"
-        class="custom-select"
-        size="1">
-        <option value="">Jaanuar</option>
-        <option value="">Veebruar</option>
-        <option value="">Märts</option>
-      </select>
-      <select
-        name="year_marked"
-        class="custom-select"
-        size="1">
-        <option value="">2017</option>
-        <option value="">2018</option>
-      </select>
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="when_marked">(märts 2017)</label>
-  </div>
-  <button class="btn btn-light">Loobun</button>
-  <button class="btn btn-light">Salvestan</button>
 </jw-modal>
 
 
 <jw-modal id="mother-birthday-edit">
-  <h4>Millal on see ema koorunud?</h4>
-  <div class="radio">
-    <label><input type="radio" name="seen">Täna</label>
+  <div class="card bg-light">
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Millal on see ema koorunud?
+        </h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onClose('mother-birthday-edit')">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="seen">Täna</label>
+    </div>
+    <div class="radio">
+      <label>
+        <input type="radio" name="when_marked">
+        <select
+          name="month_marked"
+          class="custom-select"
+          size="1">
+          <option value="">Jaanuar</option>
+          <option value="">Veebruar</option>
+          <option value="">Märts</option>
+        </select>
+        <select
+          name="year_marked"
+          class="custom-select"
+          size="1">
+          <option value="">2017</option>
+          <option value="">2018</option>
+        </select>
+      </label>
+    </div>
+    <div class="radio">
+      <label><input type="radio" name="seen">Märts 2017</label>
+    </div>
+    <button class="btn btn-light">Loobun</button>
+    <button class="btn btn-light">Salvestan</button>
+    <button
+      type="button"
+      class="btn btn-light btn-outline-primary"
+      style="width: 200px; height: 80px; margin: 0px">
+      <img
+        src="assets/img/muuda.png"
+        alt="ii"
+        style="height: 65px"
+        (click)="onChangeMotherStatusButtonClick()">
+    </button>
   </div>
-  <div class="radio">
-    <label>
-      <input type="radio" name="when_marked">
-      <select
-        name="month_marked"
-        class="custom-select"
-        size="1">
-        <option value="">Jaanuar</option>
-        <option value="">Veebruar</option>
-        <option value="">Märts</option>
-      </select>
-      <select
-        name="year_marked"
-        class="custom-select"
-        size="1">
-        <option value="">2017</option>
-        <option value="">2018</option>
-      </select>
-    </label>
-  </div>
-  <div class="radio">
-    <label><input type="radio" name="seen">Märts 2017</label>
-  </div>
-  <button class="btn btn-light">Loobun</button>
-  <button class="btn btn-light">Salvestan</button>
-  <button
-    type="button"
-    class="btn btn-light btn-outline-primary"
-    style="width: 200px; height: 80px; margin: 0px">
-    <img
-      src="assets/img/muuda.png"
-      alt="ii"
-      style="height: 65px"
-      (click)="onChangeMotherStatusButtonClick()">
-  </button>
 </jw-modal>
