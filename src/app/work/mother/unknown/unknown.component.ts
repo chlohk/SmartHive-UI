@@ -25,6 +25,10 @@ export class UnknownComponent implements OnInit {
     this.modalService.open('mother-unknown-edit')
   }
 
+  onClose(id) {
+    this.modalService.close(id)
+  }
+
   onCloseMotherUnknownEditButton() {
     this.modalService.close('mother-unknown-edit')
   }

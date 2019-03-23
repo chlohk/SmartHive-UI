@@ -25,6 +25,10 @@ export class MissingComponent implements OnInit {
     this.modalService.open('mother-missing-edit')
   }
 
+  onClose(id) {
+    this.modalService.close(id)
+  }
+
   onCloseMotherMissingEditButton() {
     this.modalService.close('mother-missing-edit')
   }

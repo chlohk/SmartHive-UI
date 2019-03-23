@@ -33,4 +33,8 @@ export class FreakComponent implements OnInit {
     this.modalService.open('mother-freak-log-edit')
   }
 
+  onCloseFreakMotherLogEditButton() {
+    this.modalService.close('mother-freak-log-edit')
+  }
+
 }

@@ -25,6 +25,10 @@ export class UnCagedComponent implements OnInit {
     this.modalService.open('mother-un-caged-edit')
   }
 
+  onClose(id) {
+    this.modalService.close(id)
+  }
+
   onCloseMotherUnCagedEditButton() {
     this.modalService.close('mother-un-caged-edit')
   }

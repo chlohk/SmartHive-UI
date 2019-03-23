@@ -87,15 +87,15 @@
 <jw-modal id="mother-un-caged-edit"  style="max-width: 50rem; height: 45rem">
   <div class="card bg-light">
     <div class="card-header">
-      <div class="row">
-        <h4>Millal ema puurist välja perre lasti?</h4>
+      <div class="row up-bar">
+        <h1>Millal ema puurist välja perre lasti?
+        </h1>
         <button
-          class="btn btn-danger"
-          style="width: 40px; height: 40px; margin-left: 700px"
-          (click)="onCloseMotherUnCagedEditButton()">
+          class="btn btn-danger closing"
+          (click)="onClose('mother-un-caged-edit')">
           <img
             src="assets/img/sulge.jpeg"
-            style="height: 30px;width: 30px; margin: 2px">
+            class="x">
         </button>
       </div>
     </div>
@@ -159,7 +159,19 @@
 
 
 <jw-modal id="mother-laying-eggs-edit">
-  <h4>Millal nägid viimati, et see ema munes?</h4>
+  <div class="card-header">
+    <div class="row up-bar">
+      <h1>Millal nägid viimati, et see ema munes?
+      </h1>
+      <button
+        class="btn btn-danger closing"
+        (click)="onClose('mother-laying-eggs-edit')">
+        <img
+          src="assets/img/sulge.jpeg"
+          class="x">
+      </button>
+    </div>
+  </div>
   <strong>Muneb</strong>
   <div class="radio">
     <label><input type="radio" name="seen">Täna</label>
@@ -182,7 +194,19 @@
 
 
 <jw-modal id="mother-marked-edit">
-  <h4>Kui korralikult on ema märgistatud ja millal?</h4>
+  <div class="card-header">
+    <div class="row up-bar">
+      <h1>Kui korralikult on ema märgistatud ja millal?
+      </h1>
+      <button
+        class="btn btn-danger closing"
+        (click)="onClose('mother-marked-edit')">
+        <img
+          src="assets/img/sulge.jpeg"
+          class="x">
+      </button>
+    </div>
+  </div>
   <strong>Märgistuse kvaliteet</strong>
   <div class="radio">
     <label><input type="radio" name="quality">Korralik märgistus</label>
@@ -231,7 +255,19 @@
 
 
 <jw-modal id="mother-birthday-edit">
-  <h4>Millal on see ema koorunud?</h4>
+  <div class="card-header">
+    <div class="row up-bar">
+      <h1>Millal on see ema koorunud?
+      </h1>
+      <button
+        class="btn btn-danger closing"
+        (click)="onClose('mother-birthday-edit')">
+        <img
+          src="assets/img/sulge.jpeg"
+          class="x">
+      </button>
+    </div>
+  </div>
   <div class="radio">
     <label><input type="radio" name="seen">Täna</label>
   </div>
