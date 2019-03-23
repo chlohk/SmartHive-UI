@@ -1,28 +1,28 @@
-<div [ngSwitch]="loadedMotherStatus" >
+<div [ngSwitch]="loadedMomAttributes.momStatus" >
   <app-freak
-    *ngSwitchCase="motherStatusEnum.FREAK"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-freak>
+    *ngSwitchCase="momStatusEnum.FREAK"
+    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-freak>
   <app-hatched
-    *ngSwitchCase="motherStatusEnum.HATCHED"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-hatched>
+    *ngSwitchCase="momStatusEnum.HATCHED"
+    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-hatched>
   <app-in-cage
-    *ngSwitchCase="motherStatusEnum.IN_CAGE"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-in-cage>
+    *ngSwitchCase="momStatusEnum.IN_CAGE"
+    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-in-cage>
   <app-missing
-    *ngSwitchCase="motherStatusEnum.MISSING"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-missing>
+    *ngSwitchCase="momStatusEnum.MISSING"
+    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-missing>
   <app-seen
-    *ngSwitchCase="motherStatusEnum.SEEN"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-seen>
+    *ngSwitchCase="momStatusEnum.SEEN"
+    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-seen>
   <app-un-caged
-    *ngSwitchCase="motherStatusEnum.UN_CAGED"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-un-caged>
+    *ngSwitchCase="momStatusEnum.UN_CAGED"
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"></app-un-caged>
   <app-unknown
-    *ngSwitchCase="motherStatusEnum.UNKNOWN"
-    (onChangeMotherStatus)="onChangeMotherStatusButtonClick($event)"></app-unknown>
+    *ngSwitchCase="momStatusEnum.UNKNOWN"
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"></app-unknown>
 </div>
 
-<jw-modal id="mother-status">
+<jw-modal id="mom-status">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
@@ -30,7 +30,7 @@
         </h1>
         <button
           class="btn btn-danger closing"
-          (click)="onCloseMother()">
+          (click)="onCloseMomStatusPanel()">
           <img
             src="assets/img/sulge.jpeg"
             class="x">
@@ -41,19 +41,19 @@
       <div class="row">
         <button
           class="btn btn-secondary"
-          (click)="changeMotherStatus(motherStatusEnum.MISSING)"
+          (click)="changeMomStatus(momStatusEnum.MISSING)"
           style="width: 230px">
           <img src="assets/img/kadunud.jpg" class="statusPanel">
         </button>
         <button
           class="btn btn-secondary"
-          (click)="changeMotherStatus(motherStatusEnum.IN_CAGE)"
+          (click)="changeMomStatus(momStatusEnum.IN_CAGE)"
           style="width: 230px">
           <img src="assets/img/puurigaTarru.png" class="statusPanel">
         </button>
         <button
           class="btn btn-secondary"
-          (click)="changeMotherStatus(motherStatusEnum.UN_CAGED)"
+          (click)="changeMomStatus(momStatusEnum.UN_CAGED)"
           style="width: 230px">
           <img src="assets/img/puuristV2lja.png" class="statusPanel">
         </button>
@@ -61,14 +61,14 @@
       <div class="row">
         <button
           class="btn btn-secondary"
-          (click)="changeMotherStatus(motherStatusEnum.UNKNOWN)"
+          (click)="changeMomStatus(momStatusEnum.UNKNOWN)"
           style="width: 230px">
           <img src="assets/img/teadmata.jpg" class="statusPanel">
         </button>
         <img src="assets/img/arrow.png" alt="" style="width: 450px; margin: 40px">
         <button
           class="btn btn-secondary"
-          (click)="changeMotherStatus(motherStatusEnum.SEEN)"
+          (click)="changeMomStatus(momStatusEnum.SEEN)"
           style="width: 230px">
           <img src="assets/img/n2htud.png" class="statusPanel">
         </button>
@@ -76,13 +76,13 @@
       <div class="row">
         <button
           class="btn btn-secondary"
-          (click)="changeMotherStatus(motherStatusEnum.FREAK)"
+          (click)="changeMomStatus(momStatusEnum.FREAK)"
           style="width: 230px">
           <img src="assets/img/v22rema.png" class="statusPanel">
         </button>
         <button
           class="btn btn-secondary"
-          (click)="changeMotherStatus(motherStatusEnum.HATCHED)"
+          (click)="changeMomStatus(momStatusEnum.HATCHED)"
           style="width: 230px; margin-left: 160px">
           <img src="assets/img/koorunudEma.jpg" class="statusPanel">
         </button>

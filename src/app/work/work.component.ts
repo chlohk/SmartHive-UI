@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {SpinnerService} from "../util/spinner/spinner.service";
-import set = Reflect.set;
-import {HttpClient} from "@angular/common/http";
+import {Colony} from "../settings/shared/colony.model";
+import {ColoniesService} from "../settings/shared/colonies.service";
+import {MomStatusEnum} from "./mother/mom-status.enum";
+import {Hive} from "../settings/shared/hive.model";
 
 @Component({
   selector: 'app-work',
@@ -9,15 +11,27 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./work.component.css']
 })
 export class WorkComponent implements OnInit {
+  colonies: Colony[];
+  currentlyChosenHive: Hive = null;
+  //@Output() onChangeColony = new EventEmitter<MomStatusEnum>();
 
-  constructor(private spinnerService: SpinnerService) { }
+  constructor(private spinnerService: SpinnerService,
+              private coloniesService: ColoniesService) { }
 
   ngOnInit() {
-    setTimeout( () => {
-      this.spinnerService.setSpinnerStatus.next(false);}, 0)
+    this.coloniesService.coloniesChanged.subscribe(
+      colonies => this.colonies = colonies
+    );
+    this.coloniesService.getColoniesData();
 
+    setTimeout(()=> {
+      this.spinnerService.setSpinnerStatus.next(false);
+    }, 0);
   }
 
+  onHiveChange(hiveThatGotChosen: Hive) {
+    this.currentlyChosenHive = hiveThatGotChosen;
+  }
 
 
 }

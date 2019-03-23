@@ -1,4 +1,6 @@
-<app-work-header></app-work-header>
+<app-work-header
+  [colonies]="colonies"
+  (currentlySelectedHive)="onHiveChange($event)"></app-work-header>
   <div class="row" style="margin-right: 0; margin-left: 0">
     <div class="col-8">
     </div>
@@ -9,6 +11,8 @@
       <!--<app-mother></app-mother-main>-->
     <!--</div>-->
     <div class="col-4" style="margin-right: 0">
-      <app-mother></app-mother>
+      <app-mother
+        [loadedMomAttributes]="currentlyChosenHive.momAttributes"
+        *ngIf="currentlyChosenHive"></app-mother>
     </div>
   </div>

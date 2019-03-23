@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {JwModalService} from "../../../util/jw-modal/jw-modal.service";
-import {MotherStatusEnum} from "../mother-status.enum";
+import {MomStatusEnum} from "../mom-status.enum";
 
 @Component({
   selector: 'app-hatched',
@@ -8,8 +8,8 @@ import {MotherStatusEnum} from "../mother-status.enum";
   styleUrls: ['./hatched.component.css']
 })
 export class HatchedComponent implements OnInit {
-  @Output() onChangeMotherStatus = new EventEmitter<MotherStatusEnum>();
-  motherStatusEnum = MotherStatusEnum;
+  @Output() onChangeMotherStatus = new EventEmitter<MomStatusEnum>();
+  motherStatusEnum = MomStatusEnum;
 
 
   constructor(private modalService: JwModalService) { }
@@ -17,7 +17,7 @@ export class HatchedComponent implements OnInit {
   ngOnInit() {
   }
 
-  onChangeMotherStatusButtonClick(newMotherStatus?: MotherStatusEnum) {
+  onChangeMotherStatusButtonClick(newMotherStatus?: MomStatusEnum) {
     this.modalService.close('mother-hatched-edit');
     this.onChangeMotherStatus.emit(newMotherStatus);
   }

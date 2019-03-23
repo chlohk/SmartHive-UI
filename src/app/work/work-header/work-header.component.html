@@ -13,13 +13,12 @@
       </a>
     </div>
     <div class="col-sm-6">
-      <form #f="ngForm">
+      <form>
         <select
           name="colony"
           class="custom-select"
-          size="1"
-          [ngModel]="defaultColony"
-          (change)="onChange($event)">
+          [(ngModel)]="currentlySelectedColonyId"
+          (change)="onColonyChange()">
           <option value="" disabled selected hidden>Vali koloonia...</option>
           <option
             *ngFor="let colony of colonies"
@@ -27,18 +26,17 @@
         </select>
       </form>
     </div>
-    <div class="col-sm-5">
-      <form #f="ngForm">
+    <div class="col-sm-5" *ngIf="currentlySelectedColonyId != ''">
+      <form>
         <select
-          name="colony"
+          name="hive"
           class="custom-select"
-          size="1"
-          [ngModel]="defaultColony"
-          (change)="onChange($event)">
-          <option value="" disabled selected hidden>Vali koloonia...</option>
+          [(ngModel)]="currentlySelectedHiveId"
+          (change)="onHiveChange()">
+          <option value="" disabled selected hidden>Vali taru...</option>
           <option
-            *ngFor="let colony of colonies"
-            [value]="colony.id"> {{ colony.name }}</option>
+            *ngFor="let hive of currentlySelectedColony.hives"
+            [value]="hive.id"> {{ '# ' + hive.number + ' ' + hive.description }}</option>
         </select>
       </form>
     </div>

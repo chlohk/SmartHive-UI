@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {JwModalService} from "../../../util/jw-modal/jw-modal.service";
-import {MotherStatusEnum} from "../mother-status.enum";
+import {MomStatusEnum} from "../mom-status.enum";
 
 @Component({
   selector: 'app-un-caged',
@@ -8,17 +8,17 @@ import {MotherStatusEnum} from "../mother-status.enum";
   styleUrls: ['./un-caged.component.css']
 })
 export class UnCagedComponent implements OnInit {
-  @Output() onChangeMotherStatus = new EventEmitter<MotherStatusEnum>();
-  motherStatusEnum = MotherStatusEnum;
+  @Output() onChangeMomStatus = new EventEmitter<MomStatusEnum>();
+  motherStatusEnum = MomStatusEnum;
 
   constructor(private modalService: JwModalService) { }
 
   ngOnInit() {
   }
 
-  onChangeMotherStatusButtonClick(newMotherStatus?: MotherStatusEnum) {
+  onChangeMotherStatusButtonClick(newMotherStatus?: MomStatusEnum) {
     this.modalService.close('mother-un-caged-edit');
-    this.onChangeMotherStatus.emit(newMotherStatus);
+    this.onChangeMomStatus.emit(newMotherStatus);
   }
 
   onMotherUnCagedEditButton() {

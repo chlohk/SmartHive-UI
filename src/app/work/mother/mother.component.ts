@@ -1,37 +1,41 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {MotherStatusEnum} from "./mother-status.enum";
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {MomStatusEnum} from "./mom-status.enum";
 import {JwModalService} from "../../util/jw-modal/jw-modal.service";
+import {MomAttributes} from "../../settings/shared/mom-attributes.model";
 
 @Component({
   selector: 'app-mother',
   templateUrl: './mother.component.html',
   styleUrls: ['./mother.component.css']
 })
-export class MotherComponent implements OnInit {
-  loadedMotherStatus: MotherStatusEnum = MotherStatusEnum.SEEN;
-  motherStatusEnum = MotherStatusEnum;
-  opened = false;
+export class MotherComponent implements OnChanges {
+  @Input() loadedMomAttributes: MomAttributes;
+  loadedMomStatus: MomStatusEnum = MomStatusEnum.SEEN;
+  momStatusEnum = MomStatusEnum;
+  //opened = false;
+
 
   constructor(private modalService: JwModalService) { }
 
-  ngOnInit() {
+  ngOnChanges() {
+    console.log(this.loadedMomAttributes);
   }
 
-  onCloseMother() {
-    this.modalService.close('mother-status')
+  onCloseMomStatusPanel() {
+    this.modalService.close('mom-status')
   }
 
-  onChangeMotherStatusButtonClick(newMotherStatus?: MotherStatusEnum) {
-    if(newMotherStatus) {
-      this.changeMotherStatus(newMotherStatus);
+  onChangeMomStatusButtonClick(newMomStatus?: MomStatusEnum) {
+    if(newMomStatus) {
+      this.changeMomStatus(newMomStatus);
     } else {
-      this.modalService.open('mother-status');
+      this.modalService.open('mom-status');
     }
   }
 
-  changeMotherStatus(newMotherStatus: MotherStatusEnum) {
-    this.loadedMotherStatus = newMotherStatus;
-    this.modalService.close('mother-status')
+  changeMomStatus(newMotherStatus: MomStatusEnum) {
+    this.loadedMomStatus = newMotherStatus;
+    this.modalService.close('mom-status')
   }
 
 
