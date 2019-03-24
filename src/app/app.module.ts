@@ -32,6 +32,7 @@ import { UnknownComponent } from './work/mother/unknown/unknown.component';
 import { MissingComponent } from './work/mother/missing/missing.component';
 import { FreakComponent } from './work/mother/freak/freak.component';
 import { UnCagedComponent } from './work/mother/un-caged/un-caged.component';
+import { SeenComponentComponent } from './work/mother/seen-component/seen-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +57,8 @@ import { UnCagedComponent } from './work/mother/un-caged/un-caged.component';
     UnknownComponent,
     MissingComponent,
     FreakComponent,
-    UnCagedComponent
+    UnCagedComponent,
+    SeenComponentComponent
   ],
   imports: [
     BrowserModule,
