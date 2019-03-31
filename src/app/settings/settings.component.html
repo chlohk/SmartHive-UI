@@ -29,12 +29,12 @@
     <div class="col-sm-1.5">
       <button
         type="button"
-        class="btn btn-light btn-outline-secondary"
+        class="btn btn-light btn-outline-secondary newCol"
         (click)="onEditColonyButtonClick()"
         [disabled]="selectField.value === ''">✎</button>
     </div>
     <div class="col-sm-3.5">
-      <button type="button" class="btn btn-light btn-outline-secondary" (click)="onNewColonyButtonClick()">✚ koloonia</button>
+      <button type="button" class="btn btn-light btn-outline-secondary" (click)="onNewColonyButtonClick()" id="newColonyButton">✚ koloonia</button>
     </div>
   </div>
 </nav>

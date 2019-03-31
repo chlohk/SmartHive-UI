@@ -37,6 +37,7 @@ import {MomAttributes} from "./work/mother/mom-attributes.model";
 import {MomAttributesService} from "./work/mother/mom-attributes.service";
 import {TimeAgoPipe} from "time-ago-pipe";
 import {UtilService} from "./util/util.service";
+import { SeenComponentComponent } from './work/mother/seen-component/seen-component.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,8 @@ import {UtilService} from "./util/util.service";
     MissingComponent,
     FreakComponent,
     UnCagedComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    SeenComponentComponent
   ],
   imports: [
     BrowserModule,
