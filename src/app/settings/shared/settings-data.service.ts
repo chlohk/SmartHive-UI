@@ -1,4 +1,4 @@
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Injectable} from "@angular/core";
 import {Colony} from "./colony.model";
 import "rxjs-compat/add/operator/map";
@@ -23,8 +23,22 @@ export class SettingsDataService {
   }
 
   onGetColoniesData() {
+    // let username: string = 'user';
+    // let password: string = 'password';
+    // let headers: HttpHeaders = new HttpHeaders();
+    // headers.append("Authorization", "Basic " + btoa(username + ":" + password));
+    // headers.append("Content-Type", "application/x-www-form-urlencoded");
     return this.httpClient.get<Colony[]>('api/colony').toPromise();
   }
+
+  // onPostToLogin() {
+  //   let username: string = 'user';
+  //   let password: string = 'password';
+  //   let headers: HttpHeaders = new HttpHeaders();
+  //   headers.append("Authorization", "Basic " + btoa(username + ":" + password));
+  //   headers.append("Content-Type", "application/x-www-form-urlencoded");
+  //   return this.httpClient.post('api/login', {headers: headers}).toPromise();
+  // }
 
   onAddNewHive(number: number, colonyIdHiveBelongsTo: string, description?: string) {
     const url =  'api/hive/' + colonyIdHiveBelongsTo;

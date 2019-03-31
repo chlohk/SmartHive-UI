@@ -1,25 +1,32 @@
-<div [ngSwitch]="loadedMomAttributes.momStatus" >
+<div [ngSwitch]="currentlyChosenHive.momAttributes.momStatus" >
   <app-freak
     *ngSwitchCase="momStatusEnum.FREAK"
-    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-freak>
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"
+    [currentlyChosenHive]="currentlyChosenHive"></app-freak>
   <app-hatched
     *ngSwitchCase="momStatusEnum.HATCHED"
-    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-hatched>
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"
+    [currentlyChosenHive]="currentlyChosenHive"></app-hatched>
   <app-in-cage
     *ngSwitchCase="momStatusEnum.IN_CAGE"
-    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-in-cage>
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"
+    [currentlyChosenHive]="currentlyChosenHive"></app-in-cage>
   <app-missing
     *ngSwitchCase="momStatusEnum.MISSING"
-    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-missing>
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"
+    [currentlyChosenHive]="currentlyChosenHive"></app-missing>
   <app-seen
     *ngSwitchCase="momStatusEnum.SEEN"
-    (onChangeMotherStatus)="onChangeMomStatusButtonClick($event)"></app-seen>
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"
+    [currentlyChosenHive]="currentlyChosenHive"></app-seen>
   <app-un-caged
     *ngSwitchCase="momStatusEnum.UN_CAGED"
-    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"></app-un-caged>
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"
+    [currentlyChosenHive]="currentlyChosenHive"></app-un-caged>
   <app-unknown
     *ngSwitchCase="momStatusEnum.UNKNOWN"
-    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"></app-unknown>
+    (onChangeMomStatus)="onChangeMomStatusButtonClick($event)"
+    [currentlyChosenHive]="currentlyChosenHive"></app-unknown>
 </div>
 
 <jw-modal id="mom-status">

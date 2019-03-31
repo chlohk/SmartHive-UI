@@ -18,52 +18,106 @@
         </div>
 
         <div class="card-body" style="background-color: white">
+
+
           <img
             src="assets/img/teadmata.jpg" alt="ii">
-          <p class="card-text">täna</p>
-          <img
-            src="assets/img/kontrollraamPuudu.png" alt="ii">
-          <p class="card-text">täna</p>
-          <img
-            src="assets/img/kuppValitudNot.png" alt="ii">
-          <p class="card-text">8 päeva tagasi</p>
+          <h3 class="word">{{ momStatusSectionTimeText }}</h3>
+
+
+          <div *ngIf="!currentlyChosenHive.momAttributes.controlFrameStartDate">
+            <img
+              src="assets/img/controlFrameNot.png" alt="ii"
+              style="margin-top: 7px">
+            <h3 class="word">{{ controlFrameSectionTimeText }}</h3>
+          </div>
+          <div *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate">
+            <img
+              src="assets/img/controlFrameOk.png" alt="ii"
+              style="margin-top: 7px">
+            <h3 class="word">{{ controlFrameSectionTimeText }}</h3>
+          </div>
+
+
+          <div *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
+                        !currentlyChosenHive.momAttributes.cocoonChosenDate">
+            <img
+              src="assets/img/cocoonNot.png" alt="ii"
+              style="margin-top: 7px">
+            <h3 class="word">{{ cocoonSectionTimeText }}</h3>
+          </div>
+          <div *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
+                         currentlyChosenHive.momAttributes.cocoonChosenDate">
+            <img
+              src="assets/img/cocoonOk.png" alt="ii"
+              style="margin-top: 7px">
+            <h3 class="word">{{ cocoonSectionTimeText }}</h3>
+          </div>
+
+
         </div>
       </div>
     </div>
     <div class="col-4.5">
       <button
         type="button"
-        class="btn btn-light btn-outline-danger"
+        class="btn btn-light btn-outline-secondary"
         style="height: 115px;width: 80px; margin: 0px; margin-left: 20px"
-        (click)="onChangeMotherStatusButtonClick(motherStatusEnum.MISSING)">
+        (click)="onChangeMotherStatusButtonClick(momStatusEnum.MISSING)">
         <img
           src="assets/img/kadunudVertical.jpg"
           alt="ii"
-          style="height: 100px">
+          style="max-height: 100px; max-width: 60px;">
       </button>
       <br>
       <button
         type="button"
-        class="btn btn-light btn-outline-success"
-        (click)="onOpenMotherUnknownEditButton()">
-        <img src="assets/img/muudaNupp.png"
-             alt="ii"
-             class="pencil">
-      </button>
-      <br>
-      <button
-        type="button"
-        class="btn btn-light btn-outline-danger"
-        (click)="onOpenControlframeEggsEditButton()">
+        class="btn btn-light btn-outline-secondary"
+        (click)="onOpenMomStatusSectionEditButton()">
         <img
           src="assets/img/muudaNupp.png"
-          alt="ii" class="pencil">
+          alt="ii"
+          class="pencil">
       </button>
       <br>
       <button
+        *ngIf="!currentlyChosenHive.momAttributes.controlFrameStartDate"
         type="button"
-        class="btn btn-light btn-outline-danger"
-        (click)="onOpenCocoonEditButton()">
+        class="btn btn-light btn-outline-success"
+        (click)="saveControlFrameSectionValues(true)">
+        <img
+          src="assets/img/check.png"
+          alt="ii"
+          class="pencil">
+      </button>
+      <button
+        *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate"
+        type="button"
+        class="btn btn-light btn-outline-secondary"
+        (click)="onOpenWhenControlFrameEditButton()">
+        <img
+          src="assets/img/muudaNupp.png"
+          alt="ii"
+          class="pencil">
+      </button>
+      <br>
+      <button
+        *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
+                !currentlyChosenHive.momAttributes.cocoonChosenDate"
+        type="button"
+        class="btn btn-light btn-outline-success"
+        (click)="saveCocoonSectionValues(true)">
+        <img
+          src="assets/img/check.png"
+          alt="ii"
+          class="pencil">
+      </button>
+      <button
+        *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
+                currentlyChosenHive.momAttributes.cocoonChosenDate"
+        type="button"
+        class="btn btn-light btn-outline-secondary"
+        (click)="onOpenWhenCocoonEditButton()">
         <img
           src="assets/img/muudaNupp.png"
           alt="ii"
@@ -73,56 +127,76 @@
   </div>
 </div>
 
-<jw-modal id="mother-unknown-edit"  style="max-width: 50rem; height: 45rem">
+<jw-modal id="mother-unknown-edit" style="max-width: 50rem; height: 45rem">
   <div class="card bg-light">
-      <div class="card-header">
-        <div class="row up-bar">
-          <h1>Mis ajast on teadmata, kas ema on tarus olemas?
-          </h1>
-          <button
-            class="btn btn-danger closing"
-            (click)="onClose('mother-unknown-edit')">
-            <img
-              src="assets/img/sulge.jpeg"
-              class="x">
-          </button>
-        </div>
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Mis ajast on teadmata, kas ema on tarus olemas?</h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onCloseMomStatusSectionEditButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
       </div>
+    </div>
     <br>
     <div class="row">
       <div class="col-1"></div>
       <div class="col-4">
-        <img src="assets/img/teadmata.jpg" alt="" style="width: 160px">
+        <img src="assets/img/teadmata.jpg" alt="">
         <br>
-        <div class="radio">
+        <div class="radio option">
           <label>
-            <h3>
+            <h2>
               <input
                 type="radio"
                 name="unknown"
-                style="width: 25px; height: 25px">
+                class="bigRadio"
+                [checked]="radioBtnMomStatusSelection === actionTimeEnum.TODAY"
+                (change)="radioBtnMomStatusSelected(actionTimeEnum.TODAY)">
               Täna
-            </h3>
+            </h2>
           </label>
         </div>
-        <div class="radio">
+        <div class="radio option">
           <label>
-            <h3>
-              <input type="radio" name="unknown"  style="width: 25px; height: 25px">&nbsp;<input type="number" size="3"> päeva tagasi</h3>
+            <h2>
+              <input type="radio" name="unknown"
+                     class="bigRadio"
+                     [checked]="radioBtnMomStatusSelection === actionTimeEnum.PAST_DATE"
+                     (change)="radioBtnMomStatusSelected(actionTimeEnum.PAST_DATE)">
+              &nbsp;&nbsp;&nbsp;
+              <input
+                type="number"
+                size="3"
+                class="num"
+                [(ngModel)]="radioBtnStatusPastDateInputValue"> päeva tagasi
+            </h2>
           </label>
         </div>
-        <div class="radio">
+        <div
+          *ngIf="momStatusInitialValueText"
+          class="radio option">
           <label>
-            <h3>
-              <input type="radio" name="unknown"  style="width: 25px; height: 25px">&nbsp; <img src="assets/img/tagasi.png" alt="" style="width: 22px; height: 22px"> (7 päeva tagasi)</h3></label>
+            <h2>
+              <input type="radio" name="unknown"
+                     class="bigRadio"
+                     (change)="radioBtnMomStatusSelected(actionTimeEnum.INITIAL_DATE)">
+              &nbsp;
+              <img src="assets/img/tagasi.png" alt="" style="height: 45px">
+              ({{ momStatusInitialValueText }})
+            </h2>
+          </label>
         </div>
       </div>
       <div class="col-7">
         <div class="row">
-          <h3>Ema staatus ei ole "teadmata"?</h3>
+          <h2>Ema staatus ei ole "teadmata kas on olemas"?</h2>
         </div>
-        <div class="row">
-          <h3>Vali teine ema staatus:&nbsp;</h3>
+        <div class="row option">
+          <h2>Vali teine ema staatus:&nbsp;&nbsp;&nbsp;</h2>
           <button
             type="button"
             class="btn btn-light btn-outline-primary"
@@ -134,20 +208,26 @@
               (click)="onChangeMotherStatusButtonClick()">
           </button>
         </div>
+        <div class="row twoButtons">
+          <button class="btn btn-light btn-outline-danger"
+                  style="color: red; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="onCloseMomStatusSectionEditButton()">
+            <h2>Loobun</h2>
+          </button>
+          <button class="btn btn-light btn-outline-success"
+                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="saveMotherStatusSectionValues()">
+            <h2>Salvestan</h2>
+          </button>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 500px"><h2>Loobun</h2></button>
-      <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
-    </div>
-
-
   </div>
 
 </jw-modal>
 
 
-<jw-modal id="mother-controlframe-edit">
+<jw-modal id="mother-control-frame-edit">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
@@ -155,33 +235,100 @@
         </h1>
         <button
           class="btn btn-danger closing"
-          (click)="onClose('mother-controlframe-edit')">
+          (click)="onCloseWhenControlFrameEditButton()">
           <img
             src="assets/img/sulge.jpeg"
             class="x">
         </button>
       </div>
     </div>
-    <strong>Kontrollraam sees</strong>
-    <div class="radio">
-      <label><input type="radio" name="controlframe">Täna</label>
+    <br>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-5">
+        <img src="assets/img/controlFrameOk.png" alt="">
+        <div class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="control_frame"
+                class="bigRadio"
+                [checked]="radioBtnControlFrameSelection === actionTimeEnum.TODAY"
+                (change)="radioBtnControlFrameSelected(actionTimeEnum.TODAY)">
+              Täna
+            </h2>
+          </label>
+        </div>
+        <div class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="control_frame"
+                class="bigRadio"
+                [checked]="radioBtnControlFrameSelection === actionTimeEnum.PAST_DATE"
+                (change)="radioBtnControlFrameSelected(actionTimeEnum.PAST_DATE)">
+              &nbsp;&nbsp;&nbsp;
+              <input
+                type="number"
+                size="3"
+                class="num"
+                [(ngModel)]="radioBtnControlFramePastDateInputValue">
+              päeva tagasi
+            </h2>
+          </label>
+        </div>
+        <div
+          *ngIf="controlFrameInitialValueText"
+          class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="control_frame"
+                class="bigRadio"
+                (change)="radioBtnControlFrameSelected(actionTimeEnum.INITIAL_DATE)">
+              &nbsp;
+              <img src="assets/img/tagasi.png" alt="" style="height: 45px">
+              ({{ controlFrameInitialValueText }})
+            </h2>
+          </label>
+        </div>
+      </div>
+      <div class="col-6">
+        <img src="assets/img/controlFrameNot.png" alt="">
+        <div class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="control_frame"
+                class="bigRadio"
+                [checked]="radioBtnControlFrameSelection === actionTimeEnum.NO_ACTION"
+                (change)="radioBtnControlFrameSelected(actionTimeEnum.NO_ACTION)">
+              Ei ole kontrollraami
+            </h2>
+          </label>
+        </div>
+        <div class="row twoButtons">
+          <button
+            class="btn btn-light btn-outline-danger"
+            style="color: red; height: 70px; width: 200px;"
+            (click)="onCloseWhenControlFrameEditButton()">
+            <h2>Loobun</h2>
+          </button>
+          <button class="btn btn-light btn-outline-success"
+                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="saveControlFrameSectionValues()">
+            <h2>Salvestan</h2>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="radio">
-      <label>
-        <input type="radio" name="controlframe"><input type="number">päeva tagasi
-      </label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="controlframe">(7 päeva tagasi)</label>
-    </div>
-    <strong>Kontrollraam puudub</strong>
-    <div class="radio">
-      <label><input type="radio" name="controlframe">Ei ole kontrollraami</label>
-    </div>
-    <button class="btn btn-warning">Loobun</button>
-    <button class="btn btn-success">Salvestan</button>
   </div>
 </jw-modal>
+
 
 <jw-modal id="mother-cocoon-edit">
   <div class="card bg-light">
@@ -191,30 +338,96 @@
         </h1>
         <button
           class="btn btn-danger closing"
-          (click)="onClose('mother-cocoon-edit')">
+          (click)="onCloseWhenCocoonEditButton()">
           <img
             src="assets/img/sulge.jpeg"
             class="x">
         </button>
       </div>
     </div>
-    <strong>Kupp valitud</strong>
-    <div class="radio">
-      <label><input type="radio" name="cocoon">Täna</label>
+    <br>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-5">
+        <img src="assets/img/cocoonOk.png" alt="">
+        <div class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="cocoon"
+                class="bigRadio"
+                [checked]="radioBtnCocoonSelection === actionTimeEnum.TODAY"
+                (change)="radioBtnCocoonSelected(actionTimeEnum.TODAY)">
+              Täna
+            </h2>
+          </label>
+        </div>
+        <div class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="cocoon"
+                class="bigRadio"
+                [checked]="radioBtnCocoonSelection === actionTimeEnum.PAST_DATE"
+                (change)="radioBtnCocoonSelected(actionTimeEnum.PAST_DATE)">
+              &nbsp;&nbsp;&nbsp;
+              <input
+                type="number"
+                size="3"
+                class="num"
+                [(ngModel)]="radioBtnCocoonPastDateInputValue">
+              päeva tagasi
+            </h2>
+          </label>
+        </div>
+        <div
+          *ngIf="cocoonInitialValueText"
+          class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="cocoon"
+                class="bigRadio"
+                (change)="radioBtnCocoonSelected(actionTimeEnum.INITIAL_DATE)">
+              &nbsp;
+              <img src="assets/img/tagasi.png" alt="" style="height: 45px">
+              ({{ cocoonInitialValueText }})
+            </h2>
+          </label>
+        </div>
+      </div>
+      <div class="col-6">
+        <img src="assets/img/cocoonNot.png" alt="">
+        <div class="radio option">
+          <label>
+            <h2>
+              <input
+                type="radio"
+                name="cocoon"
+                class="bigRadio"
+                [checked]="radioBtnCocoonSelection === actionTimeEnum.NO_ACTION"
+                (change)="radioBtnCocoonSelected(actionTimeEnum.NO_ACTION)">
+              Ei ole kontrollraami
+            </h2>
+          </label>
+        </div>
+        <div class="row twoButtons">
+          <button
+            class="btn btn-light btn-outline-danger"
+            style="color: red; height: 70px; width: 200px;"
+            (click)="onCloseWhenCocoonEditButton()">
+            <h2>Loobun</h2>
+          </button>
+          <button class="btn btn-light btn-outline-success"
+                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="saveCocoonSectionValues()">
+            <h2>Salvestan</h2>
+          </button>
+        </div>
+      </div>
     </div>
-    <div class="radio">
-      <label>
-        <input type="radio" name="cocoon"><input type="number">päeva tagasi
-      </label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="cocoon">(7 päeva tagasi)</label>
-    </div>
-    <strong>Kupp pole valitud</strong>
-    <div class="radio">
-      <label><input type="radio" name="cocoon">Ei ole kuppu valitud</label>
-    </div>
-    <button class="btn btn-warning">Loobun</button>
-    <button class="btn btn-success">Salvestan</button>
   </div>
 </jw-modal>

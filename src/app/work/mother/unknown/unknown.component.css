@@ -1,5 +1,6 @@
 img {
-  height: 100px;
+  max-height: 100px;
+  max-width: 210px;
 }
 
 img.x {
@@ -68,6 +69,7 @@ button {
   font-size: 28px;
   margin-left: 18px;
 }
+
 .option-row {
   display: flex;
   justify-content: flex-start;

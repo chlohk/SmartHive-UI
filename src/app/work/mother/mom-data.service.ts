@@ -9,6 +9,6 @@ export class MomDataService {
 
   onEditMomAttributes(hive: Hive) {
     const URL = 'api/hive/' + hive.id + '/attributes';
-    return this.httpClient.put(URL, {'name': newColonyName}).toPromise();
+    return this.httpClient.put(URL, hive.momAttributes).toPromise();
   }
 }

@@ -18,35 +18,41 @@
         </div>
 
         <div class="card-body" style="background-color: white">
+
+
           <img
-            src="assets/img/v22rema.png" alt="ii" style="height: 95px">
-          <p class="card-text">täna</p>
+            src="assets/img/v22rema.png" alt="ii"
+            style="width: 230px;">
+          <h3 class="word">{{ momStatusSectionTimeText }}</h3>
+
+
           <img
-            src="assets/img/voitlusV22remaga.png"
-            alt="ii"
-            style="margin-top: 130px">
-          <p class="card-text">mai 2018</p>
+            src="assets/img/voitlusV22remaga.png" alt="ii"
+            style="margin-top: 77px; height: 160px; max-height: 160px;">
+
+
         </div>
       </div>
     </div>
     <div class="col-4.5">
       <button
         type="button"
-        class="btn btn-light btn-outline-success"
-        (click)="onOpenFreakMotherEditButton()"
-        style="margin-top: 130px">
-        <img src="assets/img/muudaNupp.png"
-             alt="ii"
-             class="pencil">
+        class="btn btn-light btn-outline-secondary"
+        (click)="onOpenMomStatusSectionEditButton()"
+        style="margin-top: 150px;">
+        <img
+          src="assets/img/muudaNupp.png"
+          alt="ii"
+          class="pencil">
       </button>
       <br>
       <button
         type="button"
-        class="btn btn-light btn-outline-danger"
+        class="btn btn-light btn-outline-secondary"
         (click)="onOpenFreakMotherLogEditButton()"
-        style="margin-top: 130px">
+        style="margin-top: 70px;">
         <img
-          src="assets/img/raamat.jpg"
+          src="assets/img/muudaNupp.png"
           alt="ii"
           class="pencil">
       </button>
@@ -54,15 +60,14 @@
   </div>
 </div>
 
-<jw-modal id="mother-freak-edit"  style="max-width: 50rem; height: 45rem">
+<jw-modal id="mother-freak-edit" style="max-width: 50rem; height: 45rem">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
-        <h1>Mis ajast on kahtlus, et peres on väärema?
-        </h1>
+        <h1>Mis ajast on tarus väärema?</h1>
         <button
           class="btn btn-danger closing"
-          (click)="onCloseFreakMotherEditButton()">
+          (click)="onCloseMomStatusSectionEditButton()">
           <img
             src="assets/img/sulge.jpeg"
             class="x">
@@ -81,7 +86,9 @@
               <input
                 type="radio"
                 name="freak"
-                class="bigRadio">
+                class="bigRadio"
+                [checked]="radioBtnMomStatusSelection === actionTimeEnum.TODAY"
+                (change)="radioBtnMomStatusSelected(actionTimeEnum.TODAY)">
               Täna
             </h2>
           </label>
@@ -90,23 +97,36 @@
           <label>
             <h2>
               <input type="radio" name="freak"
-                     class="bigRadio">&nbsp;&nbsp;&nbsp;
-              <input type="number" size="3" class="num"> päeva tagasi
+                     class="bigRadio"
+                     [checked]="radioBtnMomStatusSelection === actionTimeEnum.PAST_DATE"
+                     (change)="radioBtnMomStatusSelected(actionTimeEnum.PAST_DATE)">
+              &nbsp;&nbsp;&nbsp;
+              <input
+                type="number"
+                size="3"
+                class="num"
+                [(ngModel)]="radioBtnStatusPastDateInputValue"> päeva tagasi
             </h2>
           </label>
         </div>
-        <div class="radio option">
+        <div
+          *ngIf="momStatusInitialValueText"
+          class="radio option">
           <label>
             <h2>
               <input type="radio" name="freak"
-                     class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva tagasi)
+                     class="bigRadio"
+                     (change)="radioBtnMomStatusSelected(actionTimeEnum.INITIAL_DATE)">
+              &nbsp;
+              <img src="assets/img/tagasi.png" alt="" style="height: 45px">
+              ({{ momStatusInitialValueText }})
             </h2>
           </label>
         </div>
       </div>
       <div class="col-7">
         <div class="row">
-          <h2>Oled kindel, et peres ei ole enam väärema?</h2>
+          <h2>Oled kindel, et tarus pole enam väärema?</h2>
         </div>
         <div class="row option">
           <h2>Vali teine ema staatus:&nbsp;&nbsp;&nbsp;</h2>
@@ -122,8 +142,16 @@
           </button>
         </div>
         <div class="row twoButtons">
-          <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px; margin-left: 100px"><h2>Loobun</h2></button>
-          <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
+          <button class="btn btn-light btn-outline-danger"
+                  style="color: red; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="onCloseMomStatusSectionEditButton()">
+            <h2>Loobun</h2>
+          </button>
+          <button class="btn btn-light btn-outline-success"
+                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="saveMotherStatusSectionValues()">
+            <h2>Salvestan</h2>
+          </button>
         </div>
       </div>
     </div>

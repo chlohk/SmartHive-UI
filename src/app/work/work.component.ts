@@ -4,6 +4,7 @@ import {Colony} from "../settings/shared/colony.model";
 import {ColoniesService} from "../settings/shared/colonies.service";
 import {MomStatusEnum} from "./mother/mom-status.enum";
 import {Hive} from "../settings/shared/hive.model";
+import {SettingsDataService} from "../settings/shared/settings-data.service";
 
 @Component({
   selector: 'app-work',
@@ -16,9 +17,12 @@ export class WorkComponent implements OnInit {
   //@Output() onChangeColony = new EventEmitter<MomStatusEnum>();
 
   constructor(private spinnerService: SpinnerService,
-              private coloniesService: ColoniesService) { }
+              private coloniesService: ColoniesService,
+              private settingsDataService: SettingsDataService) { }
 
   ngOnInit() {
+    // this.settingsDataService.onPostToLogin();
+
     this.coloniesService.coloniesChanged.subscribe(
       colonies => this.colonies = colonies
     );

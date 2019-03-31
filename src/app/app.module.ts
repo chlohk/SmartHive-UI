@@ -32,6 +32,11 @@ import { UnknownComponent } from './work/mother/unknown/unknown.component';
 import { MissingComponent } from './work/mother/missing/missing.component';
 import { FreakComponent } from './work/mother/freak/freak.component';
 import { UnCagedComponent } from './work/mother/un-caged/un-caged.component';
+import {MomDataService} from "./work/mother/mom-data.service";
+import {MomAttributes} from "./work/mother/mom-attributes.model";
+import {MomAttributesService} from "./work/mother/mom-attributes.service";
+import {TimeAgoPipe} from "time-ago-pipe";
+import {UtilService} from "./util/util.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +61,8 @@ import { UnCagedComponent } from './work/mother/un-caged/un-caged.component';
     UnknownComponent,
     MissingComponent,
     FreakComponent,
-    UnCagedComponent
+    UnCagedComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
@@ -69,7 +75,10 @@ import { UnCagedComponent } from './work/mother/un-caged/un-caged.component';
     SettingsDataService,
     SpinnerService,
     SettingsNavigationService,
-    JwModalService],
+    JwModalService,
+    MomDataService,
+    MomAttributesService,
+    UtilService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

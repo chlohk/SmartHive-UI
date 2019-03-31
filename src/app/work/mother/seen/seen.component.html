@@ -18,27 +18,83 @@
         </div>
 
         <div class="card-body" style="background-color: white">
+
+
           <img
             src="assets/img/n2htud.png" alt="ii">
-          <h3 class="word">täna</h3>
-          <img
-            src="assets/img/munebOK.png" alt="ii"
-          style="margin-top: 7px">
-          <h3 class="word">täna</h3>
-          <img
-            src="assets/img/m2rgistatudYes.png" alt="ii" style="margin-top: 15px">
-          <h3 class="word">mai 2018</h3>
-          <p style="margin-top: -23px;font-size: 31px">hele</p>
-          <img src="assets/img/synnip2evOk.png" alt="ii"
-          style="margin-top: -28px">
-          <h3 class="word" style="margin-bottom: -15px !important;">mai 2018</h3>
+          <h3 class="word">{{ momStatusSectionTimeText }}</h3>
+
+
+          <div *ngIf="!currentlyChosenHive.momAttributes.isLayingEggs">
+            <img
+              src="assets/img/munebNot.png" alt="ii"
+              style="margin-top: 7px">
+            <h3 class="word">{{ layingEggsSectionTimeText }}</h3>
+          </div>
+          <div *ngIf="currentlyChosenHive.momAttributes.isLayingEggs">
+            <img
+              src="assets/img/munebOK.png" alt="ii"
+              style="margin-top: 7px">
+            <h3 class="word">{{ layingEggsSectionTimeText }}</h3>
+          </div>
+
+
+          <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.UNMARKED">
+            <img
+              src="assets/img/unmarked.png" alt="ii"
+              style="margin-top: 7px">
+          </div>
+          <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.ATTENTION">
+            <img
+              src="assets/img/attention.png" alt="ii"
+              style="margin-top: 7px">
+            <h3
+              *ngIf="currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
+              class="word">{{ currentlyChosenHive.momAttributes.markedDate | date:'MMMM yyyy'}}
+            </h3>
+            <h3
+              *ngIf="!currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
+              class="word">{{ currentlyChosenHive.momAttributes.markedDate | date:'yyyy'}}
+            </h3>
+            <p style="margin-top: -23px;font-size: 31px">
+              {{ currentlyChosenHive.momAttributes.markedDescription }}
+            </p>
+          </div>
+          <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.MARKED">
+            <img
+              src="assets/img/marked.png" alt="ii"
+              style="margin-top: 7px">
+            <h3
+              *ngIf="currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
+              class="word">{{ currentlyChosenHive.momAttributes.markedDate | date:'MMMM yyyy'}}
+            </h3>
+            <h3
+              *ngIf="!currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
+              class="word">{{ currentlyChosenHive.momAttributes.markedDate | date:'yyyy'}}
+            </h3>
+          </div>
+
+
+          <img src="assets/img/synnip2evOk.png" alt="ii">
+          <h3
+            *ngIf="currentlyChosenHive.momAttributes.isBirthDayDateMonthSet"
+            class="word" style="margin-bottom: -15px !important;">
+            {{ currentlyChosenHive.momAttributes.birthday | date:'MMMM yyyy'}}
+          </h3>
+          <h3
+            *ngIf="!currentlyChosenHive.momAttributes.isBirthDayDateMonthSet"
+            class="word" style="margin-bottom: -15px !important;">
+            {{ currentlyChosenHive.momAttributes.birthday | date:'yyyy'}}
+          </h3>
+
+
         </div>
       </div>
     </div>
     <div class="col-4.5">
       <button
         type="button"
-        class="btn btn-light btn-outline-danger"
+        class="btn btn-light btn-outline-secondary"
         style="height: 115px;width: 80px; margin: 0px; margin-left: 20px"
         (click)="onChangeMotherStatusButtonClick(momStatusEnum.UNKNOWN)">
         <img
@@ -48,26 +104,50 @@
       </button>
       <br>
       <button
+        *ngIf="momStatusSectionTimeText != 'täna'"
         type="button"
         class="btn btn-light btn-outline-success"
-        (click)="onOpenSeenMotherEditButton()">
-        <img src="assets/img/muudaNupp.png"
-             alt="ii"
-             class="pencil">
+        (click)="saveMotherStatusSectionValues(true)">
+        <img
+          src="assets/img/check.png"
+          alt="ii"
+          class="pencil">
+      </button>
+      <button
+        *ngIf="momStatusSectionTimeText === 'täna'"
+        type="button"
+        class="btn btn-light btn-outline-secondary"
+        (click)="onOpenMomStatusSectionEditButton()">
+        <img
+          src="assets/img/muudaNupp.png"
+          alt="ii"
+          class="pencil">
       </button>
       <br>
       <button
+        *ngIf="layingEggsSectionTimeText != 'täna'"
         type="button"
-        class="btn btn-light btn-outline-danger"
+        class="btn btn-light btn-outline-success"
+        (click)="saveLayingEggsSectionValues(true)">
+        <img
+          src="assets/img/check.png"
+          alt="ii"
+          class="pencil">
+      </button>
+      <button
+        *ngIf="layingEggsSectionTimeText === 'täna'"
+        type="button"
+        class="btn btn-light btn-outline-secondary"
         (click)="onOpenWhenSeenMotherLayingEggsEditButton()">
         <img
           src="assets/img/muudaNupp.png"
-          alt="ii" class="pencil">
+          alt="ii"
+          class="pencil">
       </button>
       <br>
       <button
         type="button"
-        class="btn btn-light btn-outline-danger"
+        class="btn btn-light btn-outline-secondary"
         (click)="onOpenWhenMotherMarkedEditButton()">
         <img
           src="assets/img/muudaNupp.png"
@@ -77,7 +157,7 @@
       <br>
       <button
         type="button"
-        class="btn btn-light btn-outline-primary"
+        class="btn btn-light btn-outline-secondary"
         (click)="onOpenWhenMotherBirthdayEditButton()"
       style="margin-bottom: 0 !important;">
         <img
@@ -97,7 +177,7 @@
         </h1>
         <button
           class="btn btn-danger closing"
-          (click)="onCloseSeenMotherEditButton()">
+          (click)="onCloseMomStatusSectionEditButton()">
           <img
             src="assets/img/sulge.jpeg"
             class="x">
@@ -116,7 +196,9 @@
               <input
                 type="radio"
                 name="seen"
-                class="bigRadio">
+                class="bigRadio"
+                [checked]="radioBtnMomStatusSelection === actionTimeEnum.TODAY"
+                (change)="radioBtnMomStatusSelected(actionTimeEnum.TODAY)">
               Täna
             </h2>
           </label>
@@ -125,17 +207,29 @@
           <label>
             <h2>
               <input type="radio" name="seen"
-                     class="bigRadio">&nbsp;&nbsp;&nbsp;
-              <input type="number" size="3" class="num"> päeva tagasi
+                     class="bigRadio"
+                     [checked]="radioBtnMomStatusSelection === actionTimeEnum.PAST_DATE"
+                     (change)="radioBtnMomStatusSelected(actionTimeEnum.PAST_DATE)">
+              &nbsp;&nbsp;&nbsp;
+              <input
+                type="number"
+                size="3"
+                class="num"
+                [(ngModel)]="radioBtnStatusPastDateInputValue"> päeva tagasi
             </h2>
           </label>
         </div>
-        <div class="radio option">
+        <div
+          *ngIf="momStatusInitialValueText"
+          class="radio option">
           <label>
             <h2>
               <input type="radio" name="seen"
-                     class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva
-              tagasi)
+                     class="bigRadio"
+                     (change)="radioBtnMomStatusSelected(actionTimeEnum.INITIAL_DATE)">
+              &nbsp;
+              <img src="assets/img/tagasi.png" alt="" style="height: 45px">
+              ({{ momStatusInitialValueText }})
             </h2>
           </label>
         </div>
@@ -159,9 +253,11 @@
         </div>
         <div class="row twoButtons">
           <button class="btn btn-light btn-outline-danger"
-                  style="color: red; height: 70px; width: 200px; margin-left: 100px"><h2>Loobun</h2></button>
+                  style="color: red; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="onCloseMomStatusSectionEditButton()"><h2>Loobun</h2></button>
           <button class="btn btn-light btn-outline-success"
-                  style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
+                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="saveMotherStatusSectionValues()"><h2>Salvestan</h2></button>
         </div>
       </div>
     </div>
@@ -195,8 +291,10 @@
             <h2>
               <input
                 type="radio"
-                name="seen"
-                class="bigRadio">
+                name="laying_eggs"
+                class="bigRadio"
+                [checked]="radioBtnLayingEggsSelection === actionTimeEnum.TODAY"
+                (change)="radioBtnLayingEggsSelected(actionTimeEnum.TODAY)">
               Täna
             </h2>
           </label>
@@ -204,18 +302,33 @@
         <div class="radio option">
           <label>
             <h2>
-              <input type="radio" name="seen"
-                     class="bigRadio">&nbsp;&nbsp;&nbsp;
-              <input type="number" size="3" class="num"> päeva tagasi
+              <input type="radio" name="laying_eggs"
+                     class="bigRadio"
+                     [checked]="radioBtnLayingEggsSelection === actionTimeEnum.PAST_DATE"
+                     (change)="radioBtnLayingEggsSelected(actionTimeEnum.PAST_DATE)">
+              &nbsp;&nbsp;&nbsp;
+              <input
+                type="number"
+                size="3"
+                class="num"
+                [(ngModel)]="radioBtnLayingEggsPastDateInputValue">
+              päeva tagasi
             </h2>
           </label>
         </div>
-        <div class="radio option">
+        <div
+          *ngIf="layingEggsInitialValueText"
+          class="radio option">
           <label>
             <h2>
-              <input type="radio" name="seen"
-                     class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva
-              tagasi)
+              <input
+                type="radio"
+                name="laying_eggs"
+                class="bigRadio"
+                (change)="radioBtnLayingEggsSelected(actionTimeEnum.INITIAL_DATE)">
+              &nbsp;
+              <img src="assets/img/tagasi.png" alt="" style="height: 45px">
+              ({{ layingEggsInitialValueText }})
             </h2>
           </label>
         </div>
@@ -227,17 +340,26 @@
             <h2>
               <input
                 type="radio"
-                name="seen"
-                class="bigRadio">
+                name="laying_eggs"
+                class="bigRadio"
+                [checked]="radioBtnLayingEggsSelection === actionTimeEnum.NO_ACTION"
+                (change)="radioBtnLayingEggsSelected(actionTimeEnum.NO_ACTION)">
               Ei ole näinud, et muneks
             </h2>
           </label>
         </div>
         <div class="row twoButtons">
-          <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px;"><h2>
-            Loobun</h2></button>
+          <button
+            class="btn btn-light btn-outline-danger"
+            style="color: red; height: 70px; width: 200px;"
+            (click)="onCloseWhenSeenMotherLayingEggsEditButton()">
+            <h2>Loobun</h2>
+          </button>
           <button class="btn btn-light btn-outline-success"
-                  style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
+                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
+                  (click)="saveLayingEggsSectionValues()">
+            <h2>Salvestan</h2>
+          </button>
         </div>
       </div>
     </div>
@@ -264,60 +386,75 @@
     <div class="col">
       <div class="row">
         <div class="col-4">
-          <img src="assets/img/m2rgistatudYes.png" alt="">
+          <img src="assets/img/marked.png" alt="">
           <div class="radio option2">
             <label>
               <h2>
                 <input
                   type="radio"
-                  name="quality"
-                  class="bigRadio">
+                  name="marked_quality"
+                  class="bigRadio"
+                  [checked]="radioBtnMarkedStatusSelection === markedStatusEnum.MARKED"
+                  (change)="radioBtnMarkedStatusSelected(markedStatusEnum.MARKED)">
                 Korralik märgistus
               </h2>
             </label>
           </div>
         </div>
         <div class="col-4">
-          <img src="assets/img/m2rgistatudAttention.png" alt="">
+          <img src="assets/img/attention.png" alt="">
           <div class="radio option2" style="font-size: 33px">
             <label>
               <h2>
                 <input
                   type="radio"
-                  name="quality"
-                  class="bigRadio">
+                  name="marked_quality"
+                  class="bigRadio"
+                  [checked]="radioBtnMarkedStatusSelection === markedStatusEnum.ATTENTION"
+                  (change)="radioBtnMarkedStatusSelected(markedStatusEnum.ATTENTION)">
                 Märgistusega on probleeme. <br>
 
               </h2>
             </label>
-            Märksõna:<input type="number" size="3" class="description" style="margin-left: 5px">
+            Märksõna:
+            <input
+              type="text"
+              size="10"
+              class="description"
+              style="margin-left: 5px"
+              [disabled]="radioBtnMarkedStatusSelection != markedStatusEnum.ATTENTION"
+              [(ngModel)]="markedSectionAdditionlInfoText">
           </div>
         </div>
         <div class="col-4">
-          <img src="assets/img/m2rgistatudNo.png" alt="">
+          <img src="assets/img/unmarked.png" alt="">
           <div class="radio option2">
             <label>
               <h2>
                 <input
                   type="radio"
-                  name="quality"
-                  class="bigRadio">
+                  name="marked_quality"
+                  class="bigRadio"
+                  [checked]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
+                  (change)="radioBtnMarkedStatusSelected(markedStatusEnum.UNMARKED)">
                 Ei ole märgistatud
               </h2>
             </label>
           </div>
         </div>
       </div>
+      <hr style="margin-top: 10px; margin-bottom: 0">
       <div class="row">
-        <div class="col-4">
-          <div class="radio option2">
+        <div class="col-6">
+          <div class="radio option" style="margin-top: 25px">
             <label>
               <h2>
-                <input
-                  type="radio"
-                  name="when_marked"
-                  class="bigRadio">
-                Täna
+                <input type="radio" name="when_marked"
+                       class="bigRadio"
+                       [disabled]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
+                       (change)="radioBtnMarkedTimeSelected(actionTimeEnum.UNKNOWN)"
+                       [checked]="radioBtnMarkedTimeSelection === actionTimeEnum.UNKNOWN">
+                &nbsp;Teadmata millal märgistatud
               </h2>
             </label>
           </div>
@@ -326,41 +463,64 @@
               <label class="option-row">
                 <input type="radio"
                        name="when_marked"
-                       class="bigRadio">
+                       class="bigRadio"
+                       [disabled]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
+                       (change)="radioBtnMarkedTimeSelected(actionTimeEnum.PAST_DATE)"
+                       [checked]="radioBtnMarkedTimeSelection === actionTimeEnum.PAST_DATE">
+                <h2>&nbsp;Märgistatud:</h2>
                 <select
                   name="month_marked"
                   class="custom-select"
-                  size="1">
-                  <option value="">Jaanuar</option>
-                  <option value="">Veebruar</option>
-                  <option value="">Märts</option>
+                  size="1"
+                  [disabled]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
+                  [(ngModel)]="markedTimeMonthValue">
+                  <option value="">Kuu</option>
+                  <option value="0">Jaanuar</option>
+                  <option value="1">Veebruar</option>
+                  <option value="2">Märts</option>
+                  <option value="3">Aprill</option>
+                  <option value="4">Mai</option>
+                  <option value="5">Juuni</option>
+                  <option value="6">Juuli</option>
+                  <option value="7">August</option>
+                  <option value="8">September</option>
+                  <option value="9">Oktoober</option>
+                  <option value="10">November</option>
+                  <option value="11">Detsember</option>
                 </select>
                 <select
                   name="year_marked"
                   class="custom-select"
-                  size="1">
-                  <option value="">2017</option>
-                  <option value="">2018</option>
+                  size="1"
+                  [disabled]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
+                  [(ngModel)]="markedTimeYearValue">
+                  <option value="" disabled hidden>Aasta</option>
+                  <option value="2017">2017</option>
+                  <option value="2018">2018</option>
+                  <option value="2019">2019</option>
+                  <option value="2020">2020</option>
+                  <option value="2021">2021</option>
                 </select>
               </label>
             </div>
           </div>
-          <div class="radio option">
-            <label>
-              <h2>
-                <input type="radio" name="when_marked"
-                       class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva
-                tagasi)
-              </h2>
-            </label>
-          </div>
         </div>
-        <div class="col-8">
+        <div class="col-6">
           <div class="row" style="margin-top: 200px">
-            <button class="btn btn-light btn-outline-danger" style="color: red; height: 70px; width: 200px;"><h2>
-              Loobun</h2></button>
-            <button class="btn btn-light btn-outline-success"
-                    style="color: green; height: 70px; width: 200px; margin-left: 200px"><h2>Salvestan</h2></button>
+            <button
+              class="btn btn-light btn-outline-danger"
+              style="color: red; height: 70px; width: 200px;"
+              (click)="onCloseWhenMotherMarkedEditButton()">
+              <h2>Loobun</h2></button>
+            <button
+              class="btn btn-light btn-outline-success"
+              style="color: green; height: 70px; width: 200px; margin-left: 100px"
+              (click)="saveMarkedSectionValues()"
+              [disabled]="radioBtnMarkedTimeSelection === actionTimeEnum.PAST_DATE &&
+                            markedTimeMonthValue != '' &&
+                            markedTimeYearValue === ''">
+              <h2>Salvestan</h2>
+            </button>
           </div>
         </div>
       </div>
@@ -388,40 +548,66 @@
     <br>
     <div class="row">
       <div class="col-1"></div>
-      <div class="col-4">
+      <div class="col-5">
         <img src="assets/img/synnip2evOk.png" alt="">
         <br>
-        <div class="radio option">
+        <br>
+        <br>
+        <div class="radio option" style="margin-top: 25px">
           <label>
             <h2>
-              <input
-                type="radio"
-                name="year_marked"
-                class="bigRadio">
-              Täna
+              <input type="radio" name="birthday"
+                     class="bigRadio"
+                     (change)="radioBtnBirthdayTimeSelected(actionTimeEnum.UNKNOWN)"
+                     [checked]="radioBtnBirthdayTimeSelection === actionTimeEnum.UNKNOWN">
+              &nbsp;Teadmata millal koorunud
             </h2>
           </label>
         </div>
-        <div class="radio option">
-          <label>
-            <h2>
-              <input type="radio" name="year_marked"
-                     class="bigRadio">&nbsp;&nbsp;&nbsp;
-              <input type="number" size="3" class="num"> päeva tagasi
-            </h2>
+        <div>
+          <label class="option-row">
+            <input type="radio"
+                   name="birthday"
+                   class="bigRadio"
+                   (change)="radioBtnBirthdayTimeSelected(actionTimeEnum.PAST_DATE)"
+                   [checked]="radioBtnBirthdayTimeSelection === actionTimeEnum.PAST_DATE">
+            <select
+              name="month_marked"
+              class="custom-select"
+              size="1"
+              style="width: 200px"
+              [(ngModel)]="birthdayTimeMonthValue">
+              <option value="">Kuu</option>
+              <option value="0">Jaanuar</option>
+              <option value="1">Veebruar</option>
+              <option value="2">Märts</option>
+              <option value="3">Aprill</option>
+              <option value="4">Mai</option>
+              <option value="5">Juuni</option>
+              <option value="6">Juuli</option>
+              <option value="7">August</option>
+              <option value="8">September</option>
+              <option value="9">Oktoober</option>
+              <option value="10">November</option>
+              <option value="11">Detsember</option>
+            </select>
+            <select
+              name="year_marked"
+              class="custom-select"
+              size="1"
+              [(ngModel)]="birthdayTimeYearValue">
+              <option value="" disabled hidden>Aasta</option>
+              <option value="2017">2017</option>
+              <option value="2018">2018</option>
+              <option value="2019">2019</option>
+              <option value="2020">2020</option>
+              <option value="2021">2021</option>
+            </select>
           </label>
         </div>
-        <div class="radio option">
-          <label>
-            <h2>
-              <input type="radio" name="year_marked"
-                     class="bigRadio">&nbsp; <img src="assets/img/tagasi.png" alt="" style="height: 45px"> (7 päeva
-              tagasi)
-            </h2>
-          </label>
-        </div>
+
       </div>
-      <div class="col-7">
+      <div class="col-6">
         <div class="row">
           <h2>Selles tarus ei ole veel koorunud ema?</h2>
         </div>
@@ -439,10 +625,20 @@
           </button>
         </div>
         <div class="row twoButtons">
-          <button class="btn btn-light btn-outline-danger"
-                  style="color: red; height: 70px; width: 200px; margin-left: 100px"><h2>Loobun</h2></button>
+          <button
+            class="btn btn-light btn-outline-danger"
+            style="color: red; height: 70px; width: 200px; margin-left: 20px"
+            (click)="onCloseWhenMotherBirthdayEditButton()">
+            <h2>Loobun</h2>
+          </button>
           <button class="btn btn-light btn-outline-success"
-                  style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
+                  style="color: green; height: 70px; width: 200px; margin-left: 80px"
+                  (click)="saveBirthdaySectionValues()"
+                  [disabled]="radioBtnBirthdayTimeSelection === actionTimeEnum.PAST_DATE &&
+                            birthdayTimeMonthValue != '' &&
+                            birthdayTimeYearValue === ''">
+            <h2>Salvestan</h2>
+          </button>
         </div>
       </div>
     </div>

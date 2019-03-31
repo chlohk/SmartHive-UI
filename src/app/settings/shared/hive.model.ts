@@ -1,4 +1,4 @@
-import {MomAttributes} from "./mom-attributes.model";
+import {MomAttributes} from "../../work/mother/mom-attributes.model";
 
 export class Hive {
   id: number;

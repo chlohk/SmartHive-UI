@@ -5,11 +5,14 @@ import {Injectable} from "@angular/core";
 import {SettingsNavigationService} from "./settings-navigation.service";
 import {SpinnerService} from "../../util/spinner/spinner.service";
 import {Hive} from "./hive.model";
+import * as cloneDeep from 'lodash/cloneDeep';
 
 @Injectable()
 export class ColoniesService {
   coloniesChanged = new Subject<Colony[]>();
+  private initialColoniesData: Colony[];
   private colonies: Colony[];
+  private isInitialColoniesDataSet = false;
 
   constructor(private settingsDataService: SettingsDataService,
               private settingsNavigationService: SettingsNavigationService,
@@ -23,6 +26,10 @@ export class ColoniesService {
 
   getAllColonies() {
     return this.colonies;
+  }
+
+  getInitialColoniesData() {
+    return this.initialColoniesData;
   }
 
   async addNewColony(newColonyName: string) {
@@ -70,6 +77,10 @@ export class ColoniesService {
         (a: Hive, b: Hive) => a.number - b.number
       )
     }
+    if(!this.isInitialColoniesDataSet) {
+      this.initialColoniesData = cloneDeep(this.colonies);
+      this.isInitialColoniesDataSet = true;
+    }
     this.coloniesChanged.next(this.colonies);
   }
 
@@ -95,5 +106,17 @@ export class ColoniesService {
     await this.getColoniesData();
     this.settingsNavigationService.colonyDetailsComponent.next('');
     this.spinnerService.setSpinnerStatus.next(false);
+  }
+
+  getInitialHiveData(hiveThatsInitialInfoIWant: Hive) {
+    const initialColoniesData = this.getInitialColoniesData();
+    for(let colony of initialColoniesData) {
+      let foundHive = colony.hives.find(
+        initialHive => hiveThatsInitialInfoIWant.id === initialHive.id
+      );
+      if(foundHive) {
+        return foundHive;
+      }
+    }
   }
 }
