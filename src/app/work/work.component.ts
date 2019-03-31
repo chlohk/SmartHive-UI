@@ -24,7 +24,8 @@ export class WorkComponent implements OnInit {
     // this.settingsDataService.onPostToLogin();
 
     this.coloniesService.coloniesChanged.subscribe(
-      colonies => this.colonies = colonies
+      colonies => {
+        this.colonies = colonies;}
     );
     this.coloniesService.getColoniesData();
 

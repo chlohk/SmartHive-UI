@@ -1,5 +1,6 @@
 import {MomStatusEnum} from "./mom-status.enum";
 import {MarkedStatusEnum} from "./marked-status.enum";
+import {Log} from "./log.model";
 
 export class MomAttributes {
   momStatus: MomStatusEnum;
@@ -22,5 +23,5 @@ export class MomAttributes {
   isCocoonChosen: boolean;
   cocoonChosenDate: Date;
 
-  freakLog: any;
+  freakLog: Log[];
 }

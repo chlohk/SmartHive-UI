@@ -5,6 +5,7 @@ import {Hive} from "../../settings/shared/hive.model";
 import {SpinnerService} from "../../util/spinner/spinner.service";
 import {ColoniesService} from "../../settings/shared/colonies.service";
 import {MarkedStatusEnum} from "./marked-status.enum";
+import {Log} from "./log.model";
 
 @Injectable()
 export class MomAttributesService {
@@ -23,6 +24,27 @@ export class MomAttributesService {
   async onUpdateMomAttributes(hive: Hive) {
     this.spinnerService.setSpinnerStatus.next(true);
     await this.momDataService.onEditMomAttributes(hive);
+    this.spinnerService.setSpinnerStatus.next(false);
+  }
+
+  async onDeleteFreakLogEntry(logEntryToDelete: Log) {
+    this.spinnerService.setSpinnerStatus.next(true);
+    await this.momDataService.onDeleteFreakLogEntry(logEntryToDelete);
+    await this.coloniesService.getColoniesData();
+    this.spinnerService.setSpinnerStatus.next(false);
+  }
+
+  async onSaveNewFreakLogEntry(hive: Hive, logEntryText: string) {
+    this.spinnerService.setSpinnerStatus.next(true);
+    await this.momDataService.onSaveNewFreakLogEntry(hive, logEntryText);
+    await this.coloniesService.getColoniesData();
+    this.spinnerService.setSpinnerStatus.next(false);
+  }
+
+  async onUpdateFreakLogEntry(logEntryToUpdate: Log, newlogEntryText: string) {
+    this.spinnerService.setSpinnerStatus.next(true);
+    await this.momDataService.onUpdateFreakLogEntry(logEntryToUpdate, newlogEntryText);
+    await this.coloniesService.getColoniesData();
     this.spinnerService.setSpinnerStatus.next(false);
   }
 

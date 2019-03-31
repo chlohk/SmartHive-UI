@@ -6,6 +6,7 @@ import {ActionTimeEnum} from "../action-time.enum";
 import {UtilService} from "../../../util/util.service";
 import {MomAttributesService} from "../mom-attributes.service";
 import {ColoniesService} from "../../../settings/shared/colonies.service";
+import {Log} from "../log.model";
 
 @Component({
   selector: 'app-freak',
@@ -16,6 +17,10 @@ export class FreakComponent implements OnChanges {
   @Input() currentlyChosenHive: Hive;
   @Output() onChangeMomStatus = new EventEmitter<MomStatusEnum>();
   currentlyChosenHiveInitialData: Hive;
+  textareaValue= '';
+  textareaOnEntryEditValue: string = 'blablabla';
+
+  logEntryThatIsBeingEdited: Log = new Log("blablabla");
 
   momStatusEnum = MomStatusEnum;
   actionTimeEnum = ActionTimeEnum;
@@ -106,12 +111,14 @@ export class FreakComponent implements OnChanges {
     this.modalService.close('mother-freak-edit');
   }
 
-  onOpenWhenCocoonEditButton() {
-    this.modalService.open('mother-cocoon-edit');
+  onOpenFreakLogEntryButton(logEntryToBeEdited: Log) {
+    this.logEntryThatIsBeingEdited = logEntryToBeEdited;
+    this.textareaOnEntryEditValue = logEntryToBeEdited.text;
+    this.modalService.open('mother-freak-log-entry-edit');
   }
 
-  onCloseWhenCocoonEditButton() {
-    this.modalService.close('mother-cocoon-edit');
+  onCloseFreakLogEntryButton() {
+    this.modalService.close('mother-freak-log-entry-edit')
   }
 
   onOpenFreakMotherLogEditButton() {
@@ -121,4 +128,20 @@ export class FreakComponent implements OnChanges {
   onCloseFreakMotherLogEditButton() {
     this.modalService.close('mother-freak-log-edit')
   }
+
+  deleteLogEntry(logEntryToDelete: Log) {
+    this.momAttributesService.onDeleteFreakLogEntry(logEntryToDelete);
+    this.modalService.close('mother-freak-log-entry-edit')
+  }
+
+  saveNewLogEntry() {
+    this.momAttributesService.onSaveNewFreakLogEntry(this.currentlyChosenHive, this.textareaValue);
+    this.textareaValue = '';
+  }
+
+  updateLogEntry(logEntryToUpdate: Log, newlogEntryText: string) {
+    this.momAttributesService.onUpdateFreakLogEntry(logEntryToUpdate, newlogEntryText);
+    this.modalService.close('mother-freak-log-entry-edit')
+  }
+
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Colony} from "../../settings/shared/colony.model";
 import {Hive} from "../../settings/shared/hive.model";
 
@@ -7,7 +7,7 @@ import {Hive} from "../../settings/shared/hive.model";
   templateUrl: './work-header.component.html',
   styleUrls: ['./work-header.component.css']
 })
-export class WorkHeaderComponent implements OnInit {
+export class WorkHeaderComponent implements OnChanges {
 
   @Input() colonies: Colony[];
 
@@ -19,7 +19,10 @@ export class WorkHeaderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if(this.currentlySelectedColonyId && this.currentlySelectedHiveId) {
+      this.renewHiveDataAcrossWorkComponent();
+    }
   }
 
   onColonyChange() {
@@ -37,4 +40,10 @@ export class WorkHeaderComponent implements OnInit {
     this.currentlySelectedHive.emit(currentlySelectedHive);
   }
 
+  renewHiveDataAcrossWorkComponent() {
+    const hiveId = this.currentlySelectedHiveId;
+    this.onColonyChange();
+    this.currentlySelectedHiveId = hiveId;
+    this.onHiveChange();
+  }
 }

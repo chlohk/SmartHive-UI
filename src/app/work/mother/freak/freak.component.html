@@ -163,8 +163,7 @@
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
-        <h1>Vääremast latisaamise logi
-        </h1>
+        <h1>Vääremast latisaamise logi</h1>
         <button
           class="btn btn-danger closing"
           (click)="onCloseFreakMotherLogEditButton()">
@@ -174,51 +173,22 @@
         </button>
       </div>
     </div>
-    <div  style="overflow-y:auto;
+    <div style="overflow-y:auto;
             overflow-x:hidden;
             border-color: dimgray;
             border-style: solid;
             height:350px">
       <div class="row"
-           style="background-color: #f0f0f0; border-style: solid; border-color: white;">
-        <div class="col-sm-8">
-          <h3>Tühjendasin taru 100 m eemal</h3>
+           style="background-color: #f0f0f0; border-style: solid; border-color: white;"
+           *ngFor="let logEntry of currentlyChosenHive.momAttributes.freakLog">
+        <div class="col-sm-10">
+          <h3>{{ logEntry.text }}</h3>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-2">
           <button
             type="button"
-            class="btn btn-light btn-outline-secondary">
-            <img
-              src="assets/img/trash.png"
-              class="pencil"
-            >
-          </button>
-          <button
-            type="button"
-            class="btn btn-light btn-outline-secondary">
-            <img
-              src="assets/img/muudaNupp.png"
-              class="pencil">
-          </button>
-        </div>
-      </div>
-      <div class="row"
-           style="background-color: #e8e8e8; border-style: solid; border-color: white;">
-        <div class="col-sm-8">
-          <h3>Proovisin veel korda tühjendada</h3>
-        </div>
-        <div class="col-sm-4">
-          <button
-            type="button"
-            class="btn btn-light btn-outline-secondary">
-            <img
-              src="assets/img/trash.png"
-              class="pencil"
-            >
-          </button>
-          <button
-            type="button"
-            class="btn btn-light btn-outline-secondary">
+            class="btn btn-light btn-outline-secondary"
+            (click)="onOpenFreakLogEntryButton(logEntry)">
             <img
               src="assets/img/muudaNupp.png"
               class="pencil">
@@ -226,7 +196,92 @@
         </div>
       </div>
     </div>
-    <button class="btn btn-light btn-outline-success" style="color: green; height: 70px; width: 200px; margin-left: 100px"><h2>Salvestan</h2></button>
+    <div class="row">
+      <div class="col-sm-8">
+        <textarea
+          class="form-control"
+          rows="3"
+          style="font-size: 2em"
+          [(ngModel)]="textareaValue"></textarea>
+      </div>
+      <div class="col-sm-4">
+        <button
+          class="btn btn-light btn-outline-success"
+          style="color: green; height: 70px; width: 300px; margin-left: 20px"
+          [disabled]="textareaValue === ''"
+          (click)="saveNewLogEntry()">
+          <h2>Lisan kirje</h2>
+        </button>
+      </div>
+    </div>
+  </div>
+</jw-modal>
+
+
+<jw-modal id="mother-freak-log-entry-edit">
+  <div class="card bg-light" *ngIf="logEntryThatIsBeingEdited">
+    <div class="card-header">
+      <div class="row up-bar">
+        <h1>Logikirje muutmine</h1>
+        <button
+          class="btn btn-danger closing"
+          (click)="onCloseFreakLogEntryButton()">
+          <img
+            src="assets/img/sulge.jpeg"
+            class="x">
+        </button>
+      </div>
+    </div>
+    <div style="overflow-y:auto;
+            overflow-x:hidden;
+            border-color: dimgray;
+            border-style: solid;
+            height:350px">
+      <h2>Esialgne tekst:</h2>
+      <br>
+      <div class="row"
+           style="background-color: #f0f0f0; border-style: solid; border-color: white;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-9">
+          <h3>{{ textareaOnEntryEditValue }}</h3>
+        </div>
+        <div class="col-sm-2">
+          <button
+            type="button"
+            class="btn btn-light btn-outline-secondary"
+            (click)="deleteLogEntry(logEntryThatIsBeingEdited)">
+            <img
+              src="assets/img/trash.png"
+              class="pencil"
+            >
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-8">
+        <textarea
+          class="form-control"
+          rows="3"
+          style="font-size: 2em"
+          [(ngModel)]="textareaOnEntryEditValue"></textarea>
+      </div>
+      <div class="col-sm-4">
+        <button
+          class="btn btn-light btn-outline-success"
+          style="color: green; height: 93px; width: 300px; margin-left: 20px"
+          [disabled]="logEntryThatIsBeingEdited.text === textareaOnEntryEditValue"
+          (click)="updateLogEntry(logEntryThatIsBeingEdited, textareaOnEntryEditValue)">
+          <h2>Salvestan muudatused</h2>
+        </button>
+        <button
+          class="btn btn-light btn-outline-danger"
+          style="color: red; height: 93px; width: 300px; margin-left: 20px"
+          (click)="onCloseFreakLogEntryButton()">
+          <h2>Tühistan muudatused</h2>
+        </button>
+      </div>
+    </div>
   </div>
 </jw-modal>
 
