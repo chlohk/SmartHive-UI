@@ -73,7 +73,8 @@ export class HatchedComponent implements OnChanges {
       this.momStatusSectionTimeText = daysFromStatusBeginning + ' päeva tagasi';
       this.radioBtnStatusPastDateInputValue = daysFromStatusBeginning;
     }
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.HATCHED) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.HATCHED) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );
@@ -130,7 +131,8 @@ export class HatchedComponent implements OnChanges {
       this.radioBtnLayingEggsPastDateInputValue = null;
     }
 
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.HATCHED) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.HATCHED) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.eggsLastSeen
       );

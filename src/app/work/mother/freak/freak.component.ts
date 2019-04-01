@@ -77,7 +77,8 @@ export class FreakComponent implements OnChanges {
       this.momStatusSectionTimeText = daysFromStatusBeginning + ' päeva tagasi';
       this.radioBtnStatusPastDateInputValue = daysFromStatusBeginning;
     }
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.FREAK) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.FREAK) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );

@@ -67,7 +67,8 @@ export class InCageComponent implements OnChanges {
       this.momStatusSectionTimeText = daysFromStatusBeginning + ' päeva tagasi';
       this.radioBtnStatusPastDateInputValue = daysFromStatusBeginning;
     }
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.IN_CAGE) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.IN_CAGE) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );

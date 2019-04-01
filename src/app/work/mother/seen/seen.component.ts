@@ -47,9 +47,11 @@ export class SeenComponent implements OnChanges {
               private coloniesService: ColoniesService) { }
 
   ngOnChanges() {
+    console.log('1');
     this.currentlyChosenHiveInitialData = this.coloniesService.getInitialHiveData(
       this.currentlyChosenHive
     );
+    console.log('2');
     this.setMotherStatusSectionValuesCorrect();
     this.setLayingEggsSectionValuesCorrect();
     this.setMarkedSectionValuesCorrect();
@@ -73,7 +75,8 @@ export class SeenComponent implements OnChanges {
       this.momStatusSectionTimeText = daysFromStatusBeginning + ' päeva tagasi';
       this.radioBtnStatusPastDateInputValue = daysFromStatusBeginning;
     }
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.SEEN) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.SEEN) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );
@@ -130,7 +133,8 @@ export class SeenComponent implements OnChanges {
       this.radioBtnLayingEggsPastDateInputValue = null;
     }
 
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.SEEN) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.SEEN) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.eggsLastSeen
       );

@@ -84,7 +84,8 @@ export class UnknownComponent implements OnChanges {
       this.momStatusSectionTimeText = daysFromStatusBeginning + ' päeva tagasi';
       this.radioBtnStatusPastDateInputValue = daysFromStatusBeginning;
     }
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );
@@ -145,7 +146,8 @@ export class UnknownComponent implements OnChanges {
       this.radioBtnControlFramePastDateInputValue = null;
     }
 
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.controlFrameStartDate
       );
@@ -208,7 +210,8 @@ export class UnknownComponent implements OnChanges {
       this.radioBtnCocoonPastDateInputValue = null;
     }
 
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
       const daysFromInitialCocoonBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.cocoonChosenDate
       );

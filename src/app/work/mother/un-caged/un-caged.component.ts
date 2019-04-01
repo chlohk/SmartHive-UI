@@ -130,7 +130,8 @@ export class UnCagedComponent implements OnChanges {
       this.radioBtnLayingEggsPastDateInputValue = null;
     }
 
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UN_CAGED) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UN_CAGED) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.eggsLastSeen
       );
