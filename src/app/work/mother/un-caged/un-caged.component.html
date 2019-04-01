@@ -506,7 +506,6 @@
               style="color: green; height: 70px; width: 200px; margin-left: 100px"
               (click)="saveMarkedSectionValues()"
               [disabled]="radioBtnMarkedTimeSelection === actionTimeEnum.PAST_DATE &&
-                            markedTimeMonthValue != '' &&
                             markedTimeYearValue === ''">
               <h2>Salvestan</h2>
             </button>
@@ -624,7 +623,6 @@
                   style="color: green; height: 70px; width: 200px; margin-left: 80px"
                   (click)="saveBirthdaySectionValues()"
                   [disabled]="radioBtnBirthdayTimeSelection === actionTimeEnum.PAST_DATE &&
-                            birthdayTimeMonthValue != '' &&
                             birthdayTimeYearValue === ''">
             <h2>Salvestan</h2>
           </button>
