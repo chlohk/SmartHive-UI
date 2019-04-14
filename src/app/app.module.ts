@@ -36,6 +36,9 @@ import {MomDataService} from "./work/mother/mom-data.service";
 import {MomAttributesService} from "./work/mother/mom-attributes.service";
 import {TimeAgoPipe} from "time-ago-pipe";
 import {UtilService} from "./util/util.service";
+import { SizeComponent } from './work/size/size.component';
+import { SizeEditComponent } from './work/size/size-edit/size-edit.component';
+import { SizeViewComponent } from './work/size/size-view/size-view.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +64,10 @@ import {UtilService} from "./util/util.service";
     MissingComponent,
     FreakComponent,
     UnCagedComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    SizeComponent,
+    SizeEditComponent,
+    SizeViewComponent
   ],
   imports: [
     BrowserModule,

@@ -81,35 +81,35 @@
 </div>
 
 <jw-modal   id="delete-hive">
-  <!--<h4>Oled kustutamas sellist taru:</h4>-->
-  <!--<div style="border-color: dimgray; border-style: solid;">-->
-    <!--<p>Taru number: <strong>{{ newHiveNumber }}</strong></p>-->
-    <!--<p>Taru kirjeldus: <strong>{{ newHiveDescription ? newHiveDescription : '-' }}</strong></p>-->
-    <!--<p>Hetkel kuulub see taru kolooniasse: <strong>{{ colonyToWhichItBelongsNow.name }}</strong></p>-->
-  <!--</div>-->
-  <!--<p>Kustutades taru kustutakse kogu sellega seonduv info. </p>-->
-  <!--<p *ngIf="!warningMustIncludeVerifyText">-->
-    <!--Kui oled kindel, et soovid taru kustutada, siis kirjuta kontrollvälja "kustuta" ja kinnita soov nupule vajutusega.-->
-  <!--</p>-->
-  <!--<p *ngIf="warningMustIncludeVerifyText" style="color: red">-->
-    <!--Kui oled kindel, et soovid taru kustutada, siis-->
-    <!--<strong><u>kirjuta kontrollvälja "kustuta"</u></strong>-->
-     <!--ja kinnita soov nupule vajutusega.-->
-  <!--</p>-->
-  <!--<div class="row justify-content-center"><label>Kontrollväli</label></div>-->
-  <!--<div class="row justify-content-center">-->
-    <!--<input-->
-      <!--#verifyDeleteField-->
-      <!--[ngStyle]="warningMustIncludeVerifyText ? {'border-color': 'red'} : ''">-->
-  <!--</div>-->
-  <!--<div class="row justify-content-center" style="margin-top: 20px">-->
-    <!--<button-->
-      <!--class="btn btn-secondary"-->
-      <!--(click)="cancelDeleteHive()">Tühista</button>-->
-    <!--<button-->
-      <!--class="btn btn-danger"-->
-      <!--style="margin-left: 300px"-->
-      <!--(click)="onDeleteHive(verifyDeleteField.value, newHiveId)">Kustuta taru</button>-->
-  <!--</div>-->
+  <h4>Oled kustutamas sellist taru:</h4>
+  <div style="border-color: dimgray; border-style: solid;">
+    <p>Taru number: <strong>{{ newHiveNumber }}</strong></p>
+    <p>Taru kirjeldus: <strong>{{ newHiveDescription ? newHiveDescription : '-' }}</strong></p>
+    <p>Hetkel kuulub see taru kolooniasse: <strong>{{ colonyToWhichItBelongsNow.name }}</strong></p>
+  </div>
+  <p>Kustutades taru kustutakse kogu sellega seonduv info. </p>
+  <p *ngIf="!warningMustIncludeVerifyText">
+    Kui oled kindel, et soovid taru kustutada, siis kirjuta kontrollvälja "kustuta" ja kinnita soov nupule vajutusega.
+  </p>
+  <p *ngIf="warningMustIncludeVerifyText" style="color: red">
+    Kui oled kindel, et soovid taru kustutada, siis
+    <strong><u>kirjuta kontrollvälja "kustuta"</u></strong>
+     ja kinnita soov nupule vajutusega.
+  </p>
+  <div class="row justify-content-center"><label>Kontrollväli</label></div>
+  <div class="row justify-content-center">
+    <input
+      #verifyDeleteField
+      [ngStyle]="warningMustIncludeVerifyText ? {'border-color': 'red'} : ''">
+  </div>
+  <div class="row justify-content-center" style="margin-top: 20px">
+    <button
+      class="btn btn-secondary"
+      (click)="cancelDeleteHive()">Tühista</button>
+    <button
+      class="btn btn-danger"
+      style="margin-left: 300px"
+      (click)="onDeleteHive(verifyDeleteField.value, newHiveId)">Kustuta taru</button>
+  </div>
 
 </jw-modal>
