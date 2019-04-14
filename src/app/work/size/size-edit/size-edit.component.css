@@ -1,0 +1,13 @@
+.whiteBox {
+  width: 240px;
+  background-color: white;
+  font-size: 35px;
+  margin-top: 10px;
+  text-align: center;
+  line-height: 2.8;
+}
+
+button.btn {
+  font-size: 35px;
+  font-weight: bold;
+}

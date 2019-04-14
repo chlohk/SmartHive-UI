@@ -19,7 +19,7 @@ describe('SettingsComponent', () => {
     const {fixture, component} = setup();
     const compile = fixture.debugElement.nativeElement;
     const newColonyButton = compile.querySelector('#newColonyButton');
-    const appNewColonyComponent = compile.querySelector('#appNewColonyComponent ');
+    const appNewColonyComponent = compile.querySelector('#appNewColonyComponent');
     expect(appNewColonyComponent).toBeTruthy();
   });
 
