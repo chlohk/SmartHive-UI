@@ -38,7 +38,6 @@
             class="btn btn-light btn-outline-success leftMargin"
             [disabled]="newHiveNumber === null
                         || newHiveNumber <= 0
-                        || colonyIdToWhichHiveWillBelong === ''
                         || newHiveDescription === ''"
             (click)="addNewHive(newHiveNumber, currentlySelectedColonyId, newHiveDescription)">
             ✔
