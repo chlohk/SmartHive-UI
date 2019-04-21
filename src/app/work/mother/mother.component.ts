@@ -12,7 +12,6 @@ import {MomAttributesService} from "./mom-attributes.service";
 })
 export class MotherComponent implements OnChanges {
   @Input() currentlyChosenHive: Hive;
-  loadedMomStatus: MomStatusEnum = MomStatusEnum.SEEN;
   momStatusEnum = MomStatusEnum;
   //opened = false;
 
@@ -21,7 +20,8 @@ export class MotherComponent implements OnChanges {
               private momAttributesService: MomAttributesService) { }
 
   ngOnChanges() {
-    console.log(this.currentlyChosenHive);
+    //for debugging...
+    //console.log(this.currentlyChosenHive);
   }
 
   onCloseMomStatusPanel() {

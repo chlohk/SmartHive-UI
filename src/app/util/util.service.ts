@@ -1,4 +1,6 @@
 export class UtilService {
+  static backEndURL = 'http://localhost:8080/';
+
   static getDaysBeforeTodaysDate(date: Date) {
     const oneDay = 24 * 60 * 60 * 1000;
     const dateFormatted = new Date(date).setHours(0,0,0,0);

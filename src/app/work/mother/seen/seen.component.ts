@@ -47,11 +47,9 @@ export class SeenComponent implements OnChanges {
               private coloniesService: ColoniesService) { }
 
   ngOnChanges() {
-    console.log('1');
     this.currentlyChosenHiveInitialData = this.coloniesService.getInitialHiveData(
       this.currentlyChosenHive
     );
-    console.log('2');
     this.setMotherStatusSectionValuesCorrect();
     this.setLayingEggsSectionValuesCorrect();
     this.setMarkedSectionValuesCorrect();

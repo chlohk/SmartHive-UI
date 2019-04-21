@@ -73,7 +73,8 @@ export class UnCagedComponent implements OnChanges {
       this.momStatusSectionTimeText = daysFromStatusBeginning + ' päeva tagasi';
       this.radioBtnStatusPastDateInputValue = daysFromStatusBeginning;
     }
-    if(this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UN_CAGED) {
+    if(this.currentlyChosenHiveInitialData &&
+      this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UN_CAGED) {
       const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );
