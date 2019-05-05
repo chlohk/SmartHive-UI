@@ -14,6 +14,7 @@ import {SettingsDataService} from "../settings/shared/settings-data.service";
 export class WorkComponent implements OnInit {
   colonies: Colony[];
   currentlyChosenHive: Hive = null;
+  isCountingDownToUpdateData = false;
   //@Output() onChangeColony = new EventEmitter<MomStatusEnum>();
 
   constructor(private spinnerService: SpinnerService,
@@ -36,6 +37,10 @@ export class WorkComponent implements OnInit {
 
   onHiveChange(hiveThatGotChosen: Hive) {
     this.currentlyChosenHive = hiveThatGotChosen;
+  }
+
+  notifyIfIsCountingDownToUpdateData(isCountingDownToUpdateData: boolean) {
+    this.isCountingDownToUpdateData = isCountingDownToUpdateData;
   }
 
 

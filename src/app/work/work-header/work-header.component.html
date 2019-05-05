@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default" style="margin: 0 !important; background-color: gray; height: 100px">
   <div class="container-fluid">
     <div class="col-sm-1">
-      <a routerLink="/settings">
+      <a routerLink="/settings" *ngIf="!isCountingDownToUpdateData">
         <button
           type="button"
           class="btn btn-light btn-outline-secondary">
@@ -11,6 +11,7 @@
             >
         </button>
       </a>
+      <app-spinner *ngIf="isCountingDownToUpdateData"></app-spinner>
     </div>
     <div class="col-sm-6">
       <form>
@@ -18,7 +19,8 @@
           name="colony"
           class="custom-select"
           [(ngModel)]="currentlySelectedColonyId"
-          (change)="onColonyChange()">
+          (change)="onColonyChange()"
+          [disabled]="isCountingDownToUpdateData">
           <option value="" disabled selected hidden>Vali koloonia...</option>
           <option
             *ngFor="let colony of colonies"
@@ -32,7 +34,8 @@
           name="hive"
           class="custom-select"
           [(ngModel)]="currentlySelectedHiveId"
-          (change)="onHiveChange()">
+          (change)="onHiveChange()"
+          [disabled]="isCountingDownToUpdateData">
           <option value="" disabled selected hidden>Vali taru...</option>
           <option
             *ngFor="let hive of currentlySelectedColony.hives"

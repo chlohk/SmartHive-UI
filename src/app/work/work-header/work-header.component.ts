@@ -10,6 +10,7 @@ import {Hive} from "../../settings/shared/hive.model";
 export class WorkHeaderComponent implements OnChanges {
 
   @Input() colonies: Colony[];
+  @Input() isCountingDownToUpdateData: boolean;
 
   currentlySelectedColonyId = '';
   currentlySelectedColony: Colony;

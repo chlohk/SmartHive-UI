@@ -1,45 +1,46 @@
-<div class="whiteBox" style="margin-top: 110px; margin-bottom: 35px">
-  <button type="button" class="btn btn-light btn-outline-secondary minus">
-    -
-  </button>
-  -
-  <button type="button" class="btn btn-light btn-outline-secondary plus"
-          style="float: right">
-+
-  </button>
-</div>
-<div class="whiteBox" style="margin-bottom: 30px">
-  <button type="button" class="btn btn-light btn-outline-secondary minus"
-          style="float: left">
-    -
-  </button>
-  0
-  <button type="button" class="btn btn-light btn-outline-secondary plus"
-          style="float: right">
-    +
-  </button>
-  <br>
-  <b>7</b>
-  <br>
-  <button type="button" class="btn btn-light btn-outline-secondary minus"
-          style="float: left">
-    -
-  </button>
-  -12
-  <button type="button" class="btn btn-light btn-outline-secondary plus"
-          style="float: right">
-    +
-  </button>
-</div>
-<h2 style="text-align: center;margin-left: 10px; margin-bottom: 30px">täna</h2>
-<div class="whiteBox" style="margin-bottom: 20px">
-  <button type="button" class="btn btn-light btn-outline-secondary minus"
-          style="float: left">
-    -
-  </button>
-   0
-  <button type="button" class="btn btn-light btn-outline-secondary plus"
-          style="float: right">
-    +
-  </button>
+<div *ngIf="sizeLog">
+  <div
+    class="whiteBox" style="margin-top: 110px; margin-bottom: 35px">
+    <button type="button"
+            class="btn btn-light btn-outline-secondary minus"
+            (click)="onDecreaseMagazineSize()"> - </button>
+    <span *ngIf="sizeLog.hasMagazine">{{ sizeLog.magazineSize }}%</span>
+    <span *ngIf="!sizeLog.hasMagazine">-</span>
+    <button type="button"
+            class="btn btn-light btn-outline-secondary plus"
+            style="float: right"
+            (click)="onIncreaseMagazineSize()"> + </button>
+  </div>
+  <div class="whiteBox" style="margin-bottom: 30px">
+    <button type="button" class="btn btn-light btn-outline-secondary minus"
+            style="float: left"
+            (click)="onDecreaseAddedNumOfFrames()"> - </button>
+    +{{ sizeLog.addedNumOfFrames }}
+    <button type="button" class="btn btn-light btn-outline-secondary plus"
+            style="float: right"
+            (click)="onIncreaseAddedNumOfFrames()"> + </button>
+    <br>
+    <b>{{ sizeLog.totalNumOfFrames }}</b>
+    <br>
+    <button type="button" class="btn btn-light btn-outline-secondary minus"
+            style="float: left"
+            (click)="onDecreaseRemovedNumOfFrames()"> - </button>
+    -{{ sizeLog.removedNumOfFrames }}
+    <button type="button" class="btn btn-light btn-outline-secondary plus"
+            style="float: right"
+            (click)="onIncreaseRemovedNumOfFrames()"> + </button>
+  </div>
+  <h2 style="text-align: center;margin-left: 10px; margin-bottom: 30px">
+    <span *ngIf="blockName === 'current'">täna</span>
+    <span *ngIf="blockName != 'current'">{{ sizeLog.day | timeAgo }}</span>
+  </h2>
+  <div class="whiteBox" style="margin-bottom: 20px">
+    <button type="button" class="btn btn-light btn-outline-secondary minus"
+            style="float: left"
+            (click)="onDecreaseRemovedCocoons()"> - </button>
+    {{ sizeLog.removedCocoons }}
+    <button type="button" class="btn btn-light btn-outline-secondary plus"
+            style="float: right"
+            (click)="onIncreaseRemovedCocoons()"> + </button>
+  </div>
 </div>

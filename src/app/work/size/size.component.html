@@ -2,10 +2,32 @@
   <div class="container">
     <div class="row">
       <div class="col-3">
-        <app-size-view></app-size-view>
+        <app-size-view
+          *ngIf="blockToEdit != 'beforePrevious'"
+          [blockName]="'beforePrevious'"
+          [sizeLog]="sizeLogBeforePrevious"
+          [isCountingDownToUpdateData]="isCountingDown"
+          (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
+        <app-size-edit
+          *ngIf="blockToEdit === 'beforePrevious'"
+          [blockName]="'beforePrevious'"
+          [sizeLog]="sizeLogBeforePrevious"
+          [idOfCurrentHive]="currentlyChosenHive.id"
+          (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>
       <div class="col-3">
-        <app-size-view></app-size-view>
+        <app-size-view
+          *ngIf="blockToEdit != 'previous'"
+          [blockName]="'previous'"
+          [sizeLog]="sizeLogPrevious"
+          [isCountingDownToUpdateData]="isCountingDown"
+          (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
+        <app-size-edit
+          *ngIf="blockToEdit === 'previous'"
+          [blockName]="'previous'"
+          [sizeLog]="sizeLogPrevious"
+          [idOfCurrentHive]="currentlyChosenHive.id"
+          (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>
       <div class="col-2">
         <div class="whiteBox" style="margin-top: 110px; margin-bottom: 37px">
@@ -17,7 +39,18 @@
         </div>
       </div>
       <div class="col-4">
-        <app-size-edit></app-size-edit>
+        <app-size-view
+          *ngIf="blockToEdit != 'current'"
+          [blockName]="'current'"
+          [sizeLog]="sizeLogCurrent"
+          [isCountingDownToUpdateData]="isCountingDown"
+          (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
+        <app-size-edit
+          *ngIf="blockToEdit === 'current'"
+          [blockName]="'current'"
+          [sizeLog]="sizeLogCurrent"
+          [idOfCurrentHive]="currentlyChosenHive.id"
+          (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>
     </div>
   </div>

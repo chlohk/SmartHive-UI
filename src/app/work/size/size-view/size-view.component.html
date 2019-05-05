@@ -1,16 +1,49 @@
-<div class="whiteBox" style="margin-top: 110px; margin-bottom: 35px">
-  -
+<div *ngIf="!sizeLog">
+  <div class="whiteBox" style="margin-top: 110px; margin-bottom: 35px">
+    -
+  </div>
+  <div class="whiteBox" style="margin-bottom: 19px">
+    -
+    <br>
+    <b>-</b>
+    <br>
+    -
+  </div>
+  <button
+    type="button"
+    class="btn btn-light btn-outline-secondary"
+    style="margin-bottom: 18px"
+    [disabled]="true">
+    N/A
+  </button>
+  <div class="whiteBox">
+    -
+  </div>
 </div>
-<div class="whiteBox" style="margin-bottom: 19px">
-  +3
-  <br>
-  <b>11</b>
-  <br>
-  -0
+
+<div *ngIf="sizeLog">
+  <div class="whiteBox" style="margin-top: 110px; margin-bottom: 35px">
+    <span *ngIf="sizeLog.hasMagazine">{{ sizeLog.magazineSize }}%</span>
+    <span *ngIf="!sizeLog.hasMagazine">-</span>
+  </div>
+  <div class="whiteBox" style="margin-bottom: 19px">
+    +{{ sizeLog.addedNumOfFrames }}
+    <br>
+    <b>{{ sizeLog.totalNumOfFrames }}</b>
+    <br>
+    -{{ sizeLog.removedNumOfFrames }}
+  </div>
+  <button
+    type="button"
+    class="btn btn-light btn-outline-secondary"
+    style="margin-bottom: 18px"
+    (click)="chooseMyBlockToEdit()"
+    [disabled]="isCountingDownToUpdateData">
+    <span *ngIf="blockName === 'current'">täna</span>
+    <span *ngIf="blockName != 'current'">{{ sizeLog.day | timeAgo }}</span>
+  </button>
+  <div class="whiteBox">
+    {{ sizeLog.removedCocoons }}
+  </div>
 </div>
-<button type="button" class="btn btn-light btn-outline-secondary" style="margin-bottom: 18px">
-  12 months ago
-</button>
-<div class="whiteBox">
-  0
-</div>
+

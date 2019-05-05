@@ -1,9 +1,13 @@
 <app-work-header
   [colonies]="colonies"
+  [isCountingDownToUpdateData]="isCountingDownToUpdateData"
   (currentlySelectedHive)="onHiveChange($event)"></app-work-header>
   <div class="row" style="margin-right: 0; margin-left: 0">
     <div class="col-8">
-      <app-size></app-size>
+      <app-size
+        [currentlyChosenHive]="currentlyChosenHive"
+        *ngIf="currentlyChosenHive"
+        (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size>
     </div>
     <div class="col-4" style="margin-right: 0">
       <app-mother

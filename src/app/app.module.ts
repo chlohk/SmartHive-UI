@@ -39,6 +39,8 @@ import {UtilService} from "./util/util.service";
 import { SizeComponent } from './work/size/size.component';
 import { SizeEditComponent } from './work/size/size-edit/size-edit.component';
 import { SizeViewComponent } from './work/size/size-view/size-view.component';
+import {SizeDataService} from "./work/size/size-data.service";
+import {SizeService} from "./work/size/size.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -83,7 +85,9 @@ import { SizeViewComponent } from './work/size/size-view/size-view.component';
     JwModalService,
     MomDataService,
     MomAttributesService,
-    UtilService],
+    UtilService,
+    SizeDataService,
+    SizeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

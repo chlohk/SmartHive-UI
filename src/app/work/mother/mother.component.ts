@@ -1,7 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {MomStatusEnum} from "./mom-status.enum";
 import {JwModalService} from "../../util/jw-modal/jw-modal.service";
-import {MomDataService} from "./mom-data.service";
 import {Hive} from "../../settings/shared/hive.model";
 import {MomAttributesService} from "./mom-attributes.service";
 
