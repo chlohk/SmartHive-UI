@@ -41,6 +41,7 @@ import { SizeEditComponent } from './work/size/size-edit/size-edit.component';
 import { SizeViewComponent } from './work/size/size-view/size-view.component';
 import {SizeDataService} from "./work/size/size-data.service";
 import {SizeService} from "./work/size/size.service";
+import {LongPress} from "./util/long-press.directive";
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +70,8 @@ import {SizeService} from "./work/size/size.service";
     TimeAgoPipe,
     SizeComponent,
     SizeEditComponent,
-    SizeViewComponent
+    SizeViewComponent,
+    LongPress
   ],
   imports: [
     BrowserModule,

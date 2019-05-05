@@ -61,4 +61,8 @@ export class SettingsComponent implements OnInit{
     this.settingsNavigationService.mainSettingsComponent.next('colonyDetails');
     this.settingsNavigationService.colonyDetailsComponent.next('');
   }
+
+  closeApp() {
+    window.close();
+  }
 }

@@ -4,9 +4,9 @@ import {SettingsComponent} from "./settings/settings.component";
 import {WorkComponent} from "./work/work.component";
 
 const routes: Routes = [
+  { path: '', component: WorkComponent},
   { path: 'settings', component: SettingsComponent },
-  { path: 'work', component: WorkComponent},
-  { path: '**', redirectTo: 'settings'}
+  { path: '**', redirectTo: ''}
   ];
 
 @NgModule({
