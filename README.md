@@ -1,7 +1,7 @@
 ## Projektiplaan
 Projektiplaan leitav [Smarhive-UI repo wikist](https://github.com/chlohk/SmartHive-UI/wiki/Projektiplaan).
 
-## Projekti paigaldamine
+## Projekti lokaalne paigaldamine
 1. Installi [MySQL](https://www.mysql.com/) andmebaas, loo uus andmebaas 'smarthive', loo MySQL shellis baasiühendus `\connect root@localhost`
 2. Klooni [Smarthive-API repo](https://github.com/chlohk/SmartHive-API)
 3. Ava terminal kloonitud repos ja käivita server käsuga `gradlew.bat bootRun`
