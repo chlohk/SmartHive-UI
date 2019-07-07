@@ -1,0 +1,152 @@
+<ng-container *ngIf="activePlanningElement">
+  <ng-container *ngIf="isActiveResolveStateUnresolved; else resolvedView">
+    <div class="row pb-4">
+      <ng-container *ngIf="!activePlanningElement.id; else changePlanningHeader">
+        <h2>Uus planeering</h2>
+      </ng-container>
+    </div>
+    <div class="row">
+      <div class="col pb-4">
+        <div class="row">
+          <label class="d-flex">
+            <input
+              type="radio"
+              class="bigRadio"
+              name="input-type"
+              [checked]="activePlanningElement.dropDown === true"
+              (change)="radioBtnActivePlanInputTypeChange(true)">
+            <span class="ml-2 modal-inside-text">Rippmenüüst</span>
+          </label>
+        </div>
+        <div class="row pt-2">
+          <label class="d-flex">
+            <input
+              type="radio"
+              class="bigRadio"
+              name="input-type"
+              [checked]="activePlanningElement.dropDown === false"
+              (change)="radioBtnActivePlanInputTypeChange(false)">
+            <span class="ml-2 modal-inside-text">Vabatekst</span>
+          </label>
+        </div>
+      </div>
+      <div class="col">
+        <button
+          type="button"
+          class="btn btn-primary modal-inside-text mt-n2 btn-block"
+          (click)="callDropdownMgmt.emit()"
+          [disabled]="timerRunning">Muudan rippmenüüd</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div
+          class="card ml-n3"
+          [ngClass]="{'without-deadline-correction': activePlanningElement.withoutDeadline}">
+          <div *ngIf="!activePlanningElement.withoutDeadline"
+            class="card-header modal-inside-text
+            justify-content-between d-flex align-items-center pt-1 pb-1 pl-3 pr-3">
+            <span class="ml-1 mr-3">Tähtaeg päevades</span>
+            <button
+              class="btn btn-light btn-outline-secondary deadline-button"
+              (click)="addDaysToActivePlanDeadline(-7)"> -7 </button>
+            <button
+              class="btn btn-light btn-outline-secondary deadline-button"
+              (click)="addDaysToActivePlanDeadline(-1)"> -1 </button>
+            <span class="big-text">
+            <b>{{ activePlanningElement.deadline | daysUntil }}</b>
+            </span>
+            <button
+              class="btn btn-light btn-outline-secondary deadline-button"
+              (click)="addDaysToActivePlanDeadline(1)"> +1 </button>
+            <button
+              class="btn btn-light btn-outline-secondary deadline-button"
+              (click)="addDaysToActivePlanDeadline(7)"> +7 </button>
+          </div>
+          <div
+            class="row ml-0 edit-area-height">
+            <div class="d-flex input-area-width justify-content-around align-items-center flex-column">
+              <ng-container *ngIf="activePlanningElement.dropDown === false; else dropdownInput">
+              <textarea
+                class="modal-inside-text planning-element-text-area h-100"
+                [(ngModel)]="activePlanningElement.text"
+                (ngModelChange)="onInputChange()"></textarea>
+              </ng-container>
+            </div>
+            <div class="col d-flex flex-column justify-content-around">
+              <div class="row justify-content-center modal-inside-text mb-4 mt-5">
+                <input
+                  class="my-checkbox"
+                  type="checkbox"
+                  id="withoutDeadline"
+                  [(ngModel)]="activePlanningElement.withoutDeadline"
+                  (change)="onInputChange(true)">
+                <label class="form-check-label ml-2" for="withoutDeadline">
+                  Tähtajatu
+                </label>
+              </div>
+              <div class="row justify-content-center">
+                <ng-container *ngIf="!activePlanningElement.id; else changePlanningFinishEditing">
+                  <button
+                    class="btn btn-success modal-inside-text"
+                    (click)="onAddNewPlan()">
+                    Lisan planeeringu
+                  </button>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #resolvedView>
+  <div class="d-flex h-100 justify-content-center align-items-end pb-5">
+    <button
+      class="btn btn-success modal-inside-text mb-5"
+      *ngIf="activePlanningElement.id != null"
+      (click)="onUnResolveElement()">
+      Märgin kui "Tegemata"
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #changePlanningHeader>
+  <h2>Muudan planeeringut</h2>
+</ng-template>
+
+<ng-template #changePlanningFinishEditing>
+  <button
+    class="btn btn-danger modal-inside-text"
+    (click)="planningService.newPlanElementSelected.next(null)"
+    [disabled]="timerRunning">
+    Lõpetan muutmise
+  </button>
+</ng-template>
+
+
+<ng-template #dropdownInput>
+
+  <span
+    *ngIf="!planningService.planningDropDown"
+    class="mb-n5 ml-4 text-center">Rippmenüüs pole ühtegi elementi.
+      Elementide lisamiseks kasutage funktsionaalsust "Muudan rippmenüüd"</span>
+
+  <select
+    name="new-plan"
+    class="custom-select planning-element-text-area ml-4 mr-n4"
+    [(ngModel)]="activePlanningElement.dropDownElementId"
+    [disabled]="!planningService.planningDropDown"
+    (change)="onInputChange()">
+    <optgroup>
+      <ng-container *ngIf="planningService.planningDropDown">
+        <option
+          *ngFor="let dropdownElement of planningService.planningDropDown"
+          [value]="dropdownElement.id"> {{ dropdownElement.text}}</option>
+      </ng-container>
+    </optgroup>
+  </select>
+
+</ng-template>

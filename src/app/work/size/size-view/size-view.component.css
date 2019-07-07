@@ -2,13 +2,12 @@
   width: 100px;
   background-color: white;
   font-size: 36px;
-  margin-top: 10px;
-  text-align: center;
   line-height: 1.6;
-  margin-left: 30px;
 }
 
 button.btn {
   font-size: 22px;
   margin-top: 10px;
+  margin-bottom: 5px;
+  padding: 5px;
 }

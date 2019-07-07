@@ -1,0 +1,32 @@
+.planning-dropdown-element {
+  font-size: 1.5rem;
+  margin-bottom: 3px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 5px;
+  display: table;
+  min-height: 86px;
+}
+
+.trashcan-area {
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 5px;
+  padding: .375rem .5rem;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 120px;
+}
+
+.active-color {
+  background-color: #dcdcdc;
+}
+
+img.trash-picture {
+  height: 40px;
+}
+
+.text-area {
+  vertical-align: middle;
+  display: table-cell;
+}

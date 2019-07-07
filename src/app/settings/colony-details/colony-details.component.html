@@ -7,6 +7,7 @@
           <button
             type="button"
             class="btn btn-light btn-outline-secondary"
+            style="width: 130px"
             (click)="onNewHiveButtonClick()">✚ taru</button>
         </div>
       </div>
@@ -15,12 +16,13 @@
             overflow-x:hidden;
             border-color: dimgray;
             border-style: solid;
-            height:350px;">
+            height:350px;
+            font-size: 1.5rem">
         <div class="row"
              style="background-color: lightgray; border-style: solid; border-color: white;"
               *ngFor="let hive of currentlySelectedColony.hives">
           <div class="col-sm-2 text-center">
-            <h5>{{hive.number}}</h5>
+            <h3>{{hive.number}}</h3>
           </div>
           <div class="col-sm-6">
             <strong>{{hive.description}}</strong>

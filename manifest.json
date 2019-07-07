@@ -9,6 +9,6 @@
     }
   ],
   "start_url": "https://antomatas.github.io/smarthive-proto/",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "landscape"
 }

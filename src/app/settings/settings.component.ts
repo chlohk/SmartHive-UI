@@ -63,6 +63,18 @@ export class SettingsComponent implements OnInit{
   }
 
   closeApp() {
-    window.close();
+    this.exitFullScreen(document);
+  }
+
+  exitFullScreen(element) {
+    var requestMethod = element.exitFullscreen ||
+      element.mozCancelFullScreen ||
+      element.webkitExitFullscreen ||
+      element.msExitFullscreen;
+    if (requestMethod) {
+      requestMethod.call(element);
+    } else {
+      console.log("Oops. Request method false.");
+    }
   }
 }

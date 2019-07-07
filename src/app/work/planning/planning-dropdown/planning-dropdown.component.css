@@ -1,0 +1,36 @@
+.dropdown-elements-section-width {
+  width: 455px;
+}
+
+.dropdown-elements-section-height {
+  height: 490px;
+}
+
+.vertical-paddings {
+  padding-top: 1.1rem;
+  padding-bottom: 1.1rem
+}
+
+.scrolling-area {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 7px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #6c757d;
+  border-radius: 7px;
+}

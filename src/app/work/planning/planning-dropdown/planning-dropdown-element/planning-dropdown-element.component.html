@@ -1,0 +1,19 @@
+<div class="container planning-dropdown-element p-0">
+  <ng-container *ngIf="inActive; else active">
+    <div class="text-area planning-element-text-area" (click)="onElementClick()">
+      {{planningDropdown.text}}
+    </div>
+  </ng-container>
+
+  <ng-template #active>
+    <div class="trashcan-area active-color" (click)="onDeleteElement()">
+      <img
+        src="assets/img/trash.png"
+        class="trash-picture"
+      >
+    </div>
+    <div class="text-area planning-element-text-area">
+      {{planningDropdown.text}}
+    </div>
+  </ng-template>
+</div>

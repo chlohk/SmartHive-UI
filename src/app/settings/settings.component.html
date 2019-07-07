@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default grayBackground" style="margin: 0 !important; background-color: gray; height: 100px">
+<nav class="navbar navbar-default grayBackground" style="margin: 0 !important; background-color: gray">
   <div class="container-fluid">
     <div class="col-sm-2">
       <a routerLink="/work">
@@ -12,6 +12,7 @@
           >
         </button>
       </a>
+      <!--TODO! Close application button-->
       <!--<button-->
         <!--type="button"-->
         <!--class="btn btn-light"-->
@@ -25,10 +26,12 @@
         (change)="onChange()"
         [(ngModel)]="currentlySelectedColonyId"
         #selectField>
-        <option value="" disabled selected hidden>Vali koloonia...</option>
-        <option
-          *ngFor="let colony of colonies"
-          [value]="colony.id"> {{ colony.name }}</option>
+        <optgroup>
+          <option value="" disabled selected hidden>Vali koloonia...</option>
+          <option
+            *ngFor="let colony of colonies"
+            [value]="colony.id"> {{ colony.name }}</option>
+        </optgroup>
       </select>
     </div>
     <div class="col-sm-1">

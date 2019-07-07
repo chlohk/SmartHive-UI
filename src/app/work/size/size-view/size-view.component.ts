@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {Hive} from "../../../settings/shared/hive.model";
 import {Size} from "../size.model";
 
@@ -7,15 +7,27 @@ import {Size} from "../size.model";
   templateUrl: './size-view.component.html',
   styleUrls: ['./size-view.component.css']
 })
-export class SizeViewComponent implements OnInit {
+export class SizeViewComponent implements OnChanges {
   @Input() blockName: string;
-  @Input() sizeLog: Size;
+  @Input() sizeLogs: Size[] = null;
   @Input() isCountingDownToUpdateData: boolean;
   @Output() editMEEEE = new EventEmitter<string>();
+  sizeLog: Size;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if(this.sizeLogs) {
+      if (this.blockName === 'current') {
+        this.sizeLog = this.sizeLogs.length >= 1 ? this.sizeLogs[0] : null;
+      }
+      if (this.blockName === 'previous') {
+        this.sizeLog = this.sizeLogs.length >= 2 ? this.sizeLogs[1] : null;
+      }
+      if (this.blockName === 'beforePrevious') {
+        this.sizeLog = this.sizeLogs.length >= 3 ? this.sizeLogs[2] : null;
+      }
+    }
   }
 
   chooseMyBlockToEdit() {

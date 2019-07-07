@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-5"></div>
   <div class="col-7">
-    <div class="card bg-light mb-3" style="max-width: 23rem">
+    <div class="card bg-light" style="max-width: 23rem">
       <div class="card-header"><strong>Taru info muutmine</strong></div>
       <div class="card-body">
         <div class="row">
@@ -89,11 +89,11 @@
   </div>
   <p>Kustutades taru kustutakse kogu sellega seonduv info. </p>
   <p *ngIf="!warningMustIncludeVerifyText">
-    Kui oled kindel, et soovid taru kustutada, siis kirjuta kontrollvälja "kustuta" ja kinnita soov nupule vajutusega.
+    Kui oled kindel, et soovid taru kustutada, siis kirjuta kontrollvälja "Ok" ja kinnita soov nupule vajutusega.
   </p>
   <p *ngIf="warningMustIncludeVerifyText" style="color: red">
     Kui oled kindel, et soovid taru kustutada, siis
-    <strong><u>kirjuta kontrollvälja "kustuta"</u></strong>
+    <strong><u>kirjuta kontrollvälja "Ok"</u></strong>
      ja kinnita soov nupule vajutusega.
   </p>
   <div class="row justify-content-center"><label>Kontrollväli</label></div>

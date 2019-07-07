@@ -24,6 +24,6 @@ export class SizeService {
   }
 
   onUpdateSizeData(hiveIdThatIsUpdated: number, sizeLogToUpdate: Size) {
-    return this.sizeDataService.onUpdateSizeLog(hiveIdThatIsUpdated, sizeLogToUpdate)
+    return this.sizeDataService.onUpdateSizeLog(hiveIdThatIsUpdated, sizeLogToUpdate);
   }
 }

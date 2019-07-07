@@ -1,0 +1,16 @@
+div {
+  font-size: 1.5rem;
+}
+
+.whiteBox {
+  width: 50px;
+  background-color: white;
+  line-height: 1.6;
+}
+
+button {
+  width: 50px;
+  height: 43px;
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -16,7 +16,8 @@ export class WorkHeaderComponent implements OnChanges {
   currentlySelectedColony: Colony;
   currentlySelectedHiveId = '';
 
-  @Output() currentlySelectedHive = new EventEmitter<Hive>();
+  @Output() announceSelectedHive = new EventEmitter<Hive>();
+  @Output() announceSelectedColony = new EventEmitter<Colony>();
 
   constructor() { }
 
@@ -38,7 +39,8 @@ export class WorkHeaderComponent implements OnChanges {
     const currentlySelectedHive = this.currentlySelectedColony.hives.find(
       hive => hive.id === +this.currentlySelectedHiveId
     );
-    this.currentlySelectedHive.emit(currentlySelectedHive);
+    this.announceSelectedHive.emit(currentlySelectedHive);
+    this.announceSelectedColony.emit(this.currentlySelectedColony);
   }
 
   renewHiveDataAcrossWorkComponent() {

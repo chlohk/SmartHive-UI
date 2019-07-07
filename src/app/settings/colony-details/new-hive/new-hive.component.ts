@@ -10,7 +10,7 @@ import {Hive} from "../../shared/hive.model";
   styleUrls: ['./new-hive.component.css']
 })
 export class NewHiveComponent implements OnInit {
-  newHiveDescription = '';
+  newHiveDescription = '-';
   newHiveNumber: number = null;
   colonies: Colony[];
   warningHiveNumberExists = false;

@@ -69,7 +69,7 @@ export class UnknownComponent implements OnChanges {
 
   setMotherStatusSectionValuesCorrect() {
     this.momStatusInitialValueText = null;
-    const daysFromStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+    const daysFromStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
       this.currentlyChosenHive.momAttributes.statusStartingDate);
     if(daysFromStatusBeginning == 0) {
       this.radioBtnMomStatusSelection = ActionTimeEnum.TODAY;
@@ -86,7 +86,7 @@ export class UnknownComponent implements OnChanges {
     }
     if(this.currentlyChosenHiveInitialData &&
       this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
-      const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromInitialStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );
       if (daysFromStatusBeginning != daysFromInitialStatusBeginning) {
@@ -125,7 +125,7 @@ export class UnknownComponent implements OnChanges {
   setControlFrameSectionValuesCorrect() {
     this.controlFrameInitialValueText = null;
     if(this.currentlyChosenHive.momAttributes.controlFrameStartDate){
-      const daysFromControlFrameBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromControlFrameBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHive.momAttributes.controlFrameStartDate);
       if(daysFromControlFrameBeginning == 0) {
         this.radioBtnControlFrameSelection = ActionTimeEnum.TODAY;
@@ -148,7 +148,7 @@ export class UnknownComponent implements OnChanges {
 
     if(this.currentlyChosenHiveInitialData &&
       this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
-      const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromInitialStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.controlFrameStartDate
       );
       if(daysFromInitialStatusBeginning == 0 ||
@@ -189,7 +189,7 @@ export class UnknownComponent implements OnChanges {
   setCocoonSectionValuesCorrect() {
     this.cocoonInitialValueText = null;
     if(this.currentlyChosenHive.momAttributes.cocoonChosenDate){
-      const daysFromCocoonChosen = UtilService.getDaysBeforeTodaysDate(
+      const daysFromCocoonChosen = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHive.momAttributes.cocoonChosenDate);
       if(daysFromCocoonChosen == 0) {
         this.radioBtnCocoonSelection = ActionTimeEnum.TODAY;
@@ -212,7 +212,7 @@ export class UnknownComponent implements OnChanges {
 
     if(this.currentlyChosenHiveInitialData &&
       this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UNKNOWN) {
-      const daysFromInitialCocoonBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromInitialCocoonBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.cocoonChosenDate
       );
       if(daysFromInitialCocoonBeginning == 0 ||

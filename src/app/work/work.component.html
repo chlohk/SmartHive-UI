@@ -1,17 +1,41 @@
 <app-work-header
   [colonies]="colonies"
   [isCountingDownToUpdateData]="isCountingDownToUpdateData"
-  (currentlySelectedHive)="onHiveChange($event)"></app-work-header>
+  (announceSelectedHive)="onHiveChange($event)"
+  (announceSelectedColony)="onColonyChange($event)"
+>
+</app-work-header>
+<ng-container *ngIf="currentlyChosenHive">
   <div class="row" style="margin-right: 0; margin-left: 0">
-    <div class="col-8">
+    <div class="col-9" style="padding-right: 0px; padding-left: 5px">
+      <div class="row">
+        <div class="col-6 padding-for-notes">
+          <app-notes></app-notes>
+        </div>
+        <div class="col-6 padding-for-planning">
+          <app-planning
+            [currentlyChosenHive]="currentlyChosenHive"
+            [planningComponentType]="planningComponentEnum.WORK_DASHBOARD"
+          >
+          </app-planning>
+        </div>
+      </div>
       <app-size
         [currentlyChosenHive]="currentlyChosenHive"
         *ngIf="currentlyChosenHive"
         (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size>
     </div>
-    <div class="col-4" style="margin-right: 0">
+    <div class="col-3" style="margin-right: 0; padding-right: 0; padding-left: 5px">
       <app-mother
         [currentlyChosenHive]="currentlyChosenHive"
         *ngIf="currentlyChosenHive"></app-mother>
     </div>
   </div>
+
+  <app-planning-mgmt
+    (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"
+    [currentlyChosenHive]="currentlyChosenHive"
+    [currentlyChosenColony]="currentlyChosenColony"
+  ></app-planning-mgmt>
+</ng-container>
+

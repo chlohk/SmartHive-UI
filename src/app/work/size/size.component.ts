@@ -12,7 +12,7 @@ export class SizeComponent implements OnChanges {
   @Input() currentlyChosenHive: Hive;
   @Output() isCountingDownToUpdateData = new EventEmitter<boolean>();
   isCountingDown = false;
-  sizeLog: Size[];
+  sizeLogs: Size[];
   blockToEdit = 'current';
   sizeLogCurrent: Size = null;
   sizeLogPrevious: Size = null;
@@ -23,17 +23,10 @@ export class SizeComponent implements OnChanges {
   ngOnChanges() {
     this.sizeService.onGetSizeData(this.currentlyChosenHive.id).then(
       data => {
-        this.sizeLog = data;
-        this.sizeLogCurrent = this.sizeLog.length >= 1 ? this.sizeLog[0] : null;
-        this.sizeLogPrevious = this.sizeLog.length >= 2 ? this.sizeLog[1] : null;
-        this.sizeLogBeforePrevious = this.sizeLog.length >= 3 ? this.sizeLog[2] : null;
-        console.log(this.sizeLog);
-        console.log(this.sizeLog.length);
-        console.log(this.sizeLogCurrent);
-        console.log(this.sizeLogPrevious);
-        console.log(this.sizeLogBeforePrevious);
+        this.sizeLogs = data;
       }
     );
+    this.blockToEdit = 'current';
   }
 
   chooseNewBlockToEdit(blockToEditNow: string) {
@@ -43,6 +36,10 @@ export class SizeComponent implements OnChanges {
   notifyIfIsCountingDownToUpdateData(isCountingDownToUpdateData: boolean) {
     this.isCountingDownToUpdateData.emit(isCountingDownToUpdateData);
     this.isCountingDown = isCountingDownToUpdateData;
+  }
+
+  getColWidth(blockName: string) {
+    return this.blockToEdit === blockName ? 'col-4' : 'col-3';
   }
 
 }

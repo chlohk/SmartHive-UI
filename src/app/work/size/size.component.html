@@ -1,54 +1,54 @@
-<div class="card bg-light" style="margin-top: 113px">
-  <div class="container">
+<div class="card bg-light" style="margin-top: 5px">
+  <div class="container" style="padding: 5px">
     <div class="row">
-      <div class="col-3">
+      <div [ngClass]="getColWidth('beforePrevious')">
         <app-size-view
           *ngIf="blockToEdit != 'beforePrevious'"
           [blockName]="'beforePrevious'"
-          [sizeLog]="sizeLogBeforePrevious"
+          [sizeLogs]="sizeLogs"
           [isCountingDownToUpdateData]="isCountingDown"
           (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
         <app-size-edit
           *ngIf="blockToEdit === 'beforePrevious'"
           [blockName]="'beforePrevious'"
-          [sizeLog]="sizeLogBeforePrevious"
+          [sizeLogs]="sizeLogs"
           [idOfCurrentHive]="currentlyChosenHive.id"
           (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>
-      <div class="col-3">
+      <div [ngClass]="getColWidth('previous')">
         <app-size-view
           *ngIf="blockToEdit != 'previous'"
           [blockName]="'previous'"
-          [sizeLog]="sizeLogPrevious"
+          [sizeLogs]="sizeLogs"
           [isCountingDownToUpdateData]="isCountingDown"
           (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
         <app-size-edit
           *ngIf="blockToEdit === 'previous'"
           [blockName]="'previous'"
-          [sizeLog]="sizeLogPrevious"
+          [sizeLogs]="sizeLogs"
           [idOfCurrentHive]="currentlyChosenHive.id"
           (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>
       <div class="col-2">
-        <div class="whiteBox" style="margin-top: 110px; margin-bottom: 37px">
+        <div class="whiteBox" style="margin-bottom: 27px">
           Mag
         </div>
         <img src="assets/img/frame.jpg" alt="">
-        <div class="whiteBox" style="margin-top: 100px">
+        <div class="whiteBox" style="margin-top: 56px">
           kupp
         </div>
       </div>
-      <div class="col-4">
+      <div [ngClass]="getColWidth('current')">
         <app-size-view
           *ngIf="blockToEdit != 'current'"
           [blockName]="'current'"
-          [sizeLog]="sizeLogCurrent"
+          [sizeLogs]="sizeLogs"
           [isCountingDownToUpdateData]="isCountingDown"
           (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
         <app-size-edit
           *ngIf="blockToEdit === 'current'"
           [blockName]="'current'"
-          [sizeLog]="sizeLogCurrent"
+          [sizeLogs]="sizeLogs"
           [idOfCurrentHive]="currentlyChosenHive.id"
           (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>

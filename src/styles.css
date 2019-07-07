@@ -1,2 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
+
+
+.planning-element-text-area {
+  width: 293px;
+  padding: .375rem .5rem
+}

@@ -1,14 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-7.5">
+    <div class="col-8.5 pictures-column">
       <div
-        class="card bg-light mb-3"
-        style="max-width: 16rem; height: 42.5rem; margin-left:auto;margin-right:auto;text-align:center">
+        class="card bg-light"
+        style="max-width: 16rem; height: 719px; margin-left:auto;margin-right:auto;text-align:center">
         <div class="card-header">
           <button
             type="button"
-            class="btn btn-light btn-outline-primary"
-            style="width: 200px; height: 80px; margin: 0px">
+            class="btn btn-light btn-outline-primary change-mother-status-button">
             <img
               src="assets/img/muuda.png"
               alt="ii"
@@ -22,68 +21,71 @@
 
           <img
             src="assets/img/n2htud.png" alt="ii">
-          <h3 class="word">{{ momStatusSectionTimeText }}</h3>
+          <h3 class="time-text">{{ momStatusSectionTimeText }}</h3>
 
 
-          <div *ngIf="!currentlyChosenHive.momAttributes.isLayingEggs">
+          <div
+            *ngIf="!currentlyChosenHive.momAttributes.isLayingEggs"
+            class="second-image-block">
             <img
               src="assets/img/munebNot.png" alt="ii"
               style="margin-top: 7px">
-            <h3 class="word">{{ layingEggsSectionTimeText }}</h3>
+            <h3 class="time-text">{{ layingEggsSectionTimeText }}</h3>
           </div>
-          <div *ngIf="currentlyChosenHive.momAttributes.isLayingEggs">
+          <div
+            *ngIf="currentlyChosenHive.momAttributes.isLayingEggs"
+            class="second-image-block">
             <img
               src="assets/img/munebOK.png" alt="ii"
               style="margin-top: 7px">
-            <h3 class="word">{{ layingEggsSectionTimeText }}</h3>
+            <h3 class="time-text">{{ layingEggsSectionTimeText }}</h3>
           </div>
 
-
-          <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.UNMARKED">
-            <img
-              src="assets/img/unmarked.png" alt="ii"
-              style="margin-top: 7px">
-          </div>
-          <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.ATTENTION">
-            <img
-              src="assets/img/attention.png" alt="ii"
-              style="margin-top: 7px">
-            <h3
-              *ngIf="currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
-              class="word">{{ currentlyChosenHive.momAttributes.markedDate | date:'MMMM yyyy'}}
-            </h3>
-            <h3
-              *ngIf="!currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
-              class="word">{{ currentlyChosenHive.momAttributes.markedDate | date:'yyyy'}}
-            </h3>
-            <p style="margin-top: -23px;font-size: 31px">
-              {{ currentlyChosenHive.momAttributes.markedDescription }}
-            </p>
-          </div>
-          <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.MARKED">
-            <img
-              src="assets/img/marked.png" alt="ii"
-              style="margin-top: 7px">
-            <h3
-              *ngIf="currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
-              class="word">{{ currentlyChosenHive.momAttributes.markedDate | date:'MMMM yyyy'}}
-            </h3>
-            <h3
-              *ngIf="!currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
-              class="word">{{ currentlyChosenHive.momAttributes.markedDate | date:'yyyy'}}
-            </h3>
+          <div class="marked-image-block">
+            <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.UNMARKED">
+              <img src="assets/img/unmarked.png" alt="märgistamata">
+            </div>
+            <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.ATTENTION">
+              <img src="assets/img/attention.png" alt="märkega probleeme">
+              <h3
+                *ngIf="currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
+                class="time-text">{{ currentlyChosenHive.momAttributes.markedDate | date:'MMMM yyyy'}}
+              </h3>
+              <h3
+                *ngIf="!currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
+                class="time-text">{{ currentlyChosenHive.momAttributes.markedDate | date:'yyyy'}}
+              </h3>
+              <p class = "marked-date-description">
+                {{ currentlyChosenHive.momAttributes.markedDescription }}
+              </p>
+            </div>
+            <div *ngIf="currentlyChosenHive.momAttributes.markedStatus === markedStatusEnum.MARKED">
+              <img
+                src="assets/img/marked.png" alt="märgistatud">
+              <h3
+                *ngIf="currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
+                class="time-text">{{ currentlyChosenHive.momAttributes.markedDate | date:'MMMM yyyy'}}
+              </h3>
+              <h3
+                *ngIf="!currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
+                class="time-text">{{ currentlyChosenHive.momAttributes.markedDate | date:'yyyy'}}
+              </h3>
+              <p class = "marked-date-description">
+                {{ currentlyChosenHive.momAttributes.markedDescription }}
+              </p>
+            </div>
           </div>
 
 
           <img src="assets/img/synnip2evOk.png" alt="ii">
           <h3
             *ngIf="currentlyChosenHive.momAttributes.isBirthDayDateMonthSet"
-            class="word" style="margin-bottom: -15px !important;">
+            class="time-text" style="margin-bottom: -15px !important;">
             {{ currentlyChosenHive.momAttributes.birthday | date:'MMMM yyyy'}}
           </h3>
           <h3
             *ngIf="!currentlyChosenHive.momAttributes.isBirthDayDateMonthSet"
-            class="word" style="margin-bottom: -15px !important;">
+            class="time-text" style="margin-bottom: -15px !important;">
             {{ currentlyChosenHive.momAttributes.birthday | date:'yyyy'}}
           </h3>
 
@@ -91,11 +93,10 @@
         </div>
       </div>
     </div>
-    <div class="col-4.5">
+    <div class="col-3.5">
       <button
         type="button"
-        class="btn btn-light btn-outline-secondary"
-        style="height: 115px;width: 80px; margin: 0px; margin-left: 20px"
+        class="btn btn-light btn-outline-secondary first-from-top-button"
         (click)="onChangeMotherStatusButtonClick(momStatusEnum.UNKNOWN)">
         <img
           src="assets/img/teadmataVertical.jpg"
@@ -106,7 +107,7 @@
       <button
         *ngIf="momStatusSectionTimeText != 'täna'"
         type="button"
-        class="btn btn-light btn-outline-success"
+        class="btn btn-light btn-outline-success second-from-top-button"
         (click)="saveMotherStatusSectionValues(true)">
         <img
           src="assets/img/check.png"
@@ -116,7 +117,7 @@
       <button
         *ngIf="momStatusSectionTimeText === 'täna'"
         type="button"
-        class="btn btn-light btn-outline-secondary"
+        class="btn btn-light btn-outline-secondary second-from-top-button"
         (click)="onOpenMomStatusSectionEditButton()">
         <img
           src="assets/img/muudaNupp.png"
@@ -127,7 +128,7 @@
       <button
         *ngIf="layingEggsSectionTimeText != 'täna'"
         type="button"
-        class="btn btn-light btn-outline-success"
+        class="btn btn-light btn-outline-success third-from-top-button"
         (click)="saveLayingEggsSectionValues(true)">
         <img
           src="assets/img/check.png"
@@ -137,7 +138,7 @@
       <button
         *ngIf="layingEggsSectionTimeText === 'täna'"
         type="button"
-        class="btn btn-light btn-outline-secondary"
+        class="btn btn-light btn-outline-secondary third-from-top-button"
         (click)="onOpenWhenSeenMotherLayingEggsEditButton()">
         <img
           src="assets/img/muudaNupp.png"
@@ -147,7 +148,7 @@
       <br>
       <button
         type="button"
-        class="btn btn-light btn-outline-secondary"
+        class="btn btn-light btn-outline-secondary fourth-from-top-button"
         (click)="onOpenWhenMotherMarkedEditButton()">
         <img
           src="assets/img/muudaNupp.png"
@@ -157,9 +158,8 @@
       <br>
       <button
         type="button"
-        class="btn btn-light btn-outline-secondary"
-        (click)="onOpenWhenMotherBirthdayEditButton()"
-      style="margin-bottom: 0 !important;">
+        class="btn btn-light btn-outline-secondary fifth-from-top-button"
+        (click)="onOpenWhenMotherBirthdayEditButton()">
         <img
           src="assets/img/muudaNupp.png"
           alt="ii"
@@ -416,14 +416,6 @@
 
               </h2>
             </label>
-            Märksõna:
-            <input
-              type="text"
-              size="10"
-              class="description"
-              style="margin-left: 5px"
-              [disabled]="radioBtnMarkedStatusSelection != markedStatusEnum.ATTENTION"
-              [(ngModel)]="markedSectionAdditionlInfoText">
           </div>
         </div>
         <div class="col-4">
@@ -441,6 +433,19 @@
               </h2>
             </label>
           </div>
+        </div>
+      </div>
+      <hr style="margin-top: 10px; margin-bottom: 10px">
+      <div class="row" style="font-size: 33px">
+        <div class="col-1"></div>
+        <div class="col-11">
+          Märksõna:
+          <input
+            type="text"
+            size="10"
+            class="description"
+            [disabled]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
+            [(ngModel)]="markedSectionAdditionlInfoText">
         </div>
       </div>
       <hr style="margin-top: 10px; margin-bottom: 0">

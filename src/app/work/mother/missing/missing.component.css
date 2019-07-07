@@ -1,13 +1,35 @@
 img {
-  max-height: 100px;
-  max-width: 210px;
+  max-height: 80px;
+  max-width: 180px;
 }
 
 img.x {
   height: 40px;
 }
 
-h3.word {
+.card-body {
+  padding: 10px;
+}
+
+h3.time-text {
+  margin-top: -10px;
+  margin-bottom: 0;
+  max-width: 214px;
+}
+
+button.change-mother-status-button {
+  width: 180px;
+  height: 80px;
+  margin: 0;
+}
+
+div.pictures-column {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+p.marked-date-description {
+  font-size: 31px;
   margin-top: -10px;
 }
 
@@ -54,13 +76,14 @@ input.description {
 }
 
 img.pencil {
-  height: 57px;
+  height: 40px;
 }
 
 button {
-  height: 100px;
-  width: 100px;
-  margin: 20px;
+  height: 60px;
+  width: 60px;
+  margin-top: 20px;
+  margin-left: 9px;
 }
 
 .custom-select {
@@ -75,4 +98,37 @@ button {
   justify-content: flex-start;
   align-items: center;
   height: 60px;
+}
+
+button.first-from-top-button {
+  height: 115px;
+  width: 60px;
+  margin: 0;
+  margin-left: 9px
+}
+
+button.second-from-top-button {
+  margin-top: 30px;
+}
+
+button.third-from-top-button {
+  margin-top: 65px;
+}
+
+button.fourth-from-top-button {
+  margin-top: 75px;
+}
+
+button.fifth-from-top-button {
+  margin-top: 100px;
+}
+
+div.marked-image-block {
+  margin-top: 30px;
+  height: 156px;
+}
+
+div.second-image-block {
+  margin-top: 30px;
+  height: 110px;
 }

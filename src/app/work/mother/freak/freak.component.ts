@@ -62,7 +62,7 @@ export class FreakComponent implements OnChanges {
 
   setMotherStatusSectionValuesCorrect() {
     this.momStatusInitialValueText = null;
-    const daysFromStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+    const daysFromStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
       this.currentlyChosenHive.momAttributes.statusStartingDate);
     if(daysFromStatusBeginning == 0) {
       this.radioBtnMomStatusSelection = ActionTimeEnum.TODAY;
@@ -79,7 +79,7 @@ export class FreakComponent implements OnChanges {
     }
     if(this.currentlyChosenHiveInitialData &&
       this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.FREAK) {
-      const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromInitialStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );
       if (daysFromStatusBeginning != daysFromInitialStatusBeginning) {

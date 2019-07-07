@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule} from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -42,6 +42,18 @@ import { SizeViewComponent } from './work/size/size-view/size-view.component';
 import {SizeDataService} from "./work/size/size-data.service";
 import {SizeService} from "./work/size/size.service";
 import {LongPress} from "./util/long-press.directive";
+import { NextTimeComponent } from './work/next-time/next-time.component';
+import { NotesComponent } from './work/notes/notes.component';
+import { PlanningComponent } from './work/planning/planning.component';
+import { PlanElementComponent } from './work/planning/plan-element/plan-element.component';
+import { PlanningMgmtComponent } from './work/planning/planning-mgmt/planning-mgmt.component';
+import { PlanningMgmtEditAreaComponent } from './work/planning/planning-mgmt/planning-mgmt-edit-area/planning-mgmt-edit-area.component';
+import {PlanningService} from "./work/planning/planning.service";
+import {PlanningDataService} from "./work/planning/planning-data.service";
+import {DaysUntilPipe} from "./util/days-until.pipe";
+import { PlanningDropdownComponent } from './work/planning/planning-dropdown/planning-dropdown.component';
+import { PlanningDropdownElementComponent } from './work/planning/planning-dropdown/planning-dropdown-element/planning-dropdown-element.component';
+import { PlanningDropdownMgmtEditAreaComponent } from './work/planning/planning-dropdown/planning-dropdown-mgmt-edit-area/planning-dropdown-mgmt-edit-area.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +83,17 @@ import {LongPress} from "./util/long-press.directive";
     SizeComponent,
     SizeEditComponent,
     SizeViewComponent,
-    LongPress
+    LongPress,
+    NextTimeComponent,
+    NotesComponent,
+    PlanningComponent,
+    PlanElementComponent,
+    PlanningMgmtComponent,
+    PlanningMgmtEditAreaComponent,
+    DaysUntilPipe,
+    PlanningDropdownComponent,
+    PlanningDropdownElementComponent,
+    PlanningDropdownMgmtEditAreaComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +111,9 @@ import {LongPress} from "./util/long-press.directive";
     MomAttributesService,
     UtilService,
     SizeDataService,
-    SizeService],
+    SizeService,
+    PlanningService,
+    PlanningDataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,124 @@
+<jw-modal id="planning">
+  <ng-container [ngSwitch]="activeWindow" >
+    <ng-container [ngTemplateOutlet]="planning" *ngSwitchCase="planningMgmtWindowEnum.PLANNING"></ng-container>
+    <ng-container [ngTemplateOutlet]="dropdownMgmt" *ngSwitchCase="planningMgmtWindowEnum.DROPDOWN_MGMT"></ng-container>
+  </ng-container>
+</jw-modal>
+
+<ng-template #planning>
+  <div class="card bg-light">
+    <div class="card-header nav">
+      <span class="navbar-brand big-text planning-header">Planeeringud</span>
+      <span class="navbar-text badge badge-dark belongs-to-badge">
+        {{ currentlyChosenColony.name + ' / ' + currentlyChosenHive.number}}
+      </span>
+      <button
+        class="btn btn-danger nav-item closing ml-auto"
+        (click)="planningService.showPlanningWindow.emit(false)">
+        <img
+          src="assets/img/sulge.jpeg"
+          class="x">
+      </button>
+    </div>
+    <div class="container m-0">
+      <div class="row">
+        <div class="col-5">
+          <div class="row justify-content-center p-4">
+            <div class="btn-group btn-group-toggle" *ngIf="!timerRunning">
+              <label
+                class="btn btn-light btn-outline-secondary modal-inside-text"
+                [ngClass]="{'active': isActiveResolveStateUnresolved}">
+                <input
+                  type="radio"
+                  name="planning_window_type"
+                  [checked]="isActiveResolveStateUnresolved"
+                  (change)="radioBtnActiveResolveStateChange(true)"
+                  [disabled]="timerRunning">
+                Tegemata
+              </label>
+              <label
+                class="btn btn-light btn-outline-secondary modal-inside-text"
+                [ngClass]="{'active': !isActiveResolveStateUnresolved}">
+                <input
+                  type="radio"
+                  name="planning_window_type"
+                  [checked]="!isActiveResolveStateUnresolved"
+                  (change)="radioBtnActiveResolveStateChange(false)"
+                  [disabled]="timerRunning">
+                Tehtud
+              </label>
+            </div>
+            <div class="spinner-area">
+              <app-spinner *ngIf="timerRunning"></app-spinner>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5">
+          <div class="row padding-for-planning">
+            <app-planning
+              [currentlyChosenHive]="currentlyChosenHive"
+              [planningComponentType]="isActiveResolveStateUnresolved ?
+                planningComponentEnum.PLANNING_MANAGEMENT_UNRESOLVED :
+                planningComponentEnum.PLANNING_MANAGEMENT_RESOLVED"></app-planning>
+          </div>
+        </div>
+        <div class="col-7 pl-5">
+          <app-planning-mgmt-edit-area
+            (callDropdownMgmt)="activeWindow = planningMgmtWindowEnum.DROPDOWN_MGMT"
+            (isCountingDownToUpdateData)="onCountDownChange($event)"
+            [isActiveResolveStateUnresolved]="isActiveResolveStateUnresolved"
+            [currentlyChosenHive]="currentlyChosenHive">
+          </app-planning-mgmt-edit-area>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #dropdownMgmt>
+  <div class="card bg-light">
+    <div class="card-header nav">
+      <span class="navbar-brand big-text planning-header">Planeeringute rippmenüü</span>
+      <button
+        class="btn btn-danger nav-item closing ml-auto"
+        (click)="planningService.showPlanningWindow.emit(false)">
+        <img
+          src="assets/img/sulge.jpeg"
+          class="x">
+      </button>
+    </div>
+    <div class="container m-0">
+      <div class="row">
+        <div class="col-5">
+          <div class="row justify-content-center p-4">
+            <div class="btn-group btn-group-toggle" *ngIf="!timerRunning">
+              <button
+                class="btn btn-danger modal-inside-text"
+                (click)="activeWindow = planningMgmtWindowEnum.PLANNING">
+                Tagasi planeerima
+              </button>
+            </div>
+            <div class="spinner-area">
+              <app-spinner *ngIf="timerRunning"></app-spinner>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5">
+          <div class="row padding-for-planning">
+            <app-planning-dropdown></app-planning-dropdown>
+          </div>
+        </div>
+        <div class="col-7 pl-5 d-flex flex-column-reverse mb-5">
+          <app-planning-dropdown-mgmt-edit-area
+            (isCountingDownToUpdateData)="onCountDownChange($event)"></app-planning-dropdown-mgmt-edit-area>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

@@ -1,10 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SpinnerService} from "../util/spinner/spinner.service";
 import {Colony} from "../settings/shared/colony.model";
 import {ColoniesService} from "../settings/shared/colonies.service";
-import {MomStatusEnum} from "./mother/mom-status.enum";
 import {Hive} from "../settings/shared/hive.model";
-import {SettingsDataService} from "../settings/shared/settings-data.service";
+import {PlanningComponentEnum} from "./planning/planning-component.enum";
+import {PlanningService} from "./planning/planning.service";
 
 @Component({
   selector: 'app-work',
@@ -14,25 +14,35 @@ import {SettingsDataService} from "../settings/shared/settings-data.service";
 export class WorkComponent implements OnInit {
   colonies: Colony[];
   currentlyChosenHive: Hive = null;
+  currentlyChosenColony: Colony = null;
   isCountingDownToUpdateData = false;
+  planningComponentEnum = PlanningComponentEnum;
+
   //@Output() onChangeColony = new EventEmitter<MomStatusEnum>();
 
   constructor(private spinnerService: SpinnerService,
               private coloniesService: ColoniesService,
-              private settingsDataService: SettingsDataService) { }
+              private planningService: PlanningService) {
+  }
 
   ngOnInit() {
     // this.settingsDataService.onPostToLogin();
 
     this.coloniesService.coloniesChanged.subscribe(
       colonies => {
-        this.colonies = colonies;}
+        this.colonies = colonies;
+      }
     );
     this.coloniesService.getColoniesData();
+    this.planningService.getDropdownElements();
 
-    setTimeout(()=> {
+    setTimeout(() => {
       this.spinnerService.setSpinnerStatus.next(false);
     }, 0);
+  }
+
+  onColonyChange(colonyThatGotChosen: Colony) {
+    this.currentlyChosenColony = colonyThatGotChosen;
   }
 
   onHiveChange(hiveThatGotChosen: Hive) {
@@ -42,6 +52,5 @@ export class WorkComponent implements OnInit {
   notifyIfIsCountingDownToUpdateData(isCountingDownToUpdateData: boolean) {
     this.isCountingDownToUpdateData = isCountingDownToUpdateData;
   }
-
 
 }

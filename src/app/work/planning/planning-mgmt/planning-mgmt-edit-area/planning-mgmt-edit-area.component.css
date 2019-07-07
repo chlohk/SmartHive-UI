@@ -1,0 +1,50 @@
+
+.big-text {
+  font-size: 2rem;
+}
+
+.modal-inside-text {
+  font-size: 1.5rem;
+}
+
+input.bigRadio {
+  width: 35px;
+  height: 35px
+}
+
+.deadline-button {
+  width: 60px;
+  height: 60px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.without-deadline-correction {
+  margin-top: 69px;
+}
+
+.edit-area-height {
+  height: 235px;
+}
+
+input.my-checkbox {
+  width : 25px;
+  height : 25px;
+}
+
+select {
+  height: 60px;
+  font-size: 1.5rem;
+}
+
+optgroup {
+  font-size: 1.5rem;
+}
+
+.dropdown-in-planning-element-text-area {
+  width: 270px;
+}
+
+.input-area-width {
+  width: 300px;
+}

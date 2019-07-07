@@ -11,15 +11,27 @@ import {SizeService} from "../size.service";
 export class SizeEditComponent implements OnChanges {
   @Input() blockName: string;
   @Input() idOfCurrentHive: number;
-  @Input() sizeLog: Size;
+  @Input() sizeLogs: Size[] = null;
   @Output() isCountingDownToUpdateData = new EventEmitter<boolean>();
+  sizeLog: Size;
   timerRunning = false;
   shouldRunAnotherRound = false;
 
   constructor(private sizeService: SizeService) { }
-
   ngOnChanges() {
+    if(this.sizeLogs) {
+      if (this.blockName === 'current') {
+        this.sizeLog = this.sizeLogs.length >= 1 ? this.sizeLogs[0] : null;
+      }
+      if (this.blockName === 'previous') {
+        this.sizeLog = this.sizeLogs.length >= 2 ? this.sizeLogs[1] : null;
+      }
+      if (this.blockName === 'beforePrevious') {
+        this.sizeLog = this.sizeLogs.length >= 3 ? this.sizeLogs[2] : null;
+      }
+    }
   }
+
 
   onIncreaseMagazineSize() {
     if(this.sizeLog.hasMagazine === false) {
@@ -47,6 +59,13 @@ export class SizeEditComponent implements OnChanges {
       this.sizeLog.addedNumOfFrames += 1;
       this.sizeLog.totalNumOfFrames += 1;
       this.startCountdownToUpdateSizelogAtBackend();
+      if(this.blockName === 'previous') {
+        this.sizeLogs[0].totalNumOfFrames++;
+      }
+      if(this.blockName === 'beforePrevious') {
+        this.sizeLogs[0].totalNumOfFrames++;
+        this.sizeLogs[1].totalNumOfFrames++;
+      }
     }
   }
 
@@ -55,6 +74,13 @@ export class SizeEditComponent implements OnChanges {
       this.sizeLog.addedNumOfFrames -= 1;
       this.sizeLog.totalNumOfFrames -= 1;
       this.startCountdownToUpdateSizelogAtBackend();
+      if(this.blockName === 'previous') {
+        this.sizeLogs[0].totalNumOfFrames--;
+      }
+      if(this.blockName === 'beforePrevious') {
+        this.sizeLogs[0].totalNumOfFrames--;
+        this.sizeLogs[1].totalNumOfFrames--;
+      }
     }
   }
 
@@ -63,6 +89,13 @@ export class SizeEditComponent implements OnChanges {
       this.sizeLog.removedNumOfFrames += 1;
       this.sizeLog.totalNumOfFrames -= 1;
       this.startCountdownToUpdateSizelogAtBackend();
+      if(this.blockName === 'previous') {
+        this.sizeLogs[0].totalNumOfFrames--;
+      }
+      if(this.blockName === 'beforePrevious') {
+        this.sizeLogs[0].totalNumOfFrames--;
+        this.sizeLogs[1].totalNumOfFrames--;
+      }
     }
   }
 
@@ -71,6 +104,13 @@ export class SizeEditComponent implements OnChanges {
       this.sizeLog.removedNumOfFrames -= 1;
       this.sizeLog.totalNumOfFrames += 1;
       this.startCountdownToUpdateSizelogAtBackend();
+      if(this.blockName === 'previous') {
+        this.sizeLogs[0].totalNumOfFrames++;
+      }
+      if(this.blockName === 'beforePrevious') {
+        this.sizeLogs[0].totalNumOfFrames++;
+        this.sizeLogs[1].totalNumOfFrames++;
+      }
     }
   }
 
@@ -88,7 +128,7 @@ export class SizeEditComponent implements OnChanges {
     }
   }
 
-  async startCountdownToUpdateSizelogAtBackend() {
+  startCountdownToUpdateSizelogAtBackend() {
     if(this.timerRunning) {
       this.shouldRunAnotherRound = true;
       // console.log('...must run one more time');
@@ -102,7 +142,18 @@ export class SizeEditComponent implements OnChanges {
             // console.log('...will run for a second time');
           } else {
             // console.log('-> send request')
-            this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLog);
+            if (this.blockName === 'current') {
+              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLog);
+            }
+            if (this.blockName === 'previous') {
+              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLogs[0]);
+              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLog);
+            }
+            if (this.blockName === 'beforePrevious') {
+              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLogs[0]);
+              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLogs[1]);
+              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLog);
+            }
             this.isCountingDownToUpdateData.emit(false);
           }
         }, 1200

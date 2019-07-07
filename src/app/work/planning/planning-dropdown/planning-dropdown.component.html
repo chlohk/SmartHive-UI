@@ -1,0 +1,12 @@
+<div class="card bg-light vertical-paddings dropdown-elements-section-height">
+  <div
+    class="card-body scrolling-area dropdown-elements-section-width"
+    id="planningDropdownScrollArea">
+
+    <app-planning-dropdown-element
+      *ngFor="let planningDropdownElement of planningService.planningDropDown"
+      [planningDropdown]="planningDropdownElement"
+      [memorizedActiveDropdownElementId]="memorizedActivePlanDropdownElementId"></app-planning-dropdown-element>
+
+  </div>
+</div>

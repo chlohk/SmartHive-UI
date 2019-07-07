@@ -1,48 +1,68 @@
-<div *ngIf="!sizeLog">
-  <div class="whiteBox" style="margin-top: 110px; margin-bottom: 35px">
+<div *ngIf="!sizeLog"
+     align="center">
+  <div
+    class="whiteBox"
+    style="margin-bottom: 27px"
+    align="center">
     -
   </div>
-  <div class="whiteBox" style="margin-bottom: 19px">
+  <div
+    class="whiteBox"
+    style="margin-bottom: 19px"
+    align="center">
     -
     <br>
     <b>-</b>
     <br>
     -
   </div>
-  <button
-    type="button"
-    class="btn btn-light btn-outline-secondary"
-    style="margin-bottom: 18px"
-    [disabled]="true">
-    N/A
-  </button>
-  <div class="whiteBox">
+  <div align="center">
+    <button
+      type="button"
+      class="btn btn-light btn-outline-secondary"
+      style="margin-bottom: 18px"
+      [disabled]="true">
+      N/A
+    </button>
+  </div>
+  <div class="whiteBox"
+       align="center">
     -
   </div>
 </div>
 
-<div *ngIf="sizeLog">
-  <div class="whiteBox" style="margin-top: 110px; margin-bottom: 35px">
+<div
+  *ngIf="sizeLog"
+  align="center">
+  <div
+    class="whiteBox"
+    style="margin-bottom: 27px"
+    align="center">
     <span *ngIf="sizeLog.hasMagazine">{{ sizeLog.magazineSize }}%</span>
     <span *ngIf="!sizeLog.hasMagazine">-</span>
   </div>
-  <div class="whiteBox" style="margin-bottom: 19px">
+  <div
+    class="whiteBox"
+    align="center">
     +{{ sizeLog.addedNumOfFrames }}
     <br>
     <b>{{ sizeLog.totalNumOfFrames }}</b>
     <br>
     -{{ sizeLog.removedNumOfFrames }}
   </div>
-  <button
-    type="button"
-    class="btn btn-light btn-outline-secondary"
-    style="margin-bottom: 18px"
-    (click)="chooseMyBlockToEdit()"
-    [disabled]="isCountingDownToUpdateData">
-    <span *ngIf="blockName === 'current'">täna</span>
-    <span *ngIf="blockName != 'current'">{{ sizeLog.day | timeAgo }}</span>
-  </button>
-  <div class="whiteBox">
+  <div align="center">
+    <button
+      type="button"
+      class="btn btn-light btn-outline-secondary"
+      (click)="chooseMyBlockToEdit()"
+      [disabled]="isCountingDownToUpdateData">
+      <span *ngIf="blockName === 'current'">täna</span>
+      <span *ngIf="blockName != 'current'">{{ sizeLog.day | timeAgo }}</span>
+    </button>
+  </div>
+  <div
+    class="whiteBox"
+    align="center">
     {{ sizeLog.removedCocoons }}
   </div>
 </div>

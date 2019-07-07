@@ -1,0 +1,51 @@
+.planning-element {
+  font-size: 1.5rem;
+  margin-bottom: 3px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 5px;
+  display: table;
+  min-height: 86px;
+}
+
+.deadline-area {
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 5px;
+  padding: .375rem .5rem;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  width: 120px;
+}
+
+.unresolved-button-color {
+  background-color: #f8f9fa;
+  border-color: #218838;
+  padding: 0px;
+}
+
+.normal {
+  background-color: #92e69f;
+}
+
+.warning {
+  background-color: #fffa87;
+}
+
+.danger {
+  background-color: red;
+  color: white;
+}
+
+.without-deadline {
+  background-color: #dcdcdc;
+}
+
+.text-area {
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.not-button-area-active-color {
+  background-color: #dcdcdc;
+}

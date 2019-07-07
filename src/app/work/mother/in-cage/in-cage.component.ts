@@ -52,7 +52,7 @@ export class InCageComponent implements OnChanges {
 
   setMotherStatusSectionValuesCorrect() {
     this.momStatusInitialValueText = null;
-    const daysFromStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+    const daysFromStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
       this.currentlyChosenHive.momAttributes.statusStartingDate);
     if(daysFromStatusBeginning == 0) {
       this.radioBtnMomStatusSelection = ActionTimeEnum.TODAY;
@@ -69,7 +69,7 @@ export class InCageComponent implements OnChanges {
     }
     if(this.currentlyChosenHiveInitialData &&
       this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.IN_CAGE) {
-      const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromInitialStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );
       if(daysFromInitialStatusBeginning == 0) {
@@ -102,6 +102,7 @@ export class InCageComponent implements OnChanges {
   }
 
   setMarkedSectionValuesCorrect() {
+    this.markedSectionAdditionlInfoText = this.currentlyChosenHive.momAttributes.markedDescription;
     if(this.currentlyChosenHive.momAttributes.markedStatus == MarkedStatusEnum.MARKED){
       this.radioBtnMarkedStatusSelection = MarkedStatusEnum.MARKED;
     } else if (this.currentlyChosenHive.momAttributes.markedStatus == MarkedStatusEnum.ATTENTION){
@@ -129,7 +130,7 @@ export class InCageComponent implements OnChanges {
   saveMarkedSectionValues() {
     if(this.radioBtnMarkedStatusSelection === MarkedStatusEnum.MARKED) {
       this.currentlyChosenHive.momAttributes.markedStatus = MarkedStatusEnum.MARKED;
-      this.currentlyChosenHive.momAttributes.markedDescription = '';
+      this.currentlyChosenHive.momAttributes.markedDescription = this.markedSectionAdditionlInfoText;
       if(this.radioBtnMarkedTimeSelection === ActionTimeEnum.UNKNOWN) {
         this.currentlyChosenHive.momAttributes.markedDate = null;
       } else if (this.radioBtnMarkedTimeSelection === ActionTimeEnum.PAST_DATE) {
@@ -210,11 +211,9 @@ export class InCageComponent implements OnChanges {
 
   radioBtnMarkedStatusSelected(markedStatusSelected: MarkedStatusEnum) {
     this.radioBtnMarkedStatusSelection = markedStatusSelected;
-    if(markedStatusSelected != MarkedStatusEnum.ATTENTION) {
-      this.markedSectionAdditionlInfoText = '';
-    }
     if(markedStatusSelected === MarkedStatusEnum.UNMARKED) {
-      this.radioBtnMarkedTimeSelection = ActionTimeEnum.UNKNOWN;
+      this.radioBtnMarkedTimeSelection = ActionTimeEnum.UNKNOWN
+      this.markedSectionAdditionlInfoText = '';
     }
   }
 

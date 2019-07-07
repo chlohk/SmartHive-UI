@@ -1,0 +1,47 @@
+<ng-container *ngIf="currentlyChosenHive">
+  <div class="card bg-light vertical-paddings" [ngClass]="getHeight()">
+    <div
+      class="card-body scrolling-area"
+      id="planningScrollArea"
+      [ngClass]="{'no-plans-to-show-for-create-wide-enough':
+      planningComponentType != planningComponentEnum.WORK_DASHBOARD}">
+      <ng-container *ngIf="planningComponentType === planningComponentEnum.WORK_DASHBOARD">
+        <button
+          *ngIf="currentlyChosenHive.unresolvedPlanElements &&
+            currentlyChosenHive.unresolvedPlanElements.length >= MIN_NO_OF_PLANS_WHEN_SECOND_BUTTON_ADDED"
+          type="button"
+          class="btn btn-light btn-outline-secondary btn-block main-top"
+          (click)="onOpenPlanning()">
+          Haldan planeeringuid
+          <span class="badge badge-dark button-badge">
+            {{currentlyChosenHive.unresolvedPlanElements ? currentlyChosenHive.unresolvedPlanElements.length : '0' }}
+          </span>
+        </button>
+      </ng-container>
+
+
+      <app-plan-element
+        *ngFor="let plan of getRelevantPlansList()"
+        [plan]="plan"
+        [planningComponentType]="planningComponentType"
+        [currentlyChosenHive]="currentlyChosenHive"
+        [memorizedActiveElementId]="memorizedActivePlanElementId"></app-plan-element>
+
+      <ng-container *ngIf="planningComponentType === planningComponentEnum.WORK_DASHBOARD">
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary btn-block main-bottom"
+          (click)="onOpenPlanning()"
+          [ngClass]="{'no-plans-to-show-for-level-button': !currentlyChosenHive.unresolvedPlanElements ||
+                                                currentlyChosenHive.unresolvedPlanElements &&
+                                                 currentlyChosenHive.unresolvedPlanElements.length == 0}">
+          Haldan planeeringuid
+          <span class="badge badge-dark button-badge">
+            {{currentlyChosenHive.unresolvedPlanElements ? currentlyChosenHive.unresolvedPlanElements.length : '0' }}
+          </span>
+        </button>
+      </ng-container>
+
+    </div>
+  </div>
+</ng-container>

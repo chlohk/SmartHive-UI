@@ -1,14 +1,13 @@
 <div class="container">
   <div class="row">
-    <div class="col-7.5">
+    <div class="col-8.5 pictures-column">
       <div
-        class="card bg-light mb-3"
-        style="max-width: 16rem; height: 42.5rem; margin-left:auto;margin-right:auto;text-align:center">
+        class="card bg-light"
+        style="max-width: 16rem; height: 719px; margin-left:auto;margin-right:auto;text-align:center">
         <div class="card-header">
           <button
             type="button"
-            class="btn btn-light btn-outline-primary"
-            style="width: 200px; height: 80px; margin: 0px">
+            class="btn btn-light btn-outline-primary change-mother-status-button">
             <img
               src="assets/img/muuda.png"
               alt="ii"
@@ -22,47 +21,54 @@
 
           <img
             src="assets/img/kadunud.jpg" alt="ii">
-          <h3 class="word">{{ momStatusSectionTimeText }}</h3>
+          <h3 class="time-text">{{ momStatusSectionTimeText }}</h3>
 
 
-          <div *ngIf="!currentlyChosenHive.momAttributes.controlFrameStartDate">
+          <div
+            *ngIf="!currentlyChosenHive.momAttributes.controlFrameStartDate"
+            class="second-image-block">
             <img
               src="assets/img/controlFrameNot.png" alt="ii"
               style="margin-top: 7px">
-            <h3 class="word">{{ controlFrameSectionTimeText }}</h3>
+            <h3 class="time-text">{{ controlFrameSectionTimeText }}</h3>
           </div>
-          <div *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate">
+          <div
+            *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate"
+            class="second-image-block">
             <img
               src="assets/img/controlFrameOk.png" alt="ii"
               style="margin-top: 7px">
-            <h3 class="word">{{ controlFrameSectionTimeText }}</h3>
+            <h3 class="time-text">{{ controlFrameSectionTimeText }}</h3>
           </div>
 
 
-          <div *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
-                        !currentlyChosenHive.momAttributes.cocoonChosenDate">
+          <div
+            *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
+                        !currentlyChosenHive.momAttributes.cocoonChosenDate"
+            class="second-image-block">
             <img
               src="assets/img/cocoonNot.png" alt="ii"
               style="margin-top: 7px">
-            <h3 class="word">{{ cocoonSectionTimeText }}</h3>
+            <h3 class="time-text">{{ cocoonSectionTimeText }}</h3>
           </div>
-          <div *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
-                         currentlyChosenHive.momAttributes.cocoonChosenDate">
+          <div
+            *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
+                         currentlyChosenHive.momAttributes.cocoonChosenDate"
+            class="second-image-block">
             <img
               src="assets/img/cocoonOk.png" alt="ii"
               style="margin-top: 7px">
-            <h3 class="word">{{ cocoonSectionTimeText }}</h3>
+            <h3 class="time-text">{{ cocoonSectionTimeText }}</h3>
           </div>
 
 
         </div>
       </div>
     </div>
-    <div class="col-4.5">
+    <div class="col-3.5">
       <button
         type="button"
-        class="btn btn-light btn-outline-secondary"
-        style="height: 115px;width: 80px; margin: 0px; margin-left: 20px"
+        class="btn btn-light btn-outline-secondary first-from-top-button"
         (click)="onChangeMotherStatusButtonClick(momStatusEnum.HATCHED)">
         <img
           src="assets/img/koorunudEmaVertical.jpg"
@@ -72,7 +78,7 @@
       <br>
       <button
         type="button"
-        class="btn btn-light btn-outline-secondary"
+        class="btn btn-light btn-outline-secondary second-from-top-button"
         (click)="onOpenMomStatusSectionEditButton()">
         <img
           src="assets/img/muudaNupp.png"
@@ -83,7 +89,7 @@
       <button
         *ngIf="!currentlyChosenHive.momAttributes.controlFrameStartDate"
         type="button"
-        class="btn btn-light btn-outline-success"
+        class="btn btn-light btn-outline-success third-from-top-button"
         (click)="saveControlFrameSectionValues(true)">
         <img
           src="assets/img/check.png"
@@ -93,7 +99,7 @@
       <button
         *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate"
         type="button"
-        class="btn btn-light btn-outline-secondary"
+        class="btn btn-light btn-outline-secondary third-from-top-button"
         (click)="onOpenWhenControlFrameEditButton()">
         <img
           src="assets/img/muudaNupp.png"
@@ -105,7 +111,7 @@
         *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
                 !currentlyChosenHive.momAttributes.cocoonChosenDate"
         type="button"
-        class="btn btn-light btn-outline-success"
+        class="btn btn-light btn-outline-success fourth-from-top-button"
         (click)="saveCocoonSectionValues(true)">
         <img
           src="assets/img/check.png"
@@ -116,7 +122,7 @@
         *ngIf="currentlyChosenHive.momAttributes.controlFrameStartDate &&
                 currentlyChosenHive.momAttributes.cocoonChosenDate"
         type="button"
-        class="btn btn-light btn-outline-secondary"
+        class="btn btn-light btn-outline-secondary fourth-from-top-button"
         (click)="onOpenWhenCocoonEditButton()">
         <img
           src="assets/img/muudaNupp.png"

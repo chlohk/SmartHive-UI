@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default" style="margin: 0 !important; background-color: gray; height: 100px">
+<nav class="navbar navbar-default" style="margin: 0 !important; background-color: gray">
   <div class="container-fluid">
     <div class="col-sm-1">
       <a routerLink="/settings" *ngIf="!isCountingDownToUpdateData">
@@ -21,10 +21,12 @@
           [(ngModel)]="currentlySelectedColonyId"
           (change)="onColonyChange()"
           [disabled]="isCountingDownToUpdateData">
-          <option value="" disabled selected hidden>Vali koloonia...</option>
-          <option
-            *ngFor="let colony of colonies"
-            [value]="colony.id"> {{ colony.name }}</option>
+          <optgroup>
+            <option value="" disabled selected hidden>Vali koloonia...</option>
+            <option
+              *ngFor="let colony of colonies"
+              [value]="colony.id"> {{ colony.name }}</option>
+          </optgroup>
         </select>
       </form>
     </div>
@@ -36,10 +38,12 @@
           [(ngModel)]="currentlySelectedHiveId"
           (change)="onHiveChange()"
           [disabled]="isCountingDownToUpdateData">
-          <option value="" disabled selected hidden>Vali taru...</option>
-          <option
-            *ngFor="let hive of currentlySelectedColony.hives"
-            [value]="hive.id"> {{ '# ' + hive.number + ' ' + hive.description }}</option>
+          <optgroup>
+            <option value="" disabled selected hidden>Vali taru...</option>
+            <option
+              *ngFor="let hive of currentlySelectedColony.hives"
+              [value]="hive.id"> {{ '# ' + hive.number + ' ' + hive.description }}</option>
+          </optgroup>
         </select>
       </form>
     </div>

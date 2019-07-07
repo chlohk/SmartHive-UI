@@ -82,7 +82,7 @@ export class EditHiveComponent implements OnInit, OnChanges {
   }
 
   onDeleteHive(verifyDeleteText, id) {
-    if(verifyDeleteText === 'kustuta') {
+    if(verifyDeleteText === 'Ok') {
       this.modalService.close('delete-hive');
       this.coloniesService.deleteHive(id);
     } else {

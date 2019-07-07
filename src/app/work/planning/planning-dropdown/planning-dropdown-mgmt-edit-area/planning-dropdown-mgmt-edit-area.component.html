@@ -1,0 +1,46 @@
+<div class="row pb-4">
+  <ng-container *ngIf="!activePlanningDropdownElement.id; else changePlanningHeader">
+    <h2>Uus rippmenüü element</h2>
+  </ng-container>
+</div>
+<div class="row">
+  <div class="col">
+    <div
+      class="card ml-n3">
+      <div
+        class="row ml-0 edit-area-height">
+        <div class="d-flex input-area-width justify-content-around align-items-center flex-column">
+          <textarea
+            class="modal-inside-text planning-element-text-area h-100"
+            [(ngModel)]="activePlanningDropdownElement.text"
+            (ngModelChange)="onInputChange()"></textarea>
+        </div>
+        <div class="col d-flex flex-column justify-content-around">
+          <div class="row justify-content-center">
+            <ng-container *ngIf="!activePlanningDropdownElement.id; else changePlanningFinishEditing">
+              <button
+                class="btn btn-success modal-inside-text"
+                (click)="onAddNewPlan()">
+                Lisan elemendi
+              </button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #changePlanningHeader>
+  <h2>Rippmenüü elemendi muutmine</h2>
+</ng-template>
+
+<ng-template #changePlanningFinishEditing>
+  <button
+    class="btn btn-danger modal-inside-text"
+    (click)="planningService.newPlanDropdownElementSelected.next(null)"
+    [disabled]="timerRunning">
+    Lõpetan muutmise
+  </button>
+</ng-template>

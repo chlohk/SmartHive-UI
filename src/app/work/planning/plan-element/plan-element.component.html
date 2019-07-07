@@ -1,0 +1,43 @@
+<div class="container planning-element p-0">
+  <ng-container *ngIf="planningComponentType != planningComponentEnum.PLANNING_MANAGEMENT_RESOLVED; else resolved">
+    <ng-container *ngIf="inActive; else activeUnresolved">
+      <div class="deadline-area" [ngClass]="getColor()" (click)="onElementClick()">
+        {{ deadlineText }}
+      </div>
+      <div class="text-area planning-element-text-area" (click)="onElementClick()">
+        {{getText()}}
+      </div>
+    </ng-container>
+
+    <ng-template #activeUnresolved>
+      <div class="deadline-area unresolved-button-color" (click)="onResolveElement()">
+        {{'loen tehtuks&#x2714;\t' }}
+      </div>
+      <div class="text-area not-button-area-active-color planning-element-text-area">
+        {{getText()}}
+      </div>
+    </ng-template>
+  </ng-container>
+
+  <ng-template #resolved>
+    <ng-container *ngIf="inActive; else activeResolved">
+      <div class="deadline-area" (click)="onElementClick()">
+        {{ plan.resolvedDate | date:'dd.MM.yy' }}
+      </div>
+      <div class="text-area planning-element-text-area" (click)="onElementClick()">
+        {{getText()}}
+      </div>
+    </ng-container>
+
+    <ng-template #activeResolved>
+      <div class="deadline-area not-button-area-active-color">
+        {{ plan.resolvedDate | date:'dd.MM.yy' }}
+      </div>
+      <div class="text-area not-button-area-active-color planning-element-text-area">
+        {{getText()}}
+      </div>
+    </ng-template>
+  </ng-template>
+
+
+</div>

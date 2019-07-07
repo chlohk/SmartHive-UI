@@ -1,0 +1,22 @@
+<div class="card bg-light planning-section vertical-paddings">
+  <div class="card-body scrolling-area" id="notesScrollArea">
+    <button
+      *ngIf="document.getElementById('notesScrollArea').scrollHeight >= MIN_HEIGHT_WHEN_SECOND_BUTTON_ADDED;"
+      type="button"
+      class="btn btn-light btn-outline-secondary btn-block main-top">
+      Haldan märkmeid
+      <span class="badge badge-dark button-badge">3 / 2</span>
+    </button>
+    <ul class="list-group">
+      <li class="list-group-item active">Cras justo odio</li>
+      <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Morbi leo risus</li>
+      <li class="list-group-item">Porta ac consectetur ac</li>
+      <li class="list-group-item">Vestibulum at eros</li>
+    </ul>
+    <button type="button" class="btn btn-light btn-outline-secondary btn-block main-bottom">
+      Haldan märkmeid
+      <span class="badge badge-dark button-badge">3 / 2</span>
+    </button>
+  </div>
+</div>

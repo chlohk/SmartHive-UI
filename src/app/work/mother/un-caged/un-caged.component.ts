@@ -58,7 +58,7 @@ export class UnCagedComponent implements OnChanges {
 
   setMotherStatusSectionValuesCorrect() {
     this.momStatusInitialValueText = null;
-    const daysFromStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+    const daysFromStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
       this.currentlyChosenHive.momAttributes.statusStartingDate);
     if(daysFromStatusBeginning == 0) {
       this.radioBtnMomStatusSelection = ActionTimeEnum.TODAY;
@@ -75,7 +75,7 @@ export class UnCagedComponent implements OnChanges {
     }
     if(this.currentlyChosenHiveInitialData &&
       this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UN_CAGED) {
-      const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromInitialStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate
       );
       if(daysFromInitialStatusBeginning == 0) {
@@ -110,7 +110,7 @@ export class UnCagedComponent implements OnChanges {
   setLayingEggsSectionValuesCorrect() {
     this.layingEggsInitialValueText = null;
     if(this.currentlyChosenHive.momAttributes.isLayingEggs){
-      const daysFromLayingEggsBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromLayingEggsBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHive.momAttributes.eggsLastSeen);
       if(daysFromLayingEggsBeginning == 0) {
         this.radioBtnLayingEggsSelection = ActionTimeEnum.TODAY;
@@ -133,7 +133,7 @@ export class UnCagedComponent implements OnChanges {
 
     if(this.currentlyChosenHiveInitialData &&
       this.currentlyChosenHiveInitialData.momAttributes.momStatus === MomStatusEnum.UN_CAGED) {
-      const daysFromInitialStatusBeginning = UtilService.getDaysBeforeTodaysDate(
+      const daysFromInitialStatusBeginning = UtilService.getAbsoluteDaysBeforeTodaysDate(
         this.currentlyChosenHiveInitialData.momAttributes.eggsLastSeen
       );
       if(daysFromInitialStatusBeginning == 0 ||
@@ -173,6 +173,7 @@ export class UnCagedComponent implements OnChanges {
   }
 
   setMarkedSectionValuesCorrect() {
+    this.markedSectionAdditionlInfoText = this.currentlyChosenHive.momAttributes.markedDescription;
     if(this.currentlyChosenHive.momAttributes.markedStatus == MarkedStatusEnum.MARKED){
       this.radioBtnMarkedStatusSelection = MarkedStatusEnum.MARKED;
     } else if (this.currentlyChosenHive.momAttributes.markedStatus == MarkedStatusEnum.ATTENTION){
@@ -200,7 +201,7 @@ export class UnCagedComponent implements OnChanges {
   saveMarkedSectionValues() {
     if(this.radioBtnMarkedStatusSelection === MarkedStatusEnum.MARKED) {
       this.currentlyChosenHive.momAttributes.markedStatus = MarkedStatusEnum.MARKED;
-      this.currentlyChosenHive.momAttributes.markedDescription = '';
+      this.currentlyChosenHive.momAttributes.markedDescription = this.markedSectionAdditionlInfoText;
       if(this.radioBtnMarkedTimeSelection === ActionTimeEnum.UNKNOWN) {
         this.currentlyChosenHive.momAttributes.markedDate = null;
       } else if (this.radioBtnMarkedTimeSelection === ActionTimeEnum.PAST_DATE) {
@@ -285,11 +286,9 @@ export class UnCagedComponent implements OnChanges {
 
   radioBtnMarkedStatusSelected(markedStatusSelected: MarkedStatusEnum) {
     this.radioBtnMarkedStatusSelection = markedStatusSelected;
-    if(markedStatusSelected != MarkedStatusEnum.ATTENTION) {
-      this.markedSectionAdditionlInfoText = '';
-    }
     if(markedStatusSelected === MarkedStatusEnum.UNMARKED) {
-      this.radioBtnMarkedTimeSelection = ActionTimeEnum.UNKNOWN;
+      this.radioBtnMarkedTimeSelection = ActionTimeEnum.UNKNOWN
+      this.markedSectionAdditionlInfoText = '';
     }
   }
 
