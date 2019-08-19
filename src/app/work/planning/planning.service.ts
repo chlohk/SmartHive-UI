@@ -5,8 +5,11 @@ import {SpinnerService} from "../../util/spinner/spinner.service";
 import {PlanningDataService} from "./planning-data.service";
 import {ColoniesService} from "../../settings/shared/colonies.service";
 import {PlanningDropdown} from "./planning-dropdown/planning-dropdown-element/planning-dropdown.model";
+import { take } from 'rxjs/operators';
+import { Colony } from '../../settings/shared/colony.model';
+import { UtilService } from '../../util/util.service';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class PlanningService {
   newPlanElementSelected: Subject<PlanElement> = new Subject<PlanElement>();
   newPlanDropdownElementSelected: Subject<PlanningDropdown> = new Subject<PlanningDropdown>();
@@ -17,28 +20,35 @@ export class PlanningService {
               private planningDataService: PlanningDataService,
               private coloniesService: ColoniesService) { }
 
-  async addNewPlan(newPlan: PlanElement, hiveId: number) {
+  addNewPlan(newPlan: PlanElement, hiveId: number) {
     this.spinnerService.setSpinnerStatus.next(true);
-    await this.planningDataService.addNewPlan(newPlan, hiveId);
-    await this.coloniesService.getColoniesData();
-    this.spinnerService.setSpinnerStatus.next(false);
+    this.planningDataService.addNewPlan(newPlan, hiveId)
+      .pipe(take(1))
+      .subscribe(
+      () => this.coloniesService.retrieveColonies()
+    );
+
   }
 
-  async updatePlan(plan: PlanElement, hiveId: number) {
+  updatePlan(plan: PlanElement, hiveId: number) {
     this.spinnerService.setSpinnerStatus.next(true);
-    await this.planningDataService.updatePlan(plan, hiveId);
-    await this.coloniesService.getColoniesData();
-    this.spinnerService.setSpinnerStatus.next(false);
+    this.planningDataService.updatePlan(plan, hiveId)
+      .pipe(take(1))
+      .subscribe(
+        () => this.coloniesService.retrieveColonies()
+      );
   }
 
+  //TODO! vaata üle, et mis asja see tagastab ja milleks-kuidas seda kasutatatakse
   getDropdownElements() {
-    this.planningDataService.getPlanningDropdownElements().subscribe(
+    this.planningDataService.getPlanningDropdownElements()
+      .pipe(take(1))
+      .subscribe(
       data => {
           if(data.length === 0) {
             this.planningDropDown = undefined;
           } else {
             this.planningDropDown = data
-
           }
         }
     );

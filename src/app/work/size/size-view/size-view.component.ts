@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {Hive} from "../../../settings/shared/hive.model";
-import {Size} from "../size.model";
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Size } from '../size.model';
 
 @Component({
   selector: 'app-size-view',
@@ -14,10 +13,11 @@ export class SizeViewComponent implements OnChanges {
   @Output() editMEEEE = new EventEmitter<string>();
   sizeLog: Size;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnChanges() {
-    if(this.sizeLogs) {
+    if (this.sizeLogs) {
       if (this.blockName === 'current') {
         this.sizeLog = this.sizeLogs.length >= 1 ? this.sizeLogs[0] : null;
       }

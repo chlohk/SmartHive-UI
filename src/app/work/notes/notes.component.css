@@ -1,5 +1,9 @@
-.planning-section {
+.notes-section-height-for-work-dashboard {
   height: 330px;
+}
+
+.notes-section-height-for-planning-modal {
+  height: 490px;
 }
 
 .scrolling-area {
@@ -31,6 +35,10 @@
   border-radius: 7px;
 }
 
+.no-notes-to-show-for-create-wide-enough {
+  width: 455px;
+}
+
 button {
   padding: .375rem .75rem;
   font-size: 1.5rem;
@@ -49,4 +57,8 @@ button.main-top {
 .button-badge {
   margin-left: 1.2rem;
   font-size: 1.5rem;
+}
+
+.no-notes-to-show-for-level-button {
+  margin-top: 120px !important;
 }

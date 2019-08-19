@@ -1,21 +1,22 @@
 import { Component, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
-import {JwModalService} from "./jw-modal.service";
+import { JwModalService } from './jw-modal.service';
 
 
 @Component({
   selector: 'jw-modal',
-  template:
-    `<div class="jw-modal">
-            <div class="jw-modal-body">
-                <ng-content></ng-content>
-            </div>
-        </div>
-        <div class="jw-modal-background"></div>`,
+  template: `
+  <div class="jw-modal" [ngClass]="{'no-margin': marginLess}">
+    <div class="jw-modal-body" [ngClass]="{'no-margin': marginLess}">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="jw-modal-background"></div>`,
   styleUrls: ['./jw-modal.css']
 })
 
 export class JwModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
+  @Input() marginLess = false;
   private element: any;
 
   constructor(private modalService: JwModalService,

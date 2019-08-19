@@ -5,21 +5,19 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {PlanningDropdown} from "./planning-dropdown/planning-dropdown-element/planning-dropdown.model";
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class PlanningDataService {
 
   constructor(private httpClient: HttpClient){}
 
   addNewPlan(newPlan: PlanElement, hiveId: number) {
-    return this.httpClient.post<Colony[]>(
-      UtilService.backEndURL  + 'api/hive/' + hiveId + '/planning',
-      newPlan).toPromise();
+    return this.httpClient.post<void>(
+      UtilService.backEndURL  + 'api/hive/' + hiveId + '/planning', newPlan);
   }
 
   updatePlan(plan: PlanElement, hiveId: number) {
-    return this.httpClient.put<Colony[]>(
-      UtilService.backEndURL  + 'api/hive/' + hiveId + '/planning/' + plan.id,
-      plan).toPromise();
+    return this.httpClient.put<void>(
+      UtilService.backEndURL  + 'api/hive/' + hiveId + '/planning/' + plan.id, plan);
   }
 
   getPlanningDropdownElements() {

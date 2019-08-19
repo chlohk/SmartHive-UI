@@ -1,51 +1,59 @@
-<nav class="navbar navbar-default" style="margin: 0 !important; background-color: gray">
+<nav class="navbar navbar-default" style="margin: 0 !important; background-color: gray" *ngIf="colonies">
   <div class="container-fluid">
     <div class="col-sm-1">
-      <a routerLink="/settings" *ngIf="!isCountingDownToUpdateData">
+      <a routerLink="/tarmo/settings" *ngIf="!isCountingDownToUpdateData">
         <button
           type="button"
           class="btn btn-light btn-outline-secondary">
           <img
             src="assets/img/settingsView.png"
             height="30px"
-            >
+          >
         </button>
       </a>
       <app-spinner *ngIf="isCountingDownToUpdateData"></app-spinner>
     </div>
-    <div class="col-sm-6">
-      <form>
-        <select
-          name="colony"
-          class="custom-select"
-          [(ngModel)]="currentlySelectedColonyId"
-          (change)="onColonyChange()"
-          [disabled]="isCountingDownToUpdateData">
-          <optgroup>
-            <option value="" disabled selected hidden>Vali koloonia...</option>
-            <option
-              *ngFor="let colony of colonies"
-              [value]="colony.id"> {{ colony.name }}</option>
-          </optgroup>
-        </select>
-      </form>
+    <div class="col-sm-5">
+      <select
+        name="colony"
+        class="custom-select"
+        [(ngModel)]="currentlySelectedColonyId"
+        (change)="coloniesService.notifyColonyHiveSelection(+currentlySelectedColonyId, +currentlySelectedHiveId)"
+        [disabled]="isCountingDownToUpdateData">
+        <optgroup>
+          <option value="" disabled selected hidden>Vali koloonia...</option>
+          <option
+            *ngFor="let colony of colonies"
+            [value]="colony.id"> {{ colony.name }}</option>
+        </optgroup>
+      </select>
     </div>
-    <div class="col-sm-5" *ngIf="currentlySelectedColonyId != ''">
-      <form>
-        <select
-          name="hive"
-          class="custom-select"
-          [(ngModel)]="currentlySelectedHiveId"
-          (change)="onHiveChange()"
-          [disabled]="isCountingDownToUpdateData">
-          <optgroup>
-            <option value="" disabled selected hidden>Vali taru...</option>
-            <option
-              *ngFor="let hive of currentlySelectedColony.hives"
-              [value]="hive.id"> {{ '# ' + hive.number + ' ' + hive.description }}</option>
-          </optgroup>
-        </select>
-      </form>
+    <div class="col-sm-5" *ngIf="currentlySelectedColony">
+      <select
+        name="hive"
+        class="custom-select"
+        [(ngModel)]="currentlySelectedHiveId"
+        (change)="coloniesService.notifyColonyHiveSelection(+currentlySelectedColonyId, +currentlySelectedHiveId)"
+        [disabled]="isCountingDownToUpdateData">
+        <optgroup>
+          <option value="" disabled selected hidden>Vali taru...</option>
+          <option
+            *ngFor="let hive of currentlySelectedColony.hives"
+            [value]="hive.id"> {{ '# ' + hive.number + ' ' + hive.description }}</option>
+        </optgroup>
+      </select>
+    </div>
+    <div class="col-sm-1">
+      <button
+        type="button"
+        class="btn btn-light btn-outline-secondary"
+        (click)="utilService.showOverviewWindow(true)">
+        <img
+          src="assets/img/colony.png"
+          height="30px"
+        >
+      </button>
+      <app-spinner *ngIf="isCountingDownToUpdateData"></app-spinner>
     </div>
   </div>
 </nav>

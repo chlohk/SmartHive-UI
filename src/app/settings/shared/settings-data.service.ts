@@ -29,7 +29,7 @@ export class SettingsDataService {
     // let headers: HttpHeaders = new HttpHeaders();
     // headers.append("Authorization", "Basic " + btoa(username + ":" + password));
     // headers.append("Content-Type", "application/x-www-form-urlencoded");
-    return this.httpClient.get<Colony[]>(UtilService.backEndURL  + 'api/colony').toPromise();
+    return this.httpClient.get<Colony[]>(UtilService.backEndURL  + 'api/colony');
   }
 
   // onPostToLogin() {

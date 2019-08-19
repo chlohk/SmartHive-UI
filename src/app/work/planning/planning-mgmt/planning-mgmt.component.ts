@@ -11,10 +11,11 @@ import {Colony} from "../../../settings/shared/colony.model";
   templateUrl: './planning-mgmt.component.html',
   styleUrls: ['./planning-mgmt.component.css']
 })
-export class PlanningMgmtComponent implements OnInit {
+export class PlanningMgmtComponent {
   @Output() isCountingDownToUpdateData = new EventEmitter<boolean>();
   @Input() currentlyChosenHive: Hive;
   @Input() currentlyChosenColony: Colony;
+  @Input() mgmtComponentid: string;
 
   activeWindow: PlanningMgmtWindowEnum = PlanningMgmtWindowEnum.PLANNING;
   planningMgmtWindowEnum = PlanningMgmtWindowEnum;
@@ -26,19 +27,6 @@ export class PlanningMgmtComponent implements OnInit {
               private planningService: PlanningService) {
   }
 
-  ngOnInit() {
-    this.planningService.showPlanningWindow.subscribe(
-      show => {
-        if (show) {
-          this.modalService.open('planning');
-          this.activeWindow = PlanningMgmtWindowEnum.PLANNING;
-        } else {
-          this.modalService.close('planning');
-        }
-      }
-    );
-  }
-
   radioBtnActiveResolveStateChange(isActiveResolveStateUnresolved: boolean) {
     this.planningService.newPlanElementSelected.next(null);
     this.isActiveResolveStateUnresolved = isActiveResolveStateUnresolved;
@@ -48,5 +36,6 @@ export class PlanningMgmtComponent implements OnInit {
     this.timerRunning = countDownState;
     this.isCountingDownToUpdateData.emit(countDownState)
   }
+
 
 }

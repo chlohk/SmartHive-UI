@@ -1,14 +1,14 @@
-<div *ngIf="!sizeLog"
-     align="center">
+<div
+  *ngIf="!sizeLog"
+  align="center">
   <div
     class="whiteBox"
     style="margin-bottom: 27px"
     align="center">
-    -
+    <span> - </span>
   </div>
   <div
     class="whiteBox"
-    style="margin-bottom: 19px"
     align="center">
     -
     <br>
@@ -20,16 +20,17 @@
     <button
       type="button"
       class="btn btn-light btn-outline-secondary"
-      style="margin-bottom: 18px"
       [disabled]="true">
-      N/A
+      <span>N/A</span>
     </button>
   </div>
-  <div class="whiteBox"
-       align="center">
+  <div
+    class="whiteBox"
+    align="center">
     -
   </div>
 </div>
+
 
 <div
   *ngIf="sizeLog"

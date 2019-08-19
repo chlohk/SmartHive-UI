@@ -54,6 +54,19 @@ import {DaysUntilPipe} from "./util/days-until.pipe";
 import { PlanningDropdownComponent } from './work/planning/planning-dropdown/planning-dropdown.component';
 import { PlanningDropdownElementComponent } from './work/planning/planning-dropdown/planning-dropdown-element/planning-dropdown-element.component';
 import { PlanningDropdownMgmtEditAreaComponent } from './work/planning/planning-dropdown/planning-dropdown-mgmt-edit-area/planning-dropdown-mgmt-edit-area.component';
+import { NoteElementComponent } from './work/notes/note-element/note-element.component';
+import {NotesService} from "./work/notes/notes.service";
+import { NoteMgmtComponent } from './work/notes/note-mgmt/note-mgmt.component';
+import { NoteMgmtEditAreaComponent } from './work/notes/note-mgmt/note-mgmt-edit-area/note-mgmt-edit-area.component';
+import { TooltipModule } from 'ngx-bootstrap';
+import { OverviewComponent } from './work/overview/overview.component';
+import { DeadlineTextPipe } from './work/planning/plan-element/deadline-text.pipe';
+import { DeadlineClassPipe } from './work/planning/plan-element/deadline-class.pipe';
+import { PlanTextPipe } from './work/planning/plan-element/plan-text.pipe';
+import { MotherStatusTextPipe } from './work/mother/mother-status-text.pipe';
+import { MotherStatusCellPipe } from './work/overview/mother-status-cell.pipe';
+import { LoginComponent } from './work/login/login.component';
+import { LoadingComponent } from './util/loading/loading.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -93,13 +106,25 @@ import { PlanningDropdownMgmtEditAreaComponent } from './work/planning/planning-
     DaysUntilPipe,
     PlanningDropdownComponent,
     PlanningDropdownElementComponent,
-    PlanningDropdownMgmtEditAreaComponent
+    PlanningDropdownMgmtEditAreaComponent,
+    NoteElementComponent,
+    NoteMgmtComponent,
+    NoteMgmtEditAreaComponent,
+    OverviewComponent,
+    DeadlineTextPipe,
+    DeadlineClassPipe,
+    PlanTextPipe,
+    MotherStatusTextPipe,
+    MotherStatusCellPipe,
+    LoginComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    TooltipModule.forRoot()
   ],
   providers: [
     ColoniesService,
@@ -111,9 +136,7 @@ import { PlanningDropdownMgmtEditAreaComponent } from './work/planning/planning-
     MomAttributesService,
     UtilService,
     SizeDataService,
-    SizeService,
-    PlanningService,
-    PlanningDataService],
+    SizeService,],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,70 @@
+<jw-modal id="{{mgmtComponentId}}">
+  <div class="card bg-light">
+    <div class="card-header nav">
+      <span class="navbar-brand big-text notes-header">Märkmed</span>
+      <span class="navbar-text badge badge-dark belongs-to-badge">
+        {{ currentlyChosenColony.name + ' / ' + currentlyChosenHive.number}}
+      </span>
+      <button
+        class="btn btn-danger nav-item closing ml-auto"
+        (click)="modalService.close(mgmtComponentId);">
+        <img
+          src="assets/img/sulge.jpeg"
+          class="x">
+      </button>
+    </div>
+    <div class="container m-0">
+      <div class="row">
+        <div class="col-5">
+          <div class="row justify-content-center p-4">
+            <div class="btn-group btn-group-toggle" *ngIf="!timerRunning">
+              <label
+                class="btn btn-light btn-outline-secondary modal-inside-text"
+                [ngClass]="{'active': isActiveResolveStateUnresolved}">
+                <input
+                  type="radio"
+                  name="planning_window_type"
+                  [checked]="isActiveResolveStateUnresolved"
+                  (change)="radioBtnActiveResolveStateChange(true)"
+                  [disabled]="timerRunning">
+                Aktiivsed
+              </label>
+              <label
+                class="btn btn-light btn-outline-secondary modal-inside-text"
+                [ngClass]="{'active': !isActiveResolveStateUnresolved}">
+                <input
+                  type="radio"
+                  name="planning_window_type"
+                  [checked]="!isActiveResolveStateUnresolved"
+                  (change)="radioBtnActiveResolveStateChange(false)"
+                  [disabled]="timerRunning">
+                Kustutatud
+              </label>
+            </div>
+            <div class="spinner-area">
+              <app-spinner *ngIf="timerRunning"></app-spinner>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5">
+          <div class="row padding-for-notes">
+            <app-notes
+              [currentlySelectedHive]="currentlyChosenHive"
+              [notesComponentType]="isActiveResolveStateUnresolved ?
+                notesComponentEnum.NOTE_MANAGEMENT_ACTIVE :
+                notesComponentEnum.NOTE_MANAGEMENT_INACTIVE"></app-notes>
+          </div>
+        </div>
+        <div class="col-7 pl-5 d-flex flex-column-reverse mb-5">
+          <app-note-mgmt-edit-area
+            [currentlyChosenHive]="currentlyChosenHive"
+            (isCountingDownToUpdateData)="onCountDownChange($event)"
+            [isActiveResolveStateUnresolved]="isActiveResolveStateUnresolved">
+          </app-note-mgmt-edit-area>
+        </div>
+      </div>
+    </div>
+  </div>
+</jw-modal>

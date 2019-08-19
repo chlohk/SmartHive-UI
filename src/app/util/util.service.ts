@@ -1,14 +1,22 @@
 import {Injectable} from "@angular/core";
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class UtilService {
+
+  private overview = new Subject<boolean>();
+  public overview$ = this.overview.asObservable();
 
   constructor() {
 
   }
 
+  showOverviewWindow(status: boolean) {
+    this.overview.next(status);
+  }
 
-  static backEndURL = 'http://localhost:8080/';
+
+  // static backEndURL = 'http://localhost:8080/tarmo/';
   // static planningDropdown = null;
   // static planningDropdown = this.p
   //
@@ -35,7 +43,7 @@ export class UtilService {
   // },
   // ];
 
-  // static backEndURL = 'http://18.188.231.219/';
+  static backEndURL = '';
   //
   // ng build --prod --output-path docs
 

@@ -20,7 +20,7 @@ export class MotherComponent implements OnChanges {
 
   ngOnChanges() {
     //for debugging...
-    //console.log(this.currentlyChosenHive);
+    //console.log(this.currentlySelectedHive);
   }
 
   onCloseMomStatusPanel() {

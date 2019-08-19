@@ -1,17 +1,15 @@
-import {Component, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {Colony} from "./shared/colony.model";
-import {ColoniesService} from "./shared/colonies.service";
-import {SettingsDataService} from "./shared/settings-data.service";
-import {SpinnerService} from "../util/spinner/spinner.service";
-import {SettingsNavigationService} from "./shared/settings-navigation.service";
-import {JwModalService} from "../util/jw-modal/jw-modal.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Colony } from './shared/colony.model';
+import { ColoniesService } from './shared/colonies.service';
+import { SpinnerService } from '../util/spinner/spinner.service';
+import { SettingsNavigationService } from './shared/settings-navigation.service';
 
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
   styleUrls: ['./settings.component.css']
 })
-export class SettingsComponent implements OnInit{
+export class SettingsComponent implements OnInit {
   currentlySelectedColonyId = '';
   colonies: Colony[];
   loadedComponent = '';
@@ -19,7 +17,8 @@ export class SettingsComponent implements OnInit{
 
   constructor(private settingsNavigationService: SettingsNavigationService,
               private coloniesService: ColoniesService,
-              private spinnerService: SpinnerService) { }
+              private spinnerService: SpinnerService) {
+  }
 
   async ngOnInit() {
     this.settingsNavigationService.mainSettingsComponent.subscribe(
@@ -29,20 +28,20 @@ export class SettingsComponent implements OnInit{
       id => this.currentlySelectedColonyId = id
     );
 
-    this.coloniesService.coloniesChanged.subscribe(
+    this.coloniesService.coloniesDataRetrieved$.subscribe(
       colonies => this.colonies = colonies
     );
-    this.coloniesService.getColoniesData();
+    this.coloniesService.retrieveColonies();
 
-     setTimeout(()=> {
-       this.spinnerService.setSpinnerStatus.next(false);
-     }, 0);
+    setTimeout(() => {
+      this.spinnerService.setSpinnerStatus.next(false);
+    }, 0);
   }
 
   onNewColonyButtonClick() {
     this.settingsNavigationService.colonyDetailsComponent.next('');
     this.currentlySelectedColonyId = '';
-    if(this.loadedComponent === 'newColony') {
+    if (this.loadedComponent === 'newColony') {
       this.loadedComponent = '';
     } else {
       this.loadedComponent = 'newColony';
@@ -50,7 +49,7 @@ export class SettingsComponent implements OnInit{
   }
 
   onEditColonyButtonClick() {
-    if(this.settingsNavigationService.currentlyLoadedColonyDetailsComponent === 'editColony') {
+    if (this.settingsNavigationService.currentlyLoadedColonyDetailsComponent === 'editColony') {
       this.settingsNavigationService.colonyDetailsComponent.next('');
     } else {
       this.settingsNavigationService.colonyDetailsComponent.next('editColony');
@@ -74,7 +73,7 @@ export class SettingsComponent implements OnInit{
     if (requestMethod) {
       requestMethod.call(element);
     } else {
-      console.log("Oops. Request method false.");
+      console.log('Oops. Request method false.');
     }
   }
 }

@@ -1,22 +1,47 @@
-<div class="card bg-light planning-section vertical-paddings">
-  <div class="card-body scrolling-area" id="notesScrollArea">
-    <button
-      *ngIf="document.getElementById('notesScrollArea').scrollHeight >= MIN_HEIGHT_WHEN_SECOND_BUTTON_ADDED;"
-      type="button"
-      class="btn btn-light btn-outline-secondary btn-block main-top">
-      Haldan märkmeid
-      <span class="badge badge-dark button-badge">3 / 2</span>
-    </button>
-    <ul class="list-group">
-      <li class="list-group-item active">Cras justo odio</li>
-      <li class="list-group-item">Dapibus ac facilisis in</li>
-      <li class="list-group-item">Morbi leo risus</li>
-      <li class="list-group-item">Porta ac consectetur ac</li>
-      <li class="list-group-item">Vestibulum at eros</li>
-    </ul>
-    <button type="button" class="btn btn-light btn-outline-secondary btn-block main-bottom">
-      Haldan märkmeid
-      <span class="badge badge-dark button-badge">3 / 2</span>
-    </button>
+<ng-container *ngIf="currentlySelectedHive">
+  <div class="card bg-light vertical-paddings" [ngClass]="getHeight()">
+    <div
+      class="card-body scrolling-area"
+      id="notesScrollArea"
+      [ngClass]="{'no-notes-to-show-for-create-wide-enough':
+      notesComponentType != notesComponentEnum.WORK_DASHBOARD}">
+      <ng-container *ngIf="notesComponentType === notesComponentEnum.WORK_DASHBOARD">
+        <button
+          *ngIf="currentlySelectedHive.activeShortTermNotesCount >= MIN_NO_OF_PLANS_WHEN_SECOND_BUTTON_ADDED"
+          type="button"
+          class="btn btn-light btn-outline-secondary btn-block main-top"
+          (click)="onOpenNotes()">
+          Haldan märkmeid
+          <span class="badge badge-dark button-badge">
+            <span>{{currentlySelectedHive.activeShortTermNotesCount}}</span>
+            <span>{{ currentlySelectedHive.activeLongTermNotesCount ? '/' + currentlySelectedHive.activeLongTermNotesCount : ''}}</span>
+          </span>
+        </button>
+      </ng-container>
+
+
+      <app-note-element
+        *ngFor="let note of getRelevantNotesList()"
+        [note]="note"
+        [memorizedActiveElementId]="memorizedActiveNoteElementId"
+        [notesComponentType]="notesComponentType"
+        [currentlySelectedHive]="currentlySelectedHive">
+      </app-note-element>
+
+      <ng-container *ngIf="notesComponentType === notesComponentEnum.WORK_DASHBOARD">
+        <button
+          type="button"
+          class="btn btn-light btn-outline-secondary btn-block main-bottom"
+          (click)="onOpenNotes()"
+          [ngClass]="{'no-notes-to-show-for-level-button': currentlySelectedHive.activeShortTermNotesCount === 0}">
+          Haldan märkmeid
+          <span class="badge badge-dark button-badge">
+            <span>{{currentlySelectedHive.activeShortTermNotesCount}}</span>
+            <span>{{ currentlySelectedHive.activeLongTermNotesCount ? '/' + currentlySelectedHive.activeLongTermNotesCount : ''}}</span>
+          </span>
+        </button>
+      </ng-container>
+
+    </div>
   </div>
-</div>
+</ng-container>

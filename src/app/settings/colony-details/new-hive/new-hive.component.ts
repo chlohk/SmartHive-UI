@@ -21,7 +21,7 @@ export class NewHiveComponent implements OnInit {
               private settingsNavigationService: SettingsNavigationService) { }
 
   ngOnInit() {
-    this.colonies = this.coloniesService.getAllColonies();
+    this.colonies = this.coloniesService.getColonies();
     this.currentlySelectedColony = this.coloniesService.getColonyById(+this.currentlySelectedColonyId);
     this.newHiveNumber = this.newHiveNumberSuggestion();
   }

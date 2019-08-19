@@ -1,7 +1,6 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
-import {Hive} from "../../settings/shared/hive.model";
-import {SizeService} from "./size.service";
-import {Size} from "./size.model";
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Hive } from '../../settings/shared/hive.model';
+import { Size } from './size.model';
 
 @Component({
   selector: 'app-size',
@@ -12,20 +11,15 @@ export class SizeComponent implements OnChanges {
   @Input() currentlyChosenHive: Hive;
   @Output() isCountingDownToUpdateData = new EventEmitter<boolean>();
   isCountingDown = false;
-  sizeLogs: Size[];
   blockToEdit = 'current';
   sizeLogCurrent: Size = null;
   sizeLogPrevious: Size = null;
   sizeLogBeforePrevious: Size = null;
 
-  constructor(private sizeService: SizeService) { }
+  constructor() {
+  }
 
   ngOnChanges() {
-    this.sizeService.onGetSizeData(this.currentlyChosenHive.id).then(
-      data => {
-        this.sizeLogs = data;
-      }
-    );
     this.blockToEdit = 'current';
   }
 

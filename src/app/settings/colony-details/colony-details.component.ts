@@ -23,7 +23,7 @@ export class ColonyDetailsComponent implements OnInit, OnChanges {
     this.settingsNavigationService.colonyDetailsComponent.subscribe(
       loadedComponent => this.loadedComponent = loadedComponent
     );
-    this.coloniesService.coloniesChanged.subscribe(
+    this.coloniesService.coloniesDataRetrieved$.subscribe(
       () => this.currentlySelectedColony = this.coloniesService.getColonyById(
         +this.currentlySelectedColonyId)
     );

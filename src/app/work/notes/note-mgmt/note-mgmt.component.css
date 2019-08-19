@@ -1,0 +1,37 @@
+.padding-for-notes{
+  padding-left: 2.5px;
+}
+
+.big-text {
+  font-size: 2rem;
+}
+
+.notes-header {
+  font-weight: 500;
+  margin-right: 60px;
+}
+
+button.closing {
+  width: fit-content;
+  height: fit-content;
+  padding: 2px 2px 2px 2px;
+}
+
+img.x {
+  height: 40px;
+}
+
+.belongs-to-badge {
+  height: 40px;
+  margin-top: 8px;
+  font-size: 1.5rem;
+  margin-left: 400px;
+}
+
+.modal-inside-text {
+  font-size: 1.5rem;
+}
+
+.spinner-area {
+  height: 50px;
+}

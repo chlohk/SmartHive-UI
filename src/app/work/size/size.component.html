@@ -5,13 +5,13 @@
         <app-size-view
           *ngIf="blockToEdit != 'beforePrevious'"
           [blockName]="'beforePrevious'"
-          [sizeLogs]="sizeLogs"
+          [sizeLogs]="currentlyChosenHive.threeSizeLogs"
           [isCountingDownToUpdateData]="isCountingDown"
           (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
         <app-size-edit
           *ngIf="blockToEdit === 'beforePrevious'"
           [blockName]="'beforePrevious'"
-          [sizeLogs]="sizeLogs"
+          [sizeLogs]="currentlyChosenHive.threeSizeLogs"
           [idOfCurrentHive]="currentlyChosenHive.id"
           (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>
@@ -19,13 +19,13 @@
         <app-size-view
           *ngIf="blockToEdit != 'previous'"
           [blockName]="'previous'"
-          [sizeLogs]="sizeLogs"
+          [sizeLogs]="currentlyChosenHive.threeSizeLogs"
           [isCountingDownToUpdateData]="isCountingDown"
           (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
         <app-size-edit
           *ngIf="blockToEdit === 'previous'"
           [blockName]="'previous'"
-          [sizeLogs]="sizeLogs"
+          [sizeLogs]="currentlyChosenHive.threeSizeLogs"
           [idOfCurrentHive]="currentlyChosenHive.id"
           (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>
@@ -42,13 +42,13 @@
         <app-size-view
           *ngIf="blockToEdit != 'current'"
           [blockName]="'current'"
-          [sizeLogs]="sizeLogs"
+          [sizeLogs]="currentlyChosenHive.threeSizeLogs"
           [isCountingDownToUpdateData]="isCountingDown"
           (editMEEEE)="chooseNewBlockToEdit($event)"></app-size-view>
         <app-size-edit
           *ngIf="blockToEdit === 'current'"
           [blockName]="'current'"
-          [sizeLogs]="sizeLogs"
+          [sizeLogs]="currentlyChosenHive.threeSizeLogs"
           [idOfCurrentHive]="currentlyChosenHive.id"
           (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size-edit>
       </div>

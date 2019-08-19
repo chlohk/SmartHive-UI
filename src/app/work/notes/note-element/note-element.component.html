@@ -1,0 +1,106 @@
+<ng-container *ngIf="!note.deleted && !this.active">
+  <div
+    (click)="onElementClick()"
+    class="container planning-element pb-1 pt-1 pl-4 pr-4"
+    [ngClass]="{'warning': note.hasWarning}">
+    <div class="row d-flex justify-content-between">
+      <div>
+        <div class="container">
+          <div class="row time-height">
+            Lisatud: {{ note.dateAdded.toString() | timeAgo }}
+          </div>
+          <div class="row time-height"
+               *ngIf="note.lastModified">
+            Muudetud: {{ note.lastModified.toString() | timeAgo }}
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row-reverse align-items-center">
+        <img
+          *ngIf="note.hasWarning"
+          src="assets/img/warning.png"
+        >
+        <img
+          *ngIf="note.longTerm"
+          src="assets/img/telescope.jpg"
+        >
+      </div>
+    </div>
+    <hr class="mt-2 mb-2">
+    <div class="row"><strong>{{ note.text }}</strong></div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!note.deleted && this.active">
+  <div
+    class="container planning-element pb-1 pt-1 pl-4 pr-4 active-background"
+    [ngClass]="{'warning': note.hasWarning}">
+    <div class="row d-flex justify-content-between">
+      <div>
+        <div class="container">
+          <div class="row time-height">
+            Lisatud: {{ note.dateAdded.toString() | timeAgo }}
+          </div>
+          <div class="row time-height"
+               *ngIf="note.lastModified">
+            Muudetud: {{ note.lastModified.toString() | timeAgo }}
+          </div>
+        </div>
+      </div>
+      <div
+        *ngIf="note.longTerm"
+        class="d-flex flex-row-reverse justify-content-center align-items-center bordered inactive-background"
+        (click)="onDeleteElement()"
+        [tooltip]="notAllowedToDelete"
+        [container]="'body'">
+        <img src="assets/img/trash.png">
+      </div>
+      <div
+        *ngIf="!note.longTerm"
+        class="d-flex flex-row-reverse justify-content-center align-items-center bordered inactive-background"
+        (click)="onDeleteElement()">
+        <img src="assets/img/trash.png">
+      </div>
+    </div>
+    <hr class="mt-2 mb-2">
+    <div class="row"><strong>{{ note.text }}</strong></div>
+  </div>
+</ng-container>
+
+<ng-template #notAllowedToDelete>
+  <span [innerHTML]="'Pikaajalist märget kustutada ei saa. <br><br>Märke kustutamiseks eemalda temalt esmalt pikaajalise märge'"></span>
+</ng-template>
+
+<ng-container *ngIf="note.deleted">
+  <div
+    class="container planning-element pb-1 pt-1 pl-4 pr-4"
+    [ngClass]="{'warning': note.hasWarning, 'active-background': active}"
+    (click)="onElementClick()">
+    <div class="row d-flex justify-content-between">
+      <div>
+        <div class="container">
+          <div class="row time-height">
+            Lisatud: {{ note.dateAdded.toString() | date:'dd.MM.yy' }}
+          </div>
+          <div class="row time-height"
+               *ngIf="note.lastModified">
+            Muudetud: {{ note.lastModified.toString() | date:'dd.MM.yy' }}
+          </div>
+          <div class="row time-height"
+               *ngIf="note.lastModified">
+            Kustutatud: {{ note.dateDeleted.toString() | date:'dd.MM.yy' }}
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex-row-reverse d-flex justify-content-center align-items-center">
+        <img
+          *ngIf="note.hasWarning"
+          src="assets/img/warning.png">
+      </div>
+    </div>
+    <hr class="mt-2 mb-2">
+    <div class="row"><strong>{{ note.text }}</strong></div>
+  </div>
+</ng-container>

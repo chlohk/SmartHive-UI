@@ -17,9 +17,11 @@ export class MomAttributes {
   isBirthDayDateMonthSet: boolean;
   birthday: Date;
 
+  //TODO! add the boolean to the backend
   hasControlFrame: boolean;
   controlFrameStartDate: Date;
 
+  //TODO! add the boolean to the backend
   isCocoonChosen: boolean;
   cocoonChosenDate: Date;
 

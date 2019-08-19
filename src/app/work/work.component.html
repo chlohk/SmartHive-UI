@@ -1,41 +1,64 @@
+<app-login
+  *ngIf="!validated"
+  (allowedToPass)="validated = $event"></app-login>
+
 <app-work-header
+  *ngIf="validated"
   [colonies]="colonies"
+  [currentlySelectedColony]="currentlySelectedColony"
+  [currentlySelectedColonyId]="currentlySelectedColony ? currentlySelectedColony.id.toString() : ''"
+  [currentlySelectedHiveId]="currentlySelectedHive ? currentlySelectedHive.id.toString() : ''"
   [isCountingDownToUpdateData]="isCountingDownToUpdateData"
-  (announceSelectedHive)="onHiveChange($event)"
-  (announceSelectedColony)="onColonyChange($event)"
 >
 </app-work-header>
-<ng-container *ngIf="currentlyChosenHive">
+<ng-container *ngIf="currentlySelectedHive && validated">
   <div class="row" style="margin-right: 0; margin-left: 0">
     <div class="col-9" style="padding-right: 0px; padding-left: 5px">
       <div class="row">
         <div class="col-6 padding-for-notes">
-          <app-notes></app-notes>
+          <app-notes
+            [currentlySelectedHive]="currentlySelectedHive"
+            [notesComponentType]="notesComponentEnum.WORK_DASHBOARD"></app-notes>
         </div>
         <div class="col-6 padding-for-planning">
           <app-planning
-            [currentlyChosenHive]="currentlyChosenHive"
+            [currentlyChosenHive]="currentlySelectedHive"
             [planningComponentType]="planningComponentEnum.WORK_DASHBOARD"
           >
           </app-planning>
         </div>
       </div>
       <app-size
-        [currentlyChosenHive]="currentlyChosenHive"
-        *ngIf="currentlyChosenHive"
+        [currentlyChosenHive]="currentlySelectedHive"
+        *ngIf="currentlySelectedHive"
         (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size>
     </div>
     <div class="col-3" style="margin-right: 0; padding-right: 0; padding-left: 5px">
       <app-mother
-        [currentlyChosenHive]="currentlyChosenHive"
-        *ngIf="currentlyChosenHive"></app-mother>
+        [currentlyChosenHive]="currentlySelectedHive"
+        *ngIf="currentlySelectedHive"></app-mother>
     </div>
   </div>
 
   <app-planning-mgmt
     (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"
-    [currentlyChosenHive]="currentlyChosenHive"
-    [currentlyChosenColony]="currentlyChosenColony"
+    [currentlyChosenHive]="currentlySelectedHive"
+    [currentlyChosenColony]="currentlySelectedColony"
+    [mgmtComponentid]="'work-planning'"
   ></app-planning-mgmt>
+
+  <app-note-mgmt
+    (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"
+    [currentlyChosenHive]="currentlySelectedHive"
+    [currentlyChosenColony]="currentlySelectedColony"
+    [mgmtComponentId]="'notes'"
+  ></app-note-mgmt>
+
 </ng-container>
+
+
+<app-overview
+  *ngIf="colonies && validated"
+  [colonies]="colonies">
+</app-overview>
 

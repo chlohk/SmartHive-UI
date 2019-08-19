@@ -30,21 +30,21 @@ export class MomAttributesService {
   async onDeleteFreakLogEntry(logEntryToDelete: Log) {
     this.spinnerService.setSpinnerStatus.next(true);
     await this.momDataService.onDeleteFreakLogEntry(logEntryToDelete);
-    await this.coloniesService.getColoniesData();
+    await this.coloniesService.retrieveColonies();
     this.spinnerService.setSpinnerStatus.next(false);
   }
 
   async onSaveNewFreakLogEntry(hive: Hive, logEntryText: string) {
     this.spinnerService.setSpinnerStatus.next(true);
     await this.momDataService.onSaveNewFreakLogEntry(hive, logEntryText);
-    await this.coloniesService.getColoniesData();
+    await this.coloniesService.retrieveColonies();
     this.spinnerService.setSpinnerStatus.next(false);
   }
 
   async onUpdateFreakLogEntry(logEntryToUpdate: Log, newlogEntryText: string) {
     this.spinnerService.setSpinnerStatus.next(true);
     await this.momDataService.onUpdateFreakLogEntry(logEntryToUpdate, newlogEntryText);
-    await this.coloniesService.getColoniesData();
+    await this.coloniesService.retrieveColonies();
     this.spinnerService.setSpinnerStatus.next(false);
   }
 

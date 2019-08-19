@@ -1,4 +1,4 @@
-<jw-modal id="planning">
+<jw-modal id="{{mgmtComponentid}}">
   <ng-container [ngSwitch]="activeWindow" >
     <ng-container [ngTemplateOutlet]="planning" *ngSwitchCase="planningMgmtWindowEnum.PLANNING"></ng-container>
     <ng-container [ngTemplateOutlet]="dropdownMgmt" *ngSwitchCase="planningMgmtWindowEnum.DROPDOWN_MGMT"></ng-container>
@@ -14,7 +14,7 @@
       </span>
       <button
         class="btn btn-danger nav-item closing ml-auto"
-        (click)="planningService.showPlanningWindow.emit(false)">
+        (click)="modalService.close(mgmtComponentid)">
         <img
           src="assets/img/sulge.jpeg"
           class="x">
@@ -84,7 +84,7 @@
       <span class="navbar-brand big-text planning-header">Planeeringute rippmenüü</span>
       <button
         class="btn btn-danger nav-item closing ml-auto"
-        (click)="planningService.showPlanningWindow.emit(false)">
+        (click)="modalService.close(mgmtComponentid)">
         <img
           src="assets/img/sulge.jpeg"
           class="x">

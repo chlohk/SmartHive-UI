@@ -1,0 +1,77 @@
+<ng-container *ngIf="activeNoteElement">
+  <ng-container *ngIf="isActiveResolveStateUnresolved; else inActive">
+    <div class="row pb-4">
+      <ng-container *ngIf="!activeNoteElement.id; else changePlanningHeader">
+        <h2>Uus märge</h2>
+      </ng-container>
+    </div>
+    <div class="row card ml-n3">
+      <div class="row ml-0 edit-area-height">
+        <div class="d-flex input-area-width justify-content-around align-items-center flex-column">
+              <textarea
+                class="modal-inside-text planning-element-text-area h-100"
+                [(ngModel)]="activeNoteElement.text"
+                (ngModelChange)="onInputChange()"></textarea>
+        </div>
+        <div class="col d-flex flex-column justify-content-around">
+          <div class="row modal-inside-text mb-1 mt-4 ml-4">
+            <input
+              class="my-checkbox"
+              type="checkbox"
+              id="isLongTerm"
+              [(ngModel)]="activeNoteElement.longTerm"
+              (change)="onInputChange()"
+              [tooltip]="'Pikaajalist tähistust omavat märget ei saa kustutada ja seda ei kuvata avalehel'">
+            <label class="form-check-label ml-2" for="isLongTerm">
+              Pikaajaline
+            </label>
+          </div>
+          <div class="row modal-inside-text mb-4 mt-2 ml-4">
+            <input
+              class="my-checkbox"
+              type="checkbox"
+              id="hasWarning"
+              [(ngModel)]="activeNoteElement.hasWarning"
+              (change)="onInputChange()">
+            <label class="form-check-label ml-2" for="hasWarning">
+              Märgi tähelepanuga
+            </label>
+          </div>
+          <div class="row justify-content-center">
+            <ng-container *ngIf="!activeNoteElement.id; else changePlanningFinishEditing">
+              <button
+                class="btn btn-success modal-inside-text"
+                (click)="onAddNewNote()">
+                Lisan planeeringu
+              </button>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #inActive>
+  <div class="d-flex h-100 justify-content-center align-items-end pb-5">
+    <button
+      class="btn btn-success modal-inside-text mb-5"
+      *ngIf="activeNoteElement.id != null"
+      (click)="onActivateElement()">
+      Taastan "Aktiivseks"
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #changePlanningHeader>
+  <h2>Muudan märget</h2>
+</ng-template>
+
+<ng-template #changePlanningFinishEditing>
+  <button
+    class="btn btn-danger modal-inside-text"
+    (click)="notesService.newNoteElementSelected.next(null)"
+    [disabled]="timerRunning">
+    Lõpetan muutmise
+  </button>
+</ng-template>

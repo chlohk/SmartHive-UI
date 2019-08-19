@@ -26,3 +26,7 @@
 body.jw-modal-open {
   overflow: hidden;
 }
+
+.no-margin {
+  margin: 0 !important;
+}

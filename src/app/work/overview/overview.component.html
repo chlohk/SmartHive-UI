@@ -1,0 +1,103 @@
+<jw-modal id="overview" [marginLess]="true">
+  <div class="card bg-light">
+    <div class="card-header nav">
+      <span class="navbar-brand big-text planning-header">Mesila ülevaade</span>
+      <button
+        class="btn btn-danger nav-item closing ml-auto"
+        (click)="utilService.showOverviewWindow(false)">
+        <img
+          src="assets/img/sulge.jpeg"
+          class="x">
+      </button>
+    </div>
+    <ng-container *ngFor="let colony of colonies">
+      <h3 class="mt-5">{{colony.name}}</h3>
+      <table class="table table-striped">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Järgmine tähtaeg</th>
+          <th scope="col">Järgmine planeering <br> (kokku planeeringuid)</th>
+          <th scope="col">Ema staatus</th>
+          <th scope="col">Ema staatuse info</th>
+          <th scope="col">Peres raame</th>
+          <th scope="col">Magasin</th>
+          <th scope="col">Viimane märge <br> (kokku märkmeid)</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let hive of colony.hives">
+          <th scope="row" class="navigation with-button">
+            <button
+              class="btn btn-outline-secondary navigation"
+              (click)="coloniesService.notifyColonyHiveSelection(colony.id, hive.id); utilService.showOverviewWindow(false)">
+              {{hive.number}}
+            </button>
+          </th>
+          <td class="{{hive.unresolvedPlanElements[hive.unresolvedPlanElements.length - 1] | deadlineClass}}">
+            {{hive.unresolvedPlanElements[hive.unresolvedPlanElements.length - 1] | deadlineText}}
+          </td>
+          <td class="with-button">
+            <button
+              class="btn btn-outline-secondary"
+              (click)="onOpenOverviewPlanning(colony, hive)">
+              {{hive.unresolvedPlanElements[hive.unresolvedPlanElements.length - 1] | planText}}
+              <br>
+              <strong>{{'(' + hive.unresolvedPlanElements.length + ')'}}</strong>
+            </button>
+          </td>
+          <td class="{{hive.momAttributes.momStatus | motherStatusText : true}}">
+            {{hive.momAttributes.momStatus | motherStatusText}}
+          </td>
+          <td class="{{hive.momAttributes | motherStatusCell : true}}"
+              [innerHTML]="hive.momAttributes | motherStatusCell">
+
+          </td>
+          <td class="number">{{hive.threeSizeLogs[0].totalNumOfFrames}}</td>
+          <td class="number">{{hive.threeSizeLogs[0].hasMagazine
+            ? hive.threeSizeLogs[0].magazineSize + '%'
+            : '-'}}</td>
+          <td class="with-button">
+            <button
+              class="btn btn-outline-secondary"
+              (click)="onOpenOverviewNotes(colony, hive)">
+              {{hive.activeShortTermNotesCount != 0
+              ? hive.activeShortTermNotes[hive.activeShortTermNotesCount - 1].text
+              : ''}}
+              <br>
+              <strong>
+                <span>{{'(' + hive.activeShortTermNotesCount}}</span>
+                <span>{{ hive.activeLongTermNotesCount ? '/' + hive.activeLongTermNotesCount + ')' : ')'}}</span>
+              </strong>
+            </button>
+          </td>
+          <td><img *ngIf="hasNoteWithWarning(hive.allActiveNotes)" src="assets/img/warning.png"></td>
+        </tr>
+        </tbody>
+      </table>
+    </ng-container>
+
+    <h4 align="center" class="mt-5" style="text-decoration: underline">
+      <a
+        href="https://docs.google.com/spreadsheets/d/1h0OxIKG2roBrZ-jXIM_hsyybjaJB-E8EZZqruGyzgj8/edit?usp=sharing"
+        target="_blank">->Kui midagi käib mummimesila kasutamisega närvidele <-
+      </a>
+    </h4>
+
+  </div>
+</jw-modal>
+
+<app-note-mgmt
+  *ngIf="overviewSelectedHive && overviewSelectedColony"
+  [currentlyChosenHive]="overviewSelectedHive"
+  [currentlyChosenColony]="overviewSelectedColony"
+  [mgmtComponentId]="'overview-notes'"
+></app-note-mgmt>
+
+<app-planning-mgmt
+  *ngIf="overviewSelectedHive && overviewSelectedColony"
+  [currentlyChosenHive]="overviewSelectedHive"
+  [currentlyChosenColony]="overviewSelectedColony"
+  [mgmtComponentid]="'overview-planning'"
+></app-planning-mgmt>

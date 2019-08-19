@@ -31,7 +31,7 @@ export class EditHiveComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.colonies = this.coloniesService.getAllColonies();
+    this.colonies = this.coloniesService.getColonies();
     this.colonyIdToWhichHiveWillBelong = this.currentlySelectedColonyId;
     this.newHiveDescription = this.currentlySelectedHive.description;
     this.newHiveNumber = this.currentlySelectedHive.number;
