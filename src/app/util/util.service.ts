@@ -16,7 +16,7 @@ export class UtilService {
   }
 
 
-  // static backEndURL = 'http://localhost:8080/tarmo/';
+  // static backEndURL = 'http://localhost:8080/';
   // static planningDropdown = null;
   // static planningDropdown = this.p
   //
