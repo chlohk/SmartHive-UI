@@ -1,2 +1,2 @@
 <router-outlet></router-outlet>
-<app-spinner *ngIf="spinnerEnabled"></app-spinner>
+<app-spinner [hidden]="!spinnerEnabled"></app-spinner>

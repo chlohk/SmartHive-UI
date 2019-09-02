@@ -17,7 +17,7 @@ export class SizeDataService {
 
   onUpdateSizeLog(hiveIdThatIsBeingUpdated: number, sizeLogToUpdate: Size) {
     const URL = UtilService.backEndURL  + 'api/hive/' + hiveIdThatIsBeingUpdated + '/sizelogs/' + sizeLogToUpdate.id;
-    return this.httpClient.put(URL, sizeLogToUpdate).toPromise();
+    return this.httpClient.put(URL, sizeLogToUpdate);
   }
 
 }

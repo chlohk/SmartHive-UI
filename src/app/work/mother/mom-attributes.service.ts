@@ -6,6 +6,7 @@ import {SpinnerService} from "../../util/spinner/spinner.service";
 import {ColoniesService} from "../../settings/shared/colonies.service";
 import {MarkedStatusEnum} from "./marked-status.enum";
 import {Log} from "./log.model";
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class MomAttributesService {
@@ -21,11 +22,11 @@ export class MomAttributesService {
     this.spinnerService.setSpinnerStatus.next(false);
   }
 
-  async onUpdateMomAttributes(hive: Hive) {
-    this.spinnerService.setSpinnerStatus.next(true);
-    await this.momDataService.onEditMomAttributes(hive);
-    this.spinnerService.setSpinnerStatus.next(false);
-  }
+  onUpdateMomAttributes = (hive: Hive) => {
+    this.momDataService.onEditMomAttributes(hive)
+      .pipe(take(1))
+      .subscribe();
+  };
 
   async onDeleteFreakLogEntry(logEntryToDelete: Log) {
     this.spinnerService.setSpinnerStatus.next(true);
@@ -64,7 +65,7 @@ export class MomAttributesService {
         hive.momAttributes.markedDate = null;
         hive.momAttributes.markedDescription = '';
 
-        hive.momAttributes.isBirthDayDateMonthSet = false;
+        hive.momAttributes.isBirthdayDateMonthSet = false;
         hive.momAttributes.birthday = null;
 
         hive.momAttributes.hasControlFrame = false;
@@ -93,7 +94,7 @@ export class MomAttributesService {
             hive.momAttributes.markedDate = null;
             hive.momAttributes.markedDescription = '';
 
-            hive.momAttributes.isBirthDayDateMonthSet = false;
+            hive.momAttributes.isBirthdayDateMonthSet = false;
             hive.momAttributes.birthday = null;
 
             hive.momAttributes.hasControlFrame = false;
@@ -124,7 +125,7 @@ export class MomAttributesService {
             hive.momAttributes.markedDate = null;
             hive.momAttributes.markedDescription = '';
 
-            hive.momAttributes.isBirthDayDateMonthSet = false;
+            hive.momAttributes.isBirthdayDateMonthSet = false;
             hive.momAttributes.birthday = null;
 
             hive.momAttributes.hasControlFrame = false;
@@ -153,7 +154,7 @@ export class MomAttributesService {
             hive.momAttributes.markedDate = null;
             hive.momAttributes.markedDescription = '';
 
-            hive.momAttributes.isBirthDayDateMonthSet = true;
+            hive.momAttributes.isBirthdayDateMonthSet = true;
             hive.momAttributes.birthday = new Date();
 
             hive.momAttributes.hasControlFrame = false;
@@ -198,7 +199,7 @@ export class MomAttributesService {
             hive.momAttributes.markedDate = null;
             hive.momAttributes.markedDescription = '';
 
-            hive.momAttributes.isBirthDayDateMonthSet = true;
+            hive.momAttributes.isBirthdayDateMonthSet = true;
             hive.momAttributes.birthday = new Date();
 
             hive.momAttributes.hasControlFrame = false;
@@ -229,7 +230,7 @@ export class MomAttributesService {
             hive.momAttributes.markedDate = null;
             hive.momAttributes.markedDescription = '';
 
-            hive.momAttributes.isBirthDayDateMonthSet = true;
+            hive.momAttributes.isBirthdayDateMonthSet = true;
             hive.momAttributes.birthday = new Date();
 
             hive.momAttributes.hasControlFrame = false;
@@ -265,7 +266,7 @@ export class MomAttributesService {
             hive.momAttributes.markedDate = null;
             hive.momAttributes.markedDescription = '';
 
-            hive.momAttributes.isBirthDayDateMonthSet = true;
+            hive.momAttributes.isBirthdayDateMonthSet = true;
             hive.momAttributes.birthday = new Date();
 
             hive.momAttributes.hasControlFrame = false;

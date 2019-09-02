@@ -6,5 +6,7 @@ export class PlanElement {
   dropDownElementId: number;
   dropDown: boolean;
   resolvedDate: Date;
-  resolved: boolean
+  resolved: boolean;
+  //helper Field
+  daysToDeadline: number;
 }

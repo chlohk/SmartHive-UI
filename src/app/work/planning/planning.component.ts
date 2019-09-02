@@ -3,6 +3,7 @@ import { Hive } from '../../settings/shared/hive.model';
 import { PlanningComponentEnum } from './planning-component.enum';
 import { PlanningService } from './planning.service';
 import { JwModalService } from '../../util/jw-modal/jw-modal.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-planning',
@@ -17,8 +18,7 @@ export class PlanningComponent implements OnInit, OnChanges {
   MIN_NO_OF_PLANS_WHEN_SECOND_BUTTON_ADDED = 3;
   memorizedActivePlanElementId: number;
 
-
-  private newPlanElementSelectedSubscription: any;
+  subscriptions: Subscription[] = [];
 
   constructor(private planningService: PlanningService,
               private modalService: JwModalService) {
@@ -26,7 +26,7 @@ export class PlanningComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.document = document;
-    this.newPlanElementSelectedSubscription =
+    this.subscriptions.push(
       this.planningService.newPlanElementSelected.asObservable().subscribe(
         np => {
           if (!np) this.memorizedActivePlanElementId = undefined;
@@ -34,7 +34,8 @@ export class PlanningComponent implements OnInit, OnChanges {
             this.memorizedActivePlanElementId = np.id;
           }
         }
-      );
+      )
+    );
   }
 
   ngOnChanges() {
@@ -70,6 +71,8 @@ export class PlanningComponent implements OnInit, OnChanges {
   }
 
   ngOnDestroy(): void {
-    this.newPlanElementSelectedSubscription.unsubscribe();
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
   }
 }

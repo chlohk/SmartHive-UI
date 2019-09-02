@@ -11,7 +11,7 @@ export class MomDataService {
 
   onEditMomAttributes(hive: Hive) {
     const URL = UtilService.backEndURL  + 'api/hive/' + hive.id + '/attributes';
-    return this.httpClient.put(URL, hive.momAttributes).toPromise();
+    return this.httpClient.put(URL, hive.momAttributes);
   }
 
   onDeleteFreakLogEntry(log: Log) {

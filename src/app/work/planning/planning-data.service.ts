@@ -34,8 +34,13 @@ export class PlanningDataService {
 
   updateDropdownElement(element: PlanningDropdown) {
     return this.httpClient.put<PlanningDropdown[]>(
-      UtilService.backEndURL  + 'api/planning-dropdown',
+      UtilService.backEndURL  + 'api/planning-dropdown/' + element.id,
       element);
+  }
+
+  updateAllDropdownElements(elements: PlanningDropdown[]) {
+    return this.httpClient.put<PlanningDropdown[]>(
+      UtilService.backEndURL  + 'api/planning-dropdown/update-all', elements);
   }
 
   deleteDropdownElement(id: number) {

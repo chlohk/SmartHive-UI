@@ -1,8 +1,8 @@
 <ng-container *ngIf="!note.deleted && !this.active">
   <div
-    (click)="onElementClick()"
+    (click)="disableControls ? $event.stopPropagation() : onElementClick()"
     class="container planning-element pb-1 pt-1 pl-4 pr-4"
-    [ngClass]="{'warning': note.hasWarning}">
+    [ngClass]="{'warning': note.hasWarning, 'disabled-look': disableControls}">
     <div class="row d-flex justify-content-between">
       <div>
         <div class="container">
@@ -35,7 +35,7 @@
 <ng-container *ngIf="!note.deleted && this.active">
   <div
     class="container planning-element pb-1 pt-1 pl-4 pr-4 active-background"
-    [ngClass]="{'warning': note.hasWarning}">
+    [ngClass]="{'warning': note.hasWarning, 'disabled-look': disableControls}">
     <div class="row d-flex justify-content-between">
       <div>
         <div class="container">
@@ -51,7 +51,7 @@
       <div
         *ngIf="note.longTerm"
         class="d-flex flex-row-reverse justify-content-center align-items-center bordered inactive-background"
-        (click)="onDeleteElement()"
+        (click)="disableControls ? $event.stopPropagation() : onDeleteElement()"
         [tooltip]="notAllowedToDelete"
         [container]="'body'">
         <img src="assets/img/trash.png">
@@ -59,7 +59,7 @@
       <div
         *ngIf="!note.longTerm"
         class="d-flex flex-row-reverse justify-content-center align-items-center bordered inactive-background"
-        (click)="onDeleteElement()">
+        (click)="disableControls ? $event.stopPropagation() : onDeleteElement()">
         <img src="assets/img/trash.png">
       </div>
     </div>
@@ -76,7 +76,7 @@
   <div
     class="container planning-element pb-1 pt-1 pl-4 pr-4"
     [ngClass]="{'warning': note.hasWarning, 'active-background': active}"
-    (click)="onElementClick()">
+    (click)="disableControls ? $event.stopPropagation() : onElementClick()">
     <div class="row d-flex justify-content-between">
       <div>
         <div class="container">

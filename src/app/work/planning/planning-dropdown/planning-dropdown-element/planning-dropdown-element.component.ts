@@ -1,29 +1,53 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {PlanningDropdown} from "./planning-dropdown.model";
-import {PlanningService} from "../../planning.service";
-import {PlanningComponentEnum} from "../../planning-component.enum";
+import { Component, Input, OnInit } from '@angular/core';
+import { PlanningDropdown } from './planning-dropdown.model';
+import { PlanningService } from '../../planning.service';
+import { Subscription } from 'rxjs';
+import { ExecutorService, ProtectionState } from '../../../../util/executor/executor.service';
+import { ControlsProtectionIdEnum } from '../../../../util/executor/controls-protection-id.enum';
 
 @Component({
   selector: 'app-planning-dropdown-element',
   templateUrl: './planning-dropdown-element.component.html',
   styleUrls: ['./planning-dropdown-element.component.css']
 })
-export class PlanningDropdownElementComponent implements OnInit{
+export class PlanningDropdownElementComponent implements OnInit {
   @Input() planningDropdown: PlanningDropdown;
   @Input() memorizedActiveDropdownElementId: number;
   inActive = true;
+  allControlsDisabled : boolean;
+  trashControlsDisabled: boolean;
 
-  private newPlanningDropdownElementSelectedSubscription: any;
+  private subscriptions: Subscription[] = [];
 
-  constructor(private planningService: PlanningService) {}
+  constructor(private planningService: PlanningService,
+              private executorService: ExecutorService) {
+  }
 
   ngOnInit(): void {
-    this.newPlanningDropdownElementSelectedSubscription=
+    this.subscriptions.push(
       this.planningService.newPlanDropdownElementSelected.asObservable().subscribe(
-        () => {this.inActive = true}
-      );
+        () => {
+          this.inActive = true;
+        }
+      )
 
-    if(this.memorizedActiveDropdownElementId === this.planningDropdown.id) {
+
+    );
+    this.subscriptions.push(
+      this.executorService.getControlsProtection.subscribe(
+        (ps: ProtectionState) => {
+          if(!ps.disableControls) {
+            this.trashControlsDisabled = false;
+            this.allControlsDisabled = ps.disableControls;
+            return;
+          }
+          this.allControlsDisabled = ps.omittedControlsId != ControlsProtectionIdEnum.PLANNING_DROPDOWN_ORDERING
+          this.trashControlsDisabled = ps.disableControls;
+        }
+      )
+    );
+
+    if (this.memorizedActiveDropdownElementId === this.planningDropdown.id) {
       this.inActive = false;
     }
   }
@@ -34,7 +58,9 @@ export class PlanningDropdownElementComponent implements OnInit{
   }
 
   ngOnDestroy(): void {
-    this.newPlanningDropdownElementSelectedSubscription.unsubscribe()
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
   }
 
   onDeleteElement() {

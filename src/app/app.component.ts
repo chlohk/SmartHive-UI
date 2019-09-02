@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {SpinnerService} from "./util/spinner/spinner.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { SpinnerService, SpinnerStatus } from './util/spinner/spinner.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -7,14 +8,24 @@ import {SpinnerService} from "./util/spinner/spinner.service";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
-  spinnerEnabled = true;
+export class AppComponent implements OnInit, OnDestroy {
+  spinnerEnabled: boolean;
+  subscriptions: Subscription[] = [];
 
-  constructor(private spinnerService: SpinnerService){}
+  constructor(private spinnerService: SpinnerService) {
+  }
 
   ngOnInit(): void {
-    this.spinnerService.setSpinnerStatus.subscribe(
-      newSpinnerStatus => this.spinnerEnabled = newSpinnerStatus
-    )
+    this.subscriptions.push(
+      this.spinnerService.getSpinnerStatus.subscribe(
+        (ss: SpinnerStatus) => this.spinnerEnabled = ss.enabled
+      )
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
   }
 }

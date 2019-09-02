@@ -1,9 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Hive } from '../../../../settings/shared/hive.model';
 import { Note } from '../../note-element/note.model';
 import { NotesService } from '../../notes.service';
 import { ColoniesService } from '../../../../settings/shared/colonies.service';
 import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { ExecutorService, ProtectionState } from '../../../../util/executor/executor.service';
+import { ControlsProtectionIdEnum } from '../../../../util/executor/controls-protection-id.enum';
 
 @Component({
   selector: 'app-note-mgmt-edit-area',
@@ -11,25 +14,24 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./note-mgmt-edit-area.component.css']
 })
 export class NoteMgmtEditAreaComponent implements OnInit {
-  @Output() isCountingDownToUpdateData = new EventEmitter<boolean>();
   @Input() isActiveResolveStateUnresolved: boolean;
   @Input() currentlyChosenHive: Hive;
 
-  private newNoteElementSelectedSubscription: any;
-
+  subscriptions: Subscription[] = [];
   newNote: Note;
   activeNoteElement: Note;
-  timerRunning = false;
-  shouldRunAnotherRound = false;
+  disableEditControls: boolean;
+  disableAllControls: boolean;
 
   constructor(private notesService: NotesService,
-              private coloniesService: ColoniesService) {
+              private coloniesService: ColoniesService,
+              private executorService: ExecutorService) {
   }
 
   ngOnInit() {
     this.initNewNote();
     this.activeNoteElement = this.newNote;
-    this.newNoteElementSelectedSubscription =
+    this.subscriptions.push(
       this.notesService.newNoteElementSelected.asObservable()
         .subscribe(
           ne => {
@@ -38,7 +40,21 @@ export class NoteMgmtEditAreaComponent implements OnInit {
               this.activeNoteElement = ne;
             }
           }
-        );
+        )
+    );
+    this.subscriptions.push(
+      this.executorService.getControlsProtection.subscribe(
+        (ps: ProtectionState) => {
+          if (!ps.disableControls) {
+            this.disableEditControls = false;
+            this.disableAllControls = false;
+            return;
+          }
+          this.disableAllControls = true;
+          this.disableEditControls = ps.omittedControlsId != ControlsProtectionIdEnum.NOTE_ELEMENT;
+        }
+      )
+    );
   }
 
   initNewNote() {
@@ -58,43 +74,26 @@ export class NoteMgmtEditAreaComponent implements OnInit {
     this.coloniesService.coloniesDataRetrieved$
       .pipe(take(1))
       .subscribe(() => {
-        setTimeout(()=>{
+        setTimeout(() => {
           this.initNewNote();
           this.activeNoteElement = this.newNote;
         }, 0);
       });
   }
 
-  startCountdownToUpdatePlanningElementAtBackend() {
-    if (this.timerRunning) {
-      this.shouldRunAnotherRound = true;
-      // console.log('...must run one more time');
-    } else {
-      setTimeout(
-        () => {
-          this.timerRunning = false;
-          if (this.shouldRunAnotherRound) {
-            this.shouldRunAnotherRound = false;
-            this.startCountdownToUpdatePlanningElementAtBackend();
-            // console.log('...will run for a second time');
-          } else {
-            // console.log('-> send request')
-            this.activeNoteElement.lastModified = new Date();
-            this.notesService.updateNote(this.activeNoteElement, this.currentlyChosenHive.id);
-            this.isCountingDownToUpdateData.emit(false);
-          }
-        }, 1200
-      );
-      this.timerRunning = true;
-      this.isCountingDownToUpdateData.emit(true);
-      // console.log('! started Timer');
+  onInputChange() {
+    if (this.activeNoteElement.id) {
+      this.activeNoteElement.lastModified = new Date();
+      this.callUpdate();
     }
   }
 
-  onInputChange() {
-    if (this.activeNoteElement.id) {
-      this.startCountdownToUpdatePlanningElementAtBackend();
-    }
+  callUpdate() {
+    this.activeNoteElement.lastModified = new Date();
+    this.executorService.exeWithTimer(
+      this.notesService.updateNote,
+      [this.activeNoteElement, this.currentlyChosenHive.id],
+      ControlsProtectionIdEnum.NOTE_ELEMENT);
   }
 
   onActivateElement() {
@@ -103,10 +102,12 @@ export class NoteMgmtEditAreaComponent implements OnInit {
     this.newNote.orderNumber = this.currentlyChosenHive.allActiveNotes
       ? this.currentlyChosenHive.allActiveNotes.length + 1
       : 0;
-    this.startCountdownToUpdatePlanningElementAtBackend();
+    this.callUpdate();
   }
 
   ngOnDestroy(): void {
-    this.newNoteElementSelectedSubscription.unsubscribe();
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
   }
 }

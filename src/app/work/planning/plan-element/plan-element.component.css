@@ -18,10 +18,13 @@
   width: 120px;
 }
 
-.unresolved-button-color {
+.unresolved-button {
   background-color: #f8f9fa;
   border-color: #218838;
+  box-shadow: 0 0 4px 4px #218838;
   padding: 0px;
+  z-index: 1;
+  position: relative;
 }
 
 .normal {
@@ -48,4 +51,14 @@
 
 .not-button-area-active-color {
   background-color: #dcdcdc;
+  z-index: 0;
+  position: relative;
+}
+
+.active-container {
+  box-shadow: 0 0 4px 4px gray;
+}
+
+.disabled-look {
+  opacity: 0.5;
 }

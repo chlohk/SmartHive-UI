@@ -1,12 +1,29 @@
-<div class="card bg-light vertical-paddings dropdown-elements-section-height">
-  <div
-    class="card-body scrolling-area dropdown-elements-section-width"
-    id="planningDropdownScrollArea">
+<div class="row justify-content-center">
+  <button
+    class="btn btn-outline-secondary m-1"
+    [ngClass]="{'btn-secondary disabled-look': !memorizedActivePlanDropdownElementId}"
+    [disabled]="!memorizedActivePlanDropdownElementId || controlsDisabled"
+    (click)="increaseElementOrderPlacement()">
+    <i class="fas fa-arrow-circle-up fa-3x m-1"></i>
+  </button>
+  <div class="card bg-light vertical-paddings dropdown-elements-section-height">
+    <div
+      class="pt-1 pb-1 card-body scrolling-area dropdown-elements-section-width"
+      id="planningDropdownScrollArea">
 
-    <app-planning-dropdown-element
-      *ngFor="let planningDropdownElement of planningService.planningDropDown"
-      [planningDropdown]="planningDropdownElement"
-      [memorizedActiveDropdownElementId]="memorizedActivePlanDropdownElementId"></app-planning-dropdown-element>
+      <app-planning-dropdown-element
+        *ngFor="let planningDropdownElement of planningService.planningDropDown"
+        [planningDropdown]="planningDropdownElement"
+        [memorizedActiveDropdownElementId]="memorizedActivePlanDropdownElementId"></app-planning-dropdown-element>
 
+    </div>
   </div>
+  <button
+    class="btn btn-outline-secondary m-1"
+    [ngClass]="{'btn-secondary disabled-look': !memorizedActivePlanDropdownElementId}"
+    (click)="decreaseElementOrderPlacement()"
+    [disabled]="!memorizedActivePlanDropdownElementId || controlsDisabled">
+    <i class="fas fa-arrow-circle-down fa-3x m-1"></i>
+  </button>
+
 </div>

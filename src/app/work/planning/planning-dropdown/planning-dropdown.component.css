@@ -3,7 +3,7 @@
 }
 
 .dropdown-elements-section-height {
-  height: 490px;
+  height: 370px;
 }
 
 .vertical-paddings {
@@ -33,4 +33,8 @@
 ::-webkit-scrollbar-thumb {
   background: #6c757d;
   border-radius: 7px;
+}
+
+.disabled-look {
+  opacity: 0.2 !important;
 }

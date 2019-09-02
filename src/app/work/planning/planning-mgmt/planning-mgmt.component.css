@@ -1,4 +1,4 @@
-.padding-for-planning{
+.padding-for-planning {
   padding-left: 2.5px;
 }
 
@@ -34,4 +34,9 @@ img.x {
 
 .spinner-area {
   height: 50px;
+}
+
+
+.disabled-look {
+  opacity: 0.5;
 }

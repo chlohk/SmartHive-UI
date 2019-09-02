@@ -14,7 +14,8 @@
               class="bigRadio"
               name="input-type"
               [checked]="activePlanningElement.dropDown === true"
-              (change)="radioBtnActivePlanInputTypeChange(true)">
+              (change)="radioBtnActivePlanInputTypeChange(true)"
+              [disabled]="editControlsDisabled">
             <span class="ml-2 modal-inside-text">Rippmenüüst</span>
           </label>
         </div>
@@ -25,7 +26,8 @@
               class="bigRadio"
               name="input-type"
               [checked]="activePlanningElement.dropDown === false"
-              (change)="radioBtnActivePlanInputTypeChange(false)">
+              (change)="radioBtnActivePlanInputTypeChange(false)"
+              [disabled]="editControlsDisabled">
             <span class="ml-2 modal-inside-text">Vabatekst</span>
           </label>
         </div>
@@ -35,33 +37,48 @@
           type="button"
           class="btn btn-primary modal-inside-text mt-n2 btn-block"
           (click)="callDropdownMgmt.emit()"
-          [disabled]="timerRunning">Muudan rippmenüüd</button>
+          [disabled]="allControlsDisabled">Muudan rippmenüüd</button>
       </div>
     </div>
     <div class="row">
       <div class="col">
         <div
-          class="card ml-n3"
-          [ngClass]="{'without-deadline-correction': activePlanningElement.withoutDeadline}">
+          class="card ml-n3">
           <div *ngIf="!activePlanningElement.withoutDeadline"
             class="card-header modal-inside-text
             justify-content-between d-flex align-items-center pt-1 pb-1 pl-3 pr-3">
-            <span class="ml-1 mr-3">Tähtaeg päevades</span>
-            <button
-              class="btn btn-light btn-outline-secondary deadline-button"
-              (click)="addDaysToActivePlanDeadline(-7)"> -7 </button>
-            <button
-              class="btn btn-light btn-outline-secondary deadline-button"
-              (click)="addDaysToActivePlanDeadline(-1)"> -1 </button>
-            <span class="big-text">
-            <b>{{ activePlanningElement.deadline | daysUntil }}</b>
-            </span>
-            <button
-              class="btn btn-light btn-outline-secondary deadline-button"
-              (click)="addDaysToActivePlanDeadline(1)"> +1 </button>
-            <button
-              class="btn btn-light btn-outline-secondary deadline-button"
-              (click)="addDaysToActivePlanDeadline(7)"> +7 </button>
+            <div class="container">
+              <div class="row justify-content-center mb-4">
+                <span class="ml-1 mr-3">Planeeringu tähtaeg päevades:</span>
+                <input
+                  type="number"
+                  class="form-control adjust-width modal-inside-text"
+                  oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                  [ngModel]="activePlanningElement.daysToDeadline"
+                  (ngModelChange)="daysToActivePlanDeadline($event)"
+                  [disabled]="editControlsDisabled"
+                  maxlength="3">
+              </div>
+              <div class="d-flex align-items-center">
+                <button
+                  class="btn btn-light btn-outline-secondary deadline-button mr-4"
+                  (click)="addDaysToActivePlanDeadline(-1)"
+                  [disabled]="editControlsDisabled"> - </button>
+                <input
+                  [ngModel]="activePlanningElement.daysToDeadline"
+                  (ngModelChange)="daysToActivePlanDeadline($event)"
+                  type="range"
+                  min="0"
+                  max="21"
+                  class="slider"
+                  id="formControlRange"
+                  [disabled]="editControlsDisabled">
+                <button
+                  class="btn btn-light btn-outline-secondary deadline-button ml-4"
+                  (click)="addDaysToActivePlanDeadline(1)"
+                  [disabled]="editControlsDisabled"> + </button>
+              </div>
+            </div>
           </div>
           <div
             class="row ml-0 edit-area-height">
@@ -70,7 +87,8 @@
               <textarea
                 class="modal-inside-text planning-element-text-area h-100"
                 [(ngModel)]="activePlanningElement.text"
-                (ngModelChange)="onInputChange()"></textarea>
+                (ngModelChange)="onInputChange()"
+                [disabled]="editControlsDisabled"></textarea>
               </ng-container>
             </div>
             <div class="col d-flex flex-column justify-content-around">
@@ -80,7 +98,8 @@
                   type="checkbox"
                   id="withoutDeadline"
                   [(ngModel)]="activePlanningElement.withoutDeadline"
-                  (change)="onInputChange(true)">
+                  (change)="onInputChange(true)"
+                  [disabled]="editControlsDisabled">
                 <label class="form-check-label ml-2" for="withoutDeadline">
                   Tähtajatu
                 </label>
@@ -89,7 +108,8 @@
                 <ng-container *ngIf="!activePlanningElement.id; else changePlanningFinishEditing">
                   <button
                     class="btn btn-success modal-inside-text"
-                    (click)="onAddNewPlan()">
+                    (click)="onAddNewPlan()"
+                    [disabled]="editControlsDisabled">
                     Lisan planeeringu
                   </button>
                 </ng-container>
@@ -107,7 +127,8 @@
     <button
       class="btn btn-success modal-inside-text mb-5"
       *ngIf="activePlanningElement.id != null"
-      (click)="onUnResolveElement()">
+      (click)="onUnResolveElement()"
+      [disabled]="editControlsDisabled">
       Märgin kui "Tegemata"
     </button>
   </div>
@@ -121,7 +142,7 @@
   <button
     class="btn btn-danger modal-inside-text"
     (click)="planningService.newPlanElementSelected.next(null)"
-    [disabled]="timerRunning">
+    [disabled]="allControlsDisabled">
     Lõpetan muutmise
   </button>
 </ng-template>
@@ -138,13 +159,15 @@
     name="new-plan"
     class="custom-select planning-element-text-area ml-4 mr-n4"
     [(ngModel)]="activePlanningElement.dropDownElementId"
-    [disabled]="!planningService.planningDropDown"
-    (change)="onInputChange()">
+    (ngModelChange)="setStandardPlanDeadline($event)"
+    [disabled]="!planningService.planningDropDown || editControlsDisabled">
     <optgroup>
       <ng-container *ngIf="planningService.planningDropDown">
         <option
           *ngFor="let dropdownElement of planningService.planningDropDown"
-          [value]="dropdownElement.id"> {{ dropdownElement.text}}</option>
+          [value]="dropdownElement.id">
+          {{ dropdownElement.text }}
+        </option>
       </ng-container>
     </optgroup>
   </select>

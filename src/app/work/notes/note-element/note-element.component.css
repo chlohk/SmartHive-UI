@@ -35,3 +35,7 @@ img {
 .time-height {
   line-height: 30px;
 }
+
+.disabled-look {
+  opacity: 0.5;
+}

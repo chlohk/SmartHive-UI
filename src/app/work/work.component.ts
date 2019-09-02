@@ -17,7 +17,6 @@ export class WorkComponent implements OnInit, OnDestroy {
   colonies: Colony[];
   currentlySelectedHive: Hive;
   currentlySelectedColony: Colony;
-  isCountingDownToUpdateData = false;
   planningComponentEnum = PlanningComponentEnum;
   notesComponentEnum = NotesComponentEnum;
   validated = false;
@@ -58,10 +57,6 @@ export class WorkComponent implements OnInit, OnDestroy {
     } else {
       this.currentlySelectedHive = undefined;
     }
-  }
-
-  notifyIfIsCountingDownToUpdateData(isCountingDownToUpdateData: boolean) {
-    this.isCountingDownToUpdateData = isCountingDownToUpdateData;
   }
 
   ngOnDestroy(): void {

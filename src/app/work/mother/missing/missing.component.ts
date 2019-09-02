@@ -6,6 +6,8 @@ import {ActionTimeEnum} from "../action-time.enum";
 import {UtilService} from "../../../util/util.service";
 import {MomAttributesService} from "../mom-attributes.service";
 import {ColoniesService} from "../../../settings/shared/colonies.service";
+import { ExecutorService } from '../../../util/executor/executor.service';
+import { ControlsProtectionIdEnum } from '../../../util/executor/controls-protection-id.enum';
 
 @Component({
   selector: 'app-missing',
@@ -37,7 +39,8 @@ export class MissingComponent implements OnChanges {
 
   constructor(private modalService: JwModalService,
               private momAttributesService: MomAttributesService,
-              private coloniesService: ColoniesService) { }
+              private coloniesService: ColoniesService,
+              private executorService: ExecutorService) { }
 
   ngOnChanges() {
     this.currentlyChosenHiveInitialData = this.coloniesService.getInitialHiveData(
@@ -62,8 +65,11 @@ export class MissingComponent implements OnChanges {
       this.currentlyChosenHive.momAttributes.statusStartingDate =
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate;
     }
-    this.momAttributesService.onUpdateMomAttributes(this.currentlyChosenHive);
-    this.modalService.close('mother-missing-edit');
+    this.executorService.exeWithTimer(
+      this.momAttributesService.onUpdateMomAttributes,
+      [this.currentlyChosenHive],
+      ControlsProtectionIdEnum.MOM
+    );
     this.setMotherStatusSectionValuesCorrect();
   }
 
@@ -117,8 +123,11 @@ export class MissingComponent implements OnChanges {
     } else if (this.radioBtnControlFrameSelection === ActionTimeEnum.NO_ACTION) {
       this.currentlyChosenHive.momAttributes.controlFrameStartDate = null;
     }
-    this.momAttributesService.onUpdateMomAttributes(this.currentlyChosenHive);
-    this.modalService.close('mother-control-frame-edit');
+    this.executorService.exeWithTimer(
+      this.momAttributesService.onUpdateMomAttributes,
+      [this.currentlyChosenHive],
+      ControlsProtectionIdEnum.MOM
+    );
     this.setControlFrameSectionValuesCorrect();
   }
 
@@ -181,8 +190,11 @@ export class MissingComponent implements OnChanges {
     } else if (this.radioBtnCocoonSelection === ActionTimeEnum.NO_ACTION) {
       this.currentlyChosenHive.momAttributes.cocoonChosenDate = null;
     }
-    this.momAttributesService.onUpdateMomAttributes(this.currentlyChosenHive);
-    this.modalService.close('mother-cocoon-edit');
+    this.executorService.exeWithTimer(
+      this.momAttributesService.onUpdateMomAttributes,
+      [this.currentlyChosenHive],
+      ControlsProtectionIdEnum.MOM
+    );
     this.setCocoonSectionValuesCorrect();
   }
 
@@ -234,10 +246,12 @@ export class MissingComponent implements OnChanges {
 
   radioBtnControlFrameSelected(selectedActionTime: ActionTimeEnum) {
     this.radioBtnControlFrameSelection = selectedActionTime;
+    this.saveControlFrameSectionValues();
   }
 
   radioBtnCocoonSelected(selectedActionTime: ActionTimeEnum) {
     this.radioBtnCocoonSelection = selectedActionTime;
+    this.saveCocoonSectionValues();
   }
 
   onChangeMotherStatusButtonClick(newMotherStatus?: MomStatusEnum) {

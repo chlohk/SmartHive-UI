@@ -1,13 +1,18 @@
 import { Component, ElementRef, Input, OnInit, OnDestroy } from '@angular/core';
 import { JwModalService } from './jw-modal.service';
+import { SpinnerService, SpinnerStatus } from '../spinner/spinner.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
   selector: 'jw-modal',
   template: `
-  <div class="jw-modal" [ngClass]="{'no-margin': marginLess}">
-    <div class="jw-modal-body" [ngClass]="{'no-margin': marginLess}">
+    
+  <div class="jw-modal">
+    <div class="jw-modal-body" [ngClass]="{'no-margin': marginLess, 'full-screen': fullScreen}">
+      
       <ng-content></ng-content>
+      <app-spinner [hidden]="!spinnerEnabled" [modal]="true" [smallModal]="smallModal"></app-spinner>
     </div>
   </div>
   <div class="jw-modal-background"></div>`,
@@ -17,10 +22,15 @@ import { JwModalService } from './jw-modal.service';
 export class JwModalComponent implements OnInit, OnDestroy {
   @Input() id: string;
   @Input() marginLess = false;
+  @Input() fullScreen = false;
+  @Input() smallModal = false;
+  spinnerEnabled: boolean;
+  spinnerStatusSubscription: Subscription;
   private element: any;
 
   constructor(private modalService: JwModalService,
-              private el: ElementRef) {
+              private el: ElementRef,
+              private spinnerService: SpinnerService) {
     this.element = el.nativeElement;
   }
 
@@ -46,12 +56,17 @@ export class JwModalComponent implements OnInit, OnDestroy {
 
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.modalService.add(this);
+
+    this. spinnerStatusSubscription = this.spinnerService.getSpinnerStatus.subscribe(
+      (ss: SpinnerStatus) => this.spinnerEnabled = ss.enabled
+    );
   }
 
   // remove self from modal service when directive is destroyed
   ngOnDestroy(): void {
     this.modalService.remove(this.id);
     this.element.remove();
+    this.spinnerStatusSubscription.unsubscribe();
   }
 
   // open modal

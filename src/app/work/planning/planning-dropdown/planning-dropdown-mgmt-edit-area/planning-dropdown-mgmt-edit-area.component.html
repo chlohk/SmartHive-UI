@@ -1,26 +1,75 @@
 <div class="row pb-4">
-  <ng-container *ngIf="!activePlanningDropdownElement.id; else changePlanningHeader">
+  <ng-container *ngIf="!activePlanningDropdownElement?.id; else changePlanningHeader">
     <h2>Uus rippmenüü element</h2>
   </ng-container>
 </div>
 <div class="row">
   <div class="col">
-    <div
-      class="card ml-n3">
+    <div class="card ml-n3">
+      <div *ngIf="!activePlanningDropdownElement?.withoutDeadline"
+        class="card-header modal-inside-text
+            justify-content-between d-flex align-items-center pt-1 pb-1 pl-3 pr-3">
+        <div class="container">
+          <div class="row justify-content-center mb-4">
+            <span class="ml-1 mr-3">Elemendi tähtaeg päevades:</span>
+            <input
+              type="number"
+              class="form-control adjust-width modal-inside-text"
+              oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+              [ngModel]="activePlanningDropdownElement.deadline"
+              (ngModelChange)="setDeadline($event)"
+              [disabled]="editControlsDisabled"
+              maxlength="3">
+          </div>
+          <div class="d-flex align-items-center">
+            <button
+              class="btn btn-light btn-outline-secondary deadline-button mr-4"
+              (click)="modifyDeadlineBy(-1)"
+              [disabled]="editControlsDisabled"> - </button>
+            <input
+              type="range"
+              min="0"
+              max="21"
+              class="slider"
+              id="formControlRange"
+              [ngModel]="activePlanningDropdownElement.deadline"
+              (ngModelChange)="setDeadline($event)"
+              [disabled]="editControlsDisabled">
+            <button
+              class="btn btn-light btn-outline-secondary deadline-button ml-4"
+              (click)="modifyDeadlineBy(1)"
+              [disabled]="editControlsDisabled"> + </button>
+          </div>
+        </div>
+      </div>
       <div
         class="row ml-0 edit-area-height">
         <div class="d-flex input-area-width justify-content-around align-items-center flex-column">
           <textarea
             class="modal-inside-text planning-element-text-area h-100"
             [(ngModel)]="activePlanningDropdownElement.text"
-            (ngModelChange)="onInputChange()"></textarea>
+            (ngModelChange)="onInputChange()"
+            [disabled]="editControlsDisabled"></textarea>
         </div>
         <div class="col d-flex flex-column justify-content-around">
+          <div class="row justify-content-center modal-inside-text mb-4 mt-5">
+            <input
+              class="my-checkbox"
+              type="checkbox"
+              id="withoutDeadline"
+              [(ngModel)]="activePlanningDropdownElement.withoutDeadline"
+              (change)="onInputChange(true)"
+              [disabled]="editControlsDisabled">
+            <label class="form-check-label ml-2" for="withoutDeadline">
+              Tähtajatu
+            </label>
+          </div>
           <div class="row justify-content-center">
             <ng-container *ngIf="!activePlanningDropdownElement.id; else changePlanningFinishEditing">
               <button
                 class="btn btn-success modal-inside-text"
-                (click)="onAddNewPlan()">
+                (click)="onAddNewPlan()"
+                [disabled]="editControlsDisabled">
                 Lisan elemendi
               </button>
             </ng-container>
@@ -40,7 +89,7 @@
   <button
     class="btn btn-danger modal-inside-text"
     (click)="planningService.newPlanDropdownElementSelected.next(null)"
-    [disabled]="timerRunning">
+    [disabled]="allControlsDisabled">
     Lõpetan muutmise
   </button>
 </ng-template>

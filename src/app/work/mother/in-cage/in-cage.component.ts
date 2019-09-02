@@ -7,6 +7,8 @@ import {ActionTimeEnum} from "../action-time.enum";
 import {UtilService} from "../../../util/util.service";
 import {MomAttributesService} from "../mom-attributes.service";
 import {ColoniesService} from "../../../settings/shared/colonies.service";
+import { ExecutorService } from '../../../util/executor/executor.service';
+import { ControlsProtectionIdEnum } from '../../../util/executor/controls-protection-id.enum';
 
 @Component({
   selector: 'app-in-cage',
@@ -39,7 +41,8 @@ export class InCageComponent implements OnChanges {
 
   constructor(private modalService: JwModalService,
               private momAttributesService: MomAttributesService,
-              private coloniesService: ColoniesService) { }
+              private coloniesService: ColoniesService,
+              private executorService: ExecutorService) { }
 
   ngOnChanges() {
     this.currentlyChosenHiveInitialData = this.coloniesService.getInitialHiveData(
@@ -96,8 +99,11 @@ export class InCageComponent implements OnChanges {
       this.currentlyChosenHive.momAttributes.statusStartingDate =
         this.currentlyChosenHiveInitialData.momAttributes.statusStartingDate;
     }
-    this.momAttributesService.onUpdateMomAttributes(this.currentlyChosenHive);
-    this.modalService.close('mother-in-cage-edit');
+    this.executorService.exeWithTimer(
+      this.momAttributesService.onUpdateMomAttributes,
+      [this.currentlyChosenHive],
+      ControlsProtectionIdEnum.MOM
+    );
     this.setMotherStatusSectionValuesCorrect();
   }
 
@@ -164,8 +170,11 @@ export class InCageComponent implements OnChanges {
       this.currentlyChosenHive.momAttributes.markedDate = null;
       this.currentlyChosenHive.momAttributes.isMarkedDateMonthSet = false;
     }
-    this.momAttributesService.onUpdateMomAttributes(this.currentlyChosenHive);
-    this.modalService.close('mother-marked-edit');
+    this.executorService.exeWithTimer(
+      this.momAttributesService.onUpdateMomAttributes,
+      [this.currentlyChosenHive],
+      ControlsProtectionIdEnum.MOM
+    );
     this.setMarkedSectionValuesCorrect();
   }
 
@@ -174,7 +183,7 @@ export class InCageComponent implements OnChanges {
       this.radioBtnBirthdayTimeSelection = ActionTimeEnum.PAST_DATE;
       const birthday = new Date(this.currentlyChosenHive.momAttributes.birthday);
       this.birthdayTimeYearValue = birthday.getFullYear().toString();
-      if(this.currentlyChosenHive.momAttributes.isBirthDayDateMonthSet) {
+      if(this.currentlyChosenHive.momAttributes.isBirthdayDateMonthSet) {
         this.birthdayTimeMonthValue = birthday.getMonth().toString();
       } else {
         this.birthdayTimeMonthValue = '';
@@ -193,20 +202,24 @@ export class InCageComponent implements OnChanges {
     } else if (this.radioBtnBirthdayTimeSelection === ActionTimeEnum.PAST_DATE) {
       this.currentlyChosenHive.momAttributes.birthday = new Date();
       this.currentlyChosenHive.momAttributes.birthday.setFullYear(+this.birthdayTimeYearValue);
-      if(this.birthdayTimeMonthValue === '') {
-        this.currentlyChosenHive.momAttributes.isBirthDayDateMonthSet = false;
+      if(!this.birthdayTimeMonthValue) {
+        this.currentlyChosenHive.momAttributes.isBirthdayDateMonthSet = false;
       } else {
-        this.currentlyChosenHive.momAttributes.isBirthDayDateMonthSet = true;
+        this.currentlyChosenHive.momAttributes.isBirthdayDateMonthSet = true;
         this.currentlyChosenHive.momAttributes.birthday.setMonth(+this.birthdayTimeMonthValue);
       }
     }
-    this.momAttributesService.onUpdateMomAttributes(this.currentlyChosenHive);
-    this.modalService.close('mother-birthday-edit');
+    this.executorService.exeWithTimer(
+      this.momAttributesService.onUpdateMomAttributes,
+      [this.currentlyChosenHive],
+      ControlsProtectionIdEnum.MOM
+    );
     this.setBirthdaySectionValuesCorrect();
   }
 
   radioBtnMomStatusSelected(selectedActionTime: ActionTimeEnum) {
     this.radioBtnMomStatusSelection = selectedActionTime;
+    this.saveMotherStatusSectionValues();
   }
 
   radioBtnMarkedStatusSelected(markedStatusSelected: MarkedStatusEnum) {
@@ -215,14 +228,23 @@ export class InCageComponent implements OnChanges {
       this.radioBtnMarkedTimeSelection = ActionTimeEnum.UNKNOWN
       this.markedSectionAdditionlInfoText = '';
     }
+    this.saveMarkedSectionValues();
   }
 
   radioBtnMarkedTimeSelected(selectedActionTime: ActionTimeEnum) {
+    if (selectedActionTime === ActionTimeEnum.PAST_DATE && !this.markedTimeYearValue) {
+      this.markedTimeYearValue = '2019'
+    }
     this.radioBtnMarkedTimeSelection = selectedActionTime;
+    this.saveMarkedSectionValues();
   }
 
   radioBtnBirthdayTimeSelected(selectedActionTime: ActionTimeEnum) {
+    if (selectedActionTime === ActionTimeEnum.PAST_DATE && !this.birthdayTimeYearValue) {
+      this.birthdayTimeYearValue = '2019'
+    }
     this.radioBtnBirthdayTimeSelection = selectedActionTime;
+    this.saveBirthdaySectionValues();
   }
 
   onChangeMotherStatusButtonClick(newMotherStatus?: MomStatusEnum) {

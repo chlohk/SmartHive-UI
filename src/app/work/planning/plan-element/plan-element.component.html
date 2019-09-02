@@ -1,16 +1,23 @@
-<div class="container planning-element p-0">
+<div
+  class="container planning-element p-0"
+  [ngClass]="{'disabled-look': disableControls}">
   <ng-container *ngIf="planningComponentType != planningComponentEnum.PLANNING_MANAGEMENT_RESOLVED; else resolved">
     <ng-container *ngIf="inActive; else activeUnresolved">
-      <div class="deadline-area" [ngClass]="getColor()" (click)="onElementClick()">
+      <div
+        class="deadline-area"
+        [ngClass]="getColor()"
+        (click)="disableControls ? $event.stopPropagation() : onElementClick()">
         {{ deadlineText }}
       </div>
-      <div class="text-area planning-element-text-area" (click)="onElementClick()">
+      <div
+        class="text-area planning-element-text-area"
+        (click)="disableControls ? $event.stopPropagation() : onElementClick()">
         {{getText()}}
       </div>
     </ng-container>
 
     <ng-template #activeUnresolved>
-      <div class="deadline-area unresolved-button-color" (click)="onResolveElement()">
+      <div class="deadline-area unresolved-button" (click)="onResolveElement()">
         {{'loen tehtuks&#x2714;\t' }}
       </div>
       <div class="text-area not-button-area-active-color planning-element-text-area">

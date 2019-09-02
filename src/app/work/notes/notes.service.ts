@@ -26,8 +26,7 @@ export class NotesService {
         });
   }
 
-  updateNote(note: Note, hiveId: number) {
-    this.spinnerService.setSpinnerStatus.next(true);
+  updateNote = (note: Note, hiveId: number) => {
     this.notesDataService.updateNote(note, hiveId)
       .pipe(take(1))
       .subscribe(

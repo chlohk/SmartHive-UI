@@ -14,7 +14,7 @@ export class MomAttributes {
   markedDescription: string;
   isMarkedDateMonthSet: boolean;
 
-  isBirthDayDateMonthSet: boolean;
+  isBirthdayDateMonthSet: boolean;
   birthday: Date;
 
   //TODO! add the boolean to the backend

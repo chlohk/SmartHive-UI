@@ -1,5 +1,5 @@
-<jw-modal id="{{mgmtComponentId}}">
-  <div class="card bg-light">
+<jw-modal id="{{mgmtComponentId}}" [fullScreen]="true">
+  <div class="card bg-light h-100">
     <div class="card-header nav">
       <span class="navbar-brand big-text notes-header">Märkmed</span>
       <span class="navbar-text badge badge-dark belongs-to-badge">
@@ -7,42 +7,40 @@
       </span>
       <button
         class="btn btn-danger nav-item closing ml-auto"
-        (click)="modalService.close(mgmtComponentId);">
+        (click)="modalService.close(mgmtComponentId);"
+        [disabled]="disableControls">
         <img
           src="assets/img/sulge.jpeg"
           class="x">
       </button>
     </div>
-    <div class="container m-0">
+    <div class="card-body m-0">
       <div class="row">
         <div class="col-5">
           <div class="row justify-content-center p-4">
-            <div class="btn-group btn-group-toggle" *ngIf="!timerRunning">
+            <div class="btn-group btn-group-toggle">
               <label
                 class="btn btn-light btn-outline-secondary modal-inside-text"
-                [ngClass]="{'active': isActiveResolveStateUnresolved}">
+                [ngClass]="{'active': isActiveResolveStateUnresolved, 'disabled-look': disableControls}">
                 <input
                   type="radio"
                   name="planning_window_type"
                   [checked]="isActiveResolveStateUnresolved"
                   (change)="radioBtnActiveResolveStateChange(true)"
-                  [disabled]="timerRunning">
+                  [disabled]="disableControls">
                 Aktiivsed
               </label>
               <label
                 class="btn btn-light btn-outline-secondary modal-inside-text"
-                [ngClass]="{'active': !isActiveResolveStateUnresolved}">
+                [ngClass]="{'active': !isActiveResolveStateUnresolved, 'disabled-look': disableControls}">
                 <input
                   type="radio"
                   name="planning_window_type"
                   [checked]="!isActiveResolveStateUnresolved"
                   (change)="radioBtnActiveResolveStateChange(false)"
-                  [disabled]="timerRunning">
+                  [disabled]="disableControls">
                 Kustutatud
               </label>
-            </div>
-            <div class="spinner-area">
-              <app-spinner *ngIf="timerRunning"></app-spinner>
             </div>
           </div>
         </div>

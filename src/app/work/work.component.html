@@ -8,7 +8,6 @@
   [currentlySelectedColony]="currentlySelectedColony"
   [currentlySelectedColonyId]="currentlySelectedColony ? currentlySelectedColony.id.toString() : ''"
   [currentlySelectedHiveId]="currentlySelectedHive ? currentlySelectedHive.id.toString() : ''"
-  [isCountingDownToUpdateData]="isCountingDownToUpdateData"
 >
 </app-work-header>
 <ng-container *ngIf="currentlySelectedHive && validated">
@@ -30,8 +29,7 @@
       </div>
       <app-size
         [currentlyChosenHive]="currentlySelectedHive"
-        *ngIf="currentlySelectedHive"
-        (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"></app-size>
+        *ngIf="currentlySelectedHive"></app-size>
     </div>
     <div class="col-3" style="margin-right: 0; padding-right: 0; padding-left: 5px">
       <app-mother
@@ -41,14 +39,12 @@
   </div>
 
   <app-planning-mgmt
-    (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"
     [currentlyChosenHive]="currentlySelectedHive"
     [currentlyChosenColony]="currentlySelectedColony"
     [mgmtComponentid]="'work-planning'"
   ></app-planning-mgmt>
 
   <app-note-mgmt
-    (isCountingDownToUpdateData)="notifyIfIsCountingDownToUpdateData($event)"
     [currentlyChosenHive]="currentlySelectedHive"
     [currentlyChosenColony]="currentlySelectedColony"
     [mgmtComponentId]="'notes'"

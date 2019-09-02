@@ -91,7 +91,7 @@ export class MotherStatusCellPipe implements PipeTransform {
 
         if(attributes.birthday) {
           const birthDay = new Date(attributes.birthday);
-          if(attributes.isBirthDayDateMonthSet) {
+          if(attributes.isBirthdayDateMonthSet) {
             returnText = returnText + '<br>Koorunud: ' + this.monthNames[birthDay.getMonth()] + ' ' + birthDay.getFullYear();
           } else {
             returnText = returnText + '<br>Koorunud: ' + birthDay.getFullYear();
@@ -131,7 +131,7 @@ export class MotherStatusCellPipe implements PipeTransform {
 
         if(attributes.birthday) {
           const birthDay = new Date(attributes.birthday);
-          if(attributes.isBirthDayDateMonthSet) {
+          if(attributes.isBirthdayDateMonthSet) {
             returnText = returnText + '<br>Koorunud: ' + this.monthNames[birthDay.getMonth()] + ' ' + birthDay.getFullYear();
           } else {
             returnText = returnText + '<br>Koorunud: ' + birthDay.getFullYear();

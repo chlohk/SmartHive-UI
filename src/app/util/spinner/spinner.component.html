@@ -1,19 +1,8 @@
-<div class="container">
-  <div class="row">
-    <div id="loader">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="loading"></div>
-    </div>
-
-    <p class="spinner-message" *ngIf="message && message !== ''">
-      {{message}}
-    </p>
+<div
+  class="spinner-container d-flex justify-content-center align-items-center"
+  [ngClass]="{'for-fullscreen-modal-height': modal && !smallModal, 'for-small-modal-height': modal && smallModal}">
+  <div class="spinner-border {{withWarning ? 'text-warning' : 'text-secondary'}}" role="status">
+    <span class="sr-only">Loading...</span>
   </div>
 </div>
+

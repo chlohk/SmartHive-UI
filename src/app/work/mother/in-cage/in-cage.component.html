@@ -38,7 +38,7 @@
                 *ngIf="!currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
                 class="time-text">{{ currentlyChosenHive.momAttributes.markedDate | date:'yyyy'}}
               </h3>
-              <p class = "marked-date-description">
+              <p class="marked-date-description">
                 {{ currentlyChosenHive.momAttributes.markedDescription }}
               </p>
             </div>
@@ -53,22 +53,21 @@
                 *ngIf="!currentlyChosenHive.momAttributes.isMarkedDateMonthSet"
                 class="time-text">{{ currentlyChosenHive.momAttributes.markedDate | date:'yyyy'}}
               </h3>
-              <p class = "marked-date-description">
+              <p class="marked-date-description">
                 {{ currentlyChosenHive.momAttributes.markedDescription }}
               </p>
             </div>
           </div>
 
 
-
           <img src="assets/img/synnip2evOk.png" alt="ii">
           <h3
-            *ngIf="currentlyChosenHive.momAttributes.isBirthDayDateMonthSet"
+            *ngIf="currentlyChosenHive.momAttributes.isBirthdayDateMonthSet"
             class="time-text" style="margin-bottom: -15px !important;">
             {{ currentlyChosenHive.momAttributes.birthday | date:'MMMM yyyy'}}
           </h3>
           <h3
-            *ngIf="!currentlyChosenHive.momAttributes.isBirthDayDateMonthSet"
+            *ngIf="!currentlyChosenHive.momAttributes.isBirthdayDateMonthSet"
             class="time-text" style="margin-bottom: -15px !important;">
             {{ currentlyChosenHive.momAttributes.birthday | date:'yyyy'}}
           </h3>
@@ -127,7 +126,7 @@
   </div>
 </div>
 
-<jw-modal id="mother-in-cage-edit" style="max-width: 50rem; height: 45rem">
+<jw-modal id="mother-in-cage-edit" style="max-width: 50rem; height: 45rem" [smallModal]="true">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
@@ -173,7 +172,8 @@
                 type="number"
                 size="3"
                 class="num"
-                [(ngModel)]="radioBtnStatusPastDateInputValue"> päeva tagasi
+                [(ngModel)]="radioBtnStatusPastDateInputValue"
+                (ngModelChange)="radioBtnMomStatusSelected(actionTimeEnum.PAST_DATE)"> päeva tagasi
             </h2>
           </label>
         </div>
@@ -209,14 +209,6 @@
               (click)="onChangeMotherStatusButtonClick()">
           </button>
         </div>
-        <div class="row twoButtons">
-          <button class="btn btn-light btn-outline-danger"
-                  style="color: red; height: 70px; width: 200px; margin-left: 100px"
-                  (click)="onCloseMomStatusSectionEditButton()"><h2>Loobun</h2></button>
-          <button class="btn btn-light btn-outline-success"
-                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
-                  (click)="saveMotherStatusSectionValues()"><h2>Salvestan</h2></button>
-        </div>
       </div>
     </div>
   </div>
@@ -224,7 +216,7 @@
 </jw-modal>
 
 
-<jw-modal id="mother-marked-edit">
+<jw-modal id="mother-marked-edit" [smallModal]="true">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
@@ -302,7 +294,8 @@
             size="10"
             class="description"
             [disabled]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
-            [(ngModel)]="markedSectionAdditionlInfoText">
+            [(ngModel)]="markedSectionAdditionlInfoText"
+            (ngModelChange)="saveMarkedSectionValues()">
         </div>
       </div>
       <hr style="margin-top: 10px; margin-bottom: 0">
@@ -335,7 +328,8 @@
                   class="custom-select"
                   size="1"
                   [disabled]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
-                  [(ngModel)]="markedTimeMonthValue">
+                  [(ngModel)]="markedTimeMonthValue"
+                  (change)="radioBtnMarkedTimeSelected(actionTimeEnum.PAST_DATE)">
                   <option value="">Kuu</option>
                   <option value="0">Jaanuar</option>
                   <option value="1">Veebruar</option>
@@ -355,7 +349,8 @@
                   class="custom-select"
                   size="1"
                   [disabled]="radioBtnMarkedStatusSelection === markedStatusEnum.UNMARKED"
-                  [(ngModel)]="markedTimeYearValue">
+                  [(ngModel)]="markedTimeYearValue"
+                  (change)="radioBtnMarkedTimeSelected(actionTimeEnum.PAST_DATE)">
                   <option value="" disabled hidden>Aasta</option>
                   <option value="2017">2017</option>
                   <option value="2018">2018</option>
@@ -367,31 +362,14 @@
             </div>
           </div>
         </div>
-        <div class="col-6">
-          <div class="row" style="margin-top: 200px">
-            <button
-              class="btn btn-light btn-outline-danger"
-              style="color: red; height: 70px; width: 200px;"
-              (click)="onCloseWhenMotherMarkedEditButton()">
-              <h2>Loobun</h2></button>
-            <button
-              class="btn btn-light btn-outline-success"
-              style="color: green; height: 70px; width: 200px; margin-left: 100px"
-              (click)="saveMarkedSectionValues()"
-              [disabled]="radioBtnMarkedTimeSelection === actionTimeEnum.PAST_DATE &&
-                            markedTimeYearValue === ''">
-              <h2>Salvestan</h2>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
-
   </div>
+
 </jw-modal>
 
 
-<jw-modal id="mother-birthday-edit">
+<jw-modal id="mother-birthday-edit" [smallModal]="true">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
@@ -437,7 +415,8 @@
               class="custom-select"
               size="1"
               style="width: 200px"
-              [(ngModel)]="birthdayTimeMonthValue">
+              [(ngModel)]="birthdayTimeMonthValue"
+              (ngModelChange)="radioBtnBirthdayTimeSelected(actionTimeEnum.PAST_DATE)">
               <option value="">Kuu</option>
               <option value="0">Jaanuar</option>
               <option value="1">Veebruar</option>
@@ -456,7 +435,8 @@
               name="year_marked"
               class="custom-select"
               size="1"
-              [(ngModel)]="birthdayTimeYearValue">
+              [(ngModel)]="birthdayTimeYearValue"
+              (ngModelChange)="radioBtnBirthdayTimeSelected(actionTimeEnum.PAST_DATE)">
               <option value="" disabled hidden>Aasta</option>
               <option value="2017">2017</option>
               <option value="2018">2018</option>
@@ -483,21 +463,6 @@
               alt="ii"
               style="height: 65px"
               (click)="onChangeMotherStatusButtonClick()">
-          </button>
-        </div>
-        <div class="row twoButtons">
-          <button
-            class="btn btn-light btn-outline-danger"
-            style="color: red; height: 70px; width: 200px; margin-left: 20px"
-            (click)="onCloseWhenMotherBirthdayEditButton()">
-            <h2>Loobun</h2>
-          </button>
-          <button class="btn btn-light btn-outline-success"
-                  style="color: green; height: 70px; width: 200px; margin-left: 80px"
-                  (click)="saveBirthdaySectionValues()"
-                  [disabled]="radioBtnBirthdayTimeSelection === actionTimeEnum.PAST_DATE &&
-                            birthdayTimeYearValue === ''">
-            <h2>Salvestan</h2>
           </button>
         </div>
       </div>

@@ -56,7 +56,7 @@
       type="button"
       class="btn btn-light btn-outline-secondary"
       (click)="chooseMyBlockToEdit()"
-      [disabled]="isCountingDownToUpdateData">
+      [disabled]="disableControls">
       <span *ngIf="blockName === 'current'">täna</span>
       <span *ngIf="blockName != 'current'">{{ sizeLog.day | timeAgo }}</span>
     </button>

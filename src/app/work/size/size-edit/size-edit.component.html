@@ -5,32 +5,38 @@
     class="whiteBox" style="margin-bottom: 35px">
     <button type="button"
             class="btn btn-light btn-outline-secondary minus"
-            (click)="onDecreaseMagazineSize()"> - </button>
+            (click)="onDecreaseMagazineSize()"
+            [disabled]="disableControls"> - </button>
     <span *ngIf="sizeLog.hasMagazine">{{ sizeLog.magazineSize }}%</span>
     <span *ngIf="!sizeLog.hasMagazine">-</span>
     <button type="button"
             class="btn btn-light btn-outline-secondary plus"
             style="float: right"
-            (click)="onIncreaseMagazineSize()"> + </button>
+            (click)="onIncreaseMagazineSize()"
+            [disabled]="disableControls"> + </button>
   </div>
   <div class="whiteBox" style="margin-bottom: 10px">
     <button type="button" class="btn btn-light btn-outline-secondary minus"
             style="float: left"
-            (click)="onDecreaseAddedNumOfFrames()"> - </button>
+            (click)="onDecreaseAddedNumOfFrames()"
+            [disabled]="disableControls"> - </button>
     +{{ sizeLog.addedNumOfFrames }}
     <button type="button" class="btn btn-light btn-outline-secondary plus"
             style="float: right"
-            (click)="onIncreaseAddedNumOfFrames()"> + </button>
+            (click)="onIncreaseAddedNumOfFrames()"
+            [disabled]="disableControls"> + </button>
     <br>
     <b>{{ sizeLog.totalNumOfFrames }}</b>
     <br>
     <button type="button" class="btn btn-light btn-outline-secondary minus"
             style="float: left"
-            (click)="onDecreaseRemovedNumOfFrames()"> - </button>
+            (click)="onDecreaseRemovedNumOfFrames()"
+            [disabled]="disableControls"> - </button>
     -{{ sizeLog.removedNumOfFrames }}
     <button type="button" class="btn btn-light btn-outline-secondary plus"
             style="float: right"
-            (click)="onIncreaseRemovedNumOfFrames()"> + </button>
+            (click)="onIncreaseRemovedNumOfFrames()"
+            [disabled]="disableControls"> + </button>
   </div>
   <h2 style="text-align: center;margin-left: 10px; margin-bottom: 13px">
     <span *ngIf="blockName === 'current'">täna</span>
@@ -39,10 +45,12 @@
   <div class="whiteBox">
     <button type="button" class="btn btn-light btn-outline-secondary minus"
             style="float: left"
-            (click)="onDecreaseRemovedCocoons()"> - </button>
+            (click)="onDecreaseRemovedCocoons()"
+            [disabled]="disableControls"> - </button>
     {{ sizeLog.removedCocoons }}
     <button type="button" class="btn btn-light btn-outline-secondary plus"
             style="float: right"
-            (click)="onIncreaseRemovedCocoons()"> + </button>
+            (click)="onIncreaseRemovedCocoons()"
+            [disabled]="disableControls"> + </button>
   </div>
 </div>

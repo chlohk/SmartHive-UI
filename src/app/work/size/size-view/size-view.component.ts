@@ -1,19 +1,22 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output } from '@angular/core';
 import { Size } from '../size.model';
+import { Subscription } from 'rxjs';
+import { ExecutorService, ProtectionState } from '../../../util/executor/executor.service';
 
 @Component({
   selector: 'app-size-view',
   templateUrl: './size-view.component.html',
   styleUrls: ['./size-view.component.css']
 })
-export class SizeViewComponent implements OnChanges {
+export class SizeViewComponent implements OnInit, OnChanges, OnDestroy {
   @Input() blockName: string;
   @Input() sizeLogs: Size[] = null;
-  @Input() isCountingDownToUpdateData: boolean;
   @Output() editMEEEE = new EventEmitter<string>();
+  subscriptions: Subscription[] = [];
+  disableControls: boolean;
   sizeLog: Size;
 
-  constructor() {
+  constructor(private executorService: ExecutorService) {
   }
 
   ngOnChanges() {
@@ -30,8 +33,22 @@ export class SizeViewComponent implements OnChanges {
     }
   }
 
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.executorService.getControlsProtection.subscribe(
+        (ps: ProtectionState) => this.disableControls = ps.disableControls
+      )
+    );
+  }
+
   chooseMyBlockToEdit() {
     this.editMEEEE.emit(this.blockName);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
   }
 
 }

@@ -1,7 +1,7 @@
 <nav class="navbar navbar-default" style="margin: 0 !important; background-color: gray" *ngIf="colonies">
   <div class="container-fluid">
     <div class="col-sm-1">
-      <a routerLink="/settings" *ngIf="!isCountingDownToUpdateData">
+      <a routerLink="/settings" *ngIf="!disableControls">
         <button
           type="button"
           class="btn btn-light btn-outline-secondary">
@@ -11,7 +11,6 @@
           >
         </button>
       </a>
-      <app-spinner *ngIf="isCountingDownToUpdateData"></app-spinner>
     </div>
     <div class="col-sm-5">
       <select
@@ -19,7 +18,7 @@
         class="custom-select"
         [(ngModel)]="currentlySelectedColonyId"
         (change)="coloniesService.notifyColonyHiveSelection(+currentlySelectedColonyId, +currentlySelectedHiveId)"
-        [disabled]="isCountingDownToUpdateData">
+        [disabled]="disableControls">
         <optgroup>
           <option value="" disabled selected hidden>Vali koloonia...</option>
           <option
@@ -34,7 +33,7 @@
         class="custom-select"
         [(ngModel)]="currentlySelectedHiveId"
         (change)="coloniesService.notifyColonyHiveSelection(+currentlySelectedColonyId, +currentlySelectedHiveId)"
-        [disabled]="isCountingDownToUpdateData">
+        [disabled]="disableControls">
         <optgroup>
           <option value="" disabled selected hidden>Vali taru...</option>
           <option
@@ -47,13 +46,13 @@
       <button
         type="button"
         class="btn btn-light btn-outline-secondary"
-        (click)="utilService.showOverviewWindow(true)">
+        (click)="utilService.showOverviewWindow(true)"
+        [disabled]="disableControls">
         <img
           src="assets/img/colony.png"
           height="30px"
         >
       </button>
-      <app-spinner *ngIf="isCountingDownToUpdateData"></app-spinner>
     </div>
   </div>
 </nav>

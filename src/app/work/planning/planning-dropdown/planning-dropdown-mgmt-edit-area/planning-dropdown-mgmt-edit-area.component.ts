@@ -1,6 +1,10 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {PlanningService} from "../../planning.service";
-import {PlanningDropdown} from "../planning-dropdown-element/planning-dropdown.model";
+import { Component, OnInit } from '@angular/core';
+import { PlanningService } from '../../planning.service';
+import { PlanningDropdown } from '../planning-dropdown-element/planning-dropdown.model';
+import { Subscription } from 'rxjs';
+import { ExecutorService, ProtectionState } from '../../../../util/executor/executor.service';
+import { ControlsProtectionIdEnum } from '../../../../util/executor/controls-protection-id.enum';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-planning-dropdown-mgmt-edit-area',
@@ -8,83 +12,91 @@ import {PlanningDropdown} from "../planning-dropdown-element/planning-dropdown.m
   styleUrls: ['./planning-dropdown-mgmt-edit-area.component.css']
 })
 export class PlanningDropdownMgmtEditAreaComponent implements OnInit {
-  @Output() isCountingDownToUpdateData = new EventEmitter<boolean>();
 
-  private newPlanningDropdownElementSelectedSubscription: any;
-
+  subscriptions: Subscription[] = [];
   newDropdownElement: PlanningDropdown;
   activePlanningDropdownElement: PlanningDropdown;
-  timerRunning = false;
-  shouldRunAnotherRound = false;
+  DEFAULT_DAYS_TO_DEADLINE = 3;
+  editControlsDisabled: boolean;
+  allControlsDisabled: boolean;
 
-  constructor(private planningService: PlanningService) {
+  constructor(private planningService: PlanningService,
+              private executorService: ExecutorService) {
   }
 
   ngOnInit() {
     this.initNewPlan();
-    this.newPlanningDropdownElementSelectedSubscription=
+    this.subscriptions.push(
       this.planningService.newPlanDropdownElementSelected.asObservable().subscribe(
         np => {
-          if(!np) this.activePlanningDropdownElement = this.newDropdownElement;
+          if (!np) this.activePlanningDropdownElement = this.newDropdownElement;
           else {
             this.activePlanningDropdownElement = np;
           }
         }
-      );
+      ));
+    this.subscriptions.push(
+      this.executorService.getControlsProtection.subscribe(
+        (ps: ProtectionState) => {
+          if (!ps.disableControls) {
+            this.editControlsDisabled = false;
+            this.allControlsDisabled = false;
+            return;
+          }
+          this.allControlsDisabled = true;
+          this.editControlsDisabled = ps.omittedControlsId !== ControlsProtectionIdEnum.PLANNING_DROPDOWN_SINGLE_ELEMENT;
+        }
+      )
+    );
+
   }
 
   initNewPlan() {
     this.newDropdownElement = new PlanningDropdown();
-    this.activePlanningDropdownElement = this.newDropdownElement
+    this.newDropdownElement.deadline = this.DEFAULT_DAYS_TO_DEADLINE;
+    this.newDropdownElement.orderNumber = this.planningService.planningDropDown ?
+      this.planningService.planningDropDown.length + 1
+      : 1;
+    this.activePlanningDropdownElement = this.newDropdownElement;
   }
 
-  async onAddNewPlan() {
-    this.timerRunning = true;
-    this.isCountingDownToUpdateData.emit(true);
-    await this.planningService.createDropdownElement(this.activePlanningDropdownElement).then(
-      () => {
-        this.timerRunning = false;
-        this.isCountingDownToUpdateData.emit(false);
-      }
-    );
-    this.initNewPlan();
-  }
-
-  startCountdownToUpdatePlanningElementAtBackend() {
-    if (this.timerRunning) {
-      this.shouldRunAnotherRound = true;
-      // console.log('...must run one more time');
-    } else {
-      setTimeout(
-        () => {
-          this.timerRunning = false;
-          if (this.shouldRunAnotherRound) {
-            this.shouldRunAnotherRound = false;
-            this.startCountdownToUpdatePlanningElementAtBackend();
-            // console.log('...will run for a second time');
-          } else {
-            // console.log('-> send request')
-            this.planningService.updateDropdownElement(this.activePlanningDropdownElement).then(
-              () => {this.isCountingDownToUpdateData.emit(false)}
-            );
-          }
-        }, 1200
+  onAddNewPlan() {
+    this.planningService.createDropdownElement(this.activePlanningDropdownElement)
+      .pipe(take(1))
+      .subscribe(
+        () => setTimeout( () => this.initNewPlan(), 0)
       );
-      this.timerRunning = true;
-      this.isCountingDownToUpdateData.emit(true);
-      // console.log('! started Timer');
-    }
   }
 
   onInputChange(isWithoutDeadlineFlag?: boolean) {
+    if (isWithoutDeadlineFlag) {
+      this.activePlanningDropdownElement.deadline = this.DEFAULT_DAYS_TO_DEADLINE;
+    }
     if (this.activePlanningDropdownElement.id) {
-      this.startCountdownToUpdatePlanningElementAtBackend();
+      this.executorService.exeWithTimer(
+        this.planningService.updateDropdownElement,
+        [this.activePlanningDropdownElement],
+        ControlsProtectionIdEnum.PLANNING_DROPDOWN_SINGLE_ELEMENT);
     }
   }
 
+  modifyDeadlineBy(days: number) {
+    this.setDeadline(this.activePlanningDropdownElement.deadline + days);
+  }
+
+  setDeadline(days: number) {
+    if (!days) {
+      this.activePlanningDropdownElement.deadline = 0;
+    } else {
+      this.activePlanningDropdownElement.deadline = days;
+    }
+    this.onInputChange();
+  }
 
 
   ngOnDestroy(): void {
-    this.newPlanningDropdownElementSelectedSubscription.unsubscribe()
+    this.subscriptions.forEach(
+      sub => sub.unsubscribe()
+    );
   }
 }

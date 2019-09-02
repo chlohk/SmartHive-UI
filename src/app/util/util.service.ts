@@ -1,4 +1,4 @@
-import {Injectable} from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class UtilService {
   }
 
 
-  // static backEndURL = 'http://localhost:8080/';
+  static backEndURL = 'http://localhost:8080/';
   // static planningDropdown = null;
   // static planningDropdown = this.p
   //
@@ -43,7 +43,7 @@ export class UtilService {
   // },
   // ];
 
-  static backEndURL = '';
+  //static backEndURL = '';
   //
   // ng build --prod --output-path docs
 

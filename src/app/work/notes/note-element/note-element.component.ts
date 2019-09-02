@@ -1,33 +1,42 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Note } from './note.model';
 import { Hive } from '../../../settings/shared/hive.model';
 import { NotesService } from '../notes.service';
 import { NotesComponentEnum } from '../notes-component.enum';
+import { Subscription } from 'rxjs';
+import { ExecutorService, ProtectionState } from '../../../util/executor/executor.service';
 
 @Component({
   selector: 'app-note-element',
   templateUrl: './note-element.component.html',
   styleUrls: ['./note-element.component.css']
 })
-export class NoteElementComponent implements OnInit {
-  private newElementSelectedSubscription: any;
+export class NoteElementComponent implements OnInit, OnDestroy {
   @Input() note: Note;
   @Input() currentlySelectedHive: Hive;
   @Input() notesComponentType: NotesComponentEnum;
   @Input() memorizedActiveElementId: number;
+  subscriptions: Subscription[] = [];
+  disableControls: boolean;
   active: boolean;
   showAsActiveTimeout: any;
-  notesComponentEnum = NotesComponentEnum;
 
-  constructor(private notesService: NotesService) {
+  constructor(private notesService: NotesService,
+              private excutorService: ExecutorService) {
   }
 
   ngOnInit() {
-    this.newElementSelectedSubscription =
+    this.subscriptions.push(
       this.notesService.newNoteElementSelected.asObservable()
         .subscribe(() => {
           this.active = false;
-        });
+        })
+    );
+    this.subscriptions.push(
+      this.excutorService.getControlsProtection.subscribe(
+        (ps: ProtectionState) => this.disableControls = ps.disableControls
+      )
+    );
     if (this.memorizedActiveElementId === this.note.id &&
       this.notesComponentType === NotesComponentEnum.NOTE_MANAGEMENT_ACTIVE) {
       this.active = true;
@@ -48,7 +57,7 @@ export class NoteElementComponent implements OnInit {
   }
 
   onDeleteElement() {
-    if(this.note.longTerm) {
+    if (this.note.longTerm) {
       return;
     }
 
@@ -59,7 +68,9 @@ export class NoteElementComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.newElementSelectedSubscription.unsubscribe();
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
   }
 
 }

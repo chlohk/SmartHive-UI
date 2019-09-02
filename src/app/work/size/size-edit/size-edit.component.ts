@@ -1,23 +1,26 @@
-import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
-import {SizeDataService} from "../size-data.service";
-import {Size} from "../size.model";
-import {SizeService} from "../size.service";
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Size } from '../size.model';
+import { SizeService } from '../size.service';
+import { Subscription } from 'rxjs';
+import { ExecutorService, ProtectionState } from '../../../util/executor/executor.service';
+import { ControlsProtectionIdEnum } from '../../../util/executor/controls-protection-id.enum';
 
 @Component({
   selector: 'app-size-edit',
   templateUrl: './size-edit.component.html',
   styleUrls: ['./size-edit.component.css']
 })
-export class SizeEditComponent implements OnChanges {
+export class SizeEditComponent implements OnInit, OnChanges, OnDestroy {
   @Input() blockName: string;
   @Input() idOfCurrentHive: number;
   @Input() sizeLogs: Size[] = null;
-  @Output() isCountingDownToUpdateData = new EventEmitter<boolean>();
   sizeLog: Size;
-  timerRunning = false;
-  shouldRunAnotherRound = false;
+  subscriptions: Subscription[] = [];
+  disableControls: boolean;
 
-  constructor(private sizeService: SizeService) { }
+  constructor(private sizeService: SizeService,
+              private executorService: ExecutorService) { }
+
   ngOnChanges() {
     if(this.sizeLogs) {
       if (this.blockName === 'current') {
@@ -32,25 +35,39 @@ export class SizeEditComponent implements OnChanges {
     }
   }
 
+  ngOnInit(): void {
+    this.subscriptions.push(
+      this.executorService.getControlsProtection.subscribe(
+        (ps: ProtectionState) => {
+          if(!ps.disableControls) {
+            this.disableControls = false;
+            return;
+          }
+          this.disableControls = ps.omittedControlsId != ControlsProtectionIdEnum.SIZELOG
+        }
+      )
+    );
+  }
+
 
   onIncreaseMagazineSize() {
     if(this.sizeLog.hasMagazine === false) {
       this.sizeLog.magazineSize = 0;
       this.sizeLog.hasMagazine = true;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate()
     } else if (this.sizeLog.hasMagazine === true && this.sizeLog.magazineSize <= 80) {
       this.sizeLog.magazineSize += 20;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate()
     }
   }
 
   onDecreaseMagazineSize() {
     if(this.sizeLog.hasMagazine === true && this.sizeLog.magazineSize >= 20) {
       this.sizeLog.magazineSize -= 20;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate()
     } else if(this.sizeLog.hasMagazine === true && this.sizeLog.magazineSize === 0) {
       this.sizeLog.hasMagazine = false;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate()
     }
   }
 
@@ -58,7 +75,7 @@ export class SizeEditComponent implements OnChanges {
     if(this.sizeLog.addedNumOfFrames <= 98 && this.sizeLog.totalNumOfFrames <= 98) {
       this.sizeLog.addedNumOfFrames += 1;
       this.sizeLog.totalNumOfFrames += 1;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate();
       if(this.blockName === 'previous') {
         this.sizeLogs[0].totalNumOfFrames++;
       }
@@ -73,7 +90,7 @@ export class SizeEditComponent implements OnChanges {
     if(this.sizeLog.addedNumOfFrames >= 1 && this.sizeLog.totalNumOfFrames >= 1) {
       this.sizeLog.addedNumOfFrames -= 1;
       this.sizeLog.totalNumOfFrames -= 1;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate();
       if(this.blockName === 'previous') {
         this.sizeLogs[0].totalNumOfFrames--;
       }
@@ -88,7 +105,7 @@ export class SizeEditComponent implements OnChanges {
     if(this.sizeLog.removedNumOfFrames <=98 && this.sizeLog.totalNumOfFrames >= 1) {
       this.sizeLog.removedNumOfFrames += 1;
       this.sizeLog.totalNumOfFrames -= 1;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate();
       if(this.blockName === 'previous') {
         this.sizeLogs[0].totalNumOfFrames--;
       }
@@ -103,7 +120,7 @@ export class SizeEditComponent implements OnChanges {
     if(this.sizeLog.removedNumOfFrames >=1 && this.sizeLog.totalNumOfFrames <= 98) {
       this.sizeLog.removedNumOfFrames -= 1;
       this.sizeLog.totalNumOfFrames += 1;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate();
       if(this.blockName === 'previous') {
         this.sizeLogs[0].totalNumOfFrames++;
       }
@@ -117,52 +134,45 @@ export class SizeEditComponent implements OnChanges {
   onDecreaseRemovedCocoons() {
     if(this.sizeLog.removedCocoons >=1) {
       this.sizeLog.removedCocoons -= 1;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate()
     }
   }
 
   onIncreaseRemovedCocoons() {
     if(this.sizeLog.removedCocoons <=98) {
       this.sizeLog.removedCocoons += 1;
-      this.startCountdownToUpdateSizelogAtBackend();
+      this.callUpdate()
     }
   }
 
-  startCountdownToUpdateSizelogAtBackend() {
-    if(this.timerRunning) {
-      this.shouldRunAnotherRound = true;
-      // console.log('...must run one more time');
-    } else {
-      setTimeout(
-        () => {
-          this.timerRunning = false;
-          if(this.shouldRunAnotherRound) {
-            this.shouldRunAnotherRound = false;
-            this.startCountdownToUpdateSizelogAtBackend();
-            // console.log('...will run for a second time');
-          } else {
-            // console.log('-> send request')
-            if (this.blockName === 'current') {
-              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLog);
-            }
-            if (this.blockName === 'previous') {
-              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLogs[0]);
-              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLog);
-            }
-            if (this.blockName === 'beforePrevious') {
-              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLogs[0]);
-              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLogs[1]);
-              this.sizeService.onUpdateSizeData(this.idOfCurrentHive, this.sizeLog);
-            }
-            this.isCountingDownToUpdateData.emit(false);
-          }
-        }, 1200
+  callUpdate() {
+    if (this.blockName === 'current') {
+      this.executorService.exeWithTimer(
+        this.sizeService.updateSizeData,
+        [this.idOfCurrentHive, [this.sizeLog]],
+        ControlsProtectionIdEnum.SIZELOG
       );
-      this.timerRunning = true;
-      this.isCountingDownToUpdateData.emit(true);
-      // console.log('! started Timer');
+    }
+    if (this.blockName === 'previous') {
+      this.executorService.exeWithTimer(
+        this.sizeService.updateSizeData,
+        [this.idOfCurrentHive, [this.sizeLogs[0], this.sizeLog]],
+        ControlsProtectionIdEnum.SIZELOG
+      );
+    }
+    if (this.blockName === 'beforePrevious') {
+      this.executorService.exeWithTimer(
+        this.sizeService.updateSizeData,
+        [this.idOfCurrentHive, [this.sizeLogs[0], this.sizeLogs[1], this.sizeLog]],
+        ControlsProtectionIdEnum.SIZELOG
+      );
     }
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
+  }
 
 }

@@ -16,10 +16,13 @@
   display: table-cell;
   vertical-align: middle;
   width: 120px;
+  z-index: 1;
+  position: relative;
 }
 
-.active-color {
+.active-design {
   background-color: #dcdcdc;
+  box-shadow: 0 0 4px 4px gray;
 }
 
 img.trash-picture {
@@ -30,3 +33,15 @@ img.trash-picture {
   vertical-align: middle;
   display: table-cell;
 }
+
+.disabled-look {
+  opacity: 0.5;
+}
+
+.not-button-area {
+  z-index: 0;
+  position: relative;
+  background-color: #eeeeee;
+}
+
+

@@ -4,6 +4,8 @@ import {UtilService} from "../../../util/util.service";
 import {PlanningComponentEnum} from "../planning-component.enum";
 import {PlanningService} from "../planning.service";
 import {Hive} from "../../../settings/shared/hive.model";
+import { Subscription } from 'rxjs';
+import { ExecutorService, ProtectionState } from '../../../util/executor/executor.service';
 
 @Component({
   selector: 'app-plan-element',
@@ -11,11 +13,12 @@ import {Hive} from "../../../settings/shared/hive.model";
   styleUrls: ['./plan-element.component.css']
 })
 export class PlanElementComponent implements OnInit, OnDestroy {
-  private newElementSelectedSubscription: any;
+  subscriptions: Subscription[] = [];
   @Input() plan: PlanElement;
   @Input() currentlyChosenHive: Hive;
   @Input() planningComponentType: PlanningComponentEnum;
   @Input() memorizedActiveElementId: number;
+  disableControls: boolean;
   showAsActiveTimeout: any;
   planningComponentEnum = PlanningComponentEnum;
   deadlineText: string;
@@ -23,15 +26,22 @@ export class PlanElementComponent implements OnInit, OnDestroy {
   inActive = true;
   ELEMENT_DELETED_FROM_DROPDOWN = 'element rippmenüüst kustutatud';
 
-  constructor(private planningService: PlanningService) {
+  constructor(private planningService: PlanningService,
+              private executorServcice: ExecutorService) {
   }
 
   ngOnInit() {
     this.setDeadlineText();
-    this.newElementSelectedSubscription =
+    this.subscriptions.push(
       this.planningService.newPlanElementSelected.asObservable().subscribe(
         () => this.inActive = true
-      );
+      )
+    );
+    this.subscriptions.push(
+      this.executorServcice.getControlsProtection.subscribe(
+        (ps: ProtectionState) => this.disableControls = ps.disableControls
+      )
+    );
     if(this.memorizedActiveElementId === this.plan.id &&
         this.planningComponentType === PlanningComponentEnum.PLANNING_MANAGEMENT_UNRESOLVED) {
       this.inActive = false;
@@ -104,6 +114,8 @@ export class PlanElementComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.newElementSelectedSubscription.unsubscribe()
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
   }
 }

@@ -1,12 +1,12 @@
-<jw-modal id="{{mgmtComponentid}}">
-  <ng-container [ngSwitch]="activeWindow" >
+<jw-modal id="{{mgmtComponentid}}" [fullScreen]="true">
+  <ng-container [ngSwitch]="activeWindow">
     <ng-container [ngTemplateOutlet]="planning" *ngSwitchCase="planningMgmtWindowEnum.PLANNING"></ng-container>
     <ng-container [ngTemplateOutlet]="dropdownMgmt" *ngSwitchCase="planningMgmtWindowEnum.DROPDOWN_MGMT"></ng-container>
   </ng-container>
 </jw-modal>
 
 <ng-template #planning>
-  <div class="card bg-light">
+  <div class="card bg-light h-100">
     <div class="card-header nav">
       <span class="navbar-brand big-text planning-header">Planeeringud</span>
       <span class="navbar-text badge badge-dark belongs-to-badge">
@@ -14,37 +14,38 @@
       </span>
       <button
         class="btn btn-danger nav-item closing ml-auto"
-        (click)="modalService.close(mgmtComponentid)">
+        (click)="modalService.close(mgmtComponentid)"
+        [disabled]="disableControls">
         <img
           src="assets/img/sulge.jpeg"
           class="x">
       </button>
     </div>
-    <div class="container m-0">
+    <div class="card-body m-0">
       <div class="row">
         <div class="col-5">
           <div class="row justify-content-center p-4">
             <div class="btn-group btn-group-toggle" *ngIf="!timerRunning">
               <label
                 class="btn btn-light btn-outline-secondary modal-inside-text"
-                [ngClass]="{'active': isActiveResolveStateUnresolved}">
+                [ngClass]="{'active': isActiveResolveStateUnresolved, 'disabled-look': disableControls}">
                 <input
                   type="radio"
                   name="planning_window_type"
                   [checked]="isActiveResolveStateUnresolved"
                   (change)="radioBtnActiveResolveStateChange(true)"
-                  [disabled]="timerRunning">
+                  [disabled]="disableControls">
                 Tegemata
               </label>
               <label
                 class="btn btn-light btn-outline-secondary modal-inside-text"
-                [ngClass]="{'active': !isActiveResolveStateUnresolved}">
+                [ngClass]="{'active': !isActiveResolveStateUnresolved, 'disabled-look': disableControls}">
                 <input
                   type="radio"
                   name="planning_window_type"
                   [checked]="!isActiveResolveStateUnresolved"
                   (change)="radioBtnActiveResolveStateChange(false)"
-                  [disabled]="timerRunning">
+                  [disabled]="disableControls">
                 Tehtud
               </label>
             </div>
@@ -52,10 +53,6 @@
               <app-spinner *ngIf="timerRunning"></app-spinner>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-5">
           <div class="row padding-for-planning">
             <app-planning
               [currentlyChosenHive]="currentlyChosenHive"
@@ -64,10 +61,9 @@
                 planningComponentEnum.PLANNING_MANAGEMENT_RESOLVED"></app-planning>
           </div>
         </div>
-        <div class="col-7 pl-5">
+        <div class="col-7 d-flex flex-column-reverse">
           <app-planning-mgmt-edit-area
             (callDropdownMgmt)="activeWindow = planningMgmtWindowEnum.DROPDOWN_MGMT"
-            (isCountingDownToUpdateData)="onCountDownChange($event)"
             [isActiveResolveStateUnresolved]="isActiveResolveStateUnresolved"
             [currentlyChosenHive]="currentlyChosenHive">
           </app-planning-mgmt-edit-area>
@@ -79,25 +75,27 @@
 
 
 <ng-template #dropdownMgmt>
-  <div class="card bg-light">
+  <div class="card bg-light h-100">
     <div class="card-header nav">
       <span class="navbar-brand big-text planning-header">Planeeringute rippmenüü</span>
       <button
         class="btn btn-danger nav-item closing ml-auto"
-        (click)="modalService.close(mgmtComponentid)">
+        (click)="modalService.close(mgmtComponentid)"
+        [disabled]="disableControls">
         <img
           src="assets/img/sulge.jpeg"
           class="x">
       </button>
     </div>
-    <div class="container m-0">
+    <div class="card-body m-0">
       <div class="row">
         <div class="col-5">
           <div class="row justify-content-center p-4">
             <div class="btn-group btn-group-toggle" *ngIf="!timerRunning">
               <button
                 class="btn btn-danger modal-inside-text"
-                (click)="activeWindow = planningMgmtWindowEnum.PLANNING">
+                (click)="activeWindow = planningMgmtWindowEnum.PLANNING"
+                [disabled]="disableControls">
                 Tagasi planeerima
               </button>
             </div>
@@ -105,17 +103,10 @@
               <app-spinner *ngIf="timerRunning"></app-spinner>
             </div>
           </div>
+          <app-planning-dropdown></app-planning-dropdown>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-5">
-          <div class="row padding-for-planning">
-            <app-planning-dropdown></app-planning-dropdown>
-          </div>
-        </div>
-        <div class="col-7 pl-5 d-flex flex-column-reverse mb-5">
-          <app-planning-dropdown-mgmt-edit-area
-            (isCountingDownToUpdateData)="onCountDownChange($event)"></app-planning-dropdown-mgmt-edit-area>
+        <div class="col-7 d-flex flex-column-reverse mb-5">
+          <app-planning-dropdown-mgmt-edit-area></app-planning-dropdown-mgmt-edit-area>
         </div>
       </div>
     </div>

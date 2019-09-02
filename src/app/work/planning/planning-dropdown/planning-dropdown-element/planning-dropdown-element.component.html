@@ -1,19 +1,26 @@
-<div class="container planning-dropdown-element p-0">
+<div
+  class="container planning-dropdown-element p-0"
+  [ngClass]="{'disabled-look': allControlsDisabled}">
   <ng-container *ngIf="inActive; else active">
-    <div class="text-area planning-element-text-area" (click)="onElementClick()">
+    <div
+      class="text-area planning-element-text-area"
+      (click)="allControlsDisabled ? $event.stopPropagation() : onElementClick()">
       {{planningDropdown.text}}
     </div>
   </ng-container>
 
   <ng-template #active>
-    <div class="trashcan-area active-color" (click)="onDeleteElement()">
+    <div class="text-area planning-element-text-area not-button-area">
+      {{planningDropdown.text}}
+    </div>
+    <div
+      class="trashcan-area active-design"
+      [ngClass]="{'disabled-look': trashControlsDisabled}"
+      (click)="trashControlsDisabled ? $event.stopPropagation() : onDeleteElement()">
       <img
         src="assets/img/trash.png"
         class="trash-picture"
       >
-    </div>
-    <div class="text-area planning-element-text-area">
-      {{planningDropdown.text}}
     </div>
   </ng-template>
 </div>

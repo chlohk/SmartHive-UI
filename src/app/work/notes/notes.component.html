@@ -10,7 +10,8 @@
           *ngIf="currentlySelectedHive.activeShortTermNotesCount >= MIN_NO_OF_PLANS_WHEN_SECOND_BUTTON_ADDED"
           type="button"
           class="btn btn-light btn-outline-secondary btn-block main-top"
-          (click)="onOpenNotes()">
+          (click)="onOpenNotes()"
+          [disabled]="disableControls">
           Haldan märkmeid
           <span class="badge badge-dark button-badge">
             <span>{{currentlySelectedHive.activeShortTermNotesCount}}</span>
@@ -33,7 +34,8 @@
           type="button"
           class="btn btn-light btn-outline-secondary btn-block main-bottom"
           (click)="onOpenNotes()"
-          [ngClass]="{'no-notes-to-show-for-level-button': currentlySelectedHive.activeShortTermNotesCount === 0}">
+          [ngClass]="{'no-notes-to-show-for-level-button': currentlySelectedHive.activeShortTermNotesCount === 0}"
+          [disabled]="disableControls">
           Haldan märkmeid
           <span class="badge badge-dark button-badge">
             <span>{{currentlySelectedHive.activeShortTermNotesCount}}</span>

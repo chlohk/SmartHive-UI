@@ -7,7 +7,6 @@ import { SpinnerService } from '../../util/spinner/spinner.service';
 import { Hive } from './hive.model';
 import * as cloneDeep from 'lodash/cloneDeep';
 import { take } from 'rxjs/operators';
-import { LoadingService } from '../../util/loading/loading.service';
 
 @Injectable()
 export class ColoniesService {
@@ -21,8 +20,7 @@ export class ColoniesService {
 
   constructor(private settingsDataService: SettingsDataService,
               private settingsNavigationService: SettingsNavigationService,
-              private spinnerService: SpinnerService,
-              private loadingService: LoadingService) {
+              private spinnerService: SpinnerService) {
   }
 
   getColonyById(id: number): Colony {
@@ -84,7 +82,6 @@ export class ColoniesService {
   }
 
   retrieveColonies() {
-    this.loadingService.start();
     this.settingsDataService.onGetColoniesData()
       .pipe(take(1))
       .subscribe(
@@ -108,7 +105,6 @@ export class ColoniesService {
 
           this.coloniesDataRetrieved.next(this.colonies);
           this.spinnerService.setSpinnerStatus.next(false);
-          this.loadingService.stop();
         }
       );
   }

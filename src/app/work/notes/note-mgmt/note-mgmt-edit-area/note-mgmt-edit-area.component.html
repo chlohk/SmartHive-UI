@@ -11,7 +11,8 @@
               <textarea
                 class="modal-inside-text planning-element-text-area h-100"
                 [(ngModel)]="activeNoteElement.text"
-                (ngModelChange)="onInputChange()"></textarea>
+                (ngModelChange)="onInputChange()"
+                [disabled]="disableEditControls"></textarea>
         </div>
         <div class="col d-flex flex-column justify-content-around">
           <div class="row modal-inside-text mb-1 mt-4 ml-4">
@@ -21,7 +22,8 @@
               id="isLongTerm"
               [(ngModel)]="activeNoteElement.longTerm"
               (change)="onInputChange()"
-              [tooltip]="'Pikaajalist tähistust omavat märget ei saa kustutada ja seda ei kuvata avalehel'">
+              [tooltip]="'Pikaajalist tähistust omavat märget ei saa kustutada ja seda ei kuvata avalehel'"
+              [disabled]="disableEditControls">
             <label class="form-check-label ml-2" for="isLongTerm">
               Pikaajaline
             </label>
@@ -32,7 +34,8 @@
               type="checkbox"
               id="hasWarning"
               [(ngModel)]="activeNoteElement.hasWarning"
-              (change)="onInputChange()">
+              (change)="onInputChange()"
+              [disabled]="disableEditControls">
             <label class="form-check-label ml-2" for="hasWarning">
               Märgi tähelepanuga
             </label>
@@ -41,7 +44,8 @@
             <ng-container *ngIf="!activeNoteElement.id; else changePlanningFinishEditing">
               <button
                 class="btn btn-success modal-inside-text"
-                (click)="onAddNewNote()">
+                (click)="onAddNewNote()"
+                [disabled]="disableEditControls">
                 Lisan märkme
               </button>
             </ng-container>
@@ -57,7 +61,8 @@
     <button
       class="btn btn-success modal-inside-text mb-5"
       *ngIf="activeNoteElement.id != null"
-      (click)="onActivateElement()">
+      (click)="onActivateElement()"
+      [disabled]="disableEditControls">
       Taastan "Aktiivseks"
     </button>
   </div>
@@ -71,7 +76,7 @@
   <button
     class="btn btn-danger modal-inside-text"
     (click)="notesService.newNoteElementSelected.next(null)"
-    [disabled]="timerRunning">
+    [disabled]="disableAllControls">
     Lõpetan muutmise
   </button>
 </ng-template>

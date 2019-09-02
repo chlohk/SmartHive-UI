@@ -133,7 +133,7 @@
   </div>
 </div>
 
-<jw-modal id="mother-unknown-edit" style="max-width: 50rem; height: 45rem">
+<jw-modal id="mother-unknown-edit" style="max-width: 50rem; height: 45rem" [smallModal]="true">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
@@ -178,7 +178,8 @@
                 type="number"
                 size="3"
                 class="num"
-                [(ngModel)]="radioBtnStatusPastDateInputValue"> päeva tagasi
+                [(ngModel)]="radioBtnStatusPastDateInputValue"
+                (ngModelChange)="radioBtnMomStatusSelected(actionTimeEnum.PAST_DATE)"> päeva tagasi
             </h2>
           </label>
         </div>
@@ -214,18 +215,6 @@
               (click)="onChangeMotherStatusButtonClick()">
           </button>
         </div>
-        <div class="row twoButtons">
-          <button class="btn btn-light btn-outline-danger"
-                  style="color: red; height: 70px; width: 200px; margin-left: 100px"
-                  (click)="onCloseMomStatusSectionEditButton()">
-            <h2>Loobun</h2>
-          </button>
-          <button class="btn btn-light btn-outline-success"
-                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
-                  (click)="saveMotherStatusSectionValues()">
-            <h2>Salvestan</h2>
-          </button>
-        </div>
       </div>
     </div>
   </div>
@@ -233,7 +222,7 @@
 </jw-modal>
 
 
-<jw-modal id="mother-control-frame-edit">
+<jw-modal id="mother-control-frame-edit" [smallModal]="true">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
@@ -280,7 +269,8 @@
                 type="number"
                 size="3"
                 class="num"
-                [(ngModel)]="radioBtnControlFramePastDateInputValue">
+                [(ngModel)]="radioBtnControlFramePastDateInputValue"
+                (ngModelChange)="radioBtnControlFrameSelected(actionTimeEnum.PAST_DATE)">
               päeva tagasi
             </h2>
           </label>
@@ -317,26 +307,13 @@
             </h2>
           </label>
         </div>
-        <div class="row twoButtons">
-          <button
-            class="btn btn-light btn-outline-danger"
-            style="color: red; height: 70px; width: 200px;"
-            (click)="onCloseWhenControlFrameEditButton()">
-            <h2>Loobun</h2>
-          </button>
-          <button class="btn btn-light btn-outline-success"
-                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
-                  (click)="saveControlFrameSectionValues()">
-            <h2>Salvestan</h2>
-          </button>
-        </div>
       </div>
     </div>
   </div>
 </jw-modal>
 
 
-<jw-modal id="mother-cocoon-edit">
+<jw-modal id="mother-cocoon-edit" [smallModal]="true">
   <div class="card bg-light">
     <div class="card-header">
       <div class="row up-bar">
@@ -383,7 +360,8 @@
                 type="number"
                 size="3"
                 class="num"
-                [(ngModel)]="radioBtnCocoonPastDateInputValue">
+                [(ngModel)]="radioBtnCocoonPastDateInputValue"
+                (ngModelChange)="radioBtnCocoonSelected(actionTimeEnum.PAST_DATE)">
               päeva tagasi
             </h2>
           </label>
@@ -419,19 +397,6 @@
               Kupp valimata
             </h2>
           </label>
-        </div>
-        <div class="row twoButtons">
-          <button
-            class="btn btn-light btn-outline-danger"
-            style="color: red; height: 70px; width: 200px;"
-            (click)="onCloseWhenCocoonEditButton()">
-            <h2>Loobun</h2>
-          </button>
-          <button class="btn btn-light btn-outline-success"
-                  style="color: green; height: 70px; width: 200px; margin-left: 100px"
-                  (click)="saveCocoonSectionValues()">
-            <h2>Salvestan</h2>
-          </button>
         </div>
       </div>
     </div>

@@ -1,32 +1,34 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Hive } from '../../settings/shared/hive.model';
 import { NotesComponentEnum } from './notes-component.enum';
 import { NotesService } from './notes.service';
 import { Subscription } from 'rxjs';
 import { JwModalService } from '../../util/jw-modal/jw-modal.service';
+import { ExecutorService, ProtectionState } from '../../util/executor/executor.service';
 
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
   styleUrls: ['./notes.component.css']
 })
-export class NotesComponent implements OnInit {
+export class NotesComponent implements OnInit, OnDestroy {
   @Input() currentlySelectedHive: Hive;
   @Input() notesComponentType: NotesComponentEnum;
   notesComponentEnum = NotesComponentEnum;
   document;
   MIN_NO_OF_PLANS_WHEN_SECOND_BUTTON_ADDED = 3;
   memorizedActiveNoteElementId: number;
-
-  private newNoteElementSelectedSubscription: Subscription;
+  subscriptions: Subscription[] = [];
+  disableControls: boolean;
 
   constructor(private notesService: NotesService,
-              private modalService: JwModalService) {
+              private modalService: JwModalService,
+              private executorService: ExecutorService) {
   }
 
   ngOnInit() {
     this.document = document;
-    this.newNoteElementSelectedSubscription =
+    this.subscriptions.push(
       this.notesService.newNoteElementSelected.asObservable().subscribe(
         ne => {
           if (!ne) this.memorizedActiveNoteElementId = undefined;
@@ -34,7 +36,13 @@ export class NotesComponent implements OnInit {
             this.memorizedActiveNoteElementId = ne.id;
           }
         }
-      );
+      )
+    );
+    this.subscriptions.push(
+      this.executorService.getControlsProtection.subscribe(
+        (ps: ProtectionState) => this.disableControls = ps.disableControls
+      )
+    );
   }
 
   ngOnChanges() {
@@ -72,7 +80,9 @@ export class NotesComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.newNoteElementSelectedSubscription.unsubscribe();
+    this.subscriptions.forEach(
+      (s: Subscription) => s.unsubscribe()
+    );
   }
 
 }

@@ -1,5 +1,7 @@
 export class PlanningDropdown {
   id: number;
   text: string;
-  orderNumber: number
+  orderNumber: number;
+  withoutDeadline: boolean;
+  deadline: number;
 }
